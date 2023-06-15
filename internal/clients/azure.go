@@ -29,6 +29,9 @@ const (
 	keySubscriptionID = "subscription_id"
 	keyTenantID       = "tenant_id"
 	keyClientSecret   = "client_secret"
+
+	keyTerraformFeatures        = "features"
+	keySkipProviderRegistration = "skip_provider_registration"
 )
 
 // TerraformSetupBuilder builds Terraform a terraform.SetupFn function which
@@ -66,13 +69,39 @@ func TerraformSetupBuilder(version, providerSource, providerVersion string) terr
 			return ps, errors.Wrap(err, errUnmarshalCredentials)
 		}
 
-		// Set credential in Terraform provider configuration
-		ps.Configuration = map[string]any{
-			keySubscriptionID: creds[keySubscriptionID],
-			keyTenantID:       creds[keyTenantID],
-			keyClientID:       creds[keyClientID],
-			keyClientSecret:   creds[keyClientSecret],
+		ps.Configuration = map[string]interface{}{
+			keyTerraformFeatures: struct{}{},
+			// Terraform AzureRM provider tries to register all resource providers
+			// in Azure just in case if the provider of the resource you're
+			// trying to create is not registered and the returned error is
+			// ambiguous. However, this requires service principal to have provider
+			// registration permissions which are irrelevant in most contexts.
+			// For details, see https://github.com/upbound/provider-azure/issues/104
+			keySkipProviderRegistration: true,
 		}
+
+		// using spAuth for azure authentication
+		if _, ok := creds[keySubscriptionID]; ok {
+			ps.Configuration[keySubscriptionID] = creds[keySubscriptionID]
+		} else {
+			return ps, errors.New("invalid subscription id")
+		}
+		if _, ok := creds[keyTenantID]; ok {
+			ps.Configuration[keyTenantID] = creds[keyTenantID]
+		} else {
+			return ps, errors.New("invalid tenant id")
+		}
+		if _, ok := creds[keyClientID]; ok {
+			ps.Configuration[keyClientID] = creds[keyClientID]
+		} else {
+			return ps, errors.New("invalid client id")
+		}
+		if _, ok := creds[keyClientSecret]; ok {
+			ps.Configuration[keyClientSecret] = creds[keyClientSecret]
+		} else {
+			return ps, errors.New("invalid client secret")
+		}
+
 		return ps, nil
 	}
 }
