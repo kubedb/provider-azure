@@ -59,7 +59,7 @@ type VirtualNetworkPeeringParameters struct {
 
 	// The full Azure resource ID of the remote virtual network. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=VirtualNetwork
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=kubeform.dev/provider-azure/apis/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	RemoteVirtualNetworkID *string `json:"remoteVirtualNetworkId,omitempty" tf:"remote_virtual_network_id,omitempty"`
 

@@ -1,7 +1,7 @@
 package network
 
 import (
-	"github.com/upbound/provider-azure/apis/rconfig"
+	"kubeform.dev/provider-azure/apis/rconfig"
 	"github.com/upbound/upjet/pkg/config"
 )
 

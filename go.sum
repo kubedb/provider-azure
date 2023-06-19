@@ -508,8 +508,6 @@ github.com/stretchr/testify v1.8.0/go.mod h1:yNjHg4UonilssWZ8iaSj1OCr/vHnekPRkoO
 github.com/tmccombs/hcl2json v0.3.3 h1:+DLNYqpWE0CsOQiEZu+OZm5ZBImake3wtITYxQ8uLFQ=
 github.com/tmccombs/hcl2json v0.3.3/go.mod h1:Y2chtz2x9bAeRTvSibVRVgbLJhLJXKlUeIvjeVdnm4w=
 github.com/tv42/httpunix v0.0.0-20150427012821-b75d8614f926/go.mod h1:9ESjWnEqriFuLhtthL60Sar/7RFoluCcXsuvEwTV5KM=
-github.com/upbound/provider-azure v0.33.0 h1:ELcdJjDCE1y+cwALWc3M9XN7o+rGCV8qjXs01Y01MVk=
-github.com/upbound/provider-azure v0.33.0/go.mod h1:LoXEOSwD5/k0W1Tr58aOIyEQ65qP5NLjy8MsFuKSYc4=
 github.com/upbound/upjet v0.9.0-rc.0.0.20230427131841-1d0b7b0c08f8 h1:dFGXjvdaPxZe/Zs/5wNZ+t0lACy9WpAfEsemURfmGK0=
 github.com/upbound/upjet v0.9.0-rc.0.0.20230427131841-1d0b7b0c08f8/go.mod h1:CWxJ9YTMy7q+bDc2W504ocL/ZzBmWabwwcRjIaP7CKc=
 github.com/vmihailenco/msgpack v3.3.3+incompatible/go.mod h1:fy3FlTQTDXWkZ7Bh6AcGMlsjHatGryHQYUTf1ShIgkk=
