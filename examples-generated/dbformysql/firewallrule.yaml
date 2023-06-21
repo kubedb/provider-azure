@@ -1,0 +1,36 @@
+apiVersion: dbformysql.azure.kubeform.com/v1alpha1
+kind: FirewallRule
+metadata:
+  annotations:
+    meta.upbound.io/example-id: dbformysql/v1alpha1/firewallrule
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    endIpAddress: 40.112.8.12
+    resourceGroupName: ${azurerm_resource_group.example.name}
+    serverName: ${azurerm_mysql_server.example.name}
+    startIpAddress: 40.112.8.12
+
+---
+
+apiVersion: dbformysql.azure.kubeform.com/v1alpha1
+kind: Server
+metadata:
+  annotations:
+    crossplane.io/external-name: ${Rand.RFC1123Subdomain}
+    meta.upbound.io/example-id: dbformysql/v1alpha1/firewallrule
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupName: api-rg-pro
+    skuName: GP_Gen5_2
+    sslEnforcementEnabled: true
+    version: "5.7"
+
+---
+

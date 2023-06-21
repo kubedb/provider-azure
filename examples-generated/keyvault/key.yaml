@@ -1,0 +1,48 @@
+apiVersion: keyvault.azure.kubeform.com/v1alpha1
+kind: Key
+metadata:
+  annotations:
+    meta.upbound.io/example-id: keyvault/v1alpha1/key
+  labels:
+    testing.upbound.io/example-name: generated
+  name: generated
+spec:
+  forProvider:
+    keyOpts:
+    - decrypt
+    - encrypt
+    - sign
+    - unwrapKey
+    - verify
+    - wrapKey
+    keySize: 2048
+    keyType: RSA
+    keyVaultIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    rotationPolicy:
+    - automatic:
+      - timeBeforeExpiry: P30D
+      expireAfter: P90D
+      notifyBeforeExpiry: P29D
+
+---
+
+apiVersion: keyvault.azure.kubeform.com/v1alpha1
+kind: Vault
+metadata:
+  annotations:
+    meta.upbound.io/example-id: keyvault/v1alpha1/key
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupName: example-resources
+    skuName: premium
+    softDeleteRetentionDays: 7
+    tenantId: ${data.azurerm_client_config.current.tenant_id}
+
+---
+

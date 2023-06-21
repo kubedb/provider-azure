@@ -1,0 +1,17 @@
+apiVersion: dbformariadb.azure.kubeform.com/v1alpha1
+kind: FirewallRule
+metadata:
+  annotations:
+    meta.upbound.io/example-id: dbformariadb/v1alpha1/firewallrule
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    endIpAddress: 40.112.8.12
+    resourceGroupName: test-rg
+    serverName: test-server
+    startIpAddress: 40.112.8.12
+
+---
+

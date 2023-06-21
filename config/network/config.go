@@ -1,8 +1,8 @@
 package network
 
 import (
-	"kubeform.dev/provider-azure/apis/rconfig"
 	"github.com/upbound/upjet/pkg/config"
+	"kubeform.dev/provider-azure/apis/rconfig"
 )
 
 func Configure(p *config.Provider) {
@@ -23,5 +23,9 @@ func Configure(p *config.Provider) {
 			IgnoredFields: []string{"subnet"},
 		}
 		config.MoveToStatus(r.TerraformResource, "subnet")
+	})
+
+	p.AddResourceConfigurator("azurerm_private_dns_zone", func(r *config.Resource) {
+		r.UseAsync = false
 	})
 }

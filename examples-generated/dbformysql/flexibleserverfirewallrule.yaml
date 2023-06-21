@@ -1,0 +1,34 @@
+apiVersion: dbformysql.azure.kubeform.com/v1alpha1
+kind: FlexibleServerFirewallRule
+metadata:
+  annotations:
+    meta.upbound.io/example-id: dbformysql/v1alpha1/flexibleserverfirewallrule
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    endIpAddress: 40.112.8.12
+    resourceGroupName: ${azurerm_resource_group.example.name}
+    serverNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    startIpAddress: 40.112.8.12
+
+---
+
+apiVersion: dbformysql.azure.kubeform.com/v1alpha1
+kind: FlexibleServer
+metadata:
+  annotations:
+    meta.upbound.io/example-id: dbformysql/v1alpha1/flexibleserverfirewallrule
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupName: api-rg-pro
+
+---
+

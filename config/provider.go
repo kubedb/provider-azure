@@ -7,6 +7,12 @@ package config
 import (
 	// Note(turkenh): we are importing this to embed provider schema document
 	_ "embed"
+	"kubeform.dev/provider-azure/config/cache"
+	"kubeform.dev/provider-azure/config/cosmosdb"
+	"kubeform.dev/provider-azure/config/dbformariadb"
+	"kubeform.dev/provider-azure/config/dbformysql"
+	"kubeform.dev/provider-azure/config/dbforpostgresql"
+	"kubeform.dev/provider-azure/config/keyvault"
 	"kubeform.dev/provider-azure/config/network"
 
 	ujconfig "github.com/upbound/upjet/pkg/config"
@@ -41,6 +47,12 @@ func GetProvider() *ujconfig.Provider {
 	for _, configure := range []func(provider *ujconfig.Provider){
 		// add custom config functions
 		network.Configure,
+		cache.Configure,
+		cosmosdb.Configure,
+		dbformariadb.Configure,
+		dbformysql.Configure,
+		dbforpostgresql.Configure,
+		keyvault.Configure,
 	} {
 		configure(pc)
 	}

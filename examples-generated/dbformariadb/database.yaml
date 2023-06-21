@@ -1,0 +1,43 @@
+apiVersion: dbformariadb.azure.kubeform.com/v1alpha1
+kind: Database
+metadata:
+  annotations:
+    meta.upbound.io/example-id: dbformariadb/v1alpha1/database
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    charset: utf8mb4
+    collation: utf8mb4_unicode_520_ci
+    resourceGroupName: ${azurerm_resource_group.example.name}
+    serverName: ${azurerm_mariadb_server.example.name}
+
+---
+
+apiVersion: dbformariadb.azure.kubeform.com/v1alpha1
+kind: Server
+metadata:
+  annotations:
+    meta.upbound.io/example-id: dbformariadb/v1alpha1/database
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    administratorLogin: acctestun
+    administratorLoginPasswordSecretRef:
+      key: example-key
+      name: example-secret
+      namespace: upbound-system
+    backupRetentionDays: 7
+    geoRedundantBackupEnabled: false
+    location: West Europe
+    resourceGroupName: tfex-mariadb-database-RG
+    skuName: B_Gen5_2
+    sslEnforcementEnabled: true
+    storageMb: 51200
+    version: "10.2"
+
+---
+

@@ -1,0 +1,55 @@
+apiVersion: cache.azure.kubeform.com/v1alpha1
+kind: RedisEnterpriseDatabase
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cache/v1alpha1/redisenterprisedatabase
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    clientProtocol: Encrypted
+    clusterId: ${azurerm_redis_enterprise_cluster.example.id}
+    clusteringPolicy: EnterpriseCluster
+    evictionPolicy: NoEviction
+    linkedDatabaseGroupNickname: tftestGeoGroup
+    linkedDatabaseId:
+    - ${azurerm_redis_enterprise_cluster.example.id}/databases/default
+    - ${azurerm_redis_enterprise_cluster.example1.id}/databases/default
+    port: 10000
+    resourceGroupName: ${azurerm_resource_group.example.name}
+
+---
+
+apiVersion: cache.azure.kubeform.com/v1alpha1
+kind: RedisEnterpriseCluster
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cache/v1alpha1/redisenterprisedatabase
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupName: example-redisenterprise
+    skuName: Enterprise_E20-4
+
+---
+
+apiVersion: cache.azure.kubeform.com/v1alpha1
+kind: RedisEnterpriseCluster
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cache/v1alpha1/redisenterprisedatabase
+  labels:
+    testing.upbound.io/example-name: example1
+  name: example1
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupName: example-redisenterprise
+    skuName: Enterprise_E20-4
+
+---
+

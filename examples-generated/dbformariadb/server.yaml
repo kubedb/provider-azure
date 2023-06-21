@@ -1,0 +1,29 @@
+apiVersion: dbformariadb.azure.kubeform.com/v1alpha1
+kind: Server
+metadata:
+  annotations:
+    meta.upbound.io/example-id: dbformariadb/v1alpha1/server
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    administratorLogin: mariadbadmin
+    administratorLoginPasswordSecretRef:
+      key: example-key
+      name: example-secret
+      namespace: upbound-system
+    autoGrowEnabled: true
+    backupRetentionDays: 7
+    geoRedundantBackupEnabled: false
+    location: ${azurerm_resource_group.example.location}
+    publicNetworkAccessEnabled: false
+    resourceGroupName: ${azurerm_resource_group.example.name}
+    skuName: B_Gen5_2
+    sslEnforcementEnabled: true
+    sslMinimalTlsVersionEnforced: TLS1_2
+    storageMb: 5120
+    version: "10.2"
+
+---
+

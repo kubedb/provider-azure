@@ -1,0 +1,39 @@
+apiVersion: cosmosdb.azure.kubeform.com/v1alpha1
+kind: CassandraKeySpace
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cosmosdb/v1alpha1/cassandrakeyspace
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    accountName: ${azurerm_cosmosdb_account.example.name}
+    resourceGroupName: ${azurerm_cosmosdb_account.example.resource_group_name}
+    throughput: 400
+
+---
+
+apiVersion: cosmosdb.azure.kubeform.com/v1alpha1
+kind: Account
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cosmosdb/v1alpha1/cassandrakeyspace
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    capabilities:
+    - name: EnableCassandra
+    consistencyPolicy:
+    - consistencyLevel: Strong
+    geoLocation:
+    - failoverPriority: 0
+      location: West Europe
+    location: West Europe
+    offerType: Standard
+    resourceGroupName: tflex-cosmosdb-account-rg
+
+---
+

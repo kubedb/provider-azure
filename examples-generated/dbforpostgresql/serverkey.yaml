@@ -1,0 +1,88 @@
+apiVersion: dbforpostgresql.azure.kubeform.com/v1alpha1
+kind: ServerKey
+metadata:
+  annotations:
+    meta.upbound.io/example-id: dbforpostgresql/v1alpha1/serverkey
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    keyVaultKeyIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    serverIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: keyvault.azure.kubeform.com/v1alpha1
+kind: Vault
+metadata:
+  annotations:
+    meta.upbound.io/example-id: dbforpostgresql/v1alpha1/serverkey
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+    purgeProtectionEnabled: true
+    resourceGroupName: example-resources
+    skuName: premium
+    tenantId: ${data.azurerm_client_config.current.tenant_id}
+
+---
+
+apiVersion: keyvault.azure.kubeform.com/v1alpha1
+kind: Key
+metadata:
+  annotations:
+    meta.upbound.io/example-id: dbforpostgresql/v1alpha1/serverkey
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    keyOpts:
+    - decrypt
+    - encrypt
+    - sign
+    - unwrapKey
+    - verify
+    - wrapKey
+    keySize: 2048
+    keyType: RSA
+    keyVaultIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: dbforpostgresql.azure.kubeform.com/v1alpha1
+kind: Server
+metadata:
+  annotations:
+    meta.upbound.io/example-id: dbforpostgresql/v1alpha1/serverkey
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    administratorLogin: psqladmin
+    administratorLoginPasswordSecretRef:
+      key: example-key
+      name: example-secret
+      namespace: upbound-system
+    identity:
+    - type: SystemAssigned
+    location: West Europe
+    resourceGroupName: example-resources
+    skuName: GP_Gen5_2
+    sslEnforcementEnabled: true
+    storageMb: 51200
+    version: "11"
+
+---
+

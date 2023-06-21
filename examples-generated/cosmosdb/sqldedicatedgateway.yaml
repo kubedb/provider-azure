@@ -1,0 +1,38 @@
+apiVersion: cosmosdb.azure.kubeform.com/v1alpha1
+kind: SQLDedicatedGateway
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cosmosdb/v1alpha1/sqldedicatedgateway
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    cosmosdbAccountId: ${azurerm_cosmosdb_account.example.id}
+    instanceCount: 1
+    instanceSize: Cosmos.D4s
+
+---
+
+apiVersion: cosmosdb.azure.kubeform.com/v1alpha1
+kind: Account
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cosmosdb/v1alpha1/sqldedicatedgateway
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    consistencyPolicy:
+    - consistencyLevel: BoundedStaleness
+    geoLocation:
+    - failoverPriority: 0
+      location: West Europe
+    kind: GlobalDocumentDB
+    location: West Europe
+    offerType: Standard
+    resourceGroupName: example-resource-group
+
+---
+

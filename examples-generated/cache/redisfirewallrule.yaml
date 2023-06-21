@@ -1,0 +1,40 @@
+apiVersion: cache.azure.kubeform.com/v1alpha1
+kind: RedisFirewallRule
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cache/v1alpha1/redisfirewallrule
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    endIp: 2.3.4.5
+    redisCacheName: ${azurerm_redis_cache.example.name}
+    resourceGroupName: ${azurerm_resource_group.example.name}
+    startIp: 1.2.3.4
+
+---
+
+apiVersion: cache.azure.kubeform.com/v1alpha1
+kind: RedisCache
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cache/v1alpha1/redisfirewallrule
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    capacity: 1
+    enableNonSslPort: false
+    family: P
+    location: West Europe
+    redisConfiguration:
+    - maxmemoryDelta: 2
+      maxmemoryPolicy: allkeys-lru
+      maxmemoryReserved: 2
+    resourceGroupName: redis-resourcegroup
+    skuName: Premium
+
+---
+

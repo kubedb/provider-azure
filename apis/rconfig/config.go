@@ -31,6 +31,9 @@ const (
 	// ExtractResourceIDFuncPath holds the Azure resource ID extractor func name
 	ExtractResourceIDFuncPath = APISPackagePath + "/rconfig.ExtractResourceID()"
 
+	// Initially we are using VersionV1Alpha1 for our kubeform project
+	VersionV1Alpha1 = "v1alpha1"
+
 	// VersionV1Alpha2 is used as minimum version for all manually configured resources.
 	// Deprecated: Please use VersionV1Beta1 as minimum.
 	VersionV1Alpha2 = "v1alpha2"
@@ -41,7 +44,7 @@ const (
 	StorageAccountReferencePath = APISPackagePath + "/storage/" + VersionV1Beta1 + ".Account"
 
 	// VaultKeyReferencePath is used as import path for VaultKey
-	VaultKeyReferencePath = APISPackagePath + "/keyvault/" + VersionV1Beta1 + ".Key"
+	VaultKeyReferencePath = APISPackagePath + "/keyvault/" + VersionV1Alpha1 + ".Key"
 
 	// ContainerReferencePath is used as import path for Container
 	ContainerReferencePath = APISPackagePath + "/storage/" + VersionV1Beta1 + ".Container"

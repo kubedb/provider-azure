@@ -1,0 +1,16 @@
+apiVersion: cache.azure.kubeform.com/v1alpha1
+kind: RedisEnterpriseCluster
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cache/v1alpha1/redisenterprisecluster
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: ${azurerm_resource_group.example.location}
+    resourceGroupName: ${azurerm_resource_group.example.name}
+    skuName: EnterpriseFlash_F300-3
+
+---
+
