@@ -1,0 +1,60 @@
+apiVersion: dbformysql.azure.kubeform.com/v1alpha1
+kind: VirtualNetworkRule
+metadata:
+  annotations:
+    meta.upbound.io/example-id: dbformysql/v1alpha1/virtualnetworkrule
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    resourceGroupName: ${azurerm_resource_group.example.name}
+    serverName: ${azurerm_mysql_server.example.name}
+    subnetId: ${azurerm_subnet.internal.id}
+
+---
+
+apiVersion: dbformysql.azure.kubeform.com/v1alpha1
+kind: Server
+metadata:
+  annotations:
+    crossplane.io/external-name: ${Rand.RFC1123Subdomain}
+    meta.upbound.io/example-id: dbformysql/v1alpha1/virtualnetworkrule
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    administratorLogin: mysqladminun
+    administratorLoginPasswordSecretRef:
+      key: example-key
+      name: example-secret
+      namespace: upbound-system
+    backupRetentionDays: 7
+    geoRedundantBackupEnabled: false
+    location: West Europe
+    resourceGroupName: example-resources
+    skuName: GP_Gen5_2
+    sslEnforcementEnabled: true
+    storageMb: 5120
+    version: "5.7"
+
+---
+
+apiVersion: network.azure.kubeform.com/v1alpha1
+kind: VirtualNetwork
+metadata:
+  annotations:
+    meta.upbound.io/example-id: dbformysql/v1alpha1/virtualnetworkrule
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    addressSpace:
+    - 10.7.29.0/29
+    location: West Europe
+    resourceGroupName: example-resources
+
+---
+

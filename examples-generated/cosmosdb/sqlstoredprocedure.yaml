@@ -1,0 +1,58 @@
+apiVersion: cosmosdb.azure.kubeform.com/v1alpha1
+kind: SQLStoredProcedure
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cosmosdb/v1alpha1/sqlstoredprocedure
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    accountName: ${data.azurerm_cosmosdb_account.example.name}
+    body: |2
+         function () { var context = getContext(); var response = context.getResponse(); response.setBody('Hello, World'); }
+    containerNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    databaseNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    resourceGroupName: ${data.azurerm_cosmosdb_account.example.resource_group_name}
+
+---
+
+apiVersion: cosmosdb.azure.kubeform.com/v1alpha1
+kind: SQLContainer
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cosmosdb/v1alpha1/sqlstoredprocedure
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    accountName: ${data.azurerm_cosmosdb_account.example.name}
+    databaseNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    partitionKeyPath: /id
+    resourceGroupName: ${data.azurerm_cosmosdb_account.example.resource_group_name}
+
+---
+
+apiVersion: cosmosdb.azure.kubeform.com/v1alpha1
+kind: SQLDatabase
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cosmosdb/v1alpha1/sqlstoredprocedure
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    accountName: ${data.azurerm_cosmosdb_account.example.name}
+    resourceGroupName: ${data.azurerm_cosmosdb_account.example.resource_group_name}
+    throughput: 400
+
+---
+

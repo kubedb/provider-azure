@@ -1,0 +1,68 @@
+apiVersion: cache.azure.kubeform.com/v1alpha1
+kind: RedisLinkedServer
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cache/v1alpha1/redislinkedserver
+  labels:
+    testing.upbound.io/example-name: example-link
+  name: example-link
+spec:
+  forProvider:
+    linkedRedisCacheIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example-secondary
+    linkedRedisCacheLocation: ${azurerm_resource_group.example.location}
+    resourceGroupName: ${azurerm_redis_cache.example-primary.resource_group_name}
+    serverRole: Secondary
+    targetRedisCacheNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example-primary
+
+---
+
+apiVersion: cache.azure.kubeform.com/v1alpha1
+kind: RedisCache
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cache/v1alpha1/redislinkedserver
+  labels:
+    testing.upbound.io/example-name: example-primary
+  name: example-primary
+spec:
+  forProvider:
+    capacity: 1
+    enableNonSslPort: false
+    family: P
+    location: East US
+    redisConfiguration:
+    - maxmemoryDelta: 2
+      maxmemoryPolicy: allkeys-lru
+      maxmemoryReserved: 2
+    resourceGroupName: example-resources-primary
+    skuName: Premium
+
+---
+
+apiVersion: cache.azure.kubeform.com/v1alpha1
+kind: RedisCache
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cache/v1alpha1/redislinkedserver
+  labels:
+    testing.upbound.io/example-name: example-secondary
+  name: example-secondary
+spec:
+  forProvider:
+    capacity: 1
+    enableNonSslPort: false
+    family: P
+    location: West US
+    redisConfiguration:
+    - maxmemoryDelta: 2
+      maxmemoryPolicy: allkeys-lru
+      maxmemoryReserved: 2
+    resourceGroupName: example-resources-secondary
+    skuName: Premium
+
+---
+

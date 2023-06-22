@@ -1,0 +1,32 @@
+apiVersion: cosmosdb.azure.kubeform.com/v1alpha1
+kind: Account
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cosmosdb/v1alpha1/account
+  labels:
+    testing.upbound.io/example-name: db
+  name: db
+spec:
+  forProvider:
+    capabilities:
+    - name: EnableAggregationPipeline
+    - name: mongoEnableDocLevelTTL
+    - name: MongoDBv3.4
+    - name: EnableMongo
+    consistencyPolicy:
+    - consistencyLevel: BoundedStaleness
+      maxIntervalInSeconds: 300
+      maxStalenessPrefix: 100000
+    enableAutomaticFailover: true
+    geoLocation:
+    - failoverPriority: 1
+      location: eastus
+    - failoverPriority: 0
+      location: westus
+    kind: MongoDB
+    location: ${azurerm_resource_group.example.location}
+    offerType: Standard
+    resourceGroupName: ${azurerm_resource_group.example.name}
+
+---
+

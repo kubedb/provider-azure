@@ -1,0 +1,48 @@
+apiVersion: dbformysql.azure.kubeform.com/v1alpha1
+kind: Database
+metadata:
+  annotations:
+    meta.upbound.io/example-id: dbformysql/v1alpha1/database
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    charset: utf8
+    collation: utf8_unicode_ci
+    resourceGroupName: ${azurerm_resource_group.example.name}
+    serverName: ${azurerm_mysql_server.example.name}
+
+---
+
+apiVersion: dbformysql.azure.kubeform.com/v1alpha1
+kind: Server
+metadata:
+  annotations:
+    crossplane.io/external-name: ${Rand.RFC1123Subdomain}
+    meta.upbound.io/example-id: dbformysql/v1alpha1/database
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    administratorLogin: mysqladminun
+    administratorLoginPasswordSecretRef:
+      key: example-key
+      name: example-secret
+      namespace: upbound-system
+    autoGrowEnabled: true
+    backupRetentionDays: 7
+    geoRedundantBackupEnabled: true
+    infrastructureEncryptionEnabled: true
+    location: West Europe
+    publicNetworkAccessEnabled: false
+    resourceGroupName: example-resources
+    skuName: GP_Gen5_2
+    sslEnforcementEnabled: true
+    sslMinimalTlsVersionEnforced: TLS1_2
+    storageMb: 5120
+    version: "5.7"
+
+---
+

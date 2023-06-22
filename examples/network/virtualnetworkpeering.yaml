@@ -1,0 +1,23 @@
+apiVersion: network.azure.kubeform.com/v1alpha1
+kind: VirtualNetworkPeering
+metadata:
+  name: db-to-app
+spec:
+  forProvider:
+    allowForwardedTraffic: true
+    remoteVirtualNetworkId: "/subscriptions/1bfc9f66-316d-433e-b13d-c55589f642ca/resourceGroups/test-2/providers/Microsoft.Network/virtualNetworks/demo-2"
+    resourceGroupName: test
+    virtualNetworkName: demo-1
+
+---
+
+apiVersion: network.azure.kubeform.com/v1alpha1
+kind: VirtualNetworkPeering
+metadata:
+  name: app-to-db
+spec:
+  forProvider:
+    allowForwardedTraffic: true
+    remoteVirtualNetworkId: "/subscriptions/1bfc9f66-316d-433e-b13d-c55589f642ca/resourceGroups/test/providers/Microsoft.Network/virtualNetworks/demo-1"
+    resourceGroupName: test-2
+    virtualNetworkName: demo-2

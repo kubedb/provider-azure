@@ -1,0 +1,37 @@
+apiVersion: dbforpostgresql.azure.kubeform.com/v1alpha1
+kind: FirewallRule
+metadata:
+  annotations:
+    meta.upbound.io/example-id: dbforpostgresql/v1alpha1/firewallrule
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    endIpAddress: 40.112.8.12
+    resourceGroupName: ${azurerm_resource_group.example.name}
+    serverNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    startIpAddress: 40.112.8.12
+
+---
+
+apiVersion: dbforpostgresql.azure.kubeform.com/v1alpha1
+kind: Server
+metadata:
+  annotations:
+    meta.upbound.io/example-id: dbforpostgresql/v1alpha1/firewallrule
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupName: api-rg-pro
+    skuName: GP_Gen5_2
+    sslEnforcementEnabled: true
+    version: "11"
+
+---
+

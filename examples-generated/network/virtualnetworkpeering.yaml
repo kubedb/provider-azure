@@ -1,0 +1,54 @@
+apiVersion: network.azure.kubeform.com/v1alpha1
+kind: VirtualNetworkPeering
+metadata:
+  annotations:
+    meta.upbound.io/example-id: network/v1alpha1/virtualnetworkpeering
+  labels:
+    testing.upbound.io/example-name: example-1
+  name: example-1
+spec:
+  forProvider:
+    remoteVirtualNetworkIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example-2
+    resourceGroupName: ${azurerm_resource_group.example.name}
+    virtualNetworkNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example-1
+
+---
+
+apiVersion: network.azure.kubeform.com/v1alpha1
+kind: VirtualNetwork
+metadata:
+  annotations:
+    meta.upbound.io/example-id: network/v1alpha1/virtualnetworkpeering
+  labels:
+    testing.upbound.io/example-name: example-1
+  name: example-1
+spec:
+  forProvider:
+    addressSpace:
+    - 10.0.1.0/24
+    location: West Europe
+    resourceGroupName: peeredvnets-rg
+
+---
+
+apiVersion: network.azure.kubeform.com/v1alpha1
+kind: VirtualNetwork
+metadata:
+  annotations:
+    meta.upbound.io/example-id: network/v1alpha1/virtualnetworkpeering
+  labels:
+    testing.upbound.io/example-name: example-2
+  name: example-2
+spec:
+  forProvider:
+    addressSpace:
+    - 10.0.2.0/24
+    location: West Europe
+    resourceGroupName: peeredvnets-rg
+
+---
+

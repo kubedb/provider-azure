@@ -1,0 +1,37 @@
+apiVersion: cosmosdb.azure.kubeform.com/v1alpha1
+kind: CassandraCluster
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cosmosdb/v1alpha1/cassandracluster
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    defaultAdminPasswordSecretRef:
+      key: example-key
+      name: example-secret
+      namespace: upbound-system
+    delegatedManagementSubnetId: ${azurerm_subnet.example.id}
+    location: ${azurerm_resource_group.example.location}
+    resourceGroupName: ${azurerm_resource_group.example.name}
+
+---
+
+apiVersion: network.azure.kubeform.com/v1alpha1
+kind: VirtualNetwork
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cosmosdb/v1alpha1/cassandracluster
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    addressSpace:
+    - 10.0.0.0/16
+    location: West Europe
+    resourceGroupName: accexample-rg
+
+---
+

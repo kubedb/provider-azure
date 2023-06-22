@@ -1,0 +1,63 @@
+apiVersion: cosmosdb.azure.kubeform.com/v1alpha1
+kind: SQLRoleAssignment
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cosmosdb/v1alpha1/sqlroleassignment
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    accountName: ${azurerm_cosmosdb_account.example.name}
+    name: 736180af-7fbc-4c7f-9004-22735173c1c3
+    principalId: ${data.azurerm_client_config.current.object_id}
+    resourceGroupName: ${azurerm_resource_group.example.name}
+    roleDefinitionId: ${azurerm_cosmosdb_sql_role_definition.example.id}
+    scope: ${azurerm_cosmosdb_account.example.id}
+
+---
+
+apiVersion: cosmosdb.azure.kubeform.com/v1alpha1
+kind: Account
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cosmosdb/v1alpha1/sqlroleassignment
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    consistencyPolicy:
+    - consistencyLevel: Strong
+    geoLocation:
+    - failoverPriority: 0
+      location: West Europe
+    kind: GlobalDocumentDB
+    location: West Europe
+    offerType: Standard
+    resourceGroupName: example-resources
+
+---
+
+apiVersion: cosmosdb.azure.kubeform.com/v1alpha1
+kind: SQLRoleDefinition
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cosmosdb/v1alpha1/sqlroleassignment
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    accountName: example-cosmosdb
+    assignableScopes:
+    - ${azurerm_cosmosdb_account.example.id}
+    name: examplesqlroledef
+    permissions:
+    - dataActions:
+      - Microsoft.DocumentDB/databaseAccounts/sqlDatabases/containers/items/read
+    resourceGroupName: example-resources
+    type: CustomRole
+
+---
+
