@@ -62,7 +62,7 @@ type CassandraTableParameters struct {
 
 	// The ID of the Cosmos DB Cassandra Keyspace to create the table within. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=CassandraKeySpace
-	// +crossplane:generate:reference:extractor=kubeform.dev/provider-azure/apis/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=kubedb.dev/provider-azure/apis/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	CassandraKeyspaceID *string `json:"cassandraKeyspaceId,omitempty" tf:"cassandra_keyspace_id,omitempty"`
 

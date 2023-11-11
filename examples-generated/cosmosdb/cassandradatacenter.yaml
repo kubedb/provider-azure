@@ -1,4 +1,4 @@
-apiVersion: cosmosdb.azure.kubeform.com/v1alpha1
+apiVersion: cosmosdb.azure.kubedb.com/v1alpha1
 kind: CassandraDatacenter
 metadata:
   annotations:
@@ -18,7 +18,7 @@ spec:
 
 ---
 
-apiVersion: cosmosdb.azure.kubeform.com/v1alpha1
+apiVersion: cosmosdb.azure.kubedb.com/v1alpha1
 kind: CassandraCluster
 metadata:
   annotations:
@@ -38,7 +38,7 @@ spec:
 
 ---
 
-apiVersion: network.azure.kubeform.com/v1alpha1
+apiVersion: network.azure.kubedb.com/v1alpha1
 kind: VirtualNetwork
 metadata:
   annotations:

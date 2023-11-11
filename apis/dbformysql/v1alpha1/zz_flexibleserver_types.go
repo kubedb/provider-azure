@@ -173,8 +173,8 @@ type FlexibleServerParameters struct {
 	PointInTimeRestoreTimeInUtc *string `json:"pointInTimeRestoreTimeInUtc,omitempty" tf:"point_in_time_restore_time_in_utc,omitempty"`
 
 	// The ID of the private DNS zone to create the MySQL Flexible Server. Changing this forces a new MySQL Flexible Server to be created.
-	// +crossplane:generate:reference:type=kubeform.dev/provider-azure/apis/network/v1alpha1.PrivateDNSZone
-	// +crossplane:generate:reference:extractor=kubeform.dev/provider-azure/apis/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=kubedb.dev/provider-azure/apis/network/v1alpha1.PrivateDNSZone
+	// +crossplane:generate:reference:extractor=kubedb.dev/provider-azure/apis/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	PrivateDNSZoneID *string `json:"privateDnsZoneId,omitempty" tf:"private_dns_zone_id,omitempty"`
 

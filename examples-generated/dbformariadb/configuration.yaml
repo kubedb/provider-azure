@@ -1,4 +1,4 @@
-apiVersion: dbformariadb.azure.kubeform.com/v1alpha1
+apiVersion: dbformariadb.azure.kubedb.com/v1alpha1
 kind: Configuration
 metadata:
   annotations:
@@ -15,7 +15,7 @@ spec:
 
 ---
 
-apiVersion: dbformariadb.azure.kubeform.com/v1alpha1
+apiVersion: dbformariadb.azure.kubedb.com/v1alpha1
 kind: Server
 metadata:
   annotations:

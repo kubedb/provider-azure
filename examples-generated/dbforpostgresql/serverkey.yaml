@@ -1,4 +1,4 @@
-apiVersion: dbforpostgresql.azure.kubeform.com/v1alpha1
+apiVersion: dbforpostgresql.azure.kubedb.com/v1alpha1
 kind: ServerKey
 metadata:
   annotations:
@@ -17,7 +17,7 @@ spec:
 
 ---
 
-apiVersion: keyvault.azure.kubeform.com/v1alpha1
+apiVersion: keyvault.azure.kubedb.com/v1alpha1
 kind: Vault
 metadata:
   annotations:
@@ -35,7 +35,7 @@ spec:
 
 ---
 
-apiVersion: keyvault.azure.kubeform.com/v1alpha1
+apiVersion: keyvault.azure.kubedb.com/v1alpha1
 kind: Key
 metadata:
   annotations:
@@ -60,7 +60,7 @@ spec:
 
 ---
 
-apiVersion: dbforpostgresql.azure.kubeform.com/v1alpha1
+apiVersion: dbforpostgresql.azure.kubedb.com/v1alpha1
 kind: Server
 metadata:
   annotations:

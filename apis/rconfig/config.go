@@ -27,11 +27,11 @@ import (
 
 const (
 	// APISPackagePath is the package path for generated APIs root package
-	APISPackagePath = "kubeform.dev/provider-azure/apis"
+	APISPackagePath = "kubedb.dev/provider-azure/apis"
 	// ExtractResourceIDFuncPath holds the Azure resource ID extractor func name
 	ExtractResourceIDFuncPath = APISPackagePath + "/rconfig.ExtractResourceID()"
 
-	// Initially we are using VersionV1Alpha1 for our kubeform project
+	// Initially we are using VersionV1Alpha1 for our kubedb project
 	VersionV1Alpha1 = "v1alpha1"
 
 	// VersionV1Alpha2 is used as minimum version for all manually configured resources.

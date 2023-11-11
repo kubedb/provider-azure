@@ -1,4 +1,4 @@
-module kubeform.dev/provider-azure
+module kubedb.dev/provider-azure
 
 go 1.19
 

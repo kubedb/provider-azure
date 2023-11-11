@@ -120,7 +120,7 @@ type KeyParameters struct {
 
 	// The ID of the Key Vault where the Key should be created. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=Vault
-	// +crossplane:generate:reference:extractor=kubeform.dev/provider-azure/apis/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=kubedb.dev/provider-azure/apis/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	KeyVaultID *string `json:"keyVaultId,omitempty" tf:"key_vault_id,omitempty"`
 

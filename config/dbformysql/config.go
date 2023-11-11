@@ -21,7 +21,7 @@ import (
 	"strconv"
 
 	xpv1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
-	"kubeform.dev/provider-azure/apis/rconfig"
+	"kubedb.dev/provider-azure/apis/rconfig"
 
 	"github.com/upbound/upjet/pkg/config"
 	"github.com/upbound/upjet/pkg/registry"

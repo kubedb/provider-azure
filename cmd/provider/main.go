@@ -24,12 +24,12 @@ import (
 	ctrl "sigs.k8s.io/controller-runtime"
 	"sigs.k8s.io/controller-runtime/pkg/log/zap"
 
-	"kubeform.dev/provider-azure/apis"
-	"kubeform.dev/provider-azure/apis/v1alpha1"
-	"kubeform.dev/provider-azure/config"
-	"kubeform.dev/provider-azure/internal/clients"
-	"kubeform.dev/provider-azure/internal/controller"
-	"kubeform.dev/provider-azure/internal/features"
+	"kubedb.dev/provider-azure/apis"
+	"kubedb.dev/provider-azure/apis/v1alpha1"
+	"kubedb.dev/provider-azure/config"
+	"kubedb.dev/provider-azure/internal/clients"
+	"kubedb.dev/provider-azure/internal/controller"
+	"kubedb.dev/provider-azure/internal/features"
 )
 
 func main() {

@@ -1,4 +1,4 @@
-apiVersion: dbformariadb.azure.kubeform.com/v1alpha1
+apiVersion: dbformariadb.azure.kubedb.com/v1alpha1
 kind: VirtualNetworkRule
 metadata:
   annotations:
@@ -14,7 +14,7 @@ spec:
 
 ---
 
-apiVersion: dbformariadb.azure.kubeform.com/v1alpha1
+apiVersion: dbformariadb.azure.kubedb.com/v1alpha1
 kind: Server
 metadata:
   annotations:
@@ -37,7 +37,7 @@ spec:
 
 ---
 
-apiVersion: network.azure.kubeform.com/v1alpha1
+apiVersion: network.azure.kubedb.com/v1alpha1
 kind: VirtualNetwork
 metadata:
   annotations:

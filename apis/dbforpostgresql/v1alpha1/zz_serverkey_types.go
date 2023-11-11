@@ -28,8 +28,8 @@ type ServerKeyObservation struct {
 type ServerKeyParameters struct {
 
 	// The URL to a Key Vault Key.
-	// +crossplane:generate:reference:type=kubeform.dev/provider-azure/apis/keyvault/v1alpha1.Key
-	// +crossplane:generate:reference:extractor=kubeform.dev/provider-azure/apis/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=kubedb.dev/provider-azure/apis/keyvault/v1alpha1.Key
+	// +crossplane:generate:reference:extractor=kubedb.dev/provider-azure/apis/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	KeyVaultKeyID *string `json:"keyVaultKeyId,omitempty" tf:"key_vault_key_id,omitempty"`
 
@@ -43,7 +43,7 @@ type ServerKeyParameters struct {
 
 	// The ID of the PostgreSQL Server. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=Server
-	// +crossplane:generate:reference:extractor=kubeform.dev/provider-azure/apis/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=kubedb.dev/provider-azure/apis/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ServerID *string `json:"serverId,omitempty" tf:"server_id,omitempty"`
 

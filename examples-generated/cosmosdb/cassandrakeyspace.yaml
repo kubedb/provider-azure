@@ -1,4 +1,4 @@
-apiVersion: cosmosdb.azure.kubeform.com/v1alpha1
+apiVersion: cosmosdb.azure.kubedb.com/v1alpha1
 kind: CassandraKeySpace
 metadata:
   annotations:
@@ -14,7 +14,7 @@ spec:
 
 ---
 
-apiVersion: cosmosdb.azure.kubeform.com/v1alpha1
+apiVersion: cosmosdb.azure.kubedb.com/v1alpha1
 kind: Account
 metadata:
   annotations:

@@ -1,4 +1,4 @@
-apiVersion: dbforpostgresql.azure.kubeform.com/v1alpha1
+apiVersion: dbforpostgresql.azure.kubedb.com/v1alpha1
 kind: FlexibleServerDatabase
 metadata:
   annotations:
@@ -16,7 +16,7 @@ spec:
 
 ---
 
-apiVersion: dbforpostgresql.azure.kubeform.com/v1alpha1
+apiVersion: dbforpostgresql.azure.kubedb.com/v1alpha1
 kind: FlexibleServer
 metadata:
   annotations:

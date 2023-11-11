@@ -1,4 +1,4 @@
-apiVersion: dbformysql.azure.kubeform.com/v1alpha1
+apiVersion: dbformysql.azure.kubedb.com/v1alpha1
 kind: FirewallRule
 metadata:
   annotations:
@@ -15,7 +15,7 @@ spec:
 
 ---
 
-apiVersion: dbformysql.azure.kubeform.com/v1alpha1
+apiVersion: dbformysql.azure.kubedb.com/v1alpha1
 kind: Server
 metadata:
   annotations:

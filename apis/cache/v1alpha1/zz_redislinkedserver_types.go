@@ -41,7 +41,7 @@ type RedisLinkedServerParameters struct {
 
 	// The ID of the linked Redis cache. Changing this forces a new Redis to be created.
 	// +crossplane:generate:reference:type=RedisCache
-	// +crossplane:generate:reference:extractor=kubeform.dev/provider-azure/apis/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=kubedb.dev/provider-azure/apis/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	LinkedRedisCacheID *string `json:"linkedRedisCacheId,omitempty" tf:"linked_redis_cache_id,omitempty"`
 

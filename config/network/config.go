@@ -2,7 +2,7 @@ package network
 
 import (
 	"github.com/upbound/upjet/pkg/config"
-	"kubeform.dev/provider-azure/apis/rconfig"
+	"kubedb.dev/provider-azure/apis/rconfig"
 )
 
 func Configure(p *config.Provider) {

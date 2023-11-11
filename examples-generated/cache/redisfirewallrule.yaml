@@ -1,4 +1,4 @@
-apiVersion: cache.azure.kubeform.com/v1alpha1
+apiVersion: cache.azure.kubedb.com/v1alpha1
 kind: RedisFirewallRule
 metadata:
   annotations:
@@ -15,7 +15,7 @@ spec:
 
 ---
 
-apiVersion: cache.azure.kubeform.com/v1alpha1
+apiVersion: cache.azure.kubedb.com/v1alpha1
 kind: RedisCache
 metadata:
   annotations:

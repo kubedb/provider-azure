@@ -1,4 +1,4 @@
-apiVersion: network.azure.kubeform.com/v1alpha1
+apiVersion: network.azure.kubedb.com/v1alpha1
 kind: VirtualNetwork
 metadata:
   annotations:

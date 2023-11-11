@@ -1,4 +1,4 @@
-apiVersion: dbformysql.azure.kubeform.com/v1alpha1
+apiVersion: dbformysql.azure.kubedb.com/v1alpha1
 kind: FlexibleServer
 metadata:
   annotations:
@@ -24,7 +24,7 @@ spec:
 
 ---
 
-apiVersion: network.azure.kubeform.com/v1alpha1
+apiVersion: network.azure.kubedb.com/v1alpha1
 kind: PrivateDNSZone
 metadata:
   annotations:
@@ -38,7 +38,7 @@ spec:
 
 ---
 
-apiVersion: network.azure.kubeform.com/v1alpha1
+apiVersion: network.azure.kubedb.com/v1alpha1
 kind: VirtualNetwork
 metadata:
   annotations:

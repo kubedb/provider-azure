@@ -18,8 +18,8 @@ import (
 	"github.com/upbound/upjet/pkg/terraform"
 	ctrl "sigs.k8s.io/controller-runtime"
 
-	v1alpha1 "kubeform.dev/provider-azure/apis/cosmosdb/v1alpha1"
-	features "kubeform.dev/provider-azure/internal/features"
+	v1alpha1 "kubedb.dev/provider-azure/apis/cosmosdb/v1alpha1"
+	features "kubedb.dev/provider-azure/internal/features"
 )
 
 // Setup adds a controller that reconciles Table managed resources.

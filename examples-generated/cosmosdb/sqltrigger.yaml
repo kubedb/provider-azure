@@ -1,4 +1,4 @@
-apiVersion: cosmosdb.azure.kubeform.com/v1alpha1
+apiVersion: cosmosdb.azure.kubedb.com/v1alpha1
 kind: SQLTrigger
 metadata:
   annotations:
@@ -17,7 +17,7 @@ spec:
 
 ---
 
-apiVersion: cosmosdb.azure.kubeform.com/v1alpha1
+apiVersion: cosmosdb.azure.kubedb.com/v1alpha1
 kind: SQLContainer
 metadata:
   annotations:
@@ -36,7 +36,7 @@ spec:
 
 ---
 
-apiVersion: cosmosdb.azure.kubeform.com/v1alpha1
+apiVersion: cosmosdb.azure.kubedb.com/v1alpha1
 kind: SQLDatabase
 metadata:
   annotations:

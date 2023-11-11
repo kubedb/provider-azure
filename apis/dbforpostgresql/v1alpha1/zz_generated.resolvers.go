@@ -9,8 +9,8 @@ import (
 	"context"
 	reference "github.com/crossplane/crossplane-runtime/pkg/reference"
 	errors "github.com/pkg/errors"
-	v1alpha1 "kubeform.dev/provider-azure/apis/keyvault/v1alpha1"
-	rconfig "kubeform.dev/provider-azure/apis/rconfig"
+	v1alpha1 "kubedb.dev/provider-azure/apis/keyvault/v1alpha1"
+	rconfig "kubedb.dev/provider-azure/apis/rconfig"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
 

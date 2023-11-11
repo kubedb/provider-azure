@@ -14,7 +14,7 @@ import (
 
 	"github.com/upbound/upjet/pkg/terraform"
 
-	"kubeform.dev/provider-azure/apis/v1beta1"
+	"kubedb.dev/provider-azure/apis/v1beta1"
 )
 
 const (

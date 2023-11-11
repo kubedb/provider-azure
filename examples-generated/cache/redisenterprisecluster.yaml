@@ -1,4 +1,4 @@
-apiVersion: cache.azure.kubeform.com/v1alpha1
+apiVersion: cache.azure.kubedb.com/v1alpha1
 kind: RedisEnterpriseCluster
 metadata:
   annotations:

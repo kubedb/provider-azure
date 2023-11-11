@@ -7,20 +7,20 @@ package config
 import (
 	// Note(turkenh): we are importing this to embed provider schema document
 	_ "embed"
-	"kubeform.dev/provider-azure/config/cache"
-	"kubeform.dev/provider-azure/config/cosmosdb"
-	"kubeform.dev/provider-azure/config/dbformariadb"
-	"kubeform.dev/provider-azure/config/dbformysql"
-	"kubeform.dev/provider-azure/config/dbforpostgresql"
-	"kubeform.dev/provider-azure/config/keyvault"
-	"kubeform.dev/provider-azure/config/network"
+	"kubedb.dev/provider-azure/config/cache"
+	"kubedb.dev/provider-azure/config/cosmosdb"
+	"kubedb.dev/provider-azure/config/dbformariadb"
+	"kubedb.dev/provider-azure/config/dbformysql"
+	"kubedb.dev/provider-azure/config/dbforpostgresql"
+	"kubedb.dev/provider-azure/config/keyvault"
+	"kubedb.dev/provider-azure/config/network"
 
 	ujconfig "github.com/upbound/upjet/pkg/config"
 )
 
 const (
 	resourcePrefix = "azure"
-	modulePath     = "kubeform.dev/provider-azure"
+	modulePath     = "kubedb.dev/provider-azure"
 )
 
 //go:embed schema.json
@@ -34,7 +34,7 @@ func GetProvider() *ujconfig.Provider {
 	pc := ujconfig.NewProvider([]byte(providerSchema), resourcePrefix, modulePath, []byte(providerMetadata),
 		ujconfig.WithIncludeList(ExternalNameConfigured()),
 		ujconfig.WithFeaturesPackage("internal/features"),
-		ujconfig.WithRootGroup("azure.kubeform.com"),
+		ujconfig.WithRootGroup("azure.kubedb.com"),
 		ujconfig.WithDefaultResourceOptions(
 			ExternalNameConfigurations(),
 		))
