@@ -5,8 +5,8 @@ Copyright 2021 Upbound Inc.
 package config
 
 import (
-	// Note(turkenh): we are importing this to embed provider schema document
 	_ "embed"
+	"kubedb.dev/provider-azure/config/base"
 	"kubedb.dev/provider-azure/config/cache"
 	"kubedb.dev/provider-azure/config/cosmosdb"
 	"kubedb.dev/provider-azure/config/dbformariadb"
@@ -46,6 +46,7 @@ func GetProvider() *ujconfig.Provider {
 
 	for _, configure := range []func(provider *ujconfig.Provider){
 		// add custom config functions
+		base.Configure,
 		network.Configure,
 		cache.Configure,
 		cosmosdb.Configure,

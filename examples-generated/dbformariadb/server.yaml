@@ -16,7 +16,7 @@ spec:
     autoGrowEnabled: true
     backupRetentionDays: 7
     geoRedundantBackupEnabled: false
-    location: ${azurerm_resource_group.example.location}
+    location: West Europe
     publicNetworkAccessEnabled: false
     resourceGroupName: ${azurerm_resource_group.example.name}
     skuName: B_Gen5_2
@@ -24,6 +24,20 @@ spec:
     sslMinimalTlsVersionEnforced: TLS1_2
     storageMb: 5120
     version: "10.2"
+
+---
+
+apiVersion: azure.kubedb.com/v1alpha1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: dbformariadb/v1alpha1/server
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe
 
 ---
 

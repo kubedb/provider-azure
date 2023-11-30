@@ -25,6 +25,12 @@ const (
 	errExtractCredentials   = "cannot extract credentials"
 	errUnmarshalCredentials = "cannot unmarshal azure credentials as JSON"
 
+	// Azure service principal credentials file JSON keys
+	keyAzureSubscriptionID = "subscriptionId"
+	keyAzureClientID       = "clientId"
+	keyAzureClientSecret   = "clientSecret"
+	keyAzureTenantID       = "tenantId"
+	// Terraform Provider configuration block keys
 	keyClientID       = "client_id"
 	keySubscriptionID = "subscription_id"
 	keyTenantID       = "tenant_id"
@@ -79,29 +85,27 @@ func TerraformSetupBuilder(version, providerSource, providerVersion string) terr
 			// For details, see https://github.com/upbound/provider-azure/issues/104
 			keySkipProviderRegistration: true,
 		}
-
 		// using spAuth for azure authentication
-		if _, ok := creds[keySubscriptionID]; ok {
-			ps.Configuration[keySubscriptionID] = creds[keySubscriptionID]
+		if _, ok := creds[keyAzureSubscriptionID]; ok {
+			ps.Configuration[keySubscriptionID] = creds[keyAzureSubscriptionID]
 		} else {
 			return ps, errors.New("invalid subscription id")
 		}
-		if _, ok := creds[keyTenantID]; ok {
-			ps.Configuration[keyTenantID] = creds[keyTenantID]
+		if _, ok := creds[keyAzureTenantID]; ok {
+			ps.Configuration[keyTenantID] = creds[keyAzureTenantID]
 		} else {
 			return ps, errors.New("invalid tenant id")
 		}
-		if _, ok := creds[keyClientID]; ok {
-			ps.Configuration[keyClientID] = creds[keyClientID]
+		if _, ok := creds[keyAzureClientID]; ok {
+			ps.Configuration[keyClientID] = creds[keyAzureClientID]
 		} else {
 			return ps, errors.New("invalid client id")
 		}
-		if _, ok := creds[keyClientSecret]; ok {
-			ps.Configuration[keyClientSecret] = creds[keyClientSecret]
+		if _, ok := creds[keyAzureClientSecret]; ok {
+			ps.Configuration[keyClientSecret] = creds[keyAzureClientSecret]
 		} else {
 			return ps, errors.New("invalid client secret")
 		}
-
 		return ps, nil
 	}
 }

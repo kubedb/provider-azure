@@ -11,7 +11,7 @@ spec:
     linkedRedisCacheIdSelector:
       matchLabels:
         testing.upbound.io/example-name: example-secondary
-    linkedRedisCacheLocation: ${azurerm_resource_group.example.location}
+    linkedRedisCacheLocation: West Europe
     resourceGroupName: ${azurerm_redis_cache.example-primary.resource_group_name}
     serverRole: Secondary
     targetRedisCacheNameSelector:
@@ -63,6 +63,34 @@ spec:
       maxmemoryReserved: 2
     resourceGroupName: example-resources-secondary
     skuName: Premium
+
+---
+
+apiVersion: azure.kubedb.com/v1alpha1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cache/v1alpha1/redislinkedserver
+  labels:
+    testing.upbound.io/example-name: example-primary
+  name: example-primary
+spec:
+  forProvider:
+    location: East US
+
+---
+
+apiVersion: azure.kubedb.com/v1alpha1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cache/v1alpha1/redislinkedserver
+  labels:
+    testing.upbound.io/example-name: example-secondary
+  name: example-secondary
+spec:
+  forProvider:
+    location: West US
 
 ---
 

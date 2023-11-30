@@ -10,7 +10,8 @@ package apis
 import (
 	"k8s.io/apimachinery/pkg/runtime"
 
-	v1alpha1 "kubedb.dev/provider-azure/apis/cache/v1alpha1"
+	v1alpha1 "kubedb.dev/provider-azure/apis/azure/v1alpha1"
+	v1alpha1cache "kubedb.dev/provider-azure/apis/cache/v1alpha1"
 	v1alpha1cosmosdb "kubedb.dev/provider-azure/apis/cosmosdb/v1alpha1"
 	v1alpha1dbformariadb "kubedb.dev/provider-azure/apis/dbformariadb/v1alpha1"
 	v1alpha1dbformysql "kubedb.dev/provider-azure/apis/dbformysql/v1alpha1"
@@ -25,6 +26,7 @@ func init() {
 	// Register the types with the Scheme so the components can map objects to GroupVersionKinds and back
 	AddToSchemes = append(AddToSchemes,
 		v1alpha1.SchemeBuilder.AddToScheme,
+		v1alpha1cache.SchemeBuilder.AddToScheme,
 		v1alpha1cosmosdb.SchemeBuilder.AddToScheme,
 		v1alpha1dbformariadb.SchemeBuilder.AddToScheme,
 		v1alpha1dbformysql.SchemeBuilder.AddToScheme,

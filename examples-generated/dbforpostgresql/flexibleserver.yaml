@@ -14,7 +14,7 @@ spec:
       name: example-secret
       namespace: upbound-system
     delegatedSubnetId: ${azurerm_subnet.example.id}
-    location: ${azurerm_resource_group.example.location}
+    location: West Europe
     privateDnsZoneId: ${azurerm_private_dns_zone.example.id}
     resourceGroupName: ${azurerm_resource_group.example.name}
     skuName: GP_Standard_D4s_v3
@@ -35,6 +35,20 @@ metadata:
 spec:
   forProvider:
     resourceGroupName: example-resources
+
+---
+
+apiVersion: azure.kubedb.com/v1alpha1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: dbforpostgresql/v1alpha1/flexibleserver
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe
 
 ---
 

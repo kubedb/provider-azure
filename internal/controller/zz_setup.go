@@ -9,6 +9,9 @@ import (
 
 	"github.com/upbound/upjet/pkg/controller"
 
+	providerregistration "kubedb.dev/provider-azure/internal/controller/azure/providerregistration"
+	resourcegroup "kubedb.dev/provider-azure/internal/controller/azure/resourcegroup"
+	subscription "kubedb.dev/provider-azure/internal/controller/azure/subscription"
 	rediscache "kubedb.dev/provider-azure/internal/controller/cache/rediscache"
 	redisenterprisecluster "kubedb.dev/provider-azure/internal/controller/cache/redisenterprisecluster"
 	redisenterprisedatabase "kubedb.dev/provider-azure/internal/controller/cache/redisenterprisedatabase"
@@ -70,6 +73,9 @@ import (
 // the supplied manager.
 func Setup(mgr ctrl.Manager, o controller.Options) error {
 	for _, setup := range []func(ctrl.Manager, controller.Options) error{
+		providerregistration.Setup,
+		resourcegroup.Setup,
+		subscription.Setup,
 		rediscache.Setup,
 		redisenterprisecluster.Setup,
 		redisenterprisedatabase.Setup,

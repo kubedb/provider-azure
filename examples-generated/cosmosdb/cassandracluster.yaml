@@ -13,8 +13,22 @@ spec:
       name: example-secret
       namespace: upbound-system
     delegatedManagementSubnetId: ${azurerm_subnet.example.id}
-    location: ${azurerm_resource_group.example.location}
+    location: West Europe
     resourceGroupName: ${azurerm_resource_group.example.name}
+
+---
+
+apiVersion: azure.kubedb.com/v1alpha1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cosmosdb/v1alpha1/cassandracluster
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe
 
 ---
 

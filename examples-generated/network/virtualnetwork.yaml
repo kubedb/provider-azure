@@ -13,10 +13,24 @@ spec:
     dnsServers:
     - 10.0.0.4
     - 10.0.0.5
-    location: ${azurerm_resource_group.example.location}
+    location: West Europe
     resourceGroupName: ${azurerm_resource_group.example.name}
     tags:
       environment: Production
+
+---
+
+apiVersion: azure.kubedb.com/v1alpha1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: network/v1alpha1/virtualnetwork
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe
 
 ---
 

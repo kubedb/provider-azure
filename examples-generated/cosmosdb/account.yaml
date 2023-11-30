@@ -24,9 +24,23 @@ spec:
     - failoverPriority: 0
       location: westus
     kind: MongoDB
-    location: ${azurerm_resource_group.example.location}
+    location: West Europe
     offerType: Standard
     resourceGroupName: ${azurerm_resource_group.example.name}
+
+---
+
+apiVersion: azure.kubedb.com/v1alpha1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cosmosdb/v1alpha1/account
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe
 
 ---
 

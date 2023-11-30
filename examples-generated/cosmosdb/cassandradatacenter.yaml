@@ -12,7 +12,7 @@ spec:
     cassandraClusterId: ${azurerm_cosmosdb_cassandra_cluster.example.id}
     delegatedManagementSubnetId: ${azurerm_subnet.example.id}
     diskCount: 4
-    location: ${azurerm_resource_group.example.location}
+    location: West Europe
     nodeCount: 3
     skuName: Standard_DS14_v2
 
@@ -35,6 +35,20 @@ spec:
     delegatedManagementSubnetId: ${azurerm_subnet.example.id}
     location: West Europe
     resourceGroupName: accexample-rg
+
+---
+
+apiVersion: azure.kubedb.com/v1alpha1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cosmosdb/v1alpha1/cassandradatacenter
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe
 
 ---
 

@@ -9,12 +9,26 @@ metadata:
 spec:
   forProvider:
     enabledForDiskEncryption: true
-    location: ${azurerm_resource_group.example.location}
+    location: West Europe
     purgeProtectionEnabled: false
     resourceGroupName: ${azurerm_resource_group.example.name}
     skuName: standard
     softDeleteRetentionDays: 7
     tenantId: ${data.azurerm_client_config.current.tenant_id}
+
+---
+
+apiVersion: azure.kubedb.com/v1alpha1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: keyvault/v1alpha1/vault
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe
 
 ---
 
