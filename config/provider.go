@@ -15,7 +15,7 @@ import (
 	"kubedb.dev/provider-azure/config/keyvault"
 	"kubedb.dev/provider-azure/config/network"
 
-	ujconfig "github.com/upbound/upjet/pkg/config"
+	ujconfig "github.com/crossplane/upjet/pkg/config"
 )
 
 const (

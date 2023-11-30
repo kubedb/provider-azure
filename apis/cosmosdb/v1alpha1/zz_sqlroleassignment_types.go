@@ -1,3 +1,7 @@
+// SPDX-FileCopyrightText: 2023 The Crossplane Authors <https://crossplane.io>
+//
+// SPDX-License-Identifier: Apache-2.0
+
 /*
 Copyright 2022 Upbound Inc.
 */
@@ -12,6 +16,27 @@ import (
 
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
+
+type SQLRoleAssignmentInitParameters struct {
+
+	// The name of the Cosmos DB Account. Changing this forces a new resource to be created.
+	AccountName *string `json:"accountName,omitempty" tf:"account_name,omitempty"`
+
+	// The GUID as the name of the Cosmos DB SQL Role Assignment - one will be generated if not specified. Changing this forces a new resource to be created.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The ID of the Principal (Client) in Azure Active Directory. Changing this forces a new resource to be created.
+	PrincipalID *string `json:"principalId,omitempty" tf:"principal_id,omitempty"`
+
+	// The name of the Resource Group in which the Cosmos DB SQL Role Assignment is created. Changing this forces a new resource to be created.
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+
+	// The resource ID of the Cosmos DB SQL Role Definition.
+	RoleDefinitionID *string `json:"roleDefinitionId,omitempty" tf:"role_definition_id,omitempty"`
+
+	// The data plane resource path for which access is being granted through this Cosmos DB SQL Role Assignment. Changing this forces a new resource to be created.
+	Scope *string `json:"scope,omitempty" tf:"scope,omitempty"`
+}
 
 type SQLRoleAssignmentObservation struct {
 
@@ -68,6 +93,17 @@ type SQLRoleAssignmentParameters struct {
 type SQLRoleAssignmentSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     SQLRoleAssignmentParameters `json:"forProvider"`
+	// THIS IS A BETA FIELD. It will be honored
+	// unless the Management Policies feature flag is disabled.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider SQLRoleAssignmentInitParameters `json:"initProvider,omitempty"`
 }
 
 // SQLRoleAssignmentStatus defines the observed state of SQLRoleAssignment.
@@ -88,11 +124,11 @@ type SQLRoleAssignmentStatus struct {
 type SQLRoleAssignment struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.accountName)",message="accountName is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.principalId)",message="principalId is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.resourceGroupName)",message="resourceGroupName is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.roleDefinitionId)",message="roleDefinitionId is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.scope)",message="scope is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.accountName) || (has(self.initProvider) && has(self.initProvider.accountName))",message="spec.forProvider.accountName is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.principalId) || (has(self.initProvider) && has(self.initProvider.principalId))",message="spec.forProvider.principalId is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.resourceGroupName) || (has(self.initProvider) && has(self.initProvider.resourceGroupName))",message="spec.forProvider.resourceGroupName is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.roleDefinitionId) || (has(self.initProvider) && has(self.initProvider.roleDefinitionId))",message="spec.forProvider.roleDefinitionId is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.scope) || (has(self.initProvider) && has(self.initProvider.scope))",message="spec.forProvider.scope is a required parameter"
 	Spec   SQLRoleAssignmentSpec   `json:"spec"`
 	Status SQLRoleAssignmentStatus `json:"status,omitempty"`
 }

@@ -65,6 +65,3 @@ spec:
     - 10.7.29.0/29
     location: West Europe
     resourceGroupName: example-resources
-
----
-

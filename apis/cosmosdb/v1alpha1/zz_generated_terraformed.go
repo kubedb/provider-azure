@@ -1,3 +1,7 @@
+// SPDX-FileCopyrightText: 2023 The Crossplane Authors <https://crossplane.io>
+//
+// SPDX-License-Identifier: Apache-2.0
+
 /*
 Copyright 2022 Upbound Inc.
 */
@@ -9,8 +13,8 @@ package v1alpha1
 import (
 	"github.com/pkg/errors"
 
-	"github.com/upbound/upjet/pkg/resource"
-	"github.com/upbound/upjet/pkg/resource/json"
+	"github.com/crossplane/upjet/pkg/resource"
+	"github.com/crossplane/upjet/pkg/resource/json"
 )
 
 // GetTerraformResourceType returns Terraform resource type for this Account
@@ -67,6 +71,16 @@ func (tr *Account) SetParameters(params map[string]any) error {
 		return err
 	}
 	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// GetInitParameters of this Account
+func (tr *Account) GetInitParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.InitProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
 }
 
 // LateInitialize this Account using its observed tfState.
@@ -143,6 +157,16 @@ func (tr *CassandraCluster) SetParameters(params map[string]any) error {
 	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
 }
 
+// GetInitParameters of this CassandraCluster
+func (tr *CassandraCluster) GetInitParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.InitProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
 // LateInitialize this CassandraCluster using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *CassandraCluster) LateInitialize(attrs []byte) (bool, error) {
@@ -215,6 +239,16 @@ func (tr *CassandraDatacenter) SetParameters(params map[string]any) error {
 		return err
 	}
 	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// GetInitParameters of this CassandraDatacenter
+func (tr *CassandraDatacenter) GetInitParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.InitProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
 }
 
 // LateInitialize this CassandraDatacenter using its observed tfState.
@@ -291,6 +325,16 @@ func (tr *CassandraKeySpace) SetParameters(params map[string]any) error {
 	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
 }
 
+// GetInitParameters of this CassandraKeySpace
+func (tr *CassandraKeySpace) GetInitParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.InitProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
 // LateInitialize this CassandraKeySpace using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *CassandraKeySpace) LateInitialize(attrs []byte) (bool, error) {
@@ -363,6 +407,16 @@ func (tr *CassandraTable) SetParameters(params map[string]any) error {
 		return err
 	}
 	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// GetInitParameters of this CassandraTable
+func (tr *CassandraTable) GetInitParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.InitProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
 }
 
 // LateInitialize this CassandraTable using its observed tfState.
@@ -440,6 +494,16 @@ func (tr *GremlinDatabase) SetParameters(params map[string]any) error {
 	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
 }
 
+// GetInitParameters of this GremlinDatabase
+func (tr *GremlinDatabase) GetInitParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.InitProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
 // LateInitialize this GremlinDatabase using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *GremlinDatabase) LateInitialize(attrs []byte) (bool, error) {
@@ -512,6 +576,16 @@ func (tr *GremlinGraph) SetParameters(params map[string]any) error {
 		return err
 	}
 	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// GetInitParameters of this GremlinGraph
+func (tr *GremlinGraph) GetInitParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.InitProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
 }
 
 // LateInitialize this GremlinGraph using its observed tfState.
@@ -588,6 +662,16 @@ func (tr *MongoCollection) SetParameters(params map[string]any) error {
 	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
 }
 
+// GetInitParameters of this MongoCollection
+func (tr *MongoCollection) GetInitParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.InitProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
 // LateInitialize this MongoCollection using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *MongoCollection) LateInitialize(attrs []byte) (bool, error) {
@@ -660,6 +744,16 @@ func (tr *MongoDatabase) SetParameters(params map[string]any) error {
 		return err
 	}
 	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// GetInitParameters of this MongoDatabase
+func (tr *MongoDatabase) GetInitParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.InitProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
 }
 
 // LateInitialize this MongoDatabase using its observed tfState.
@@ -736,6 +830,16 @@ func (tr *SQLContainer) SetParameters(params map[string]any) error {
 	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
 }
 
+// GetInitParameters of this SQLContainer
+func (tr *SQLContainer) GetInitParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.InitProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
 // LateInitialize this SQLContainer using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *SQLContainer) LateInitialize(attrs []byte) (bool, error) {
@@ -808,6 +912,16 @@ func (tr *SQLDatabase) SetParameters(params map[string]any) error {
 		return err
 	}
 	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// GetInitParameters of this SQLDatabase
+func (tr *SQLDatabase) GetInitParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.InitProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
 }
 
 // LateInitialize this SQLDatabase using its observed tfState.
@@ -884,6 +998,16 @@ func (tr *SQLDedicatedGateway) SetParameters(params map[string]any) error {
 	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
 }
 
+// GetInitParameters of this SQLDedicatedGateway
+func (tr *SQLDedicatedGateway) GetInitParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.InitProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
 // LateInitialize this SQLDedicatedGateway using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *SQLDedicatedGateway) LateInitialize(attrs []byte) (bool, error) {
@@ -956,6 +1080,16 @@ func (tr *SQLFunction) SetParameters(params map[string]any) error {
 		return err
 	}
 	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// GetInitParameters of this SQLFunction
+func (tr *SQLFunction) GetInitParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.InitProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
 }
 
 // LateInitialize this SQLFunction using its observed tfState.
@@ -1032,6 +1166,16 @@ func (tr *SQLRoleAssignment) SetParameters(params map[string]any) error {
 	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
 }
 
+// GetInitParameters of this SQLRoleAssignment
+func (tr *SQLRoleAssignment) GetInitParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.InitProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
 // LateInitialize this SQLRoleAssignment using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *SQLRoleAssignment) LateInitialize(attrs []byte) (bool, error) {
@@ -1104,6 +1248,16 @@ func (tr *SQLRoleDefinition) SetParameters(params map[string]any) error {
 		return err
 	}
 	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// GetInitParameters of this SQLRoleDefinition
+func (tr *SQLRoleDefinition) GetInitParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.InitProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
 }
 
 // LateInitialize this SQLRoleDefinition using its observed tfState.
@@ -1180,6 +1334,16 @@ func (tr *SQLStoredProcedure) SetParameters(params map[string]any) error {
 	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
 }
 
+// GetInitParameters of this SQLStoredProcedure
+func (tr *SQLStoredProcedure) GetInitParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.InitProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
 // LateInitialize this SQLStoredProcedure using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *SQLStoredProcedure) LateInitialize(attrs []byte) (bool, error) {
@@ -1254,6 +1418,16 @@ func (tr *SQLTrigger) SetParameters(params map[string]any) error {
 	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
 }
 
+// GetInitParameters of this SQLTrigger
+func (tr *SQLTrigger) GetInitParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.InitProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
 // LateInitialize this SQLTrigger using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *SQLTrigger) LateInitialize(attrs []byte) (bool, error) {
@@ -1326,6 +1500,16 @@ func (tr *Table) SetParameters(params map[string]any) error {
 		return err
 	}
 	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// GetInitParameters of this Table
+func (tr *Table) GetInitParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.InitProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
 }
 
 // LateInitialize this Table using its observed tfState.

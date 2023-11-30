@@ -17,7 +17,7 @@ limitations under the License.
 package cosmosdb
 
 import (
-	"github.com/upbound/upjet/pkg/config"
+	"github.com/crossplane/upjet/pkg/config"
 	"kubedb.dev/provider-azure/apis/rconfig"
 )
 

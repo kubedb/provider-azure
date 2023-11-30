@@ -1,3 +1,7 @@
+// SPDX-FileCopyrightText: 2023 The Crossplane Authors <https://crossplane.io>
+//
+// SPDX-License-Identifier: Apache-2.0
+
 /*
 Copyright 2022 Upbound Inc.
 */
@@ -9,8 +13,8 @@ package v1alpha1
 import (
 	"github.com/pkg/errors"
 
-	"github.com/upbound/upjet/pkg/resource"
-	"github.com/upbound/upjet/pkg/resource/json"
+	"github.com/crossplane/upjet/pkg/resource"
+	"github.com/crossplane/upjet/pkg/resource/json"
 )
 
 // GetTerraformResourceType returns Terraform resource type for this PrivateDNSZone
@@ -67,6 +71,16 @@ func (tr *PrivateDNSZone) SetParameters(params map[string]any) error {
 		return err
 	}
 	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// GetInitParameters of this PrivateDNSZone
+func (tr *PrivateDNSZone) GetInitParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.InitProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
 }
 
 // LateInitialize this PrivateDNSZone using its observed tfState.
@@ -143,6 +157,16 @@ func (tr *VirtualNetwork) SetParameters(params map[string]any) error {
 	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
 }
 
+// GetInitParameters of this VirtualNetwork
+func (tr *VirtualNetwork) GetInitParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.InitProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
 // LateInitialize this VirtualNetwork using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *VirtualNetwork) LateInitialize(attrs []byte) (bool, error) {
@@ -216,6 +240,16 @@ func (tr *VirtualNetworkPeering) SetParameters(params map[string]any) error {
 		return err
 	}
 	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// GetInitParameters of this VirtualNetworkPeering
+func (tr *VirtualNetworkPeering) GetInitParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.InitProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
 }
 
 // LateInitialize this VirtualNetworkPeering using its observed tfState.

@@ -1,3 +1,7 @@
+// SPDX-FileCopyrightText: 2023 The Crossplane Authors <https://crossplane.io>
+//
+// SPDX-License-Identifier: Apache-2.0
+
 /*
 Copyright 2022 Upbound Inc.
 */
@@ -13,6 +17,12 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type AutoscaleSettingsInitParameters struct {
+
+	// The maximum throughput of the Cassandra KeySpace (RU/s). Must be between 1,000 and 1,000,000. Must be set in increments of 1,000. Conflicts with throughput.
+	MaxThroughput *float64 `json:"maxThroughput,omitempty" tf:"max_throughput,omitempty"`
+}
+
 type AutoscaleSettingsObservation struct {
 
 	// The maximum throughput of the Cassandra KeySpace (RU/s). Must be between 1,000 and 1,000,000. Must be set in increments of 1,000. Conflicts with throughput.
@@ -24,6 +34,15 @@ type AutoscaleSettingsParameters struct {
 	// The maximum throughput of the Cassandra KeySpace (RU/s). Must be between 1,000 and 1,000,000. Must be set in increments of 1,000. Conflicts with throughput.
 	// +kubebuilder:validation:Optional
 	MaxThroughput *float64 `json:"maxThroughput,omitempty" tf:"max_throughput,omitempty"`
+}
+
+type CassandraKeySpaceInitParameters struct {
+
+	// An autoscale_settings block as defined below.
+	AutoscaleSettings []AutoscaleSettingsInitParameters `json:"autoscaleSettings,omitempty" tf:"autoscale_settings,omitempty"`
+
+	// The throughput of Cassandra KeySpace (RU/s). Must be set in increments of 100. The minimum value is 400.
+	Throughput *float64 `json:"throughput,omitempty" tf:"throughput,omitempty"`
 }
 
 type CassandraKeySpaceObservation struct {
@@ -67,6 +86,17 @@ type CassandraKeySpaceParameters struct {
 type CassandraKeySpaceSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     CassandraKeySpaceParameters `json:"forProvider"`
+	// THIS IS A BETA FIELD. It will be honored
+	// unless the Management Policies feature flag is disabled.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider CassandraKeySpaceInitParameters `json:"initProvider,omitempty"`
 }
 
 // CassandraKeySpaceStatus defines the observed state of CassandraKeySpace.

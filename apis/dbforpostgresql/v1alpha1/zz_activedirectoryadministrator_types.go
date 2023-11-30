@@ -1,3 +1,7 @@
+// SPDX-FileCopyrightText: 2023 The Crossplane Authors <https://crossplane.io>
+//
+// SPDX-License-Identifier: Apache-2.0
+
 /*
 Copyright 2022 Upbound Inc.
 */
@@ -12,6 +16,18 @@ import (
 
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
+
+type ActiveDirectoryAdministratorInitParameters struct {
+
+	// The login name of the principal to set as the server administrator
+	Login *string `json:"login,omitempty" tf:"login,omitempty"`
+
+	// The ID of the principal to set as the server administrator. For a managed identity this should be the Client ID of the identity.
+	ObjectID *string `json:"objectId,omitempty" tf:"object_id,omitempty"`
+
+	// The Azure Tenant ID
+	TenantID *string `json:"tenantId,omitempty" tf:"tenant_id,omitempty"`
+}
 
 type ActiveDirectoryAdministratorObservation struct {
 
@@ -70,6 +86,17 @@ type ActiveDirectoryAdministratorParameters struct {
 type ActiveDirectoryAdministratorSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     ActiveDirectoryAdministratorParameters `json:"forProvider"`
+	// THIS IS A BETA FIELD. It will be honored
+	// unless the Management Policies feature flag is disabled.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider ActiveDirectoryAdministratorInitParameters `json:"initProvider,omitempty"`
 }
 
 // ActiveDirectoryAdministratorStatus defines the observed state of ActiveDirectoryAdministrator.
@@ -90,9 +117,9 @@ type ActiveDirectoryAdministratorStatus struct {
 type ActiveDirectoryAdministrator struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.login)",message="login is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.objectId)",message="objectId is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.tenantId)",message="tenantId is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.login) || (has(self.initProvider) && has(self.initProvider.login))",message="spec.forProvider.login is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.objectId) || (has(self.initProvider) && has(self.initProvider.objectId))",message="spec.forProvider.objectId is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.tenantId) || (has(self.initProvider) && has(self.initProvider.tenantId))",message="spec.forProvider.tenantId is a required parameter"
 	Spec   ActiveDirectoryAdministratorSpec   `json:"spec"`
 	Status ActiveDirectoryAdministratorStatus `json:"status,omitempty"`
 }

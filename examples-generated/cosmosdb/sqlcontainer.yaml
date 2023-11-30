@@ -42,6 +42,3 @@ spec:
   forProvider:
     accountName: ${data.azurerm_cosmosdb_account.example.name}
     resourceGroupName: ${data.azurerm_cosmosdb_account.example.resource_group_name}
-
----
-

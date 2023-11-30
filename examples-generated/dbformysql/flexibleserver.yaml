@@ -66,6 +66,3 @@ spec:
     - 10.0.0.0/16
     location: West Europe
     resourceGroupName: example-resources
-
----
-

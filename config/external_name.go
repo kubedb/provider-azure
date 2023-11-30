@@ -7,8 +7,8 @@ package config
 import (
 	"context"
 	"fmt"
+	"github.com/crossplane/upjet/pkg/config"
 	"github.com/pkg/errors"
-	"github.com/upbound/upjet/pkg/config"
 	"strings"
 )
 
@@ -73,9 +73,9 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	// cosmosdb
 	"azurerm_cosmosdb_sql_database":  config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.DocumentDB/databaseAccounts/{{ .parameters.account_name }}/sqlDatabases/{{ .external_name }}"),
 	"azurerm_cosmosdb_sql_container": config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.DocumentDB/databaseAccounts/{{ .parameters.account_name }}/sqlDatabases/{{ .parameters.database_name }}/containers/{{ .external_name }}"),
-	// We switched to IdentifierFromProvider configuration because of the problem in this issue: https://github.com/upbound/upjet/issues/32
+	// We switched to IdentifierFromProvider configuration because of the problem in this issue: https://github.com/crossplane/upjet/issues/32
 	"azurerm_cosmosdb_sql_role_assignment": config.IdentifierFromProvider,
-	// We switched to IdentifierFromProvider configuration because of the problem in this issue: https://github.com/upbound/upjet/issues/32
+	// We switched to IdentifierFromProvider configuration because of the problem in this issue: https://github.com/crossplane/upjet/issues/32
 	"azurerm_cosmosdb_sql_role_definition":  config.IdentifierFromProvider,
 	"azurerm_cosmosdb_mongo_database":       config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.DocumentDB/databaseAccounts/{{ .parameters.account_name }}/mongodbDatabases/{{ .external_name }}"),
 	"azurerm_cosmosdb_mongo_collection":     config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.DocumentDB/databaseAccounts/{{ .parameters.account_name }}/mongodbDatabases/{{ .parameters.database_name }}/collections/{{ .external_name }}"),

@@ -1,7 +1,7 @@
 package keyvault
 
 import (
-	"github.com/upbound/upjet/pkg/config"
+	"github.com/crossplane/upjet/pkg/config"
 	"kubedb.dev/provider-azure/apis/rconfig"
 )
 

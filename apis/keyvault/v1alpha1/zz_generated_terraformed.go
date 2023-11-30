@@ -1,3 +1,7 @@
+// SPDX-FileCopyrightText: 2023 The Crossplane Authors <https://crossplane.io>
+//
+// SPDX-License-Identifier: Apache-2.0
+
 /*
 Copyright 2022 Upbound Inc.
 */
@@ -9,8 +13,8 @@ package v1alpha1
 import (
 	"github.com/pkg/errors"
 
-	"github.com/upbound/upjet/pkg/resource"
-	"github.com/upbound/upjet/pkg/resource/json"
+	"github.com/crossplane/upjet/pkg/resource"
+	"github.com/crossplane/upjet/pkg/resource/json"
 )
 
 // GetTerraformResourceType returns Terraform resource type for this Vault
@@ -67,6 +71,16 @@ func (tr *Vault) SetParameters(params map[string]any) error {
 		return err
 	}
 	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// GetInitParameters of this Vault
+func (tr *Vault) GetInitParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.InitProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
 }
 
 // LateInitialize this Vault using its observed tfState.
@@ -141,6 +155,16 @@ func (tr *Key) SetParameters(params map[string]any) error {
 		return err
 	}
 	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// GetInitParameters of this Key
+func (tr *Key) GetInitParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.InitProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
 }
 
 // LateInitialize this Key using its observed tfState.

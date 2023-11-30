@@ -17,22 +17,14 @@ func (mg *PrivateDNSZone) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
-// GetManagementPolicy of this PrivateDNSZone.
-func (mg *PrivateDNSZone) GetManagementPolicy() xpv1.ManagementPolicy {
-	return mg.Spec.ManagementPolicy
+// GetManagementPolicies of this PrivateDNSZone.
+func (mg *PrivateDNSZone) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this PrivateDNSZone.
 func (mg *PrivateDNSZone) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
-}
-
-/*
-GetProviderReference of this PrivateDNSZone.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *PrivateDNSZone) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
 }
 
 // GetPublishConnectionDetailsTo of this PrivateDNSZone.
@@ -55,22 +47,14 @@ func (mg *PrivateDNSZone) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
-// SetManagementPolicy of this PrivateDNSZone.
-func (mg *PrivateDNSZone) SetManagementPolicy(r xpv1.ManagementPolicy) {
-	mg.Spec.ManagementPolicy = r
+// SetManagementPolicies of this PrivateDNSZone.
+func (mg *PrivateDNSZone) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this PrivateDNSZone.
 func (mg *PrivateDNSZone) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this PrivateDNSZone.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *PrivateDNSZone) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this PrivateDNSZone.
@@ -93,22 +77,14 @@ func (mg *VirtualNetwork) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
-// GetManagementPolicy of this VirtualNetwork.
-func (mg *VirtualNetwork) GetManagementPolicy() xpv1.ManagementPolicy {
-	return mg.Spec.ManagementPolicy
+// GetManagementPolicies of this VirtualNetwork.
+func (mg *VirtualNetwork) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this VirtualNetwork.
 func (mg *VirtualNetwork) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
-}
-
-/*
-GetProviderReference of this VirtualNetwork.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *VirtualNetwork) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
 }
 
 // GetPublishConnectionDetailsTo of this VirtualNetwork.
@@ -131,22 +107,14 @@ func (mg *VirtualNetwork) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
-// SetManagementPolicy of this VirtualNetwork.
-func (mg *VirtualNetwork) SetManagementPolicy(r xpv1.ManagementPolicy) {
-	mg.Spec.ManagementPolicy = r
+// SetManagementPolicies of this VirtualNetwork.
+func (mg *VirtualNetwork) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this VirtualNetwork.
 func (mg *VirtualNetwork) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this VirtualNetwork.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *VirtualNetwork) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this VirtualNetwork.
@@ -169,22 +137,14 @@ func (mg *VirtualNetworkPeering) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
-// GetManagementPolicy of this VirtualNetworkPeering.
-func (mg *VirtualNetworkPeering) GetManagementPolicy() xpv1.ManagementPolicy {
-	return mg.Spec.ManagementPolicy
+// GetManagementPolicies of this VirtualNetworkPeering.
+func (mg *VirtualNetworkPeering) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this VirtualNetworkPeering.
 func (mg *VirtualNetworkPeering) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
-}
-
-/*
-GetProviderReference of this VirtualNetworkPeering.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *VirtualNetworkPeering) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
 }
 
 // GetPublishConnectionDetailsTo of this VirtualNetworkPeering.
@@ -207,22 +167,14 @@ func (mg *VirtualNetworkPeering) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
-// SetManagementPolicy of this VirtualNetworkPeering.
-func (mg *VirtualNetworkPeering) SetManagementPolicy(r xpv1.ManagementPolicy) {
-	mg.Spec.ManagementPolicy = r
+// SetManagementPolicies of this VirtualNetworkPeering.
+func (mg *VirtualNetworkPeering) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this VirtualNetworkPeering.
 func (mg *VirtualNetworkPeering) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this VirtualNetworkPeering.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *VirtualNetworkPeering) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this VirtualNetworkPeering.

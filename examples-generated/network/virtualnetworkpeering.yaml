@@ -63,6 +63,3 @@ spec:
     - 10.0.2.0/24
     location: West Europe
     resourceGroupName: peeredvnets-rg
-
----
-

@@ -12,6 +12,3 @@ spec:
     resourceGroupName: test-rg
     serverName: test-server
     startIpAddress: 40.112.8.12
-
----
-

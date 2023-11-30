@@ -23,8 +23,8 @@ import (
 	xpv1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 	"kubedb.dev/provider-azure/apis/rconfig"
 
-	"github.com/upbound/upjet/pkg/config"
-	"github.com/upbound/upjet/pkg/registry"
+	"github.com/crossplane/upjet/pkg/config"
+	"github.com/crossplane/upjet/pkg/registry"
 )
 
 const (
