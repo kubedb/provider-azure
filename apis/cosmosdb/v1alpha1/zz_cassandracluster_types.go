@@ -50,9 +50,6 @@ type CassandraClusterInitParameters struct {
 	// A list of TLS certificates that is used to authorize client connecting to the Cassandra Cluster.
 	ClientCertificatePems []*string `json:"clientCertificatePems,omitempty" tf:"client_certificate_pems,omitempty"`
 
-	// The ID of the delegated management subnet for this Cassandra Cluster. Changing this forces a new Cassandra Cluster to be created.
-	DelegatedManagementSubnetID *string `json:"delegatedManagementSubnetId,omitempty" tf:"delegated_management_subnet_id,omitempty"`
-
 	// A list of TLS certificates that is used to authorize gossip from unmanaged Cassandra Data Center.
 	ExternalGossipCertificatePems []*string `json:"externalGossipCertificatePems,omitempty" tf:"external_gossip_certificate_pems,omitempty"`
 
@@ -135,8 +132,18 @@ type CassandraClusterParameters struct {
 	DefaultAdminPasswordSecretRef v1.SecretKeySelector `json:"defaultAdminPasswordSecretRef" tf:"-"`
 
 	// The ID of the delegated management subnet for this Cassandra Cluster. Changing this forces a new Cassandra Cluster to be created.
+	// +crossplane:generate:reference:type=kubedb.dev/provider-azure/apis/network/v1alpha1.Subnet
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	DelegatedManagementSubnetID *string `json:"delegatedManagementSubnetId,omitempty" tf:"delegated_management_subnet_id,omitempty"`
+
+	// Reference to a Subnet in network to populate delegatedManagementSubnetId.
+	// +kubebuilder:validation:Optional
+	DelegatedManagementSubnetIDRef *v1.Reference `json:"delegatedManagementSubnetIdRef,omitempty" tf:"-"`
+
+	// Selector for a Subnet in network to populate delegatedManagementSubnetId.
+	// +kubebuilder:validation:Optional
+	DelegatedManagementSubnetIDSelector *v1.Selector `json:"delegatedManagementSubnetIdSelector,omitempty" tf:"-"`
 
 	// A list of TLS certificates that is used to authorize gossip from unmanaged Cassandra Data Center.
 	// +kubebuilder:validation:Optional
@@ -163,8 +170,17 @@ type CassandraClusterParameters struct {
 	RepairEnabled *bool `json:"repairEnabled,omitempty" tf:"repair_enabled,omitempty"`
 
 	// The name of the Resource Group where the Cassandra Cluster should exist. Changing this forces a new Cassandra Cluster to be created.
-	// +kubebuilder:validation:Required
-	ResourceGroupName *string `json:"resourceGroupName" tf:"resource_group_name,omitempty"`
+	// +crossplane:generate:reference:type=kubedb.dev/provider-azure/apis/azure/v1alpha1.ResourceGroup
+	// +kubebuilder:validation:Optional
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+
+	// Reference to a ResourceGroup in azure to populate resourceGroupName.
+	// +kubebuilder:validation:Optional
+	ResourceGroupNameRef *v1.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+
+	// Selector for a ResourceGroup in azure to populate resourceGroupName.
+	// +kubebuilder:validation:Optional
+	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// A mapping of tags assigned to the resource.
 	// +kubebuilder:validation:Optional
@@ -211,7 +227,6 @@ type CassandraCluster struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
 	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.defaultAdminPasswordSecretRef)",message="spec.forProvider.defaultAdminPasswordSecretRef is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.delegatedManagementSubnetId) || (has(self.initProvider) && has(self.initProvider.delegatedManagementSubnetId))",message="spec.forProvider.delegatedManagementSubnetId is a required parameter"
 	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.location) || (has(self.initProvider) && has(self.initProvider.location))",message="spec.forProvider.location is a required parameter"
 	Spec   CassandraClusterSpec   `json:"spec"`
 	Status CassandraClusterStatus `json:"status,omitempty"`

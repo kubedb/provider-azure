@@ -32,7 +32,9 @@ spec:
       name: example-secret
       namespace: upbound-system
     location: West Europe
-    resourceGroupName: example-resources
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
     skuName: GP_Standard_D4s_v3
     storageMb: 32768
     version: "12"

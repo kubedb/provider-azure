@@ -6,9 +6,11 @@ import (
 
 var (
 	resourceGroup = map[string]string{
-		"azurerm_virtual_network_peering": "network",
-		"azurerm_virtual_network":         "network",
-		"azurerm_private_dns_zone":        "network",
+		"azurerm_virtual_network_peering":               "network",
+		"azurerm_virtual_network":                       "network",
+		"azurerm_private_dns_zone":                      "network",
+		"azurerm_subnet":                                "network",
+		"azurerm_private_dns_zone_virtual_network_link": "network",
 
 		"azurerm_redis_cache":                               "cache",
 		"azurerm_redis_firewall_rule":                       "cache",
@@ -66,6 +68,8 @@ var (
 		"azurerm_virtual_network_peering":                   "VirtualNetworkPeering",
 		"azurerm_virtual_network":                           "VirtualNetwork",
 		"azurerm_private_dns_zone":                          "PrivateDNSZone",
+		"azurerm_private_dns_zone_virtual_network_link":     "PrivateDNSZoneVirtualNetworkLink",
+		"azurerm_subnet":                                    "Subnet",
 		"azurerm_redis_cache":                               "RedisCache",
 		"azurerm_redis_firewall_rule":                       "RedisFirewallRule",
 		"azurerm_redis_enterprise_cluster":                  "RedisEnterpriseCluster",

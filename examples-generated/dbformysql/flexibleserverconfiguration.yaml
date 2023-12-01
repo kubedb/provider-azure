@@ -8,7 +8,9 @@ metadata:
   name: example
 spec:
   forProvider:
-    resourceGroupName: ${azurerm_resource_group.example.name}
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
     serverNameSelector:
       matchLabels:
         testing.upbound.io/example-name: example
@@ -32,7 +34,9 @@ spec:
       name: example-secret
       namespace: upbound-system
     location: West Europe
-    resourceGroupName: example-resources
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
     skuName: GP_Standard_D2ds_v4
 
 ---

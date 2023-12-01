@@ -8,7 +8,9 @@ metadata:
   name: example
 spec:
   forProvider:
-    cosmosdbAccountId: ${azurerm_cosmosdb_account.example.id}
+    cosmosdbAccountIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
     instanceCount: 1
     instanceSize: Cosmos.D4s
 
@@ -32,7 +34,9 @@ spec:
     kind: GlobalDocumentDB
     location: West Europe
     offerType: Standard
-    resourceGroupName: example-resource-group
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
 
 ---
 

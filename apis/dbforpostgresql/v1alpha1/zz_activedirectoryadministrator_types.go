@@ -61,8 +61,17 @@ type ActiveDirectoryAdministratorParameters struct {
 	ObjectID *string `json:"objectId,omitempty" tf:"object_id,omitempty"`
 
 	// The name of the resource group for the PostgreSQL server. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
-	ResourceGroupName *string `json:"resourceGroupName" tf:"resource_group_name,omitempty"`
+	// +crossplane:generate:reference:type=kubedb.dev/provider-azure/apis/azure/v1alpha1.ResourceGroup
+	// +kubebuilder:validation:Optional
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+
+	// Reference to a ResourceGroup in azure to populate resourceGroupName.
+	// +kubebuilder:validation:Optional
+	ResourceGroupNameRef *v1.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+
+	// Selector for a ResourceGroup in azure to populate resourceGroupName.
+	// +kubebuilder:validation:Optional
+	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The name of the PostgreSQL Server on which to set the administrator. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=Server

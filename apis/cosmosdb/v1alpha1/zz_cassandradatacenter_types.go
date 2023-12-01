@@ -28,9 +28,6 @@ type CassandraDatacenterInitParameters struct {
 	// The fragment of the cassandra.yaml configuration file to be included in the cassandra.yaml for all nodes in this Cassandra Datacenter. The fragment should be Base64 encoded and only a subset of keys is allowed.
 	Base64EncodedYamlFragment *string `json:"base64EncodedYamlFragment,omitempty" tf:"base64_encoded_yaml_fragment,omitempty"`
 
-	// The ID of the delegated management subnet for this Cassandra Datacenter. Changing this forces a new Cassandra Datacenter to be created.
-	DelegatedManagementSubnetID *string `json:"delegatedManagementSubnetId,omitempty" tf:"delegated_management_subnet_id,omitempty"`
-
 	// Determines the number of p30 disks that are attached to each node.
 	DiskCount *float64 `json:"diskCount,omitempty" tf:"disk_count,omitempty"`
 
@@ -104,12 +101,32 @@ type CassandraDatacenterParameters struct {
 	Base64EncodedYamlFragment *string `json:"base64EncodedYamlFragment,omitempty" tf:"base64_encoded_yaml_fragment,omitempty"`
 
 	// The ID of the Cassandra Cluster. Changing this forces a new Cassandra Datacenter to be created.
-	// +kubebuilder:validation:Required
-	CassandraClusterID *string `json:"cassandraClusterId" tf:"cassandra_cluster_id,omitempty"`
+	// +crossplane:generate:reference:type=kubedb.dev/provider-azure/apis/cosmosdb/v1alpha1.CassandraCluster
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +kubebuilder:validation:Optional
+	CassandraClusterID *string `json:"cassandraClusterId,omitempty" tf:"cassandra_cluster_id,omitempty"`
+
+	// Reference to a CassandraCluster in cosmosdb to populate cassandraClusterId.
+	// +kubebuilder:validation:Optional
+	CassandraClusterIDRef *v1.Reference `json:"cassandraClusterIdRef,omitempty" tf:"-"`
+
+	// Selector for a CassandraCluster in cosmosdb to populate cassandraClusterId.
+	// +kubebuilder:validation:Optional
+	CassandraClusterIDSelector *v1.Selector `json:"cassandraClusterIdSelector,omitempty" tf:"-"`
 
 	// The ID of the delegated management subnet for this Cassandra Datacenter. Changing this forces a new Cassandra Datacenter to be created.
+	// +crossplane:generate:reference:type=kubedb.dev/provider-azure/apis/network/v1alpha1.Subnet
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	DelegatedManagementSubnetID *string `json:"delegatedManagementSubnetId,omitempty" tf:"delegated_management_subnet_id,omitempty"`
+
+	// Reference to a Subnet in network to populate delegatedManagementSubnetId.
+	// +kubebuilder:validation:Optional
+	DelegatedManagementSubnetIDRef *v1.Reference `json:"delegatedManagementSubnetIdRef,omitempty" tf:"-"`
+
+	// Selector for a Subnet in network to populate delegatedManagementSubnetId.
+	// +kubebuilder:validation:Optional
+	DelegatedManagementSubnetIDSelector *v1.Selector `json:"delegatedManagementSubnetIdSelector,omitempty" tf:"-"`
 
 	// Determines the number of p30 disks that are attached to each node.
 	// +kubebuilder:validation:Optional
@@ -171,7 +188,6 @@ type CassandraDatacenterStatus struct {
 type CassandraDatacenter struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.delegatedManagementSubnetId) || (has(self.initProvider) && has(self.initProvider.delegatedManagementSubnetId))",message="spec.forProvider.delegatedManagementSubnetId is a required parameter"
 	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.location) || (has(self.initProvider) && has(self.initProvider.location))",message="spec.forProvider.location is a required parameter"
 	Spec   CassandraDatacenterSpec   `json:"spec"`
 	Status CassandraDatacenterStatus `json:"status,omitempty"`

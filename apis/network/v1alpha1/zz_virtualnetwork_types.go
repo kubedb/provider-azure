@@ -46,27 +46,6 @@ type DdosProtectionPlanParameters struct {
 	ID *string `json:"id" tf:"id,omitempty"`
 }
 
-type SubnetInitParameters struct {
-}
-
-type SubnetObservation struct {
-
-	// The address prefix to use for the subnet.
-	AddressPrefix *string `json:"addressPrefix,omitempty" tf:"address_prefix,omitempty"`
-
-	// The ID of this subnet.
-	ID *string `json:"id,omitempty" tf:"id,omitempty"`
-
-	// The name of the subnet.
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
-
-	// The Network Security Group to associate with the subnet. (Referenced by id, ie. azurerm_network_security_group.example.id)
-	SecurityGroup *string `json:"securityGroup,omitempty" tf:"security_group,omitempty"`
-}
-
-type SubnetParameters struct {
-}
-
 type VirtualNetworkInitParameters struct {
 
 	// The address space that is used the virtual network. You can supply more than one address space.
@@ -127,7 +106,7 @@ type VirtualNetworkObservation struct {
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 
 	// Can be specified multiple times to define multiple subnets. Each subnet block supports fields documented below.
-	Subnet []SubnetObservation `json:"subnet,omitempty" tf:"subnet,omitempty"`
+	Subnet []VirtualNetworkSubnetObservation `json:"subnet,omitempty" tf:"subnet,omitempty"`
 
 	// A mapping of tags to assign to the resource.
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
@@ -164,12 +143,42 @@ type VirtualNetworkParameters struct {
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// The name of the resource group in which to create the virtual network. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
-	ResourceGroupName *string `json:"resourceGroupName" tf:"resource_group_name,omitempty"`
+	// +crossplane:generate:reference:type=kubedb.dev/provider-azure/apis/azure/v1alpha1.ResourceGroup
+	// +kubebuilder:validation:Optional
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+
+	// Reference to a ResourceGroup in azure to populate resourceGroupName.
+	// +kubebuilder:validation:Optional
+	ResourceGroupNameRef *v1.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+
+	// Selector for a ResourceGroup in azure to populate resourceGroupName.
+	// +kubebuilder:validation:Optional
+	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// A mapping of tags to assign to the resource.
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+}
+
+type VirtualNetworkSubnetInitParameters struct {
+}
+
+type VirtualNetworkSubnetObservation struct {
+
+	// The address prefix to use for the subnet.
+	AddressPrefix *string `json:"addressPrefix,omitempty" tf:"address_prefix,omitempty"`
+
+	// The ID of this subnet.
+	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The name of the subnet.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The Network Security Group to associate with the subnet. (Referenced by id, ie. azurerm_network_security_group.example.id)
+	SecurityGroup *string `json:"securityGroup,omitempty" tf:"security_group,omitempty"`
+}
+
+type VirtualNetworkSubnetParameters struct {
 }
 
 // VirtualNetworkSpec defines the desired state of VirtualNetwork

@@ -10,8 +10,12 @@ spec:
   forProvider:
     login: sqladmin
     objectId: ${data.azurerm_client_config.current.object_id}
-    resourceGroupName: ${azurerm_resource_group.example.name}
-    serverName: ${azurerm_mysql_server.example.name}
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    serverNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
     tenantId: ${data.azurerm_client_config.current.tenant_id}
 
 ---
@@ -33,7 +37,9 @@ spec:
       name: example-secret
       namespace: upbound-system
     location: West Europe
-    resourceGroupName: example-resources
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
     skuName: B_Gen5_2
     sslEnforcementEnabled: true
     storageMb: 5120

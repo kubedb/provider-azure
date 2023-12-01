@@ -8,7 +8,9 @@ metadata:
   name: example
 spec:
   forProvider:
-    resourceGroupName: ${azurerm_resource_group.example.name}
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
 
 ---
 

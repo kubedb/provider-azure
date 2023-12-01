@@ -38,9 +38,6 @@ type PermissionsParameters struct {
 
 type SQLRoleDefinitionInitParameters struct {
 
-	// The name of the Cosmos DB Account. Changing this forces a new resource to be created.
-	AccountName *string `json:"accountName,omitempty" tf:"account_name,omitempty"`
-
 	// A list of fully qualified scopes at or below which Role Assignments may be created using this Cosmos DB SQL Role Definition. It will allow application of this Cosmos DB SQL Role Definition on the entire Database Account or any underlying Database/Collection. Scopes higher than Database Account are not enforceable as assignable scopes.
 	AssignableScopes []*string `json:"assignableScopes,omitempty" tf:"assignable_scopes,omitempty"`
 
@@ -49,9 +46,6 @@ type SQLRoleDefinitionInitParameters struct {
 
 	// A permissions block as defined below.
 	Permissions []PermissionsInitParameters `json:"permissions,omitempty" tf:"permissions,omitempty"`
-
-	// The name of the Resource Group in which the Cosmos DB SQL Role Definition is created. Changing this forces a new resource to be created.
-	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 
 	// The GUID as the name of the Cosmos DB SQL Role Definition - one will be generated if not specified. Changing this forces a new resource to be created.
 	RoleDefinitionID *string `json:"roleDefinitionId,omitempty" tf:"role_definition_id,omitempty"`
@@ -90,8 +84,17 @@ type SQLRoleDefinitionObservation struct {
 type SQLRoleDefinitionParameters struct {
 
 	// The name of the Cosmos DB Account. Changing this forces a new resource to be created.
+	// +crossplane:generate:reference:type=kubedb.dev/provider-azure/apis/cosmosdb/v1alpha1.Account
 	// +kubebuilder:validation:Optional
 	AccountName *string `json:"accountName,omitempty" tf:"account_name,omitempty"`
+
+	// Reference to a Account in cosmosdb to populate accountName.
+	// +kubebuilder:validation:Optional
+	AccountNameRef *v1.Reference `json:"accountNameRef,omitempty" tf:"-"`
+
+	// Selector for a Account in cosmosdb to populate accountName.
+	// +kubebuilder:validation:Optional
+	AccountNameSelector *v1.Selector `json:"accountNameSelector,omitempty" tf:"-"`
 
 	// A list of fully qualified scopes at or below which Role Assignments may be created using this Cosmos DB SQL Role Definition. It will allow application of this Cosmos DB SQL Role Definition on the entire Database Account or any underlying Database/Collection. Scopes higher than Database Account are not enforceable as assignable scopes.
 	// +kubebuilder:validation:Optional
@@ -106,8 +109,17 @@ type SQLRoleDefinitionParameters struct {
 	Permissions []PermissionsParameters `json:"permissions,omitempty" tf:"permissions,omitempty"`
 
 	// The name of the Resource Group in which the Cosmos DB SQL Role Definition is created. Changing this forces a new resource to be created.
+	// +crossplane:generate:reference:type=kubedb.dev/provider-azure/apis/azure/v1alpha1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+
+	// Reference to a ResourceGroup in azure to populate resourceGroupName.
+	// +kubebuilder:validation:Optional
+	ResourceGroupNameRef *v1.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+
+	// Selector for a ResourceGroup in azure to populate resourceGroupName.
+	// +kubebuilder:validation:Optional
+	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The GUID as the name of the Cosmos DB SQL Role Definition - one will be generated if not specified. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
@@ -153,11 +165,9 @@ type SQLRoleDefinitionStatus struct {
 type SQLRoleDefinition struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.accountName) || (has(self.initProvider) && has(self.initProvider.accountName))",message="spec.forProvider.accountName is a required parameter"
 	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.assignableScopes) || (has(self.initProvider) && has(self.initProvider.assignableScopes))",message="spec.forProvider.assignableScopes is a required parameter"
 	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name) || (has(self.initProvider) && has(self.initProvider.name))",message="spec.forProvider.name is a required parameter"
 	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.permissions) || (has(self.initProvider) && has(self.initProvider.permissions))",message="spec.forProvider.permissions is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.resourceGroupName) || (has(self.initProvider) && has(self.initProvider.resourceGroupName))",message="spec.forProvider.resourceGroupName is a required parameter"
 	Spec   SQLRoleDefinitionSpec   `json:"spec"`
 	Status SQLRoleDefinitionStatus `json:"status,omitempty"`
 }

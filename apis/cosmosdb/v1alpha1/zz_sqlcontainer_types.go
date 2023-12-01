@@ -317,8 +317,17 @@ type SQLContainerObservation struct {
 type SQLContainerParameters struct {
 
 	// The name of the Cosmos DB Account to create the container within. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
-	AccountName *string `json:"accountName" tf:"account_name,omitempty"`
+	// +crossplane:generate:reference:type=Account
+	// +kubebuilder:validation:Optional
+	AccountName *string `json:"accountName,omitempty" tf:"account_name,omitempty"`
+
+	// Reference to a Account to populate accountName.
+	// +kubebuilder:validation:Optional
+	AccountNameRef *v1.Reference `json:"accountNameRef,omitempty" tf:"-"`
+
+	// Selector for a Account to populate accountName.
+	// +kubebuilder:validation:Optional
+	AccountNameSelector *v1.Selector `json:"accountNameSelector,omitempty" tf:"-"`
 
 	// The default time to live of Analytical Storage for this SQL container. If present and the value is set to -1, it is equal to infinity, and items don’t expire by default. If present and the value is set to some number n – items will expire n seconds after their last modified time.
 	// +kubebuilder:validation:Optional
@@ -362,8 +371,17 @@ type SQLContainerParameters struct {
 	PartitionKeyVersion *float64 `json:"partitionKeyVersion,omitempty" tf:"partition_key_version,omitempty"`
 
 	// The name of the resource group in which the Cosmos DB SQL Container is created. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
-	ResourceGroupName *string `json:"resourceGroupName" tf:"resource_group_name,omitempty"`
+	// +crossplane:generate:reference:type=kubedb.dev/provider-azure/apis/azure/v1alpha1.ResourceGroup
+	// +kubebuilder:validation:Optional
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+
+	// Reference to a ResourceGroup in azure to populate resourceGroupName.
+	// +kubebuilder:validation:Optional
+	ResourceGroupNameRef *v1.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+
+	// Selector for a ResourceGroup in azure to populate resourceGroupName.
+	// +kubebuilder:validation:Optional
+	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The throughput of SQL container (RU/s). Must be set in increments of 100. The minimum value is 400.
 	// +kubebuilder:validation:Optional

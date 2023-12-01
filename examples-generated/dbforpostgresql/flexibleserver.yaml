@@ -13,10 +13,16 @@ spec:
       key: example-key
       name: example-secret
       namespace: upbound-system
-    delegatedSubnetId: ${azurerm_subnet.example.id}
+    delegatedSubnetIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
     location: West Europe
-    privateDnsZoneId: ${azurerm_private_dns_zone.example.id}
-    resourceGroupName: ${azurerm_resource_group.example.name}
+    privateDnsZoneIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
     skuName: GP_Standard_D4s_v3
     storageMb: 32768
     version: "12"
@@ -34,7 +40,31 @@ metadata:
   name: example
 spec:
   forProvider:
-    resourceGroupName: example-resources
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: network.azure.kubedb.com/v1alpha1
+kind: PrivateDNSZoneVirtualNetworkLink
+metadata:
+  annotations:
+    meta.upbound.io/example-id: dbforpostgresql/v1alpha1/flexibleserver
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    privateDnsZoneNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    virtualNetworkIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
 
 ---
 
@@ -53,6 +83,35 @@ spec:
 ---
 
 apiVersion: network.azure.kubedb.com/v1alpha1
+kind: Subnet
+metadata:
+  annotations:
+    meta.upbound.io/example-id: dbforpostgresql/v1alpha1/flexibleserver
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    addressPrefixes:
+    - 10.0.2.0/24
+    delegation:
+    - name: fs
+      serviceDelegation:
+      - actions:
+        - Microsoft.Network/virtualNetworks/subnets/join/action
+        name: Microsoft.DBforPostgreSQL/flexibleServers
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    serviceEndpoints:
+    - Microsoft.Storage
+    virtualNetworkNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: network.azure.kubedb.com/v1alpha1
 kind: VirtualNetwork
 metadata:
   annotations:
@@ -65,4 +124,6 @@ spec:
     addressSpace:
     - 10.0.0.0/16
     location: West Europe
-    resourceGroupName: example-resources
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example

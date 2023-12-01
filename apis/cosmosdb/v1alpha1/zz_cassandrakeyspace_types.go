@@ -66,16 +66,34 @@ type CassandraKeySpaceObservation struct {
 type CassandraKeySpaceParameters struct {
 
 	// The name of the Cosmos DB Cassandra KeySpace to create the table within. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
-	AccountName *string `json:"accountName" tf:"account_name,omitempty"`
+	// +crossplane:generate:reference:type=kubedb.dev/provider-azure/apis/cosmosdb/v1alpha1.Account
+	// +kubebuilder:validation:Optional
+	AccountName *string `json:"accountName,omitempty" tf:"account_name,omitempty"`
+
+	// Reference to a Account in cosmosdb to populate accountName.
+	// +kubebuilder:validation:Optional
+	AccountNameRef *v1.Reference `json:"accountNameRef,omitempty" tf:"-"`
+
+	// Selector for a Account in cosmosdb to populate accountName.
+	// +kubebuilder:validation:Optional
+	AccountNameSelector *v1.Selector `json:"accountNameSelector,omitempty" tf:"-"`
 
 	// An autoscale_settings block as defined below.
 	// +kubebuilder:validation:Optional
 	AutoscaleSettings []AutoscaleSettingsParameters `json:"autoscaleSettings,omitempty" tf:"autoscale_settings,omitempty"`
 
 	// The name of the resource group in which the Cosmos DB Cassandra KeySpace is created. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
-	ResourceGroupName *string `json:"resourceGroupName" tf:"resource_group_name,omitempty"`
+	// +crossplane:generate:reference:type=kubedb.dev/provider-azure/apis/azure/v1alpha1.ResourceGroup
+	// +kubebuilder:validation:Optional
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+
+	// Reference to a ResourceGroup in azure to populate resourceGroupName.
+	// +kubebuilder:validation:Optional
+	ResourceGroupNameRef *v1.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+
+	// Selector for a ResourceGroup in azure to populate resourceGroupName.
+	// +kubebuilder:validation:Optional
+	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The throughput of Cassandra KeySpace (RU/s). Must be set in increments of 100. The minimum value is 400.
 	// +kubebuilder:validation:Optional

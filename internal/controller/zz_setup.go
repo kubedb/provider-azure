@@ -64,6 +64,8 @@ import (
 	key "kubedb.dev/provider-azure/internal/controller/keyvault/key"
 	vault "kubedb.dev/provider-azure/internal/controller/keyvault/vault"
 	privatednszone "kubedb.dev/provider-azure/internal/controller/network/privatednszone"
+	privatednszonevirtualnetworklink "kubedb.dev/provider-azure/internal/controller/network/privatednszonevirtualnetworklink"
+	subnet "kubedb.dev/provider-azure/internal/controller/network/subnet"
 	virtualnetwork "kubedb.dev/provider-azure/internal/controller/network/virtualnetwork"
 	virtualnetworkpeering "kubedb.dev/provider-azure/internal/controller/network/virtualnetworkpeering"
 	providerconfig "kubedb.dev/provider-azure/internal/controller/providerconfig"
@@ -128,6 +130,8 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		key.Setup,
 		vault.Setup,
 		privatednszone.Setup,
+		privatednszonevirtualnetworklink.Setup,
+		subnet.Setup,
 		virtualnetwork.Setup,
 		virtualnetworkpeering.Setup,
 		providerconfig.Setup,

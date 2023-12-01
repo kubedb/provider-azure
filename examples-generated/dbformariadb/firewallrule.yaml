@@ -9,6 +9,10 @@ metadata:
 spec:
   forProvider:
     endIpAddress: 40.112.8.12
-    resourceGroupName: test-rg
-    serverName: test-server
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    serverNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
     startIpAddress: 40.112.8.12

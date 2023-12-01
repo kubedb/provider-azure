@@ -41,7 +41,9 @@ spec:
       location: West Europe
     location: West Europe
     offerType: Standard
-    resourceGroupName: tflex-cosmosdb-account-rg
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
 
 ---
 
@@ -55,8 +57,12 @@ metadata:
   name: example
 spec:
   forProvider:
-    accountName: tfex-cosmosdb-account
-    resourceGroupName: tflex-cosmosdb-account-rg
+    accountNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
     throughput: 400
 
 ---

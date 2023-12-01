@@ -39,7 +39,9 @@ metadata:
 spec:
   forProvider:
     location: West Europe
-    resourceGroupName: example-resources
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
     skuName: premium
     softDeleteRetentionDays: 7
     tenantId: ${data.azurerm_client_config.current.tenant_id}

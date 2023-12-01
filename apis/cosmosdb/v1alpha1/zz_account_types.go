@@ -319,8 +319,17 @@ type AccountParameters struct {
 	PublicNetworkAccessEnabled *bool `json:"publicNetworkAccessEnabled,omitempty" tf:"public_network_access_enabled,omitempty"`
 
 	// The name of the resource group in which the CosmosDB Account is created. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
-	ResourceGroupName *string `json:"resourceGroupName" tf:"resource_group_name,omitempty"`
+	// +crossplane:generate:reference:type=kubedb.dev/provider-azure/apis/azure/v1alpha1.ResourceGroup
+	// +kubebuilder:validation:Optional
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+
+	// Reference to a ResourceGroup in azure to populate resourceGroupName.
+	// +kubebuilder:validation:Optional
+	ResourceGroupNameRef *v1.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+
+	// Selector for a ResourceGroup in azure to populate resourceGroupName.
+	// +kubebuilder:validation:Optional
+	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// A restore block as defined below.
 	// +kubebuilder:validation:Optional
@@ -652,9 +661,6 @@ type RestoreInitParameters struct {
 
 	// The creation time of the database or the collection (Datetime Format RFC 3339). Changing this forces a new resource to be created.
 	RestoreTimestampInUtc *string `json:"restoreTimestampInUtc,omitempty" tf:"restore_timestamp_in_utc,omitempty"`
-
-	// The resource ID of the restorable database account from which the restore has to be initiated. The example is /subscriptions/{subscriptionId}/providers/Microsoft.DocumentDB/locations/{location}/restorableDatabaseAccounts/{restorableDatabaseAccountName}. Changing this forces a new resource to be created.
-	SourceCosmosdbAccountID *string `json:"sourceCosmosdbAccountId,omitempty" tf:"source_cosmosdb_account_id,omitempty"`
 }
 
 type RestoreObservation struct {
@@ -680,8 +686,18 @@ type RestoreParameters struct {
 	RestoreTimestampInUtc *string `json:"restoreTimestampInUtc" tf:"restore_timestamp_in_utc,omitempty"`
 
 	// The resource ID of the restorable database account from which the restore has to be initiated. The example is /subscriptions/{subscriptionId}/providers/Microsoft.DocumentDB/locations/{location}/restorableDatabaseAccounts/{restorableDatabaseAccountName}. Changing this forces a new resource to be created.
+	// +crossplane:generate:reference:type=Account
+	// +crossplane:generate:reference:extractor=kubedb.dev/provider-azure/apis/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
-	SourceCosmosdbAccountID *string `json:"sourceCosmosdbAccountId" tf:"source_cosmosdb_account_id,omitempty"`
+	SourceCosmosdbAccountID *string `json:"sourceCosmosdbAccountId,omitempty" tf:"source_cosmosdb_account_id,omitempty"`
+
+	// Reference to a Account to populate sourceCosmosdbAccountId.
+	// +kubebuilder:validation:Optional
+	SourceCosmosdbAccountIDRef *v1.Reference `json:"sourceCosmosdbAccountIdRef,omitempty" tf:"-"`
+
+	// Selector for a Account to populate sourceCosmosdbAccountId.
+	// +kubebuilder:validation:Optional
+	SourceCosmosdbAccountIDSelector *v1.Selector `json:"sourceCosmosdbAccountIdSelector,omitempty" tf:"-"`
 }
 
 type VirtualNetworkRuleInitParameters struct {

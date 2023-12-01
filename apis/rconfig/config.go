@@ -41,19 +41,19 @@ const (
 	VersionV1Beta1 = "v1beta1"
 
 	// StorageAccountReferencePath is used as import path for StorageAccount
-	StorageAccountReferencePath = APISPackagePath + "/storage/" + VersionV1Beta1 + ".Account"
+	StorageAccountReferencePath = APISPackagePath + "/storage/" + VersionV1Alpha1 + ".Account"
 
 	// VaultKeyReferencePath is used as import path for VaultKey
 	VaultKeyReferencePath = APISPackagePath + "/keyvault/" + VersionV1Alpha1 + ".Key"
 
 	// ContainerReferencePath is used as import path for Container
-	ContainerReferencePath = APISPackagePath + "/storage/" + VersionV1Beta1 + ".Container"
+	ContainerReferencePath = APISPackagePath + "/storage/" + VersionV1Alpha1 + ".Container"
 )
 
 // GetDefaultVersionedPath gets the package path from repo root
 // for the specified group and kind name.
 func GetDefaultVersionedPath(group, kindName string) string {
-	return fmt.Sprintf("/%s/%s.%s", group, VersionV1Beta1, kindName)
+	return fmt.Sprintf("/%s/%s.%s", group, VersionV1Alpha1, kindName)
 }
 
 // ExtractResourceID extracts the value of `spec.atProvider.id`

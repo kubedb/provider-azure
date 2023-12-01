@@ -26,7 +26,9 @@ spec:
     kind: MongoDB
     location: West Europe
     offerType: Standard
-    resourceGroupName: ${azurerm_resource_group.example.name}
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
 
 ---
 

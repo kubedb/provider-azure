@@ -51,12 +51,30 @@ type RedisFirewallRuleParameters struct {
 	EndIP *string `json:"endIp,omitempty" tf:"end_ip,omitempty"`
 
 	// The name of the Redis Cache. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
-	RedisCacheName *string `json:"redisCacheName" tf:"redis_cache_name,omitempty"`
+	// +crossplane:generate:reference:type=kubedb.dev/provider-azure/apis/cache/v1alpha1.RedisCache
+	// +kubebuilder:validation:Optional
+	RedisCacheName *string `json:"redisCacheName,omitempty" tf:"redis_cache_name,omitempty"`
+
+	// Reference to a RedisCache in cache to populate redisCacheName.
+	// +kubebuilder:validation:Optional
+	RedisCacheNameRef *v1.Reference `json:"redisCacheNameRef,omitempty" tf:"-"`
+
+	// Selector for a RedisCache in cache to populate redisCacheName.
+	// +kubebuilder:validation:Optional
+	RedisCacheNameSelector *v1.Selector `json:"redisCacheNameSelector,omitempty" tf:"-"`
 
 	// The name of the resource group in which this Redis Cache exists. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
-	ResourceGroupName *string `json:"resourceGroupName" tf:"resource_group_name,omitempty"`
+	// +crossplane:generate:reference:type=kubedb.dev/provider-azure/apis/azure/v1alpha1.ResourceGroup
+	// +kubebuilder:validation:Optional
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+
+	// Reference to a ResourceGroup in azure to populate resourceGroupName.
+	// +kubebuilder:validation:Optional
+	ResourceGroupNameRef *v1.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+
+	// Selector for a ResourceGroup in azure to populate resourceGroupName.
+	// +kubebuilder:validation:Optional
+	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The lowest IP address included in the range
 	// +kubebuilder:validation:Optional

@@ -12,9 +12,13 @@ spec:
       key: example-key
       name: example-secret
       namespace: upbound-system
-    delegatedManagementSubnetId: ${azurerm_subnet.example.id}
+    delegatedManagementSubnetIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
     location: West Europe
-    resourceGroupName: ${azurerm_resource_group.example.name}
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
 
 ---
 
@@ -33,6 +37,27 @@ spec:
 ---
 
 apiVersion: network.azure.kubedb.com/v1alpha1
+kind: Subnet
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cosmosdb/v1alpha1/cassandracluster
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    addressPrefixes:
+    - 10.0.1.0/24
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    virtualNetworkNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: network.azure.kubedb.com/v1alpha1
 kind: VirtualNetwork
 metadata:
   annotations:
@@ -45,4 +70,6 @@ spec:
     addressSpace:
     - 10.0.0.0/16
     location: West Europe
-    resourceGroupName: accexample-rg
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example

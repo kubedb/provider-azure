@@ -48,16 +48,6 @@ func (in *ConfigurationInitParameters) DeepCopyInto(out *ConfigurationInitParame
 		*out = new(string)
 		**out = **in
 	}
-	if in.ResourceGroupName != nil {
-		in, out := &in.ResourceGroupName, &out.ResourceGroupName
-		*out = new(string)
-		**out = **in
-	}
-	if in.ServerName != nil {
-		in, out := &in.ServerName, &out.ServerName
-		*out = new(string)
-		**out = **in
-	}
 	if in.Value != nil {
 		in, out := &in.Value, &out.Value
 		*out = new(string)
@@ -160,10 +150,30 @@ func (in *ConfigurationParameters) DeepCopyInto(out *ConfigurationParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.ResourceGroupNameRef != nil {
+		in, out := &in.ResourceGroupNameRef, &out.ResourceGroupNameRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.ResourceGroupNameSelector != nil {
+		in, out := &in.ResourceGroupNameSelector, &out.ResourceGroupNameSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.ServerName != nil {
 		in, out := &in.ServerName, &out.ServerName
 		*out = new(string)
 		**out = **in
+	}
+	if in.ServerNameRef != nil {
+		in, out := &in.ServerNameRef, &out.ServerNameRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.ServerNameSelector != nil {
+		in, out := &in.ServerNameSelector, &out.ServerNameSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.Value != nil {
 		in, out := &in.Value, &out.Value
@@ -359,10 +369,30 @@ func (in *DatabaseParameters) DeepCopyInto(out *DatabaseParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.ResourceGroupNameRef != nil {
+		in, out := &in.ResourceGroupNameRef, &out.ResourceGroupNameRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.ResourceGroupNameSelector != nil {
+		in, out := &in.ResourceGroupNameSelector, &out.ResourceGroupNameSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.ServerName != nil {
 		in, out := &in.ServerName, &out.ServerName
 		*out = new(string)
 		**out = **in
+	}
+	if in.ServerNameRef != nil {
+		in, out := &in.ServerNameRef, &out.ServerNameRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.ServerNameSelector != nil {
+		in, out := &in.ServerNameSelector, &out.ServerNameSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 }
 
@@ -548,10 +578,30 @@ func (in *FirewallRuleParameters) DeepCopyInto(out *FirewallRuleParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.ResourceGroupNameRef != nil {
+		in, out := &in.ResourceGroupNameRef, &out.ResourceGroupNameRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.ResourceGroupNameSelector != nil {
+		in, out := &in.ResourceGroupNameSelector, &out.ResourceGroupNameSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.ServerName != nil {
 		in, out := &in.ServerName, &out.ServerName
 		*out = new(string)
 		**out = **in
+	}
+	if in.ServerNameRef != nil {
+		in, out := &in.ServerNameRef, &out.ServerNameRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.ServerNameSelector != nil {
+		in, out := &in.ServerNameSelector, &out.ServerNameSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.StartIPAddress != nil {
 		in, out := &in.StartIPAddress, &out.StartIPAddress
@@ -652,11 +702,6 @@ func (in *ServerInitParameters) DeepCopyInto(out *ServerInitParameters) {
 	}
 	if in.CreateMode != nil {
 		in, out := &in.CreateMode, &out.CreateMode
-		*out = new(string)
-		**out = **in
-	}
-	if in.CreationSourceServerID != nil {
-		in, out := &in.CreationSourceServerID, &out.CreationSourceServerID
 		*out = new(string)
 		**out = **in
 	}
@@ -914,6 +959,16 @@ func (in *ServerParameters) DeepCopyInto(out *ServerParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.CreationSourceServerIDRef != nil {
+		in, out := &in.CreationSourceServerIDRef, &out.CreationSourceServerIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.CreationSourceServerIDSelector != nil {
+		in, out := &in.CreationSourceServerIDSelector, &out.CreationSourceServerIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.GeoRedundantBackupEnabled != nil {
 		in, out := &in.GeoRedundantBackupEnabled, &out.GeoRedundantBackupEnabled
 		*out = new(bool)
@@ -933,6 +988,16 @@ func (in *ServerParameters) DeepCopyInto(out *ServerParameters) {
 		in, out := &in.ResourceGroupName, &out.ResourceGroupName
 		*out = new(string)
 		**out = **in
+	}
+	if in.ResourceGroupNameRef != nil {
+		in, out := &in.ResourceGroupNameRef, &out.ResourceGroupNameRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.ResourceGroupNameSelector != nil {
+		in, out := &in.ResourceGroupNameSelector, &out.ResourceGroupNameSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.RestorePointInTime != nil {
 		in, out := &in.RestorePointInTime, &out.RestorePointInTime
@@ -1057,11 +1122,6 @@ func (in *VirtualNetworkRule) DeepCopyObject() runtime.Object {
 // DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
 func (in *VirtualNetworkRuleInitParameters) DeepCopyInto(out *VirtualNetworkRuleInitParameters) {
 	*out = *in
-	if in.SubnetID != nil {
-		in, out := &in.SubnetID, &out.SubnetID
-		*out = new(string)
-		**out = **in
-	}
 }
 
 // DeepCopy is an autogenerated deepcopy function, copying the receiver, creating a new VirtualNetworkRuleInitParameters.
@@ -1149,15 +1209,45 @@ func (in *VirtualNetworkRuleParameters) DeepCopyInto(out *VirtualNetworkRulePara
 		*out = new(string)
 		**out = **in
 	}
+	if in.ResourceGroupNameRef != nil {
+		in, out := &in.ResourceGroupNameRef, &out.ResourceGroupNameRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.ResourceGroupNameSelector != nil {
+		in, out := &in.ResourceGroupNameSelector, &out.ResourceGroupNameSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.ServerName != nil {
 		in, out := &in.ServerName, &out.ServerName
 		*out = new(string)
 		**out = **in
 	}
+	if in.ServerNameRef != nil {
+		in, out := &in.ServerNameRef, &out.ServerNameRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.ServerNameSelector != nil {
+		in, out := &in.ServerNameSelector, &out.ServerNameSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.SubnetID != nil {
 		in, out := &in.SubnetID, &out.SubnetID
 		*out = new(string)
 		**out = **in
+	}
+	if in.SubnetIDRef != nil {
+		in, out := &in.SubnetIDRef, &out.SubnetIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.SubnetIDSelector != nil {
+		in, out := &in.SubnetIDSelector, &out.SubnetIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 }
 
@@ -1176,7 +1266,7 @@ func (in *VirtualNetworkRuleSpec) DeepCopyInto(out *VirtualNetworkRuleSpec) {
 	*out = *in
 	in.ResourceSpec.DeepCopyInto(&out.ResourceSpec)
 	in.ForProvider.DeepCopyInto(&out.ForProvider)
-	in.InitProvider.DeepCopyInto(&out.InitProvider)
+	out.InitProvider = in.InitProvider
 }
 
 // DeepCopy is an autogenerated deepcopy function, copying the receiver, creating a new VirtualNetworkRuleSpec.

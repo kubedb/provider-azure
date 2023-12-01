@@ -51,12 +51,30 @@ type FirewallRuleParameters struct {
 	EndIPAddress *string `json:"endIpAddress,omitempty" tf:"end_ip_address,omitempty"`
 
 	// The name of the resource group in which the MariaDB Server exists. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
-	ResourceGroupName *string `json:"resourceGroupName" tf:"resource_group_name,omitempty"`
+	// +crossplane:generate:reference:type=kubedb.dev/provider-azure/apis/azure/v1alpha1.ResourceGroup
+	// +kubebuilder:validation:Optional
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+
+	// Reference to a ResourceGroup in azure to populate resourceGroupName.
+	// +kubebuilder:validation:Optional
+	ResourceGroupNameRef *v1.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+
+	// Selector for a ResourceGroup in azure to populate resourceGroupName.
+	// +kubebuilder:validation:Optional
+	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// Specifies the name of the MariaDB Server. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
-	ServerName *string `json:"serverName" tf:"server_name,omitempty"`
+	// +crossplane:generate:reference:type=Server
+	// +kubebuilder:validation:Optional
+	ServerName *string `json:"serverName,omitempty" tf:"server_name,omitempty"`
+
+	// Reference to a Server to populate serverName.
+	// +kubebuilder:validation:Optional
+	ServerNameRef *v1.Reference `json:"serverNameRef,omitempty" tf:"-"`
+
+	// Selector for a Server to populate serverName.
+	// +kubebuilder:validation:Optional
+	ServerNameSelector *v1.Selector `json:"serverNameSelector,omitempty" tf:"-"`
 
 	// Specifies the Start IP Address associated with this Firewall Rule.
 	// +kubebuilder:validation:Optional

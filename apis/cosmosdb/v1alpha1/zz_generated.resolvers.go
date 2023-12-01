@@ -8,10 +8,184 @@ package v1alpha1
 import (
 	"context"
 	reference "github.com/crossplane/crossplane-runtime/pkg/reference"
+	resource "github.com/crossplane/upjet/pkg/resource"
 	errors "github.com/pkg/errors"
+	v1alpha1 "kubedb.dev/provider-azure/apis/azure/v1alpha1"
+	v1alpha11 "kubedb.dev/provider-azure/apis/network/v1alpha1"
 	rconfig "kubedb.dev/provider-azure/apis/rconfig"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
+
+// ResolveReferences of this Account.
+func (mg *Account) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
+		Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
+		To: reference.To{
+			List:    &v1alpha1.ResourceGroupList{},
+			Managed: &v1alpha1.ResourceGroup{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.ResourceGroupName")
+	}
+	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
+
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.Restore); i3++ {
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Restore[i3].SourceCosmosdbAccountID),
+			Extract:      rconfig.ExtractResourceID(),
+			Reference:    mg.Spec.ForProvider.Restore[i3].SourceCosmosdbAccountIDRef,
+			Selector:     mg.Spec.ForProvider.Restore[i3].SourceCosmosdbAccountIDSelector,
+			To: reference.To{
+				List:    &AccountList{},
+				Managed: &Account{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.ForProvider.Restore[i3].SourceCosmosdbAccountID")
+		}
+		mg.Spec.ForProvider.Restore[i3].SourceCosmosdbAccountID = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.ForProvider.Restore[i3].SourceCosmosdbAccountIDRef = rsp.ResolvedReference
+
+	}
+
+	return nil
+}
+
+// ResolveReferences of this CassandraCluster.
+func (mg *CassandraCluster) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DelegatedManagementSubnetID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.ForProvider.DelegatedManagementSubnetIDRef,
+		Selector:     mg.Spec.ForProvider.DelegatedManagementSubnetIDSelector,
+		To: reference.To{
+			List:    &v1alpha11.SubnetList{},
+			Managed: &v1alpha11.Subnet{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.DelegatedManagementSubnetID")
+	}
+	mg.Spec.ForProvider.DelegatedManagementSubnetID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.DelegatedManagementSubnetIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
+		Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
+		To: reference.To{
+			List:    &v1alpha1.ResourceGroupList{},
+			Managed: &v1alpha1.ResourceGroup{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.ResourceGroupName")
+	}
+	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
+
+	return nil
+}
+
+// ResolveReferences of this CassandraDatacenter.
+func (mg *CassandraDatacenter) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CassandraClusterID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.ForProvider.CassandraClusterIDRef,
+		Selector:     mg.Spec.ForProvider.CassandraClusterIDSelector,
+		To: reference.To{
+			List:    &CassandraClusterList{},
+			Managed: &CassandraCluster{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.CassandraClusterID")
+	}
+	mg.Spec.ForProvider.CassandraClusterID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.CassandraClusterIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DelegatedManagementSubnetID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.ForProvider.DelegatedManagementSubnetIDRef,
+		Selector:     mg.Spec.ForProvider.DelegatedManagementSubnetIDSelector,
+		To: reference.To{
+			List:    &v1alpha11.SubnetList{},
+			Managed: &v1alpha11.Subnet{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.DelegatedManagementSubnetID")
+	}
+	mg.Spec.ForProvider.DelegatedManagementSubnetID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.DelegatedManagementSubnetIDRef = rsp.ResolvedReference
+
+	return nil
+}
+
+// ResolveReferences of this CassandraKeySpace.
+func (mg *CassandraKeySpace) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.AccountName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.AccountNameRef,
+		Selector:     mg.Spec.ForProvider.AccountNameSelector,
+		To: reference.To{
+			List:    &AccountList{},
+			Managed: &Account{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.AccountName")
+	}
+	mg.Spec.ForProvider.AccountName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.AccountNameRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
+		Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
+		To: reference.To{
+			List:    &v1alpha1.ResourceGroupList{},
+			Managed: &v1alpha1.ResourceGroup{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.ResourceGroupName")
+	}
+	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
+
+	return nil
+}
 
 // ResolveReferences of this CassandraTable.
 func (mg *CassandraTable) ResolveReferences(ctx context.Context, c client.Reader) error {
@@ -39,12 +213,70 @@ func (mg *CassandraTable) ResolveReferences(ctx context.Context, c client.Reader
 	return nil
 }
 
+// ResolveReferences of this GremlinDatabase.
+func (mg *GremlinDatabase) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.AccountName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.AccountNameRef,
+		Selector:     mg.Spec.ForProvider.AccountNameSelector,
+		To: reference.To{
+			List:    &AccountList{},
+			Managed: &Account{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.AccountName")
+	}
+	mg.Spec.ForProvider.AccountName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.AccountNameRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
+		Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
+		To: reference.To{
+			List:    &v1alpha1.ResourceGroupList{},
+			Managed: &v1alpha1.ResourceGroup{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.ResourceGroupName")
+	}
+	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
+
+	return nil
+}
+
 // ResolveReferences of this GremlinGraph.
 func (mg *GremlinGraph) ResolveReferences(ctx context.Context, c client.Reader) error {
 	r := reference.NewAPIResolver(c, mg)
 
 	var rsp reference.ResolutionResponse
 	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.AccountName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.AccountNameRef,
+		Selector:     mg.Spec.ForProvider.AccountNameSelector,
+		To: reference.To{
+			List:    &AccountList{},
+			Managed: &Account{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.AccountName")
+	}
+	mg.Spec.ForProvider.AccountName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.AccountNameRef = rsp.ResolvedReference
 
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DatabaseName),
@@ -62,6 +294,22 @@ func (mg *GremlinGraph) ResolveReferences(ctx context.Context, c client.Reader) 
 	mg.Spec.ForProvider.DatabaseName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.DatabaseNameRef = rsp.ResolvedReference
 
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
+		Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
+		To: reference.To{
+			List:    &v1alpha1.ResourceGroupList{},
+			Managed: &v1alpha1.ResourceGroup{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.ResourceGroupName")
+	}
+	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
+
 	return nil
 }
 
@@ -71,6 +319,22 @@ func (mg *MongoCollection) ResolveReferences(ctx context.Context, c client.Reade
 
 	var rsp reference.ResolutionResponse
 	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.AccountName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.AccountNameRef,
+		Selector:     mg.Spec.ForProvider.AccountNameSelector,
+		To: reference.To{
+			List:    &AccountList{},
+			Managed: &Account{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.AccountName")
+	}
+	mg.Spec.ForProvider.AccountName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.AccountNameRef = rsp.ResolvedReference
 
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DatabaseName),
@@ -88,6 +352,64 @@ func (mg *MongoCollection) ResolveReferences(ctx context.Context, c client.Reade
 	mg.Spec.ForProvider.DatabaseName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.DatabaseNameRef = rsp.ResolvedReference
 
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
+		Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
+		To: reference.To{
+			List:    &v1alpha1.ResourceGroupList{},
+			Managed: &v1alpha1.ResourceGroup{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.ResourceGroupName")
+	}
+	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
+
+	return nil
+}
+
+// ResolveReferences of this MongoDatabase.
+func (mg *MongoDatabase) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.AccountName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.AccountNameRef,
+		Selector:     mg.Spec.ForProvider.AccountNameSelector,
+		To: reference.To{
+			List:    &AccountList{},
+			Managed: &Account{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.AccountName")
+	}
+	mg.Spec.ForProvider.AccountName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.AccountNameRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
+		Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
+		To: reference.To{
+			List:    &v1alpha1.ResourceGroupList{},
+			Managed: &v1alpha1.ResourceGroup{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.ResourceGroupName")
+	}
+	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
+
 	return nil
 }
 
@@ -97,6 +419,22 @@ func (mg *SQLContainer) ResolveReferences(ctx context.Context, c client.Reader) 
 
 	var rsp reference.ResolutionResponse
 	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.AccountName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.AccountNameRef,
+		Selector:     mg.Spec.ForProvider.AccountNameSelector,
+		To: reference.To{
+			List:    &AccountList{},
+			Managed: &Account{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.AccountName")
+	}
+	mg.Spec.ForProvider.AccountName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.AccountNameRef = rsp.ResolvedReference
 
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DatabaseName),
@@ -113,6 +451,90 @@ func (mg *SQLContainer) ResolveReferences(ctx context.Context, c client.Reader) 
 	}
 	mg.Spec.ForProvider.DatabaseName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.DatabaseNameRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
+		Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
+		To: reference.To{
+			List:    &v1alpha1.ResourceGroupList{},
+			Managed: &v1alpha1.ResourceGroup{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.ResourceGroupName")
+	}
+	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
+
+	return nil
+}
+
+// ResolveReferences of this SQLDatabase.
+func (mg *SQLDatabase) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.AccountName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.AccountNameRef,
+		Selector:     mg.Spec.ForProvider.AccountNameSelector,
+		To: reference.To{
+			List:    &AccountList{},
+			Managed: &Account{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.AccountName")
+	}
+	mg.Spec.ForProvider.AccountName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.AccountNameRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
+		Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
+		To: reference.To{
+			List:    &v1alpha1.ResourceGroupList{},
+			Managed: &v1alpha1.ResourceGroup{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.ResourceGroupName")
+	}
+	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
+
+	return nil
+}
+
+// ResolveReferences of this SQLDedicatedGateway.
+func (mg *SQLDedicatedGateway) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CosmosdbAccountID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.ForProvider.CosmosdbAccountIDRef,
+		Selector:     mg.Spec.ForProvider.CosmosdbAccountIDSelector,
+		To: reference.To{
+			List:    &AccountList{},
+			Managed: &Account{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.CosmosdbAccountID")
+	}
+	mg.Spec.ForProvider.CosmosdbAccountID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.CosmosdbAccountIDRef = rsp.ResolvedReference
 
 	return nil
 }
@@ -143,12 +565,144 @@ func (mg *SQLFunction) ResolveReferences(ctx context.Context, c client.Reader) e
 	return nil
 }
 
+// ResolveReferences of this SQLRoleAssignment.
+func (mg *SQLRoleAssignment) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.AccountName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.AccountNameRef,
+		Selector:     mg.Spec.ForProvider.AccountNameSelector,
+		To: reference.To{
+			List:    &AccountList{},
+			Managed: &Account{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.AccountName")
+	}
+	mg.Spec.ForProvider.AccountName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.AccountNameRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
+		Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
+		To: reference.To{
+			List:    &v1alpha1.ResourceGroupList{},
+			Managed: &v1alpha1.ResourceGroup{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.ResourceGroupName")
+	}
+	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.RoleDefinitionID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.ForProvider.RoleDefinitionIDRef,
+		Selector:     mg.Spec.ForProvider.RoleDefinitionIDSelector,
+		To: reference.To{
+			List:    &SQLRoleDefinitionList{},
+			Managed: &SQLRoleDefinition{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.RoleDefinitionID")
+	}
+	mg.Spec.ForProvider.RoleDefinitionID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.RoleDefinitionIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Scope),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.ForProvider.ScopeRef,
+		Selector:     mg.Spec.ForProvider.ScopeSelector,
+		To: reference.To{
+			List:    &AccountList{},
+			Managed: &Account{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.Scope")
+	}
+	mg.Spec.ForProvider.Scope = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ScopeRef = rsp.ResolvedReference
+
+	return nil
+}
+
+// ResolveReferences of this SQLRoleDefinition.
+func (mg *SQLRoleDefinition) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.AccountName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.AccountNameRef,
+		Selector:     mg.Spec.ForProvider.AccountNameSelector,
+		To: reference.To{
+			List:    &AccountList{},
+			Managed: &Account{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.AccountName")
+	}
+	mg.Spec.ForProvider.AccountName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.AccountNameRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
+		Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
+		To: reference.To{
+			List:    &v1alpha1.ResourceGroupList{},
+			Managed: &v1alpha1.ResourceGroup{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.ResourceGroupName")
+	}
+	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
+
+	return nil
+}
+
 // ResolveReferences of this SQLStoredProcedure.
 func (mg *SQLStoredProcedure) ResolveReferences(ctx context.Context, c client.Reader) error {
 	r := reference.NewAPIResolver(c, mg)
 
 	var rsp reference.ResolutionResponse
 	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.AccountName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.AccountNameRef,
+		Selector:     mg.Spec.ForProvider.AccountNameSelector,
+		To: reference.To{
+			List:    &AccountList{},
+			Managed: &Account{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.AccountName")
+	}
+	mg.Spec.ForProvider.AccountName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.AccountNameRef = rsp.ResolvedReference
 
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ContainerName),
@@ -182,6 +736,22 @@ func (mg *SQLStoredProcedure) ResolveReferences(ctx context.Context, c client.Re
 	mg.Spec.ForProvider.DatabaseName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.DatabaseNameRef = rsp.ResolvedReference
 
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
+		Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
+		To: reference.To{
+			List:    &v1alpha1.ResourceGroupList{},
+			Managed: &v1alpha1.ResourceGroup{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.ResourceGroupName")
+	}
+	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
+
 	return nil
 }
 
@@ -207,6 +777,48 @@ func (mg *SQLTrigger) ResolveReferences(ctx context.Context, c client.Reader) er
 	}
 	mg.Spec.ForProvider.ContainerID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ContainerIDRef = rsp.ResolvedReference
+
+	return nil
+}
+
+// ResolveReferences of this Table.
+func (mg *Table) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.AccountName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.AccountNameRef,
+		Selector:     mg.Spec.ForProvider.AccountNameSelector,
+		To: reference.To{
+			List:    &AccountList{},
+			Managed: &Account{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.AccountName")
+	}
+	mg.Spec.ForProvider.AccountName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.AccountNameRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
+		Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
+		To: reference.To{
+			List:    &v1alpha1.ResourceGroupList{},
+			Managed: &v1alpha1.ResourceGroup{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.ResourceGroupName")
+	}
+	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
 
 	return nil
 }

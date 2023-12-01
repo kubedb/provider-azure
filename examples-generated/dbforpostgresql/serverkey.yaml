@@ -29,7 +29,9 @@ spec:
   forProvider:
     location: West Europe
     purgeProtectionEnabled: true
-    resourceGroupName: example-resources
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
     skuName: premium
     tenantId: ${data.azurerm_client_config.current.tenant_id}
 
@@ -78,7 +80,9 @@ spec:
     identity:
     - type: SystemAssigned
     location: West Europe
-    resourceGroupName: example-resources
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
     skuName: GP_Gen5_2
     sslEnforcementEnabled: true
     storageMb: 51200

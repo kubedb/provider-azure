@@ -12,7 +12,9 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: example-secondary
     linkedRedisCacheLocation: West Europe
-    resourceGroupName: ${azurerm_redis_cache.example-primary.resource_group_name}
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example-primary
     serverRole: Secondary
     targetRedisCacheNameSelector:
       matchLabels:
@@ -38,7 +40,9 @@ spec:
     - maxmemoryDelta: 2
       maxmemoryPolicy: allkeys-lru
       maxmemoryReserved: 2
-    resourceGroupName: example-resources-primary
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
     skuName: Premium
 
 ---
@@ -61,7 +65,9 @@ spec:
     - maxmemoryDelta: 2
       maxmemoryPolicy: allkeys-lru
       maxmemoryReserved: 2
-    resourceGroupName: example-resources-secondary
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
     skuName: Premium
 
 ---

@@ -18,7 +18,9 @@ spec:
     geoRedundantBackupEnabled: true
     location: West Europe
     publicNetworkAccessEnabled: false
-    resourceGroupName: ${azurerm_resource_group.example.name}
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
     skuName: GP_Gen5_4
     sslEnforcementEnabled: true
     sslMinimalTlsVersionEnforced: TLS1_2

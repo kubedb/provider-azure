@@ -663,6 +663,16 @@ func (in *AccountParameters) DeepCopyInto(out *AccountParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.ResourceGroupNameRef != nil {
+		in, out := &in.ResourceGroupNameRef, &out.ResourceGroupNameRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.ResourceGroupNameSelector != nil {
+		in, out := &in.ResourceGroupNameSelector, &out.ResourceGroupNameSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.Restore != nil {
 		in, out := &in.Restore, &out.Restore
 		*out = make([]RestoreParameters, len(*in))
@@ -1201,11 +1211,6 @@ func (in *CassandraClusterInitParameters) DeepCopyInto(out *CassandraClusterInit
 			}
 		}
 	}
-	if in.DelegatedManagementSubnetID != nil {
-		in, out := &in.DelegatedManagementSubnetID, &out.DelegatedManagementSubnetID
-		*out = new(string)
-		**out = **in
-	}
 	if in.ExternalGossipCertificatePems != nil {
 		in, out := &in.ExternalGossipCertificatePems, &out.ExternalGossipCertificatePems
 		*out = make([]*string, len(*in))
@@ -1451,6 +1456,16 @@ func (in *CassandraClusterParameters) DeepCopyInto(out *CassandraClusterParamete
 		*out = new(string)
 		**out = **in
 	}
+	if in.DelegatedManagementSubnetIDRef != nil {
+		in, out := &in.DelegatedManagementSubnetIDRef, &out.DelegatedManagementSubnetIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.DelegatedManagementSubnetIDSelector != nil {
+		in, out := &in.DelegatedManagementSubnetIDSelector, &out.DelegatedManagementSubnetIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.ExternalGossipCertificatePems != nil {
 		in, out := &in.ExternalGossipCertificatePems, &out.ExternalGossipCertificatePems
 		*out = make([]*string, len(*in))
@@ -1499,6 +1514,16 @@ func (in *CassandraClusterParameters) DeepCopyInto(out *CassandraClusterParamete
 		in, out := &in.ResourceGroupName, &out.ResourceGroupName
 		*out = new(string)
 		**out = **in
+	}
+	if in.ResourceGroupNameRef != nil {
+		in, out := &in.ResourceGroupNameRef, &out.ResourceGroupNameRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.ResourceGroupNameSelector != nil {
+		in, out := &in.ResourceGroupNameSelector, &out.ResourceGroupNameSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.Tags != nil {
 		in, out := &in.Tags, &out.Tags
@@ -1610,11 +1635,6 @@ func (in *CassandraDatacenterInitParameters) DeepCopyInto(out *CassandraDatacent
 	}
 	if in.Base64EncodedYamlFragment != nil {
 		in, out := &in.Base64EncodedYamlFragment, &out.Base64EncodedYamlFragment
-		*out = new(string)
-		**out = **in
-	}
-	if in.DelegatedManagementSubnetID != nil {
-		in, out := &in.DelegatedManagementSubnetID, &out.DelegatedManagementSubnetID
 		*out = new(string)
 		**out = **in
 	}
@@ -1790,10 +1810,30 @@ func (in *CassandraDatacenterParameters) DeepCopyInto(out *CassandraDatacenterPa
 		*out = new(string)
 		**out = **in
 	}
+	if in.CassandraClusterIDRef != nil {
+		in, out := &in.CassandraClusterIDRef, &out.CassandraClusterIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.CassandraClusterIDSelector != nil {
+		in, out := &in.CassandraClusterIDSelector, &out.CassandraClusterIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.DelegatedManagementSubnetID != nil {
 		in, out := &in.DelegatedManagementSubnetID, &out.DelegatedManagementSubnetID
 		*out = new(string)
 		**out = **in
+	}
+	if in.DelegatedManagementSubnetIDRef != nil {
+		in, out := &in.DelegatedManagementSubnetIDRef, &out.DelegatedManagementSubnetIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.DelegatedManagementSubnetIDSelector != nil {
+		in, out := &in.DelegatedManagementSubnetIDSelector, &out.DelegatedManagementSubnetIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.DiskCount != nil {
 		in, out := &in.DiskCount, &out.DiskCount
@@ -2008,6 +2048,16 @@ func (in *CassandraKeySpaceParameters) DeepCopyInto(out *CassandraKeySpaceParame
 		*out = new(string)
 		**out = **in
 	}
+	if in.AccountNameRef != nil {
+		in, out := &in.AccountNameRef, &out.AccountNameRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.AccountNameSelector != nil {
+		in, out := &in.AccountNameSelector, &out.AccountNameSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.AutoscaleSettings != nil {
 		in, out := &in.AutoscaleSettings, &out.AutoscaleSettings
 		*out = make([]AutoscaleSettingsParameters, len(*in))
@@ -2019,6 +2069,16 @@ func (in *CassandraKeySpaceParameters) DeepCopyInto(out *CassandraKeySpaceParame
 		in, out := &in.ResourceGroupName, &out.ResourceGroupName
 		*out = new(string)
 		**out = **in
+	}
+	if in.ResourceGroupNameRef != nil {
+		in, out := &in.ResourceGroupNameRef, &out.ResourceGroupNameRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.ResourceGroupNameSelector != nil {
+		in, out := &in.ResourceGroupNameSelector, &out.ResourceGroupNameSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.Throughput != nil {
 		in, out := &in.Throughput, &out.Throughput
@@ -3490,6 +3550,16 @@ func (in *GremlinDatabaseParameters) DeepCopyInto(out *GremlinDatabaseParameters
 		*out = new(string)
 		**out = **in
 	}
+	if in.AccountNameRef != nil {
+		in, out := &in.AccountNameRef, &out.AccountNameRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.AccountNameSelector != nil {
+		in, out := &in.AccountNameSelector, &out.AccountNameSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.AutoscaleSettings != nil {
 		in, out := &in.AutoscaleSettings, &out.AutoscaleSettings
 		*out = make([]GremlinDatabaseAutoscaleSettingsParameters, len(*in))
@@ -3501,6 +3571,16 @@ func (in *GremlinDatabaseParameters) DeepCopyInto(out *GremlinDatabaseParameters
 		in, out := &in.ResourceGroupName, &out.ResourceGroupName
 		*out = new(string)
 		**out = **in
+	}
+	if in.ResourceGroupNameRef != nil {
+		in, out := &in.ResourceGroupNameRef, &out.ResourceGroupNameRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.ResourceGroupNameSelector != nil {
+		in, out := &in.ResourceGroupNameSelector, &out.ResourceGroupNameSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.Throughput != nil {
 		in, out := &in.Throughput, &out.Throughput
@@ -3827,6 +3907,16 @@ func (in *GremlinGraphParameters) DeepCopyInto(out *GremlinGraphParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.AccountNameRef != nil {
+		in, out := &in.AccountNameRef, &out.AccountNameRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.AccountNameSelector != nil {
+		in, out := &in.AccountNameSelector, &out.AccountNameSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.AutoscaleSettings != nil {
 		in, out := &in.AutoscaleSettings, &out.AutoscaleSettings
 		*out = make([]GremlinGraphAutoscaleSettingsParameters, len(*in))
@@ -3882,6 +3972,16 @@ func (in *GremlinGraphParameters) DeepCopyInto(out *GremlinGraphParameters) {
 		in, out := &in.ResourceGroupName, &out.ResourceGroupName
 		*out = new(string)
 		**out = **in
+	}
+	if in.ResourceGroupNameRef != nil {
+		in, out := &in.ResourceGroupNameRef, &out.ResourceGroupNameRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.ResourceGroupNameSelector != nil {
+		in, out := &in.ResourceGroupNameSelector, &out.ResourceGroupNameSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.Throughput != nil {
 		in, out := &in.Throughput, &out.Throughput
@@ -4989,6 +5089,16 @@ func (in *MongoCollectionParameters) DeepCopyInto(out *MongoCollectionParameters
 		*out = new(string)
 		**out = **in
 	}
+	if in.AccountNameRef != nil {
+		in, out := &in.AccountNameRef, &out.AccountNameRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.AccountNameSelector != nil {
+		in, out := &in.AccountNameSelector, &out.AccountNameSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.AnalyticalStorageTTL != nil {
 		in, out := &in.AnalyticalStorageTTL, &out.AnalyticalStorageTTL
 		*out = new(float64)
@@ -5032,6 +5142,16 @@ func (in *MongoCollectionParameters) DeepCopyInto(out *MongoCollectionParameters
 		in, out := &in.ResourceGroupName, &out.ResourceGroupName
 		*out = new(string)
 		**out = **in
+	}
+	if in.ResourceGroupNameRef != nil {
+		in, out := &in.ResourceGroupNameRef, &out.ResourceGroupNameRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.ResourceGroupNameSelector != nil {
+		in, out := &in.ResourceGroupNameSelector, &out.ResourceGroupNameSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.ShardKey != nil {
 		in, out := &in.ShardKey, &out.ShardKey
@@ -5286,6 +5406,16 @@ func (in *MongoDatabaseParameters) DeepCopyInto(out *MongoDatabaseParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.AccountNameRef != nil {
+		in, out := &in.AccountNameRef, &out.AccountNameRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.AccountNameSelector != nil {
+		in, out := &in.AccountNameSelector, &out.AccountNameSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.AutoscaleSettings != nil {
 		in, out := &in.AutoscaleSettings, &out.AutoscaleSettings
 		*out = make([]MongoDatabaseAutoscaleSettingsParameters, len(*in))
@@ -5297,6 +5427,16 @@ func (in *MongoDatabaseParameters) DeepCopyInto(out *MongoDatabaseParameters) {
 		in, out := &in.ResourceGroupName, &out.ResourceGroupName
 		*out = new(string)
 		**out = **in
+	}
+	if in.ResourceGroupNameRef != nil {
+		in, out := &in.ResourceGroupNameRef, &out.ResourceGroupNameRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.ResourceGroupNameSelector != nil {
+		in, out := &in.ResourceGroupNameSelector, &out.ResourceGroupNameSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.Throughput != nil {
 		in, out := &in.Throughput, &out.Throughput
@@ -5503,11 +5643,6 @@ func (in *RestoreInitParameters) DeepCopyInto(out *RestoreInitParameters) {
 		*out = new(string)
 		**out = **in
 	}
-	if in.SourceCosmosdbAccountID != nil {
-		in, out := &in.SourceCosmosdbAccountID, &out.SourceCosmosdbAccountID
-		*out = new(string)
-		**out = **in
-	}
 }
 
 // DeepCopy is an autogenerated deepcopy function, copying the receiver, creating a new RestoreInitParameters.
@@ -5571,6 +5706,16 @@ func (in *RestoreParameters) DeepCopyInto(out *RestoreParameters) {
 		in, out := &in.SourceCosmosdbAccountID, &out.SourceCosmosdbAccountID
 		*out = new(string)
 		**out = **in
+	}
+	if in.SourceCosmosdbAccountIDRef != nil {
+		in, out := &in.SourceCosmosdbAccountIDRef, &out.SourceCosmosdbAccountIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.SourceCosmosdbAccountIDSelector != nil {
+		in, out := &in.SourceCosmosdbAccountIDSelector, &out.SourceCosmosdbAccountIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 }
 
@@ -5957,6 +6102,16 @@ func (in *SQLContainerParameters) DeepCopyInto(out *SQLContainerParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.AccountNameRef != nil {
+		in, out := &in.AccountNameRef, &out.AccountNameRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.AccountNameSelector != nil {
+		in, out := &in.AccountNameSelector, &out.AccountNameSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.AnalyticalStorageTTL != nil {
 		in, out := &in.AnalyticalStorageTTL, &out.AnalyticalStorageTTL
 		*out = new(float64)
@@ -6017,6 +6172,16 @@ func (in *SQLContainerParameters) DeepCopyInto(out *SQLContainerParameters) {
 		in, out := &in.ResourceGroupName, &out.ResourceGroupName
 		*out = new(string)
 		**out = **in
+	}
+	if in.ResourceGroupNameRef != nil {
+		in, out := &in.ResourceGroupNameRef, &out.ResourceGroupNameRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.ResourceGroupNameSelector != nil {
+		in, out := &in.ResourceGroupNameSelector, &out.ResourceGroupNameSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.Throughput != nil {
 		in, out := &in.Throughput, &out.Throughput
@@ -6351,6 +6516,16 @@ func (in *SQLDatabaseParameters) DeepCopyInto(out *SQLDatabaseParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.AccountNameRef != nil {
+		in, out := &in.AccountNameRef, &out.AccountNameRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.AccountNameSelector != nil {
+		in, out := &in.AccountNameSelector, &out.AccountNameSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.AutoscaleSettings != nil {
 		in, out := &in.AutoscaleSettings, &out.AutoscaleSettings
 		*out = make([]SQLDatabaseAutoscaleSettingsParameters, len(*in))
@@ -6362,6 +6537,16 @@ func (in *SQLDatabaseParameters) DeepCopyInto(out *SQLDatabaseParameters) {
 		in, out := &in.ResourceGroupName, &out.ResourceGroupName
 		*out = new(string)
 		**out = **in
+	}
+	if in.ResourceGroupNameRef != nil {
+		in, out := &in.ResourceGroupNameRef, &out.ResourceGroupNameRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.ResourceGroupNameSelector != nil {
+		in, out := &in.ResourceGroupNameSelector, &out.ResourceGroupNameSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.Throughput != nil {
 		in, out := &in.Throughput, &out.Throughput
@@ -6541,6 +6726,16 @@ func (in *SQLDedicatedGatewayParameters) DeepCopyInto(out *SQLDedicatedGatewayPa
 		in, out := &in.CosmosdbAccountID, &out.CosmosdbAccountID
 		*out = new(string)
 		**out = **in
+	}
+	if in.CosmosdbAccountIDRef != nil {
+		in, out := &in.CosmosdbAccountIDRef, &out.CosmosdbAccountIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.CosmosdbAccountIDSelector != nil {
+		in, out := &in.CosmosdbAccountIDSelector, &out.CosmosdbAccountIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.InstanceCount != nil {
 		in, out := &in.InstanceCount, &out.InstanceCount
@@ -6808,11 +7003,6 @@ func (in *SQLRoleAssignment) DeepCopyObject() runtime.Object {
 // DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
 func (in *SQLRoleAssignmentInitParameters) DeepCopyInto(out *SQLRoleAssignmentInitParameters) {
 	*out = *in
-	if in.AccountName != nil {
-		in, out := &in.AccountName, &out.AccountName
-		*out = new(string)
-		**out = **in
-	}
 	if in.Name != nil {
 		in, out := &in.Name, &out.Name
 		*out = new(string)
@@ -6820,21 +7010,6 @@ func (in *SQLRoleAssignmentInitParameters) DeepCopyInto(out *SQLRoleAssignmentIn
 	}
 	if in.PrincipalID != nil {
 		in, out := &in.PrincipalID, &out.PrincipalID
-		*out = new(string)
-		**out = **in
-	}
-	if in.ResourceGroupName != nil {
-		in, out := &in.ResourceGroupName, &out.ResourceGroupName
-		*out = new(string)
-		**out = **in
-	}
-	if in.RoleDefinitionID != nil {
-		in, out := &in.RoleDefinitionID, &out.RoleDefinitionID
-		*out = new(string)
-		**out = **in
-	}
-	if in.Scope != nil {
-		in, out := &in.Scope, &out.Scope
 		*out = new(string)
 		**out = **in
 	}
@@ -6940,6 +7115,16 @@ func (in *SQLRoleAssignmentParameters) DeepCopyInto(out *SQLRoleAssignmentParame
 		*out = new(string)
 		**out = **in
 	}
+	if in.AccountNameRef != nil {
+		in, out := &in.AccountNameRef, &out.AccountNameRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.AccountNameSelector != nil {
+		in, out := &in.AccountNameSelector, &out.AccountNameSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.Name != nil {
 		in, out := &in.Name, &out.Name
 		*out = new(string)
@@ -6955,15 +7140,45 @@ func (in *SQLRoleAssignmentParameters) DeepCopyInto(out *SQLRoleAssignmentParame
 		*out = new(string)
 		**out = **in
 	}
+	if in.ResourceGroupNameRef != nil {
+		in, out := &in.ResourceGroupNameRef, &out.ResourceGroupNameRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.ResourceGroupNameSelector != nil {
+		in, out := &in.ResourceGroupNameSelector, &out.ResourceGroupNameSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.RoleDefinitionID != nil {
 		in, out := &in.RoleDefinitionID, &out.RoleDefinitionID
 		*out = new(string)
 		**out = **in
 	}
+	if in.RoleDefinitionIDRef != nil {
+		in, out := &in.RoleDefinitionIDRef, &out.RoleDefinitionIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.RoleDefinitionIDSelector != nil {
+		in, out := &in.RoleDefinitionIDSelector, &out.RoleDefinitionIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.Scope != nil {
 		in, out := &in.Scope, &out.Scope
 		*out = new(string)
 		**out = **in
+	}
+	if in.ScopeRef != nil {
+		in, out := &in.ScopeRef, &out.ScopeRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.ScopeSelector != nil {
+		in, out := &in.ScopeSelector, &out.ScopeSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 }
 
@@ -7042,11 +7257,6 @@ func (in *SQLRoleDefinition) DeepCopyObject() runtime.Object {
 // DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
 func (in *SQLRoleDefinitionInitParameters) DeepCopyInto(out *SQLRoleDefinitionInitParameters) {
 	*out = *in
-	if in.AccountName != nil {
-		in, out := &in.AccountName, &out.AccountName
-		*out = new(string)
-		**out = **in
-	}
 	if in.AssignableScopes != nil {
 		in, out := &in.AssignableScopes, &out.AssignableScopes
 		*out = make([]*string, len(*in))
@@ -7069,11 +7279,6 @@ func (in *SQLRoleDefinitionInitParameters) DeepCopyInto(out *SQLRoleDefinitionIn
 		for i := range *in {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
-	}
-	if in.ResourceGroupName != nil {
-		in, out := &in.ResourceGroupName, &out.ResourceGroupName
-		*out = new(string)
-		**out = **in
 	}
 	if in.RoleDefinitionID != nil {
 		in, out := &in.RoleDefinitionID, &out.RoleDefinitionID
@@ -7200,6 +7405,16 @@ func (in *SQLRoleDefinitionParameters) DeepCopyInto(out *SQLRoleDefinitionParame
 		*out = new(string)
 		**out = **in
 	}
+	if in.AccountNameRef != nil {
+		in, out := &in.AccountNameRef, &out.AccountNameRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.AccountNameSelector != nil {
+		in, out := &in.AccountNameSelector, &out.AccountNameSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.AssignableScopes != nil {
 		in, out := &in.AssignableScopes, &out.AssignableScopes
 		*out = make([]*string, len(*in))
@@ -7227,6 +7442,16 @@ func (in *SQLRoleDefinitionParameters) DeepCopyInto(out *SQLRoleDefinitionParame
 		in, out := &in.ResourceGroupName, &out.ResourceGroupName
 		*out = new(string)
 		**out = **in
+	}
+	if in.ResourceGroupNameRef != nil {
+		in, out := &in.ResourceGroupNameRef, &out.ResourceGroupNameRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.ResourceGroupNameSelector != nil {
+		in, out := &in.ResourceGroupNameSelector, &out.ResourceGroupNameSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.RoleDefinitionID != nil {
 		in, out := &in.RoleDefinitionID, &out.RoleDefinitionID
@@ -7417,6 +7642,16 @@ func (in *SQLStoredProcedureParameters) DeepCopyInto(out *SQLStoredProcedurePara
 		*out = new(string)
 		**out = **in
 	}
+	if in.AccountNameRef != nil {
+		in, out := &in.AccountNameRef, &out.AccountNameRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.AccountNameSelector != nil {
+		in, out := &in.AccountNameSelector, &out.AccountNameSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.Body != nil {
 		in, out := &in.Body, &out.Body
 		*out = new(string)
@@ -7456,6 +7691,16 @@ func (in *SQLStoredProcedureParameters) DeepCopyInto(out *SQLStoredProcedurePara
 		in, out := &in.ResourceGroupName, &out.ResourceGroupName
 		*out = new(string)
 		**out = **in
+	}
+	if in.ResourceGroupNameRef != nil {
+		in, out := &in.ResourceGroupNameRef, &out.ResourceGroupNameRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.ResourceGroupNameSelector != nil {
+		in, out := &in.ResourceGroupNameSelector, &out.ResourceGroupNameSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 }
 
@@ -8149,6 +8394,16 @@ func (in *TableParameters) DeepCopyInto(out *TableParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.AccountNameRef != nil {
+		in, out := &in.AccountNameRef, &out.AccountNameRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.AccountNameSelector != nil {
+		in, out := &in.AccountNameSelector, &out.AccountNameSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.AutoscaleSettings != nil {
 		in, out := &in.AutoscaleSettings, &out.AutoscaleSettings
 		*out = make([]TableAutoscaleSettingsParameters, len(*in))
@@ -8160,6 +8415,16 @@ func (in *TableParameters) DeepCopyInto(out *TableParameters) {
 		in, out := &in.ResourceGroupName, &out.ResourceGroupName
 		*out = new(string)
 		**out = **in
+	}
+	if in.ResourceGroupNameRef != nil {
+		in, out := &in.ResourceGroupNameRef, &out.ResourceGroupNameRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.ResourceGroupNameSelector != nil {
+		in, out := &in.ResourceGroupNameSelector, &out.ResourceGroupNameSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.Throughput != nil {
 		in, out := &in.Throughput, &out.Throughput

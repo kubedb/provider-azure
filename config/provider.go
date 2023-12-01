@@ -6,8 +6,10 @@ package config
 
 import (
 	_ "embed"
+	"github.com/crossplane/upjet/pkg/registry/reference"
 	"kubedb.dev/provider-azure/config/base"
 	"kubedb.dev/provider-azure/config/cache"
+	"kubedb.dev/provider-azure/config/common"
 	"kubedb.dev/provider-azure/config/cosmosdb"
 	"kubedb.dev/provider-azure/config/dbformariadb"
 	"kubedb.dev/provider-azure/config/dbformysql"
@@ -35,6 +37,7 @@ func GetProvider() *ujconfig.Provider {
 		ujconfig.WithIncludeList(ExternalNameConfigured()),
 		ujconfig.WithFeaturesPackage("internal/features"),
 		ujconfig.WithRootGroup("azure.kubedb.com"),
+		ujconfig.WithReferenceInjectors([]ujconfig.ReferenceInjector{reference.NewInjector(modulePath)}),
 		ujconfig.WithDefaultResourceOptions(
 			ExternalNameConfigurations(),
 		))
@@ -58,5 +61,14 @@ func GetProvider() *ujconfig.Provider {
 		configure(pc)
 	}
 	pc.ConfigureResources()
+
+	// This function runs after the special configurations were applied. However, if some references were configured in
+	// the configuration files, the reference generator does not override them.
+	for _, r := range pc.Resources {
+		delete(r.References, "resource_group_name")
+		if err := common.AddCommonReferences(r); err != nil {
+			panic(err)
+		}
+	}
 	return pc
 }

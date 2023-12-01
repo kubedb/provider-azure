@@ -44,8 +44,18 @@ type SQLDedicatedGatewayObservation struct {
 type SQLDedicatedGatewayParameters struct {
 
 	// The resource ID of the CosmosDB Account. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
-	CosmosdbAccountID *string `json:"cosmosdbAccountId" tf:"cosmosdb_account_id,omitempty"`
+	// +crossplane:generate:reference:type=kubedb.dev/provider-azure/apis/cosmosdb/v1alpha1.Account
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +kubebuilder:validation:Optional
+	CosmosdbAccountID *string `json:"cosmosdbAccountId,omitempty" tf:"cosmosdb_account_id,omitempty"`
+
+	// Reference to a Account in cosmosdb to populate cosmosdbAccountId.
+	// +kubebuilder:validation:Optional
+	CosmosdbAccountIDRef *v1.Reference `json:"cosmosdbAccountIdRef,omitempty" tf:"-"`
+
+	// Selector for a Account in cosmosdb to populate cosmosdbAccountId.
+	// +kubebuilder:validation:Optional
+	CosmosdbAccountIDSelector *v1.Selector `json:"cosmosdbAccountIdSelector,omitempty" tf:"-"`
 
 	// The instance count for the CosmosDB SQL Dedicated Gateway. Possible value is between 1 and 5.
 	// +kubebuilder:validation:Optional

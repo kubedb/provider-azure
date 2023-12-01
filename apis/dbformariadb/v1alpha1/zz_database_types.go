@@ -55,12 +55,30 @@ type DatabaseParameters struct {
 	Collation *string `json:"collation,omitempty" tf:"collation,omitempty"`
 
 	// The name of the resource group in which the MariaDB Server exists. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
-	ResourceGroupName *string `json:"resourceGroupName" tf:"resource_group_name,omitempty"`
+	// +crossplane:generate:reference:type=kubedb.dev/provider-azure/apis/azure/v1alpha1.ResourceGroup
+	// +kubebuilder:validation:Optional
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+
+	// Reference to a ResourceGroup in azure to populate resourceGroupName.
+	// +kubebuilder:validation:Optional
+	ResourceGroupNameRef *v1.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+
+	// Selector for a ResourceGroup in azure to populate resourceGroupName.
+	// +kubebuilder:validation:Optional
+	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// Specifies the name of the MariaDB Server. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
-	ServerName *string `json:"serverName" tf:"server_name,omitempty"`
+	// +crossplane:generate:reference:type=kubedb.dev/provider-azure/apis/dbformariadb/v1alpha1.Server
+	// +kubebuilder:validation:Optional
+	ServerName *string `json:"serverName,omitempty" tf:"server_name,omitempty"`
+
+	// Reference to a Server in dbformariadb to populate serverName.
+	// +kubebuilder:validation:Optional
+	ServerNameRef *v1.Reference `json:"serverNameRef,omitempty" tf:"-"`
+
+	// Selector for a Server in dbformariadb to populate serverName.
+	// +kubebuilder:validation:Optional
+	ServerNameSelector *v1.Selector `json:"serverNameSelector,omitempty" tf:"-"`
 }
 
 // DatabaseSpec defines the desired state of Database

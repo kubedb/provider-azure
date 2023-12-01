@@ -1238,6 +1238,16 @@ func (in *VaultParameters) DeepCopyInto(out *VaultParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.ResourceGroupNameRef != nil {
+		in, out := &in.ResourceGroupNameRef, &out.ResourceGroupNameRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.ResourceGroupNameSelector != nil {
+		in, out := &in.ResourceGroupNameSelector, &out.ResourceGroupNameSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.SkuName != nil {
 		in, out := &in.SkuName, &out.SkuName
 		*out = new(string)

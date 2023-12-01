@@ -9,7 +9,9 @@ metadata:
 spec:
   forProvider:
     location: West Europe
-    resourceGroupName: ${azurerm_resource_group.example.name}
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
     skuName: EnterpriseFlash_F300-3
 
 ---
