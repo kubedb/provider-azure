@@ -25,7 +25,62 @@ func Configure(p *config.Provider) {
 		config.MoveToStatus(r.TerraformResource, "subnet")
 	})
 
+	p.AddResourceConfigurator("azurerm_virtual_network_gateway", func(r *config.Resource) {
+		r.Kind = "VirtualNetworkGateway"
+		r.References["ip_configuration.subnet_id"] = config.Reference{
+			Type:      "Subnet",
+			Extractor: rconfig.ExtractResourceIDFuncPath,
+		}
+	})
 	p.AddResourceConfigurator("azurerm_private_dns_zone", func(r *config.Resource) {
 		r.UseAsync = false
 	})
+
+	p.AddResourceConfigurator("azurerm_network_security_rule", func(r *config.Resource) {
+		r.UseAsync = false
+		r.References["network_security_group_name"] = config.Reference{
+			Type: "SecurityGroup",
+		}
+	})
+
+	p.AddResourceConfigurator("azurerm_network_interface_security_group_association", func(r *config.Resource) {
+		r.Kind = "NetworkInterfaceSecurityGroupAssociation"
+		r.References["network_interface_id"] = config.Reference{
+			Type:      "NetworkInterface",
+			Extractor: rconfig.ExtractResourceIDFuncPath,
+		}
+		r.References["network_security_group_id"] = config.Reference{
+			Type:      "SecurityGroup",
+			Extractor: rconfig.ExtractResourceIDFuncPath,
+		}
+	})
+
+	p.AddResourceConfigurator("azurerm_subnet_network_security_group_association", func(r *config.Resource) {
+		r.Kind = "SubnetNetworkSecurityGroupAssociation"
+		r.References["subnet_id"] = config.Reference{
+			Type:      "Subnet",
+			Extractor: rconfig.ExtractResourceIDFuncPath,
+		}
+		r.References["network_security_group_id"] = config.Reference{
+			Type:      "SecurityGroup",
+			Extractor: rconfig.ExtractResourceIDFuncPath,
+		}
+	})
+
+	p.AddResourceConfigurator("azurerm_subnet_route_table_association", func(r *config.Resource) {
+		r.Kind = "SubnetRouteTableAssociation"
+		r.References["subnet_id"] = config.Reference{
+			Type:      "Subnet",
+			Extractor: rconfig.ExtractResourceIDFuncPath,
+		}
+		r.References["route_table_id"] = config.Reference{
+			Type:      "RouteTable",
+			Extractor: rconfig.ExtractResourceIDFuncPath,
+		}
+	})
+
+	p.AddResourceConfigurator("azurerm_network_security_group", func(r *config.Resource) {
+		r.UseAsync = false
+	})
+
 }

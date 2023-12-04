@@ -6,11 +6,14 @@ import (
 
 var (
 	resourceGroup = map[string]string{
-		"azurerm_virtual_network_peering":               "network",
-		"azurerm_virtual_network":                       "network",
-		"azurerm_private_dns_zone":                      "network",
-		"azurerm_subnet":                                "network",
-		"azurerm_private_dns_zone_virtual_network_link": "network",
+		"azurerm_virtual_network_peering":                   "network",
+		"azurerm_virtual_network":                           "network",
+		"azurerm_private_dns_zone":                          "network",
+		"azurerm_subnet":                                    "network",
+		"azurerm_private_dns_zone_virtual_network_link":     "network",
+		"azurerm_subnet_network_security_group_association": "network",
+		"azurerm_subnet_route_table_association":            "network",
+		"azurerm_route_table":                               "network",
 
 		"azurerm_redis_cache":                               "cache",
 		"azurerm_redis_firewall_rule":                       "cache",
@@ -87,6 +90,7 @@ var (
 		"azurerm_mssql_server_vulnerability_assessment":                 "sql",
 		"azurerm_storage_account":                                       "storage",
 		"azurerm_storage_container":                                     "storage",
+		"azurerm_network_security_group":                                "network",
 	}
 	resourceKind = map[string]string{
 		"azurerm_virtual_network_peering":                   "VirtualNetworkPeering",
@@ -94,6 +98,10 @@ var (
 		"azurerm_private_dns_zone":                          "PrivateDNSZone",
 		"azurerm_private_dns_zone_virtual_network_link":     "PrivateDNSZoneVirtualNetworkLink",
 		"azurerm_subnet":                                    "Subnet",
+		"azurerm_network_security_group":                    "SecurityGroup",
+		"azurerm_subnet_network_security_group_association": "SubnetNetworkSecurityGroupAssociation",
+		"azurerm_subnet_route_table_association":            "SubnetRouteTableAssociation",
+		"azurerm_route_table":                               "RouteTable",
 		"azurerm_redis_cache":                               "RedisCache",
 		"azurerm_redis_firewall_rule":                       "RedisFirewallRule",
 		"azurerm_redis_enterprise_cluster":                  "RedisEnterpriseCluster",

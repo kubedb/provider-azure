@@ -8,8 +8,6 @@ spec:
   forProvider:
     managedInstanceIdRef:
       name: example-sql
-
-
 ---
 apiVersion: sql.azure.kubedb.com/v1alpha1
 kind: MSSQLManagedInstance
@@ -45,6 +43,7 @@ type: Opaque
 data:
   password: dGVzdFBhc3N3b3JkITEyMw== # testPassword!123
 ---
+
 apiVersion: azure.kubedb.com/v1alpha1
 kind: ResourceGroup
 metadata:
