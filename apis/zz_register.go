@@ -22,6 +22,7 @@ import (
 	v1alpha1dbforpostgresql "kubedb.dev/provider-azure/apis/dbforpostgresql/v1alpha1"
 	v1alpha1keyvault "kubedb.dev/provider-azure/apis/keyvault/v1alpha1"
 	v1alpha1network "kubedb.dev/provider-azure/apis/network/v1alpha1"
+	v1alpha1sql "kubedb.dev/provider-azure/apis/sql/v1alpha1"
 	v1alpha1apis "kubedb.dev/provider-azure/apis/v1alpha1"
 	v1beta1 "kubedb.dev/provider-azure/apis/v1beta1"
 )
@@ -37,6 +38,7 @@ func init() {
 		v1alpha1dbforpostgresql.SchemeBuilder.AddToScheme,
 		v1alpha1keyvault.SchemeBuilder.AddToScheme,
 		v1alpha1network.SchemeBuilder.AddToScheme,
+		v1alpha1sql.SchemeBuilder.AddToScheme,
 		v1alpha1apis.SchemeBuilder.AddToScheme,
 		v1beta1.SchemeBuilder.AddToScheme,
 	)

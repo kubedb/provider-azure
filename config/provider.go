@@ -6,6 +6,7 @@ package config
 
 import (
 	_ "embed"
+	ujconfig "github.com/crossplane/upjet/pkg/config"
 	"github.com/crossplane/upjet/pkg/registry/reference"
 	"kubedb.dev/provider-azure/config/base"
 	"kubedb.dev/provider-azure/config/cache"
@@ -16,8 +17,7 @@ import (
 	"kubedb.dev/provider-azure/config/dbforpostgresql"
 	"kubedb.dev/provider-azure/config/keyvault"
 	"kubedb.dev/provider-azure/config/network"
-
-	ujconfig "github.com/crossplane/upjet/pkg/config"
+	"kubedb.dev/provider-azure/config/sql"
 )
 
 const (
@@ -57,6 +57,7 @@ func GetProvider() *ujconfig.Provider {
 		dbformysql.Configure,
 		dbforpostgresql.Configure,
 		keyvault.Configure,
+		sql.Configure,
 	} {
 		configure(pc)
 	}

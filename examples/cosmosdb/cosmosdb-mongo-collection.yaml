@@ -1,0 +1,86 @@
+apiVersion: cosmosdb.azure.kubedb.com/v1alpha1
+kind: MongoCollection
+metadata:
+  annotations:
+    meta.kubedb.com/example-id: cosmosdb/v1alpha1/mongocollection
+  labels:
+    testing.kubedb.com/example-name: example
+  name: example
+spec:
+  forProvider:
+    accountNameSelector:
+      matchLabels:
+        testing.kubedb.com/example-name: mongo
+    databaseNameSelector:
+      matchLabels:
+        testing.kubedb.com/example-name: example
+    defaultTtlSeconds: 777
+    index:
+    - keys:
+      - _id
+      unique: true
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.kubedb.com/example-name: rg1
+    shardKey: uniqueKey
+    throughput: 400
+
+---
+
+apiVersion: cosmosdb.azure.kubedb.com/v1alpha1
+kind: MongoDatabase
+metadata:
+  annotations:
+    meta.kubedb.com/example-id: cosmosdb/v1alpha1/mongocollection
+  labels:
+    testing.kubedb.com/example-name: example
+  name: example
+spec:
+  forProvider:
+    accountNameSelector:
+      matchLabels:
+        testing.kubedb.com/example-name: mongo
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.kubedb.com/example-name: rg1
+
+---
+
+apiVersion: cosmosdb.azure.kubedb.com/v1alpha1
+kind: Account
+metadata:
+  annotations:
+    meta.kubedb.com/example-id: cosmosdb/v1alpha1/mongocollection
+  labels:
+    testing.kubedb.com/example-name: mongo
+  name: example-cosmosdb-mongo
+spec:
+  forProvider:
+    capabilities:
+      - name: EnableMongo
+      - name: MongoDBv3.4
+      - name: mongoEnableDocLevelTTL
+    consistencyPolicy:
+      - consistencyLevel: Strong
+    geoLocation:
+      - failoverPriority: 0
+        location: West Europe
+    kind: MongoDB
+    location: West Europe
+    offerType: Standard
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.kubedb.com/example-name: rg1
+
+---
+apiVersion: azure.kubedb.com/v1alpha1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.kubedb.com/example-id: cosmosdb/v1alpha1/account
+  labels:
+    testing.kubedb.com/example-name: rg1
+  name: rg1
+spec:
+  forProvider:
+    location: West Europe

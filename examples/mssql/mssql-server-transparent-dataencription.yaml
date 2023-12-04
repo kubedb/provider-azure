@@ -1,0 +1,64 @@
+apiVersion: sql.azure.kubedb.com/v1alpha1
+kind: MSSQLServerTransparentDataEncryption
+metadata:
+  annotations:
+    meta.kubedb.com/example-id: sql/v1alpha1/mssqlservertransparentdataencryption
+  labels:
+    testing.kubedb.com/example-name: example
+  name: example
+spec:
+  forProvider:
+    serverIdSelector:
+      matchLabels:
+        testing.kubedb.com/example-name: example
+
+---
+
+apiVersion: sql.azure.kubedb.com/v1alpha1
+kind: MSSQLServer
+metadata:
+  annotations:
+    meta.kubedb.com/example-id: sql/v1alpha1/mssqlservertransparentdataencryption
+  labels:
+    testing.kubedb.com/example-name: example
+  name: trans-enc
+spec:
+  forProvider:
+    administratorLogin: missadministrator
+    administratorLoginPasswordSecretRef:
+      key: example-key
+      name: example-secret
+      namespace: upbound-system
+    location: EastUs
+    minimumTlsVersion: "1.2"
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.kubedb.com/example-name: example-sql-trans-enc
+    tags:
+      environment: production
+    version: "12.0"
+
+---
+
+apiVersion: azure.kubedb.com/v1alpha1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.kubedb.com/example-id: sql/v1alpha1/mssqlservertransparentdataencryption
+  labels:
+    testing.kubedb.com/example-name: example-sql-trans-enc
+  name: example-sql-trans-enc
+spec:
+  forProvider:
+    location: EastUs
+
+---
+
+apiVersion: v1
+kind: Secret
+metadata:
+  name: example-secret
+  namespace: upbound-system
+type: Opaque
+stringData:
+  example-key: dXBib3VuZHJvY2tz

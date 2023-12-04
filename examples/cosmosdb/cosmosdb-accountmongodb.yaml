@@ -1,0 +1,46 @@
+apiVersion: cosmosdb.azure.kubedb.com/v1alpha1
+kind: Account
+metadata:
+  annotations:
+    meta.kubedb.com/example-id: cosmosdb/v1alpha1/account
+  labels:
+    testing.kubedb.com/example-name: db
+  name: example-cosmosdb
+spec:
+  forProvider:
+    capabilities:
+      - name: EnableAggregationPipeline
+      - name: mongoEnableDocLevelTTL
+      - name: MongoDBv3.4
+      - name: EnableMongo
+    consistencyPolicy:
+      - consistencyLevel: BoundedStaleness
+        maxIntervalInSeconds: 300
+        maxStalenessPrefix: 100000
+    enableAutomaticFailover: true
+    geoLocation:
+      - failoverPriority: 1
+        location: eastus
+      - failoverPriority: 0
+        location: westus
+    kind: MongoDB
+    location: West Europe
+    offerType: Standard
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.kubedb.com/example-name: example
+
+---
+
+apiVersion: azure.kubedb.com/v1alpha1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.kubedb.com/example-id: cosmosdb/v1alpha1/account
+  labels:
+    testing.kubedb.com/example-name: example
+  name: cosmosdb-rg
+spec:
+  forProvider:
+    location: West Europe
+---

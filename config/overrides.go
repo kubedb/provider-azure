@@ -63,6 +63,28 @@ var (
 		"azurerm_postgresql_configuration":                  "dbforpostgresql",
 		"azurerm_key_vault":                                 "keyvault",
 		"azurerm_key_vault_key":                             "keyvault",
+
+		// sql
+		"azurerm_mssql_server":                                          "sql",
+		"azurerm_mssql_database":                                        "sql",
+		"azurerm_mssql_failover_group":                                  "sql",
+		"azurerm_mssql_server_transparent_data_encryption":              "sql",
+		"azurerm_mssql_virtual_network_rule":                            "sql",
+		"azurerm_mssql_managed_instance":                                "sql",
+		"azurerm_mssql_managed_database":                                "sql",
+		"azurerm_mssql_managed_instance_active_directory_administrator": "sql",
+		"azurerm_mssql_managed_instance_failover_group":                 "sql",
+		"azurerm_mssql_managed_instance_vulnerability_assessment":       "sql",
+		"azurerm_mssql_outbound_firewall_rule":                          "sql",
+		"azurerm_mssql_server_dns_alias":                                "sql",
+		"azurerm_mssql_database_extended_auditing_policy":               "sql",
+		"azurerm_mssql_server_security_alert_policy":                    "sql",
+		"azurerm_mssql_firewall_rule":                                   "sql",
+		"azurerm_mssql_database_vulnerability_assessment_rule_baseline": "sql",
+		"azurerm_mssql_elasticpool":                                     "sql",
+		"azurerm_mssql_job_agent":                                       "sql",
+		"azurerm_mssql_job_credential":                                  "sql",
+		"azurerm_mssql_server_vulnerability_assessment":                 "sql",
 	}
 	resourceKind = map[string]string{
 		"azurerm_virtual_network_peering":                   "VirtualNetworkPeering",
@@ -121,6 +143,28 @@ var (
 		"azurerm_postgresql_configuration":                  "Configuration",
 		"azurerm_key_vault":                                 "Vault",
 		"azurerm_key_vault_key":                             "Key",
+
+		// sql
+		"azurerm_mssql_server":                                          "MSSQLServer",
+		"azurerm_mssql_database":                                        "MSSQLDatabase",
+		"azurerm_mssql_failover_group":                                  "MSSQLFailoverGroup",
+		"azurerm_mssql_server_transparent_data_encryption":              "MSSQLServerTransparentDataEncryption",
+		"azurerm_mssql_virtual_network_rule":                            "MSSQLVirtualNetworkRule",
+		"azurerm_mssql_managed_instance":                                "MSSQLManagedInstance",
+		"azurerm_mssql_managed_database":                                "MSSQLManagedDatabase",
+		"azurerm_mssql_managed_instance_active_directory_administrator": "MSSQLManagedInstanceActiveDirectoryAdministrator",
+		"azurerm_mssql_managed_instance_failover_group":                 "MSSQLManagedInstanceFailoverGroup",
+		"azurerm_mssql_managed_instance_vulnerability_assessment":       "MSSQLManagedInstanceVulnerabilityAssessment",
+		"azurerm_mssql_outbound_firewall_rule":                          "MSSQLOutboundFirewallRule",
+		"azurerm_mssql_server_dns_alias":                                "MSSQLServerDNSAlias",
+		"azurerm_mssql_database_extended_auditing_policy":               "MSSQLServerMicrosoftSupportAuditingPolicy",
+		"azurerm_mssql_server_security_alert_policy":                    "MSSQLServerSecurityAlertPolicy",
+		"azurerm_mssql_firewall_rule":                                   "MSSQLFirewallRule",
+		"azurerm_mssql_database_vulnerability_assessment_rule_baseline": "MSSQLDatabaseVulnerabilityAssessmentRuleBaseline",
+		"azurerm_mssql_elasticpool":                                     "MSSQLElasticPool",
+		"azurerm_mssql_job_agent":                                       "MSSQLJobAgent",
+		"azurerm_mssql_job_credential":                                  "MSSQLJobCredential",
+		"azurerm_mssql_server_vulnerability_assessment":                 "MSSQLServerVulnerabilityAssessment",
 	}
 )
 

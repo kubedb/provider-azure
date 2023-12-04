@@ -1,0 +1,137 @@
+apiVersion: cosmosdb.azure.kubedb.com/v1alpha1
+kind: SQLFunction
+metadata:
+  annotations:
+    meta.kubedb.com/example-id: cosmosdb/v1alpha1/sqlfunction
+  labels:
+    testing.kubedb.com/example-name: example
+  name: example
+spec:
+  forProvider:
+    body: function trigger(){}
+    containerIdSelector:
+      matchLabels:
+        testing.kubedb.com/example-name: example
+
+---
+
+apiVersion: cosmosdb.azure.kubedb.com/v1alpha1
+kind: SQLContainer
+metadata:
+  annotations:
+    meta.kubedb.com/example-id: cosmosdb/v1alpha1/sqlfunction
+  labels:
+    testing.kubedb.com/example-name: example
+  name: example
+spec:
+  forProvider:
+    accountNameSelector:
+      matchLabels:
+        testing.kubedb.com/example-name: sql
+    databaseNameSelector:
+      matchLabels:
+        testing.kubedb.com/example-name: example
+    partitionKeyPath: /id
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.kubedb.com/example-name: rg1
+
+---
+
+apiVersion: cosmosdb.azure.kubedb.com/v1alpha1
+kind: SQLDatabase
+metadata:
+  annotations:
+    meta.kubedb.com/example-id: cosmosdb/v1alpha1/sqlfunction
+  labels:
+    testing.kubedb.com/example-name: example
+  name: example
+spec:
+  forProvider:
+    accountNameSelector:
+      matchLabels:
+        testing.kubedb.com/example-name: sql
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.kubedb.com/example-name: rg1
+    throughput: 400
+
+---
+
+apiVersion: cosmosdb.azure.kubedb.com/v1alpha1
+kind: Account
+metadata:
+  annotations:
+    meta.kubedb.com/example-id: cosmosdb/v1alpha1/sqlfunction
+  labels:
+    testing.kubedb.com/example-name: sql
+  name: example-cosmosdb-sql
+spec:
+  forProvider:
+    consistencyPolicy:
+      - consistencyLevel: BoundedStaleness
+    geoLocation:
+      - failoverPriority: 0
+        location: West Europe
+    location: West Europe
+    offerType: Standard
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.kubedb.com/example-name: rg1
+
+---
+
+apiVersion: cosmosdb.azure.kubedb.com/v1alpha1
+kind: SQLTrigger
+metadata:
+  annotations:
+    meta.kubedb.com/example-id: cosmosdb/v1alpha1/sqltrigger
+  labels:
+    testing.kubedb.com/example-name: example
+  name: example
+spec:
+  forProvider:
+    body: function trigger(){}
+    containerIdSelector:
+      matchLabels:
+        testing.kubedb.com/example-name: example
+    operation: Delete
+    type: Post
+
+---
+
+apiVersion: cosmosdb.azure.kubedb.com/v1alpha1
+kind: SQLStoredProcedure
+metadata:
+  labels:
+    testing.kubedb.com/example-name: example
+  name: example
+spec:
+  forProvider:
+    accountNameSelector:
+      matchLabels:
+        testing.kubedb.com/example-name: sql
+    body: "  \tfunction () { var context = getContext(); var response = context.getResponse();
+      response.setBody('Hello, World'); }\n"
+    containerNameSelector:
+      matchLabels:
+        testing.kubedb.com/example-name: example
+    databaseNameSelector:
+      matchLabels:
+        testing.kubedb.com/example-name: example
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.kubedb.com/example-name: rg1
+
+---
+apiVersion: azure.kubedb.com/v1alpha1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.kubedb.com/example-id: cosmosdb/v1alpha1/account
+  labels:
+    testing.kubedb.com/example-name: rg1
+  name: rg1
+spec:
+  forProvider:
+    location: West Europe

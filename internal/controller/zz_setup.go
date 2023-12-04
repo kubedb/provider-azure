@@ -69,6 +69,26 @@ import (
 	virtualnetwork "kubedb.dev/provider-azure/internal/controller/network/virtualnetwork"
 	virtualnetworkpeering "kubedb.dev/provider-azure/internal/controller/network/virtualnetworkpeering"
 	providerconfig "kubedb.dev/provider-azure/internal/controller/providerconfig"
+	mssqldatabase "kubedb.dev/provider-azure/internal/controller/sql/mssqldatabase"
+	mssqldatabasevulnerabilityassessmentrulebaseline "kubedb.dev/provider-azure/internal/controller/sql/mssqldatabasevulnerabilityassessmentrulebaseline"
+	mssqlelasticpool "kubedb.dev/provider-azure/internal/controller/sql/mssqlelasticpool"
+	mssqlfailovergroup "kubedb.dev/provider-azure/internal/controller/sql/mssqlfailovergroup"
+	mssqlfirewallrule "kubedb.dev/provider-azure/internal/controller/sql/mssqlfirewallrule"
+	mssqljobagent "kubedb.dev/provider-azure/internal/controller/sql/mssqljobagent"
+	mssqljobcredential "kubedb.dev/provider-azure/internal/controller/sql/mssqljobcredential"
+	mssqlmanageddatabase "kubedb.dev/provider-azure/internal/controller/sql/mssqlmanageddatabase"
+	mssqlmanagedinstance "kubedb.dev/provider-azure/internal/controller/sql/mssqlmanagedinstance"
+	mssqlmanagedinstanceactivedirectoryadministrator "kubedb.dev/provider-azure/internal/controller/sql/mssqlmanagedinstanceactivedirectoryadministrator"
+	mssqlmanagedinstancefailovergroup "kubedb.dev/provider-azure/internal/controller/sql/mssqlmanagedinstancefailovergroup"
+	mssqlmanagedinstancevulnerabilityassessment "kubedb.dev/provider-azure/internal/controller/sql/mssqlmanagedinstancevulnerabilityassessment"
+	mssqloutboundfirewallrule "kubedb.dev/provider-azure/internal/controller/sql/mssqloutboundfirewallrule"
+	mssqlserver "kubedb.dev/provider-azure/internal/controller/sql/mssqlserver"
+	mssqlserverdnsalias "kubedb.dev/provider-azure/internal/controller/sql/mssqlserverdnsalias"
+	mssqlservermicrosoftsupportauditingpolicy "kubedb.dev/provider-azure/internal/controller/sql/mssqlservermicrosoftsupportauditingpolicy"
+	mssqlserversecurityalertpolicy "kubedb.dev/provider-azure/internal/controller/sql/mssqlserversecurityalertpolicy"
+	mssqlservertransparentdataencryption "kubedb.dev/provider-azure/internal/controller/sql/mssqlservertransparentdataencryption"
+	mssqlservervulnerabilityassessment "kubedb.dev/provider-azure/internal/controller/sql/mssqlservervulnerabilityassessment"
+	mssqlvirtualnetworkrule "kubedb.dev/provider-azure/internal/controller/sql/mssqlvirtualnetworkrule"
 )
 
 // Setup creates all controllers with the supplied logger and adds them to
@@ -135,6 +155,26 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		virtualnetwork.Setup,
 		virtualnetworkpeering.Setup,
 		providerconfig.Setup,
+		mssqldatabase.Setup,
+		mssqldatabasevulnerabilityassessmentrulebaseline.Setup,
+		mssqlelasticpool.Setup,
+		mssqlfailovergroup.Setup,
+		mssqlfirewallrule.Setup,
+		mssqljobagent.Setup,
+		mssqljobcredential.Setup,
+		mssqlmanageddatabase.Setup,
+		mssqlmanagedinstance.Setup,
+		mssqlmanagedinstanceactivedirectoryadministrator.Setup,
+		mssqlmanagedinstancefailovergroup.Setup,
+		mssqlmanagedinstancevulnerabilityassessment.Setup,
+		mssqloutboundfirewallrule.Setup,
+		mssqlserver.Setup,
+		mssqlserverdnsalias.Setup,
+		mssqlservermicrosoftsupportauditingpolicy.Setup,
+		mssqlserversecurityalertpolicy.Setup,
+		mssqlservertransparentdataencryption.Setup,
+		mssqlservervulnerabilityassessment.Setup,
+		mssqlvirtualnetworkrule.Setup,
 	} {
 		if err := setup(mgr, o); err != nil {
 			return err

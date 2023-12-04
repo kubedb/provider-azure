@@ -1,0 +1,68 @@
+apiVersion: sql.azure.kubedb.com/v1alpha1
+kind: MSSQLServerSecurityAlertPolicy
+metadata:
+  annotations:
+    meta.kubedb.com/example-id: sql/v1alpha1/mssqlserversecurityalertpolicy
+  labels:
+    testing.kubedb.com/example-name: example
+  name: alertpolicyname
+spec:
+  forProvider:
+    disabledAlerts:
+    - Sql_Injection
+    - Data_Exfiltration
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.kubedb.com/example-name: mssql-rg
+    retentionDays: 0
+    serverNameSelector:
+      matchLabels:
+        testing.kubedb.com/example-name: example-srv
+    state: Enabled
+
+---
+
+apiVersion: sql.azure.kubedb.com/v1alpha1
+kind: MSSQLServer
+metadata:
+  annotations:  
+    uptest.kubedb.com/timeout: "3600"
+    meta.kubedb.com/example-id: sql/v1alpha1/example-srv
+  labels:
+    testing.kubedb.com/example-name: example-srv
+  name: example-srv
+spec:
+  forProvider:
+    administratorLogin: 4dm1n157r470r
+    administratorLoginPasswordSecretRef:
+      key: example-key
+      name: example-secret
+      namespace: upbound-system
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.kubedb.com/example-name: mssql-rg
+    version: "12.0"
+
+---
+apiVersion: azure.kubedb.com/v1alpha1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.kubedb.com/example-id: sql/v1alpha1/mssqlelasticpool
+  labels:
+    testing.kubedb.com/example-name: mssql-rg
+  name: mssql-rg
+spec:
+  forProvider:
+    location: West Europe
+
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: example-secret
+  namespace: upbound-system
+type: Opaque
+data:
+  example-key: dGVzdFBhc3N3b3JkITEyMw==

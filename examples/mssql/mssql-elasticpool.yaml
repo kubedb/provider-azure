@@ -1,0 +1,25 @@
+apiVersion: sql.azure.kubedb.com/v1alpha1
+kind: MSSQLElasticPool
+metadata:
+  annotations:
+    meta.kubedb.com/example-id: sql/v1alpha1/mssqlelasticpool
+  labels:
+    testing.kubedb.com/example-name: examplemssqlelasticpool
+  name: examplemssqlelasticpool
+spec:
+  forProvider:
+    location: West Europe
+    maxSizeGb: 5
+    perDatabaseSettings:
+    - maxCapacity: 4
+      minCapacity: 1
+    resourceGroupNameRef:
+      name: db
+    serverNameRef:
+      name: mssqlservername
+    sku:
+    - capacity: 4
+      name: GP_Gen5
+      tier: GeneralPurpose
+      family: Gen5
+---

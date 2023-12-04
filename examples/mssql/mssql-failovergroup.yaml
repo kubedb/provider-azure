@@ -1,0 +1,174 @@
+apiVersion: sql.azure.kubedb.com/v1alpha1
+kind: MSSQLOutboundFirewallRule
+metadata:
+  annotations:
+    meta.kubedb.com/example-id: sql/v1alpha1/mssqloutboundfirewallrule
+  labels:
+    testing.kubedb.com/example-name: example
+  name: example
+spec:
+  forProvider:
+    serverIdSelector:
+      matchLabels:
+        testing.kubedb.com/example-name: primary
+
+---
+
+
+apiVersion: sql.azure.kubedb.com/v1alpha1
+kind: MSSQLServerDNSAlias
+metadata:
+  annotations:
+    meta.kubedb.com/example-id: sql/v1alpha1/mssqlfailovergroup
+  labels:
+    testing.kubedb.com/example-name: example
+  name: dns-arm
+spec:
+  forProvider:
+    mssqlServerIdSelector:
+      matchLabels:
+        testing.kubedb.com/example-name: primary
+
+---
+
+apiVersion: sql.azure.kubedb.com/v1alpha1
+kind: MSSQLFailoverGroup
+metadata:
+  annotations:
+    meta.kubedb.com/example-id: sql/v1alpha1/mssqlfailovergroup
+  labels:
+    testing.kubedb.com/example-name: example
+  name: fgroup-arm
+spec:
+  forProvider:
+    databasesRefs:
+    - name: example-failover
+    partnerServer:
+    - idSelector:
+        matchLabels:
+          testing.kubedb.com/example-name: secondary
+    readWriteEndpointFailoverPolicy:
+    - graceMinutes: 80
+      mode: Automatic
+    serverIdSelector:
+      matchLabels:
+        testing.kubedb.com/example-name: primary
+    tags:
+      database: example
+      environment: prod
+
+---
+
+apiVersion: sql.azure.kubedb.com/v1alpha1
+kind: MSSQLDatabase
+metadata:
+  annotations:
+    meta.kubedb.com/example-id: sql/v1alpha1/mssqlfailovergroup
+  labels:
+    testing.kubedb.com/example-name: example-failover
+  name: example-failover
+spec:
+  forProvider:
+    collation: SQL_Latin1_General_CP1_CI_AS
+    maxSizeGb: 200
+    serverIdSelector:
+      matchLabels:
+        testing.kubedb.com/example-name: primary
+    skuName: S1
+
+---
+
+apiVersion: sql.azure.kubedb.com/v1alpha1
+kind: MSSQLServer
+metadata:
+  annotations:
+    meta.kubedb.com/example-id: sql/v1alpha1/mssqlfailovergroup
+  labels:
+    testing.kubedb.com/example-name: primary
+  name: primary-arm
+spec:
+  forProvider:
+    administratorLogin: missadministrator
+    administratorLoginPasswordSecretRef:
+      key: example-key
+      name: example-secret
+      namespace: upbound-system
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.kubedb.com/example-name: example-sql-failover-primary
+    version: "12.0"
+
+---
+
+apiVersion: sql.azure.kubedb.com/v1alpha1
+kind: MSSQLServer
+metadata:
+  annotations:
+    meta.kubedb.com/example-id: sql/v1alpha1/mssqlfailovergroup
+  labels:
+    testing.kubedb.com/example-name: secondary
+  name: secondary-arm
+spec:
+  forProvider:
+    administratorLogin: missadministrator
+    administratorLoginPasswordSecretRef:
+      key: example-key
+      name: example-secret
+      namespace: upbound-system
+    location: North Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.kubedb.com/example-name: example-sql-failover-secondary
+    version: "12.0"
+
+---
+
+apiVersion: azure.kubedb.com/v1alpha1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.kubedb.com/example-id: sql/v1alpha1/mssqlfailovergroup
+  labels:
+    testing.kubedb.com/example-name: example-sql-failover-secondary
+  name: example-sql-failover-secondary
+spec:
+  forProvider:
+    location: North Europe
+
+---
+
+apiVersion: azure.kubedb.com/v1alpha1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.kubedb.com/example-id: sql/v1alpha1/mssqlfailovergroup
+  labels:
+    testing.kubedb.com/example-name: example-sql-failover-primary
+  name: example-sql-failover-primary
+spec:
+  forProvider:
+    location: West Europe
+
+---
+
+apiVersion: v1
+data:
+  example-key: dXBiMHVuZHIwY2s1ITMxMzM3Cg==
+kind: Secret
+metadata:
+  name: example-secret
+  namespace: upbound-system
+type: Opaque
+
+
+---
+
+apiVersion: v1
+data:
+  example-key: dXBiMHVuZHIwY2s1ITMxMzM3Cg==
+kind: Secret
+metadata:
+  name: example-secret2
+  namespace: upbound-system
+type: Opaque

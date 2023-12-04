@@ -1,0 +1,54 @@
+apiVersion: cosmosdb.azure.kubedb.com/v1alpha1
+kind: SQLDedicatedGateway
+metadata:
+  annotations:
+    uptest.kubedb.com/timeout: "3600"
+    meta.kubedb.com/example-id: cosmosdb/v1alpha1/sqldedicatedgateway
+  labels:
+    testing.kubedb.com/example-name: examplecosmogw
+  name: examplecosmogw
+spec:
+  forProvider:
+    cosmosdbAccountIdSelector:
+      matchLabels:
+        testing.kubedb.com/example-name: sqldedicatedgw-cdb
+    instanceCount: 1
+    instanceSize: Cosmos.D4s
+---
+
+apiVersion: cosmosdb.azure.kubedb.com/v1alpha1
+kind: Account
+metadata:
+  annotations:
+    uptest.kubedb.com/timeout: "3600"
+    meta.kubedb.com/example-id: cosmosdb/v1alpha1/sqldedicatedgateway
+  labels:
+    testing.kubedb.com/example-name: sqldedicatedgw-cdb
+  name: sqldedicatedgw-cdb
+spec:
+  forProvider:
+    consistencyPolicy:
+    - consistencyLevel: BoundedStaleness
+    geoLocation:
+    - failoverPriority: 0
+      location: West Europe
+    kind: GlobalDocumentDB
+    location: West Europe
+    offerType: Standard
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.kubedb.com/example-name: sqldedicatedgw-rg
+
+---
+
+apiVersion: azure.kubedb.com/v1alpha1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.kubedb.com/example-id: cosmosdb/v1alpha1/sqldedicatedgateway
+  labels:
+    testing.kubedb.com/example-name: sqldedicatedgw-rg
+  name: sqldedicatedgw-rg
+spec:
+  forProvider:
+    location: West Europe

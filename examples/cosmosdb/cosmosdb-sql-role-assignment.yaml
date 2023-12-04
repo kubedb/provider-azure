@@ -1,0 +1,95 @@
+apiVersion: cosmosdb.azure.kubedb.com/v1alpha1
+kind: SQLRoleAssignment
+metadata:
+  annotations:
+    meta.kubedb.com/example-id: cosmosdb/v1alpha1/sqlroleassignment
+    upjet.kubedb.com/manual-intervention: "This resource needs a SQLRoleDefinition resource."
+  labels:
+    testing.kubedb.com/example-name: example
+  name: example
+spec:
+  forProvider:
+    accountNameSelector:
+      matchLabels:
+        testing.kubedb.com/example-name: example
+    name: 736180af-7fbc-4c7f-9004-22735173c1c3
+    #principalId -> User object id
+    principalId: 267af1b5-77e8-461d-b12b-f39c9e15c2f7
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.kubedb.com/example-name: example
+    roleDefinitionIdSelector:
+      matchLabels:
+        testing.kubedb.com/example-name: example
+    # scopeSelector:
+    #   matchLabels:
+    #     testing.kubedb.com/example-name: example
+    scope: "/subscriptions/1bfc9f66-316d-433e-b13d-c55589f642ca/resourceGroups/example/providers/Microsoft.DocumentDB/databaseAccounts/upbound-example"
+
+---
+
+apiVersion: cosmosdb.azure.kubedb.com/v1alpha1
+kind: SQLRoleDefinition
+metadata:
+  annotations:
+    meta.kubedb.com/example-id: cosmosdb/v1alpha1/sqlroleassignment
+    upjet.kubedb.com/manual-intervention: "This resource needs a valid assignableScopes id(s)."
+  labels:
+    testing.kubedb.com/example-name: example
+  name: example
+spec:
+  forProvider:
+    accountNameSelector:
+      matchLabels:
+        testing.kubedb.com/example-name: example
+    assignableScopes:
+    - "/subscriptions/1bfc9f66-316d-433e-b13d-c55589f642ca/resourceGroups/example/providers/Microsoft.DocumentDB/databaseAccounts/upbound-example"
+    name: examplesqlroledef
+    permissions:
+    - dataActions:
+      - Microsoft.DocumentDB/databaseAccounts/sqlDatabases/containers/items/read
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.kubedb.com/example-name: example
+    type: CustomRole
+
+---
+
+apiVersion: cosmosdb.azure.kubedb.com/v1alpha1
+kind: Account
+metadata:
+  annotations:
+    meta.kubedb.com/example-id: cosmosdb/v1alpha1/sqlroleassignment
+    upjet.kubedb.com/manual-intervention: "This resource is dependency of SQLRoleAssignment. This resource is skipping because parent resource was skipped."
+  labels:
+  labels:
+    testing.kubedb.com/example-name: example
+  name: upbound-example
+spec:
+  forProvider:
+    consistencyPolicy:
+    - consistencyLevel: Strong
+    geoLocation:
+    - failoverPriority: 0
+      location: West Europe
+    kind: GlobalDocumentDB
+    location: West Europe
+    offerType: Standard
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.kubedb.com/example-name: example
+
+---
+
+apiVersion: azure.kubedb.com/v1alpha1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.kubedb.com/example-id: cosmosdb/v1alpha1/sqlroleassignment
+    upjet.kubedb.com/manual-intervention: "This resource is dependency of SQLRoleAssignment. This resource is skipping because parent resource was skipped."
+  labels:
+    testing.kubedb.com/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe

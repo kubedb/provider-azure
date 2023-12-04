@@ -1,0 +1,40 @@
+apiVersion: sql.azure.kubedb.com/v1alpha1
+kind: MSSQLServerSecurityAlertPolicy
+metadata:
+  annotations:
+    meta.upbound.io/example-id: sql/v1alpha1/mssqlserversecurityalertpolicy
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    disabledAlerts:
+    - Sql_Injection
+    - Data_Exfiltration
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    retentionDays: 20
+    serverNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    state: Enabled
+    storageAccountAccessKeySecretRef:
+      key: attribute.primary_access_key
+      name: example-storage-account
+      namespace: upbound-system
+    storageEndpoint: ${azurerm_storage_account.example.primary_blob_endpoint}
+
+---
+
+apiVersion: azure.kubedb.com/v1alpha1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: sql/v1alpha1/mssqlserversecurityalertpolicy
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe

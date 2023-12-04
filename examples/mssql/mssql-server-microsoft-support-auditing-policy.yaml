@@ -1,0 +1,105 @@
+apiVersion: sql.azure.kubedb.com/v1alpha1
+kind: MSSQLServerMicrosoftSupportAuditingPolicy
+metadata:
+  annotations:
+    meta.kubedb.com/example-id: sql/v1alpha1/mssqlservermicrosoftsupportauditingpolicy
+  labels:
+    testing.kubedb.com/example-name: example
+  name: example
+spec:
+  forProvider:
+    blobStorageEndpointSelector:
+      matchLabels:
+        testing.kubedb.com/example-name: staccexample0001
+    serverIdSelector:
+      matchLabels:
+        testing.kubedb.com/example-name: example-srv
+    storageAccountAccessKeySecretRef:
+      key: attribute.primary_access_key
+      name: example-storage-account
+      namespace: upbound-system
+---
+apiVersion: storage.azure.kubedb.com/v1alpha1
+kind: Account
+metadata:
+  annotations:
+    uptest.kubedb.com/pre-delete-hook: testhooks/delete-supportauditingpolicy.sh
+    meta.kubedb.com/example-id: sql/v1alpha1/mssqlservermicrosoftsupportauditingpolicy
+  labels:
+    testing.kubedb.com/example-name: staccexample0001
+  name: staccexample0001
+spec:
+  forProvider:
+    accountReplicationType: LRS
+    accountTier: Standard
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.kubedb.com/example-name: mssql-rg
+  writeConnectionSecretToRef:
+    name: example-storage-account
+    namespace: upbound-system
+
+
+# ---
+
+# apiVersion: sql.azure.kubedb.com/v1alpha1
+# kind: MSSQLServer
+# metadata:
+#   annotations:  
+#     uptest.kubedb.com/timeout: "3600"
+#     meta.kubedb.com/example-id: sql/v1alpha1/example-srv
+#   labels:
+#     testing.kubedb.com/example-name: example-srv
+#   name: example-srv
+# spec:
+#   forProvider:
+#     administratorLogin: 4dm1n157r470r
+#     administratorLoginPasswordSecretRef:
+#       key: example-key
+#       name: example-secret
+#       namespace: upbound-system
+#     location: West Europe
+#     resourceGroupNameSelector:
+#       matchLabels:
+#         testing.kubedb.com/example-name: mssql-rg
+#     version: "12.0"
+
+# ---
+
+
+# apiVersion: azure.kubedb.com/v1alpha1
+# kind: ResourceGroup
+# metadata:
+#   annotations:
+#     meta.kubedb.com/example-id: sql/v1alpha1/mssqlelasticpool
+#   labels:
+#     testing.kubedb.com/example-name: mssql-rg
+#   name: mssql-rg
+# spec:
+#   forProvider:
+#     location: West Europe
+
+# ---
+# apiVersion: v1
+# kind: Secret
+# metadata:
+#   name: example-secret
+#   namespace: upbound-system
+# type: Opaque
+# data:
+#   example-key: dGVzdFBhc3N3b3JkITEyMw==
+
+# ---
+
+
+# apiVersion: v1
+# kind: Secret
+# metadata:
+#   name: example-secret-stor
+#   namespace: upbound-system
+# type: Opaque
+# data:
+#   example-key: SmNQL1krSlFtOWhaVnNIQzQ4TlVTR0lSUmRnU0I1WU1mRlVBcU1SbHZPdGdQaVFUMUdEUVNoZ2hCRWFhYXk0OVlIbUl5S1ltZ2pMYytBU3R3RlR2SXc9PQ==
+
+# ---
