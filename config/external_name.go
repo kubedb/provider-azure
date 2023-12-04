@@ -144,6 +144,10 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	// keyvault
 	"azurerm_key_vault":     config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.KeyVault/vaults/{{ .external_name }}"),
 	"azurerm_key_vault_key": keyVaultURLIDConf("keys"),
+
+	// storage
+	"azurerm_storage_account":   config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.Storage/storageAccounts/{{ .external_name }}"),
+	"azurerm_storage_container": config.TemplatedStringAsIdentifier("name", "https://{{ .parameters.storage_account_name }}.blob.core.windows.net/{{ .external_name }}"),
 }
 
 // ExternalNameConfigurations applies all external name configs listed in the

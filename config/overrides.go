@@ -85,6 +85,8 @@ var (
 		"azurerm_mssql_job_agent":                                       "sql",
 		"azurerm_mssql_job_credential":                                  "sql",
 		"azurerm_mssql_server_vulnerability_assessment":                 "sql",
+		"azurerm_storage_account":                                       "storage",
+		"azurerm_storage_container":                                     "storage",
 	}
 	resourceKind = map[string]string{
 		"azurerm_virtual_network_peering":                   "VirtualNetworkPeering",
@@ -165,6 +167,8 @@ var (
 		"azurerm_mssql_job_agent":                                       "MSSQLJobAgent",
 		"azurerm_mssql_job_credential":                                  "MSSQLJobCredential",
 		"azurerm_mssql_server_vulnerability_assessment":                 "MSSQLServerVulnerabilityAssessment",
+		"azurerm_storage_account":                                       "Account",
+		"azurerm_storage_container":                                     "Container",
 	}
 )
 

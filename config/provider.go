@@ -18,6 +18,7 @@ import (
 	"kubedb.dev/provider-azure/config/keyvault"
 	"kubedb.dev/provider-azure/config/network"
 	"kubedb.dev/provider-azure/config/sql"
+	"kubedb.dev/provider-azure/config/storage"
 )
 
 const (
@@ -58,6 +59,7 @@ func GetProvider() *ujconfig.Provider {
 		dbforpostgresql.Configure,
 		keyvault.Configure,
 		sql.Configure,
+		storage.Configure,
 	} {
 		configure(pc)
 	}
