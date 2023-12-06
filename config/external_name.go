@@ -149,9 +149,50 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	"azurerm_key_vault":     config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.KeyVault/vaults/{{ .external_name }}"),
 	"azurerm_key_vault_key": keyVaultURLIDConf("keys"),
 
+	// sql
+	"azurerm_mssql_server":                                          config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.Sql/servers/{{ .external_name }}"),
+	"azurerm_mssql_database":                                        config.TemplatedStringAsIdentifier("name", "{{ .parameters.server_id }}/databases/{{ .external_name }}"),
+	"azurerm_mssql_failover_group":                                  config.TemplatedStringAsIdentifier("name", "{{ .parameters.server_id }}/failoverGroups/{{ .external_name }}"),
+	"azurerm_mssql_server_transparent_data_encryption":              config.TemplatedStringAsIdentifier("", "{{ .parameters.server_id }}/encryptionProtector/current"),
+	"azurerm_mssql_virtual_network_rule":                            config.TemplatedStringAsIdentifier("name", "{{ .parameters.server_id }}/virtualNetworkRules/{{ .external_name }}"),
+	"azurerm_mssql_managed_instance":                                config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.Sql/managedInstances/{{ .external_name }}"),
+	"azurerm_mssql_managed_database":                                config.TemplatedStringAsIdentifier("name", "{{ .parameters.managed_instance_id }}/databases/{{ .external_name }}"),
+	"azurerm_mssql_managed_instance_active_directory_administrator": config.TemplatedStringAsIdentifier("", "{{ .parameters.managed_instance_id }}/administrators/activeDirectory"),
+	"azurerm_mssql_managed_instance_failover_group":                 config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.Sql/locations/{{ .parameters.location }}/instanceFailoverGroups/{{ .external_name }}"),
+	"azurerm_mssql_managed_instance_vulnerability_assessment":       config.TemplatedStringAsIdentifier("", "{{ .parameters.managed_instance_id }}/vulnerabilityAssessments/Default"),
+	"azurerm_mssql_outbound_firewall_rule":                          config.TemplatedStringAsIdentifier("name", "{{ .parameters.server_id }}/outboundFirewallRules/{{ .external_name }}"),
+	"azurerm_mssql_server_dns_alias":                                config.TemplatedStringAsIdentifier("name", "{{ .parameters.mssql_server_id }}/dnsAliases/{{ .external_name }}"),
+	// MS SQL Database Extended Auditing Policies can be imported using the resource id
+	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.Sql/servers/sqlServer1/databases/db1/extendedAuditingSettings/default
+	"azurerm_mssql_database_extended_auditing_policy": config.TemplatedStringAsIdentifier("", "{{ .parameters.database_id }}/extendedAuditingSettings/default"),
+	// MS SQL Server Security Alert Policy can be imported using the resource id
+	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/acceptanceTestResourceGroup1/providers/Microsoft.Sql/servers/mssqlserver/securityAlertPolicies/Default
+	"azurerm_mssql_server_security_alert_policy": config.TemplatedStringAsIdentifier("", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.Sql/servers/{{ .parameters.server_name }}/securityAlertPolicies/default"),
+	// SQL Firewall Rules can be imported using the resource id
+	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myresourcegroup/providers/Microsoft.Sql/servers/myserver/firewallRules/rule1
+	"azurerm_mssql_firewall_rule": config.TemplatedStringAsIdentifier("name", "{{ .parameters.server_id }}/firewallRules/{{ .external_name }}"),
+	// Database Vulnerability Assessment Rule Baseline can be imported using the resource id
+	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/acceptanceTestResourceGroup1/providers/Microsoft.Sql/servers/mssqlserver/databases/mysqldatabase/vulnerabilityAssessments/Default/rules/VA2065/baselines/master
+	"azurerm_mssql_database_vulnerability_assessment_rule_baseline": config.IdentifierFromProvider,
+	// SQL Elastic Pool can be imported using the resource id
+	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myresourcegroup/providers/Microsoft.Sql/servers/myserver/elasticPools/myelasticpoolname
+	"azurerm_mssql_elasticpool": config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.Sql/servers/{{ .parameters.server_name }}/elasticPools/{{ .external_name }}"),
+	// Elastic Job Agents can be imported using the id
+	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/mygroup1/providers/Microsoft.Sql/servers/myserver1/jobAgents/myjobagent1
+	"azurerm_mssql_job_agent": config.IdentifierFromProvider,
+	// Elastic Job Credentials can be imported using the resource id
+	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/mygroup1/providers/Microsoft.Sql/servers/myserver1/jobAgents/myjobagent1/credentials/credential1
+	"azurerm_mssql_job_credential": config.TemplatedStringAsIdentifier("name", "{{ .parameters.job_agent_id }}/credentials/{{ .external_name }}"),
+	// MS SQL Server Vulnerability Assessment can be imported using the resource id
+	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/acceptanceTestResourceGroup1/providers/Microsoft.Sql/servers/mssqlserver/vulnerabilityAssessments/Default
+	"azurerm_mssql_server_vulnerability_assessment": config.IdentifierFromProvider,
+
 	// storage
 	"azurerm_storage_account":   config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.Storage/storageAccounts/{{ .external_name }}"),
 	"azurerm_storage_container": config.TemplatedStringAsIdentifier("name", "https://{{ .parameters.storage_account_name }}.blob.core.windows.net/{{ .external_name }}"),
+
+	// authorization
+	"azurerm_role_assignment": config.IdentifierFromProvider,
 }
 
 // ExternalNameConfigurations applies all external name configs listed in the

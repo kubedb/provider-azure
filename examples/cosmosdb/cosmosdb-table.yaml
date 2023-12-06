@@ -8,12 +8,10 @@ metadata:
   name: example
 spec:
   forProvider:
-    accountNameSelector:
-      matchLabels:
-        testing.kubedb.com/example-name: table
-    resourceGroupNameSelector:
-      matchLabels:
-        testing.kubedb.com/example-name: rg1
+    accountNameRef:
+      name: example-cosmosdb-table
+    resourceGroupNameRef:
+      name: db
     throughput: 400
 
 ---
@@ -37,19 +35,19 @@ spec:
         location: West Europe
     location: West Europe
     offerType: Standard
-    resourceGroupNameSelector:
-      matchLabels:
-        testing.kubedb.com/example-name: rg1
+    resourceGroupNameRef:
+      name: db
 ---
 
 apiVersion: azure.kubedb.com/v1alpha1
 kind: ResourceGroup
 metadata:
   annotations:
-    meta.kubedb.com/example-id: cosmosdb/v1alpha1/account
+    meta.kubedb.com/example-id: cosmosdb/v1alpha1/cosmosdb
   labels:
-    testing.kubedb.com/example-name: rg1
-  name: rg1
+    testing.kubedb.com/example-name: db
+  name: db
 spec:
   forProvider:
     location: West Europe
+---

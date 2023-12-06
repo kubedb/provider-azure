@@ -1,0 +1,54 @@
+
+apiVersion: cosmosdb.azure.kubedb.com/v1alpha1
+kind: GremlinDatabase
+metadata:
+  annotations:
+    meta.kubedb.com/example-id: cosmosdb/v1alpha1/gremlingraph
+  labels:
+    testing.kubedb.com/example-name: example
+  name: example
+spec:
+  forProvider:
+    accountNameRef:
+      name: example-cosmosdb-gremlin
+    resourceGroupNameRef:
+      name: db
+
+---
+
+apiVersion: cosmosdb.azure.kubedb.com/v1alpha1
+kind: Account
+metadata:
+  annotations:
+    meta.kubedb.com/example-id: cosmosdb/v1alpha1/gremlingraph
+  labels:
+    testing.kubedb.com/example-name: example-cosmosdb
+  name: example-cosmosdb-gremlin
+spec:
+  forProvider:
+    capabilities:
+      - name: EnableGremlin
+    consistencyPolicy:
+      - consistencyLevel: Strong
+    geoLocation:
+      - failoverPriority: 0
+        location: West Europe
+    location: West Europe
+    offerType: Standard
+    resourceGroupNameRef:
+      name: db
+
+---
+
+apiVersion: azure.kubedb.com/v1alpha1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.kubedb.com/example-id: cosmosdb/v1alpha1/cosmosdb
+  labels:
+    testing.kubedb.com/example-name: db
+  name: db
+spec:
+  forProvider:
+    location: West Europe
+---

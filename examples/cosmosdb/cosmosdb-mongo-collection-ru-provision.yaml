@@ -5,23 +5,20 @@ metadata:
     meta.kubedb.com/example-id: cosmosdb/v1alpha1/mongocollection
   labels:
     testing.kubedb.com/example-name: example
-  name: example
+  name: example-mongo-collection
 spec:
   forProvider:
-    accountNameSelector:
-      matchLabels:
-        testing.kubedb.com/example-name: mongo
-    databaseNameSelector:
-      matchLabels:
-        testing.kubedb.com/example-name: example
+    accountNameRef:
+      name: example-cosmosdb-mongo
+    databaseNameRef:
+      name: example
+    resourceGroupNameRef:
+      name: db
     defaultTtlSeconds: 777
     index:
     - keys:
       - _id
       unique: true
-    resourceGroupNameSelector:
-      matchLabels:
-        testing.kubedb.com/example-name: rg1
     shardKey: uniqueKey
     throughput: 400
 
@@ -37,12 +34,10 @@ metadata:
   name: example
 spec:
   forProvider:
-    accountNameSelector:
-      matchLabels:
-        testing.kubedb.com/example-name: mongo
-    resourceGroupNameSelector:
-      matchLabels:
-        testing.kubedb.com/example-name: rg1
+    accountNameRef:
+      name: example-cosmosdb-mongo
+    resourceGroupNameRef:
+      name: db
 
 ---
 
@@ -68,19 +63,19 @@ spec:
     kind: MongoDB
     location: West Europe
     offerType: Standard
-    resourceGroupNameSelector:
-      matchLabels:
-        testing.kubedb.com/example-name: rg1
+    resourceGroupNameRef:
+      name: db
 
 ---
 apiVersion: azure.kubedb.com/v1alpha1
 kind: ResourceGroup
 metadata:
   annotations:
-    meta.kubedb.com/example-id: cosmosdb/v1alpha1/account
+    meta.kubedb.com/example-id: cosmosdb/v1alpha1/cosmosdb
   labels:
-    testing.kubedb.com/example-name: rg1
-  name: rg1
+    testing.kubedb.com/example-name: db
+  name: db
 spec:
   forProvider:
     location: West Europe
+---

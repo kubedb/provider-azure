@@ -14,7 +14,8 @@ package apis
 import (
 	"k8s.io/apimachinery/pkg/runtime"
 
-	v1alpha1 "kubedb.dev/provider-azure/apis/azure/v1alpha1"
+	v1alpha1 "kubedb.dev/provider-azure/apis/authorization/v1alpha1"
+	v1alpha1azure "kubedb.dev/provider-azure/apis/azure/v1alpha1"
 	v1alpha1cache "kubedb.dev/provider-azure/apis/cache/v1alpha1"
 	v1alpha1cosmosdb "kubedb.dev/provider-azure/apis/cosmosdb/v1alpha1"
 	v1alpha1dbformariadb "kubedb.dev/provider-azure/apis/dbformariadb/v1alpha1"
@@ -22,6 +23,7 @@ import (
 	v1alpha1dbforpostgresql "kubedb.dev/provider-azure/apis/dbforpostgresql/v1alpha1"
 	v1alpha1keyvault "kubedb.dev/provider-azure/apis/keyvault/v1alpha1"
 	v1alpha1network "kubedb.dev/provider-azure/apis/network/v1alpha1"
+	v1alpha1sql "kubedb.dev/provider-azure/apis/sql/v1alpha1"
 	v1alpha1storage "kubedb.dev/provider-azure/apis/storage/v1alpha1"
 	v1alpha1apis "kubedb.dev/provider-azure/apis/v1alpha1"
 	v1beta1 "kubedb.dev/provider-azure/apis/v1beta1"
@@ -31,6 +33,7 @@ func init() {
 	// Register the types with the Scheme so the components can map objects to GroupVersionKinds and back
 	AddToSchemes = append(AddToSchemes,
 		v1alpha1.SchemeBuilder.AddToScheme,
+		v1alpha1azure.SchemeBuilder.AddToScheme,
 		v1alpha1cache.SchemeBuilder.AddToScheme,
 		v1alpha1cosmosdb.SchemeBuilder.AddToScheme,
 		v1alpha1dbformariadb.SchemeBuilder.AddToScheme,
@@ -38,6 +41,7 @@ func init() {
 		v1alpha1dbforpostgresql.SchemeBuilder.AddToScheme,
 		v1alpha1keyvault.SchemeBuilder.AddToScheme,
 		v1alpha1network.SchemeBuilder.AddToScheme,
+		v1alpha1sql.SchemeBuilder.AddToScheme,
 		v1alpha1storage.SchemeBuilder.AddToScheme,
 		v1alpha1apis.SchemeBuilder.AddToScheme,
 		v1beta1.SchemeBuilder.AddToScheme,

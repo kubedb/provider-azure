@@ -55,11 +55,11 @@ apiVersion: azure.kubedb.com/v1alpha1
 kind: ResourceGroup
 metadata:
   annotations:
-    meta.kubedb.com/example-id: cosmosdb/v1alpha1/sqlroledefinition
-    upjet.kubedb.com/manual-intervention: "This resource is dependency of SQLRoleDefinition. This resource is skipping because parent resource was skipped."
+    meta.kubedb.com/example-id: cosmosdb/v1alpha1/cosmosdb
   labels:
-    testing.kubedb.com/example-name: example
-  name: example
+    testing.kubedb.com/example-name: db
+  name: db
 spec:
   forProvider:
     location: West Europe
+---

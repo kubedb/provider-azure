@@ -2,13 +2,13 @@ apiVersion: sql.azure.kubedb.com/v1alpha1
 kind: MSSQLManagedInstanceFailoverGroup
 metadata:
   annotations:
-    upjet.kubedb.com/manual-intervention: "Creation takes 4 hours, see https://docs.microsoft.com/en-us/azure/azure-sql/managed-instance/management-operations-overview?view=azuresql#duration"
+    upjet.kubedb.com/manual-intervention: "Creation takes 4 hours"
   name: example-sql-managed-failover
 spec:
   forProvider:
-    location: West Europe
+    location: West US
     managedInstanceIdRef:
-      name: example-sql
+      name: examplesql
     partnerManagedInstanceIdRef:
       name: example-sql-failover-instance
     readWriteEndpointFailoverPolicy:
@@ -23,17 +23,17 @@ apiVersion: sql.azure.kubedb.com/v1alpha1
 kind: MSSQLManagedInstance
 metadata:
   annotations:
-    upjet.kubedb.com/manual-intervention: "Creation takes 4 hours, see https://docs.microsoft.com/en-us/azure/azure-sql/managed-instance/management-operations-overview?view=azuresql#duration"
+    upjet.kubedb.com/manual-intervention: "Creation takes 4 hours"
   name: example-sql-failover-instance
 spec:
   forProvider:
     dnsZonePartnerIdRef:
-      name: example-sql
+      name: examplesql
     administratorLogin: mradministrator
     administratorLoginPasswordSecretRef:
       key: password
       name: example-secret
-      namespace: upbound-system
+      namespace: crossplane-system
     licenseType: BasePrice
     location: North Europe
     resourceGroupNameRef:
@@ -168,7 +168,7 @@ spec:
     remoteVirtualNetworkIdRef:
       name: example-vn-failover
     resourceGroupNameRef:
-      name: example-sql-rg
+      name: db
     virtualNetworkNameRef:
       name: example-vn
 ---
@@ -186,3 +186,5 @@ spec:
       name: example-sql-rg-failover
     virtualNetworkNameRef:
       name: example-vn-failover
+
+---

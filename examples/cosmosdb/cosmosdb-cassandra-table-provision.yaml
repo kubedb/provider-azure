@@ -4,13 +4,12 @@ metadata:
   annotations:
     meta.kubedb.com/example-id: cosmosdb/v1alpha1/cassandratable
   labels:
-    testing.kubedb.com/example-name: example
-  name: example
+    testing.kubedb.com/example-name: example-table
+  name: example-table
 spec:
   forProvider:
-    cassandraKeyspaceIdSelector:
-      matchLabels:
-        testing.kubedb.com/example-name: example
+    cassandraKeyspaceIdRef:
+      name: example
     schema:
     - column:
       - name: test1
@@ -19,9 +18,24 @@ spec:
         type: int
       partitionKey:
       - name: test1
+---
+apiVersion: cosmosdb.azure.kubedb.com/v1alpha1
+kind: CassandraKeySpace
+metadata:
+  annotations:
+    meta.kubedb.com/example-id: cosmosdb/v1alpha1/cassandratable
+  labels:
+    testing.kubedb.com/example-name: example
+  name: example
+spec:
+  forProvider:
+    accountNameRef:
+      name: example-cosmosdb-cassandra
+    resourceGroupNameRef:
+      name: db
+    throughput: 400
 
 ---
-
 apiVersion: cosmosdb.azure.kubedb.com/v1alpha1
 kind: Account
 metadata:
@@ -41,40 +55,19 @@ spec:
       location: West Europe
     location: West Europe
     offerType: Standard
-    resourceGroupNameSelector:
-      matchLabels:
-        testing.kubedb.com/example-name: rg1
+    resourceGroupNameRef:
+      name: db
 
 ---
-
-apiVersion: cosmosdb.azure.kubedb.com/v1alpha1
-kind: CassandraKeySpace
-metadata:
-  annotations:
-    meta.kubedb.com/example-id: cosmosdb/v1alpha1/cassandratable
-  labels:
-    testing.kubedb.com/example-name: example
-  name: example
-spec:
-  forProvider:
-    accountNameSelector:
-      matchLabels:
-        testing.kubedb.com/example-name: cassandra
-    resourceGroupNameSelector:
-      matchLabels:
-        testing.kubedb.com/example-name: rg1
-    throughput: 400
-
----
-
 apiVersion: azure.kubedb.com/v1alpha1
 kind: ResourceGroup
 metadata:
   annotations:
-    meta.kubedb.com/example-id: cosmosdb/v1alpha1/cassandratable
+    meta.kubedb.com/example-id: cosmosdb/v1alpha1/cosmosdb
   labels:
-    testing.kubedb.com/example-name: rg1
-  name: example-cosmosdb
+    testing.kubedb.com/example-name: db
+  name: db
 spec:
   forProvider:
     location: West Europe
+---

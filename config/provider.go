@@ -8,6 +8,7 @@ import (
 	_ "embed"
 	ujconfig "github.com/crossplane/upjet/pkg/config"
 	"github.com/crossplane/upjet/pkg/registry/reference"
+	"kubedb.dev/provider-azure/config/authorization"
 	"kubedb.dev/provider-azure/config/base"
 	"kubedb.dev/provider-azure/config/cache"
 	"kubedb.dev/provider-azure/config/common"
@@ -60,6 +61,7 @@ func GetProvider() *ujconfig.Provider {
 		keyvault.Configure,
 		sql.Configure,
 		storage.Configure,
+		authorization.Configure,
 	} {
 		configure(pc)
 	}

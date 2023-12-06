@@ -14,6 +14,7 @@ var (
 		"azurerm_subnet_network_security_group_association": "network",
 		"azurerm_subnet_route_table_association":            "network",
 		"azurerm_route_table":                               "network",
+		"azurerm_role_assignment":                           "authorization",
 
 		"azurerm_redis_cache":                               "cache",
 		"azurerm_redis_firewall_rule":                       "cache",
@@ -101,6 +102,7 @@ var (
 		"azurerm_network_security_group":                    "SecurityGroup",
 		"azurerm_subnet_network_security_group_association": "SubnetNetworkSecurityGroupAssociation",
 		"azurerm_subnet_route_table_association":            "SubnetRouteTableAssociation",
+		"azurerm_role_assignment":                           "RoleAssignment",
 		"azurerm_route_table":                               "RouteTable",
 		"azurerm_redis_cache":                               "RedisCache",
 		"azurerm_redis_firewall_rule":                       "RedisFirewallRule",

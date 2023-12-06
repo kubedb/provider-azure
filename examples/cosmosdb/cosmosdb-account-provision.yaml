@@ -9,26 +9,19 @@ metadata:
 spec:
   forProvider:
     capabilities:
-      - name: EnableAggregationPipeline
-      - name: mongoEnableDocLevelTTL
-      - name: MongoDBv3.4
-      - name: EnableMongo
+      # - name: EnableGremlin
+      # - name: EnableTable
+      - name: EnableCassandra
     consistencyPolicy:
-      - consistencyLevel: BoundedStaleness
-        maxIntervalInSeconds: 300
-        maxStalenessPrefix: 100000
+      - consistencyLevel: Strong
     enableAutomaticFailover: true
     geoLocation:
-      - failoverPriority: 1
-        location: eastus
       - failoverPriority: 0
-        location: westus
-    kind: MongoDB
+        location: West Europe
     location: West Europe
     offerType: Standard
-    resourceGroupNameSelector:
-      matchLabels:
-        testing.kubedb.com/example-name: example
+    resourceGroupNameRef:
+      name: db
 
 ---
 
@@ -36,10 +29,10 @@ apiVersion: azure.kubedb.com/v1alpha1
 kind: ResourceGroup
 metadata:
   annotations:
-    meta.kubedb.com/example-id: cosmosdb/v1alpha1/account
+    meta.kubedb.com/example-id: cosmosdb/v1alpha1/cosmosdb
   labels:
-    testing.kubedb.com/example-name: example
-  name: cosmosdb-rg
+    testing.kubedb.com/example-name: db
+  name: db
 spec:
   forProvider:
     location: West Europe

@@ -7,12 +7,13 @@ metadata:
 spec:
   forProvider:
     managedInstanceIdRef:
-      name: example-sql
+      name: examplesql
+
 ---
 apiVersion: sql.azure.kubedb.com/v1alpha1
 kind: MSSQLManagedInstance
 metadata:
-  name: example-sql
+  name: examplesql
   annotations:
     upjet.kubedb.com/manual-intervention: "Creation takes 4 hours"
 spec:
@@ -23,7 +24,7 @@ spec:
       name: example-secret
       namespace: crossplane-system
     licenseType: BasePrice
-    location: West Europe
+    location: West US
     resourceGroupNameRef:
       name: db
     skuName: GP_Gen5
@@ -52,7 +53,7 @@ metadata:
   name: db
 spec:
   forProvider:
-    location: West Europe
+    location: West US
     tags:
       provisioner: crossplane
 ---
@@ -64,7 +65,7 @@ metadata:
   name: example-vn
 spec:
   forProvider:
-    location: West Europe
+    location: West US
     resourceGroupNameRef:
       name: db
     addressSpace:
@@ -104,7 +105,7 @@ metadata:
   name: example
 spec:
   forProvider:
-    location: West Europe
+    location: West US
     resourceGroupNameRef:
       name: db
     tags:
@@ -133,7 +134,7 @@ metadata:
 spec:
   forProvider:
     disableBgpRoutePropagation: false
-    location: West Europe
+    location: West US
     resourceGroupNameRef:
       name: db
     tags:

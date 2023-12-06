@@ -10,11 +10,11 @@ metadata:
 spec:
   forProvider:
     availabilityZonesEnabled: false
-    cassandraClusterIdSelector:
-      matchLabels:
-        testing.kubedb.com/example-name: example
+    cassandraClusterIdRef:
+      name: example-cassandra-cluster
     delegatedManagementSubnetIdRef:
       name: example-subnet
+    # delegatedManagementSubnetId: null
     diskCount: 4
     location: West Europe
     nodeCount: 3
@@ -29,21 +29,21 @@ metadata:
     upjet.kubedb.com/manual-intervention: "This resource needs valid credentials."
     meta.kubedb.com/example-id: cosmosdb/v1alpha1/cassandradatacenter
   labels:
-    testing.kubedb.com/example-name: example
-  name: example
+    testing.kubedb.com/example-name: example-cassandra-cluster
+  name: example-cassandra-cluster
 spec:
   forProvider:
     defaultAdminPasswordSecretRef:
       key:  password
       name: example-secret
-      namespace: upbound-system
+      namespace: crossplane-system
     # delegatedManagementSubnetId: ### The ID of the delegated management subnet for this Cassandra Datacenter.
+    # delegatedManagementSubnetId: null
     delegatedManagementSubnetIdRef:
       name: example-subnet
     location: West Europe
-    resourceGroupNameSelector:
-      matchLabels:
-        testing.kubedb.com/example-name: example
+    resourceGroupNameRef:
+      name: db
 
 ---
 
@@ -53,35 +53,24 @@ metadata:
   annotations:
     upjet.kubedb.com/manual-intervention: "This resource requires manual intervention."
   name: example-secret
-  namespace: upbound-system
+  namespace: crossplane-system
 type: Opaque
 data:
   password: dGVzdFBhc3N3b3JkITEyMw== # testPassword!123
 
 ---
-apiVersion: azure.kubedb.com/v1alpha1
-kind: ResourceGroup
-metadata:
-  annotations:
-    meta.kubedb.com/example-id: cosmosdb/v1alpha1/cassandratable
-  labels:
-    testing.kubedb.com/example-name: example
-  name: example
-spec:
-  forProvider:
-    location: West Europe
----
+
 apiVersion: network.azure.kubedb.com/v1alpha1
 kind: VirtualNetwork
 metadata:
   annotations:
-    upjet.kubedb.com/manual-intervention: "Creation MSSQLManagedInstance takes 4 hours, see https://docs.microsoft.com/en-us/azure/azure-sql/managed-instance/management-operations-overview?view=azuresql#duration"
+    upjet.kubedb.com/manual-intervention: "Cassandra Cluster Datacenter"
   name: example-vn
 spec:
   forProvider:
     location: West Europe
     resourceGroupNameRef:
-      name: example
+      name: db
     addressSpace:
       - "10.0.0.0/16"
     dnsServers:
@@ -92,36 +81,36 @@ apiVersion: network.azure.kubedb.com/v1alpha1
 kind: Subnet
 metadata:
   annotations:
-    upjet.kubedb.com/manual-intervention: "Creation MSSQLManagedInstance takes 4 hours, see https://docs.microsoft.com/en-us/azure/azure-sql/managed-instance/management-operations-overview?view=azuresql#duration"
+    upjet.kubedb.com/manual-intervention: "Cassandra Cluster Datacenter"
   name: example-subnet
 spec:
   forProvider:
     resourceGroupNameRef:
-      name: example
+      name: db
     virtualNetworkNameRef:
       name: example-vn
     addressPrefixes:
       - "10.0.0.0/24"
-    delegation:
-      - name: managedinstancedelegation
-        serviceDelegation:
-          - name: "Microsoft.Sql/managedInstances"
-            actions:
-              - "Microsoft.Network/virtualNetworks/subnets/join/action"
-              - "Microsoft.Network/virtualNetworks/subnets/prepareNetworkPolicies/action"
-              - "Microsoft.Network/virtualNetworks/subnets/unprepareNetworkPolicies/action"
+    # delegation:
+    #   - name: managedinstancedelegation
+    #     serviceDelegation:
+    #       - name: "Microsoft.DocumentDB/cassandraClusters"
+    #         actions:
+    #           - "Microsoft.Network/virtualNetworks/subnets/join/action"
+    #           - "Microsoft.Network/virtualNetworks/subnets/prepareNetworkPolicies/action"
+    #           - "Microsoft.Network/virtualNetworks/subnets/unprepareNetworkPolicies/action"
 ---
 apiVersion: network.azure.kubedb.com/v1alpha1
 kind: SecurityGroup
 metadata:
   annotations:
-    upjet.kubedb.com/manual-intervention: "Creation MSSQLManagedInstance takes 4 hours, see https://docs.microsoft.com/en-us/azure/azure-sql/managed-instance/management-operations-overview?view=azuresql#duration"
+    upjet.kubedb.com/manual-intervention: "Cassandra Cluster Datacenter"
   name: example
 spec:
   forProvider:
     location: West Europe
     resourceGroupNameRef:
-      name: example
+      name: db
     tags:
       environment: Production
 
@@ -130,7 +119,7 @@ apiVersion: network.azure.kubedb.com/v1alpha1
 kind: SubnetNetworkSecurityGroupAssociation
 metadata:
   annotations:
-    upjet.kubedb.com/manual-intervention: "Creation MSSQLManagedInstance takes 4 hours, see https://docs.microsoft.com/en-us/azure/azure-sql/managed-instance/management-operations-overview?view=azuresql#duration"
+    upjet.kubedb.com/manual-intervention: "Cassandra Cluster Datacenter"
   name: example
 spec:
   forProvider:
@@ -143,14 +132,14 @@ apiVersion: network.azure.kubedb.com/v1alpha1
 kind: RouteTable
 metadata:
   annotations:
-    upjet.kubedb.com/manual-intervention: "Creation MSSQLManagedInstance takes 4 hours, see https://docs.microsoft.com/en-us/azure/azure-sql/managed-instance/management-operations-overview?view=azuresql#duration"
+    upjet.kubedb.com/manual-intervention: "Cassandra Cluster Datacenter"
   name: example
 spec:
   forProvider:
     disableBgpRoutePropagation: false
     location: West Europe
     resourceGroupNameRef:
-      name: example
+      name: db
     tags:
       environment: Production
 ---
@@ -158,7 +147,7 @@ apiVersion: network.azure.kubedb.com/v1alpha1
 kind: SubnetRouteTableAssociation
 metadata:
   annotations:
-    upjet.kubedb.com/manual-intervention: "Creation MSSQLManagedInstance takes 4 hours, see https://docs.microsoft.com/en-us/azure/azure-sql/managed-instance/management-operations-overview?view=azuresql#duration"
+    upjet.kubedb.com/manual-intervention: "Cassandra Cluster Datacenter"
   name: example
 spec:
   forProvider:
@@ -166,4 +155,31 @@ spec:
       name: example
     subnetIdRef:
       name: example-subnet
+---
+
+apiVersion: authorization.azure.kubedb.com/v1alpha1
+kind: RoleAssignment
+metadata:
+  annotations:
+    upjet.upbound.io/manual-intervention: scope is generic and context specific
+  name: example
+spec:
+  forProvider:
+    principalId: "a232010e-820c-4083-83bb-3ace5fc29d0b"
+    roleDefinitionId: "/subscriptions/1bfc9f66-316d-433e-b13d-c55589f642ca/providers/Microsoft.Authorization/roleDefinitions/4d97b98b-1d4f-4787-a291-c67834d212e7"
+    scope: "/subscriptions/1bfc9f66-316d-433e-b13d-c55589f642ca/resourceGroups/db/providers/Microsoft.Network/virtualNetworks/example-vn"
+---
+
+
+apiVersion: azure.kubedb.com/v1alpha1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.kubedb.com/example-id: cosmosdb/v1alpha1/cosmosdb
+  labels:
+    testing.kubedb.com/example-name: db
+  name: db
+spec:
+  forProvider:
+    location: West Europe
 ---
