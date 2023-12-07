@@ -44,6 +44,15 @@ func GetProvider() *ujconfig.Provider {
 			ExternalNameConfigurations(),
 		))
 
+	// "azure" group contains resources that actually do not have a specific
+	// group, e.g. ResourceGroup with APIVersion "azure.upbound.io/v1beta1".
+	// We need to include the controllers for this group into the base packages
+	// list to get their controllers packaged together with the config package
+	// controllers (provider family config package).
+	for _, c := range []string{"internal/controller/azure/resourcegroup", "internal/controller/azure/providerregistration", "internal/controller/azure/subscription"} {
+		pc.BasePackages.ControllerMap[c] = "config"
+	}
+
 	// API group overrides from Terraform import statements
 	for _, r := range pc.Resources {
 		groupKindOverride(r)

@@ -14,7 +14,6 @@ spec:
       name: example-cassandra-cluster
     delegatedManagementSubnetIdRef:
       name: example-subnet
-    # delegatedManagementSubnetId: null
     diskCount: 4
     location: West Europe
     nodeCount: 3
@@ -91,24 +90,16 @@ spec:
       name: example-vn
     addressPrefixes:
       - "10.0.0.0/24"
-    # delegation:
-    #   - name: managedinstancedelegation
-    #     serviceDelegation:
-    #       - name: "Microsoft.DocumentDB/cassandraClusters"
-    #         actions:
-    #           - "Microsoft.Network/virtualNetworks/subnets/join/action"
-    #           - "Microsoft.Network/virtualNetworks/subnets/prepareNetworkPolicies/action"
-    #           - "Microsoft.Network/virtualNetworks/subnets/unprepareNetworkPolicies/action"
 ---
 apiVersion: network.azure.kubedb.com/v1alpha1
 kind: SecurityGroup
 metadata:
   annotations:
-    upjet.kubedb.com/manual-intervention: "Cassandra Cluster Datacenter"
+    upjet.kubedb.com/manual-intervention: "Creation MSSQLManagedInstance takes 4 hours"
   name: example
 spec:
   forProvider:
-    location: West Europe
+    location: West US
     resourceGroupNameRef:
       name: db
     tags:
@@ -119,7 +110,7 @@ apiVersion: network.azure.kubedb.com/v1alpha1
 kind: SubnetNetworkSecurityGroupAssociation
 metadata:
   annotations:
-    upjet.kubedb.com/manual-intervention: "Cassandra Cluster Datacenter"
+    upjet.kubedb.com/manual-intervention: "Creation MSSQLManagedInstance takes 4 hours"
   name: example
 spec:
   forProvider:
@@ -165,7 +156,7 @@ metadata:
   name: example
 spec:
   forProvider:
-    principalId: "a232010e-820c-4083-83bb-3ace5fc29d0b"
+    principalId: "ebe3c859-e631-47e2-bbcd-bba43c5a3b2f"
     roleDefinitionId: "/subscriptions/1bfc9f66-316d-433e-b13d-c55589f642ca/providers/Microsoft.Authorization/roleDefinitions/4d97b98b-1d4f-4787-a291-c67834d212e7"
     scope: "/subscriptions/1bfc9f66-316d-433e-b13d-c55589f642ca/resourceGroups/db/providers/Microsoft.Network/virtualNetworks/example-vn"
 ---

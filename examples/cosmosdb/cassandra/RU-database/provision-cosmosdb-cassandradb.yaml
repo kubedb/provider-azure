@@ -1,24 +1,4 @@
-apiVersion: cosmosdb.azure.kubedb.com/v1alpha1
-kind: CassandraTable
-metadata:
-  annotations:
-    meta.kubedb.com/example-id: cosmosdb/v1alpha1/cassandratable
-  labels:
-    testing.kubedb.com/example-name: example-table
-  name: example-table
-spec:
-  forProvider:
-    cassandraKeyspaceIdRef:
-      name: example
-    schema:
-    - column:
-      - name: test1
-        type: ascii
-      - name: test2
-        type: int
-      partitionKey:
-      - name: test1
----
+
 apiVersion: cosmosdb.azure.kubedb.com/v1alpha1
 kind: CassandraKeySpace
 metadata:

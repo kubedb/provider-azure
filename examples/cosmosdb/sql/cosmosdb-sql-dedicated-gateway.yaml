@@ -1,0 +1,16 @@
+apiVersion: cosmosdb.azure.kubedb.com/v1alpha1
+kind: SQLDedicatedGateway
+metadata:
+  annotations:
+    uptest.kubedb.com/timeout: "3600"
+    meta.kubedb.com/example-id: cosmosdb/v1alpha1/sqldedicatedgateway
+  labels:
+    testing.kubedb.com/example-name: examplecosmogw
+  name: examplecosmogw
+spec:
+  forProvider:
+    cosmosdbAccountIdRef:
+      name: example-cosmosdb-sql
+    instanceCount: 1
+    instanceSize: Cosmos.D4s
+---

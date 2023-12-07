@@ -1,59 +1,47 @@
-apiVersion: cosmosdb.azure.kubedb.com/v1alpha1
-kind: SQLContainer
-metadata:
-  annotations:
-    meta.kubedb.com/example-id: cosmosdb/v1alpha1/sqlfunction
-  labels:
-    testing.kubedb.com/example-name: example
-  name: example
-spec:
-  forProvider:
-    accountNameRef:
-      name: example-cosmosdb-sql
-    databaseNameRef:
-      name: example
-    resourceGroupNameRef:
-      name: db
-    partitionKeyPath: /id
----
+
 
 apiVersion: cosmosdb.azure.kubedb.com/v1alpha1
-kind: SQLDatabase
+kind: MongoDatabase
 metadata:
   annotations:
-    meta.kubedb.com/example-id: cosmosdb/v1alpha1/sqlfunction
+    meta.kubedb.com/example-id: cosmosdb/v1alpha1/mongocollection
   labels:
     testing.kubedb.com/example-name: example
   name: example
 spec:
   forProvider:
     accountNameRef:
-      name: example-cosmosdb-sql
+      name: example-cosmosdb-mongo
     resourceGroupNameRef:
       name: db
-    throughput: 400
+
 ---
 
 apiVersion: cosmosdb.azure.kubedb.com/v1alpha1
 kind: Account
 metadata:
   annotations:
-    meta.kubedb.com/example-id: cosmosdb/v1alpha1/sqlfunction
+    meta.kubedb.com/example-id: cosmosdb/v1alpha1/mongocollection
   labels:
-    testing.kubedb.com/example-name: sql
-  name: example-cosmosdb-sql
+    testing.kubedb.com/example-name: mongo
+  name: example-cosmosdb-mongo
 spec:
   forProvider:
+    capabilities:
+      - name: EnableMongo
+      - name: MongoDBv3.4
+      - name: mongoEnableDocLevelTTL
     consistencyPolicy:
-      - consistencyLevel: BoundedStaleness
+      - consistencyLevel: Strong
     geoLocation:
       - failoverPriority: 0
         location: West Europe
+    kind: MongoDB
     location: West Europe
     offerType: Standard
-    kind: GlobalDocumentDB
     resourceGroupNameRef:
       name: db
+
 ---
 apiVersion: azure.kubedb.com/v1alpha1
 kind: ResourceGroup

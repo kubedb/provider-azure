@@ -45,18 +45,7 @@ data:
   password: dGVzdFBhc3N3b3JkITEyMw== # testPassword!123
 ---
 
-apiVersion: azure.kubedb.com/v1alpha1
-kind: ResourceGroup
-metadata:
-  annotations:
-    upjet.kubedb.com/manual-intervention: "Creation takes of MSSQLManagedInstance takes 4 hours"
-  name: db
-spec:
-  forProvider:
-    location: West US
-    tags:
-      provisioner: crossplane
----
+
 apiVersion: network.azure.kubedb.com/v1alpha1
 kind: VirtualNetwork
 metadata:
@@ -154,3 +143,16 @@ spec:
       name: example-subnet
 
 ---
+
+# apiVersion: azure.kubedb.com/v1alpha1
+# kind: ResourceGroup
+# metadata:
+#   annotations:
+#     upjet.kubedb.com/manual-intervention: "Creation takes of MSSQLManagedInstance takes 4 hours"
+#   name: db
+# spec:
+#   forProvider:
+#     location: West US
+#     tags:
+#       provisioner: crossplane
+# ---

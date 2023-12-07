@@ -1,0 +1,18 @@
+apiVersion: cosmosdb.azure.kubedb.com/v1alpha1
+kind: SQLContainer
+metadata:
+  annotations:
+    meta.kubedb.com/example-id: cosmosdb/v1alpha1/sqlfunction
+  labels:
+    testing.kubedb.com/example-name: example
+  name: example-container
+spec:
+  forProvider:
+    accountNameRef:
+      name: example-cosmosdb-sql
+    databaseNameRef:
+      name: example-db
+    resourceGroupNameRef:
+      name: db
+    partitionKeyPath: /id
+---
