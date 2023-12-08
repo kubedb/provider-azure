@@ -11,6 +11,9 @@ spec:
     disabledAlerts:
     - Sql_Injection
     - Data_Exfiltration
+    emailAddresses:
+      - example1@gmail.com
+      - example2@gmail.com
     resourceGroupNameRef:
       name: db
     retentionDays: 0

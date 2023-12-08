@@ -8,12 +8,10 @@ metadata:
   name: example
 spec:
   forProvider:
-    blobStorageEndpointSelector:
-      matchLabels:
-        testing.kubedb.com/example-name: staccexample0001
-    serverIdSelector:
-      matchLabels:
-        testing.kubedb.com/example-name: example-srv
+    storageEndpointRef:
+      name: staccexample0001
+    databaseIdRef:
+      name: database
     storageAccountAccessKeySecretRef:
       key: attribute.primary_access_key
       name: example-storage-account
@@ -23,7 +21,6 @@ apiVersion: storage.azure.kubedb.com/v1alpha1
 kind: Account
 metadata:
   annotations:
-    uptest.kubedb.com/pre-delete-hook: testhooks/delete-supportauditingpolicy.sh
     meta.kubedb.com/example-id: sql/v1alpha1/mssqlservermicrosoftsupportauditingpolicy
   labels:
     testing.kubedb.com/example-name: staccexample0001
@@ -33,9 +30,8 @@ spec:
     accountReplicationType: LRS
     accountTier: Standard
     location: West Europe
-    resourceGroupNameSelector:
-      matchLabels:
-        testing.kubedb.com/example-name: mssql-rg
+    resourceGroupNameRef:
+      name: db
   writeConnectionSecretToRef:
     name: example-storage-account
     namespace: crossplane-system

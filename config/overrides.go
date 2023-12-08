@@ -14,6 +14,7 @@ var (
 		"azurerm_subnet_network_security_group_association": "network",
 		"azurerm_subnet_route_table_association":            "network",
 		"azurerm_route_table":                               "network",
+		"azurerm_network_security_group":                    "network",
 		"azurerm_role_assignment":                           "authorization",
 
 		"azurerm_redis_cache":                               "cache",
@@ -91,7 +92,6 @@ var (
 		"azurerm_mssql_server_vulnerability_assessment":                 "sql",
 		"azurerm_storage_account":                                       "storage",
 		"azurerm_storage_container":                                     "storage",
-		"azurerm_network_security_group":                                "network",
 	}
 	resourceKind = map[string]string{
 		"azurerm_virtual_network_peering":                   "VirtualNetworkPeering",
