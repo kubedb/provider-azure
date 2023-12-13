@@ -9,8 +9,12 @@ metadata:
 spec:
   forProvider:
     name: interactive_timeout
-    resourceGroupName: ${azurerm_resource_group.example.name}
-    serverName: ${azurerm_mariadb_server.example.name}
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    serverNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
     value: "600"
 
 ---
@@ -31,10 +35,23 @@ spec:
       name: example-secret
       namespace: upbound-system
     location: West Europe
-    resourceGroupName: api-rg-pro
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
     skuName: B_Gen5_2
     sslEnforcementEnabled: true
     version: "10.2"
 
 ---
 
+apiVersion: azure.kubedb.com/v1alpha1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: dbformariadb/v1alpha1/configuration
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe

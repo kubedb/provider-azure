@@ -1,3 +1,7 @@
+// SPDX-FileCopyrightText: 2023 The Crossplane Authors <https://crossplane.io>
+//
+// SPDX-License-Identifier: Apache-2.0
+
 /*
 Copyright 2022 Upbound Inc.
 */
@@ -13,6 +17,12 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type MongoCollectionAutoscaleSettingsInitParameters struct {
+
+	// The maximum throughput of the MongoDB collection (RU/s). Must be between 1,000 and 1,000,000. Must be set in increments of 1,000. Conflicts with throughput.
+	MaxThroughput *float64 `json:"maxThroughput,omitempty" tf:"max_throughput,omitempty"`
+}
+
 type MongoCollectionAutoscaleSettingsObservation struct {
 
 	// The maximum throughput of the MongoDB collection (RU/s). Must be between 1,000 and 1,000,000. Must be set in increments of 1,000. Conflicts with throughput.
@@ -24,6 +34,15 @@ type MongoCollectionAutoscaleSettingsParameters struct {
 	// The maximum throughput of the MongoDB collection (RU/s). Must be between 1,000 and 1,000,000. Must be set in increments of 1,000. Conflicts with throughput.
 	// +kubebuilder:validation:Optional
 	MaxThroughput *float64 `json:"maxThroughput,omitempty" tf:"max_throughput,omitempty"`
+}
+
+type MongoCollectionIndexInitParameters struct {
+
+	// Specifies the list of user settable keys for each Cosmos DB Mongo Collection.
+	Keys []*string `json:"keys,omitempty" tf:"keys,omitempty"`
+
+	// Is the index unique or not? Defaults to false.
+	Unique *bool `json:"unique,omitempty" tf:"unique,omitempty"`
 }
 
 type MongoCollectionIndexObservation struct {
@@ -38,12 +57,33 @@ type MongoCollectionIndexObservation struct {
 type MongoCollectionIndexParameters struct {
 
 	// Specifies the list of user settable keys for each Cosmos DB Mongo Collection.
-	// +kubebuilder:validation:Required
+	// +kubebuilder:validation:Optional
 	Keys []*string `json:"keys" tf:"keys,omitempty"`
 
 	// Is the index unique or not? Defaults to false.
 	// +kubebuilder:validation:Optional
 	Unique *bool `json:"unique,omitempty" tf:"unique,omitempty"`
+}
+
+type MongoCollectionInitParameters struct {
+
+	// The default time to live of Analytical Storage for this Mongo Collection. If present and the value is set to -1, it is equal to infinity, and items don’t expire by default. If present and the value is set to some number n – items will expire n seconds after their last modified time.
+	AnalyticalStorageTTL *float64 `json:"analyticalStorageTtl,omitempty" tf:"analytical_storage_ttl,omitempty"`
+
+	// An autoscale_settings block as defined below.
+	AutoscaleSettings []MongoCollectionAutoscaleSettingsInitParameters `json:"autoscaleSettings,omitempty" tf:"autoscale_settings,omitempty"`
+
+	// The default Time To Live in seconds. If the value is -1, items are not automatically expired.
+	DefaultTTLSeconds *float64 `json:"defaultTtlSeconds,omitempty" tf:"default_ttl_seconds,omitempty"`
+
+	// One or more index blocks as defined below.
+	Index []MongoCollectionIndexInitParameters `json:"index,omitempty" tf:"index,omitempty"`
+
+	// The name of the key to partition on for sharding. There must not be any other unique index keys. Changing this forces a new resource to be created.
+	ShardKey *string `json:"shardKey,omitempty" tf:"shard_key,omitempty"`
+
+	// The throughput of the MongoDB collection (RU/s). Must be set in increments of 100. The minimum value is 400.
+	Throughput *float64 `json:"throughput,omitempty" tf:"throughput,omitempty"`
 }
 
 type MongoCollectionObservation struct {
@@ -85,8 +125,17 @@ type MongoCollectionObservation struct {
 type MongoCollectionParameters struct {
 
 	// The name of the Cosmos DB Account in which the Cosmos DB Mongo Collection is created. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
-	AccountName *string `json:"accountName" tf:"account_name,omitempty"`
+	// +crossplane:generate:reference:type=Account
+	// +kubebuilder:validation:Optional
+	AccountName *string `json:"accountName,omitempty" tf:"account_name,omitempty"`
+
+	// Reference to a Account to populate accountName.
+	// +kubebuilder:validation:Optional
+	AccountNameRef *v1.Reference `json:"accountNameRef,omitempty" tf:"-"`
+
+	// Selector for a Account to populate accountName.
+	// +kubebuilder:validation:Optional
+	AccountNameSelector *v1.Selector `json:"accountNameSelector,omitempty" tf:"-"`
 
 	// The default time to live of Analytical Storage for this Mongo Collection. If present and the value is set to -1, it is equal to infinity, and items don’t expire by default. If present and the value is set to some number n – items will expire n seconds after their last modified time.
 	// +kubebuilder:validation:Optional
@@ -118,8 +167,17 @@ type MongoCollectionParameters struct {
 	Index []MongoCollectionIndexParameters `json:"index,omitempty" tf:"index,omitempty"`
 
 	// The name of the resource group in which the Cosmos DB Mongo Collection is created. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
-	ResourceGroupName *string `json:"resourceGroupName" tf:"resource_group_name,omitempty"`
+	// +crossplane:generate:reference:type=kubedb.dev/provider-azure/apis/azure/v1alpha1.ResourceGroup
+	// +kubebuilder:validation:Optional
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+
+	// Reference to a ResourceGroup in azure to populate resourceGroupName.
+	// +kubebuilder:validation:Optional
+	ResourceGroupNameRef *v1.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+
+	// Selector for a ResourceGroup in azure to populate resourceGroupName.
+	// +kubebuilder:validation:Optional
+	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The name of the key to partition on for sharding. There must not be any other unique index keys. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
@@ -128,6 +186,9 @@ type MongoCollectionParameters struct {
 	// The throughput of the MongoDB collection (RU/s). Must be set in increments of 100. The minimum value is 400.
 	// +kubebuilder:validation:Optional
 	Throughput *float64 `json:"throughput,omitempty" tf:"throughput,omitempty"`
+}
+
+type SystemIndexesInitParameters struct {
 }
 
 type SystemIndexesObservation struct {
@@ -146,6 +207,17 @@ type SystemIndexesParameters struct {
 type MongoCollectionSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     MongoCollectionParameters `json:"forProvider"`
+	// THIS IS A BETA FIELD. It will be honored
+	// unless the Management Policies feature flag is disabled.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider MongoCollectionInitParameters `json:"initProvider,omitempty"`
 }
 
 // MongoCollectionStatus defines the observed state of MongoCollection.

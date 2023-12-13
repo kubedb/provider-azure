@@ -1,0 +1,60 @@
+apiVersion: sql.azure.kubedb.com/v1alpha1
+kind: MSSQLDatabase
+metadata:
+  annotations:
+    meta.kubedb.com/example-id: sql/v1alpha1/mssqldatabase
+  labels:
+    testing.kubedb.com/example-name: mssqlservername
+  name: database
+spec:
+  forProvider:
+    serverIdRef:
+      name: mssqlservername
+
+---
+
+apiVersion: sql.azure.kubedb.com/v1alpha1
+kind: MSSQLServer
+metadata:
+  annotations:
+    meta.kubedb.com/example-id: sql/v1alpha1/mssqlserver
+  labels:
+    testing.kubedb.com/example-name: example
+  name: mssqlservername
+spec:
+  forProvider:
+    administratorLogin: missadministrator
+    administratorLoginPasswordSecretRef:
+      key: example-key
+      name: example-secret
+      namespace: crossplane-system
+    location: West Europe
+    resourceGroupNameRef:
+      name: db
+    version: "12.0"
+
+---
+
+apiVersion: v1
+kind: Secret
+metadata:
+  name: example-secret
+  namespace: crossplane-system
+type: Opaque
+data:
+  example-key: dGVzdFBhc3N3b3JkITEyMw==
+
+---
+
+apiVersion: azure.kubedb.com/v1alpha1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.kubedb.com/example-id: sql/v1alpha1/mssqldatabase
+  labels:
+    testing.kubedb.com/example-name: example
+  name: db
+spec:
+  forProvider:
+    location: West Europe
+---

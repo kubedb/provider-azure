@@ -8,14 +8,18 @@ metadata:
   name: example
 spec:
   forProvider:
-    accountName: ${azurerm_cosmosdb_account.example.name}
+    accountNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
     assignableScopes:
     - ${azurerm_cosmosdb_account.example.id}/dbs/sales
     name: acctestsqlrole
     permissions:
     - dataActions:
       - Microsoft.DocumentDB/databaseAccounts/sqlDatabases/containers/items/read
-    resourceGroupName: ${azurerm_resource_group.example.name}
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
     roleDefinitionId: 84cf3a8b-4122-4448-bce2-fa423cfe0a15
 
 ---
@@ -38,7 +42,20 @@ spec:
     kind: GlobalDocumentDB
     location: West Europe
     offerType: Standard
-    resourceGroupName: example-resources
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
 
 ---
 
+apiVersion: azure.kubedb.com/v1alpha1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cosmosdb/v1alpha1/sqlroledefinition
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe

@@ -9,8 +9,12 @@ metadata:
 spec:
   forProvider:
     endIp: 2.3.4.5
-    redisCacheName: ${azurerm_redis_cache.example.name}
-    resourceGroupName: ${azurerm_resource_group.example.name}
+    redisCacheNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
     startIp: 1.2.3.4
 
 ---
@@ -33,8 +37,21 @@ spec:
     - maxmemoryDelta: 2
       maxmemoryPolicy: allkeys-lru
       maxmemoryReserved: 2
-    resourceGroupName: redis-resourcegroup
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
     skuName: Premium
 
 ---
 
+apiVersion: azure.kubedb.com/v1alpha1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cache/v1alpha1/redisfirewallrule
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe

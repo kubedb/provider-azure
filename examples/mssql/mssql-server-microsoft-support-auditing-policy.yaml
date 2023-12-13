@@ -1,0 +1,38 @@
+apiVersion: sql.azure.kubedb.com/v1alpha1
+kind: MSSQLServerMicrosoftSupportAuditingPolicy
+metadata:
+  annotations:
+    meta.kubedb.com/example-id: sql/v1alpha1/mssqlservermicrosoftsupportauditingpolicy
+  labels:
+    testing.kubedb.com/example-name: example
+  name: example
+spec:
+  forProvider:
+    storageEndpointRef:
+      name: staccexample0001
+    databaseIdRef:
+      name: database
+    storageAccountAccessKeySecretRef:
+      key: attribute.primary_access_key
+      name: example-storage-account
+      namespace: crossplane-system
+---
+apiVersion: storage.azure.kubedb.com/v1alpha1
+kind: Account
+metadata:
+  annotations:
+    meta.kubedb.com/example-id: sql/v1alpha1/mssqlservermicrosoftsupportauditingpolicy
+  labels:
+    testing.kubedb.com/example-name: staccexample0001
+  name: staccexample0001
+spec:
+  forProvider:
+    accountReplicationType: LRS
+    accountTier: Standard
+    location: West Europe
+    resourceGroupNameRef:
+      name: db
+  writeConnectionSecretToRef:
+    name: example-storage-account
+    namespace: crossplane-system
+---

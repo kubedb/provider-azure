@@ -1,0 +1,11 @@
+apiVersion: azure.kubedb.com/v1alpha1
+kind: ProviderRegistration
+metadata:
+  annotations:
+    meta.upbound.io/example-id: azure/v1alpha1/providerregistration
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    name: Microsoft.PolicyInsights

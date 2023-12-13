@@ -1,0 +1,52 @@
+
+
+apiVersion: cosmosdb.azure.kubedb.com/v1alpha1
+kind: SQLDatabase
+metadata:
+  annotations:
+    meta.kubedb.com/example-id: cosmosdb/v1alpha1/sqlfunction
+  labels:
+    testing.kubedb.com/example-name: example
+  name: example-db
+spec:
+  forProvider:
+    accountNameRef:
+      name: example-cosmosdb-sql
+    resourceGroupNameRef:
+      name: db
+    throughput: 400
+---
+
+apiVersion: cosmosdb.azure.kubedb.com/v1alpha1
+kind: Account
+metadata:
+  annotations:
+    meta.kubedb.com/example-id: cosmosdb/v1alpha1/sqlfunction
+  labels:
+    testing.kubedb.com/example-name: sql
+  name: example-cosmosdb-sql
+spec:
+  forProvider:
+    consistencyPolicy:
+      - consistencyLevel: BoundedStaleness
+    geoLocation:
+      - failoverPriority: 0
+        location: West Europe
+    location: West Europe
+    offerType: Standard
+    kind: GlobalDocumentDB
+    resourceGroupNameRef:
+      name: db
+---
+apiVersion: azure.kubedb.com/v1alpha1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.kubedb.com/example-id: cosmosdb/v1alpha1/cosmosdb
+  labels:
+    testing.kubedb.com/example-name: db
+  name: db
+spec:
+  forProvider:
+    location: West Europe
+---

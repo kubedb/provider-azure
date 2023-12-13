@@ -1,3 +1,7 @@
+// SPDX-FileCopyrightText: 2023 The Crossplane Authors <https://crossplane.io>
+//
+// SPDX-License-Identifier: Apache-2.0
+
 /*
 Copyright 2022 Upbound Inc.
 */
@@ -12,6 +16,9 @@ import (
 
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
+
+type VirtualNetworkRuleInitParameters struct {
+}
 
 type VirtualNetworkRuleObservation struct {
 
@@ -31,22 +38,61 @@ type VirtualNetworkRuleObservation struct {
 type VirtualNetworkRuleParameters struct {
 
 	// The name of the resource group where the MariaDB server resides. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
-	ResourceGroupName *string `json:"resourceGroupName" tf:"resource_group_name,omitempty"`
+	// +crossplane:generate:reference:type=kubedb.dev/provider-azure/apis/azure/v1alpha1.ResourceGroup
+	// +kubebuilder:validation:Optional
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+
+	// Reference to a ResourceGroup in azure to populate resourceGroupName.
+	// +kubebuilder:validation:Optional
+	ResourceGroupNameRef *v1.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+
+	// Selector for a ResourceGroup in azure to populate resourceGroupName.
+	// +kubebuilder:validation:Optional
+	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The name of the SQL Server to which this MariaDB virtual network rule will be applied to. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
-	ServerName *string `json:"serverName" tf:"server_name,omitempty"`
+	// +crossplane:generate:reference:type=kubedb.dev/provider-azure/apis/dbformariadb/v1alpha1.Server
+	// +kubebuilder:validation:Optional
+	ServerName *string `json:"serverName,omitempty" tf:"server_name,omitempty"`
+
+	// Reference to a Server in dbformariadb to populate serverName.
+	// +kubebuilder:validation:Optional
+	ServerNameRef *v1.Reference `json:"serverNameRef,omitempty" tf:"-"`
+
+	// Selector for a Server in dbformariadb to populate serverName.
+	// +kubebuilder:validation:Optional
+	ServerNameSelector *v1.Selector `json:"serverNameSelector,omitempty" tf:"-"`
 
 	// The ID of the subnet that the MariaDB server will be connected to.
+	// +crossplane:generate:reference:type=kubedb.dev/provider-azure/apis/network/v1alpha1.Subnet
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
+
+	// Reference to a Subnet in network to populate subnetId.
+	// +kubebuilder:validation:Optional
+	SubnetIDRef *v1.Reference `json:"subnetIdRef,omitempty" tf:"-"`
+
+	// Selector for a Subnet in network to populate subnetId.
+	// +kubebuilder:validation:Optional
+	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
 }
 
 // VirtualNetworkRuleSpec defines the desired state of VirtualNetworkRule
 type VirtualNetworkRuleSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     VirtualNetworkRuleParameters `json:"forProvider"`
+	// THIS IS A BETA FIELD. It will be honored
+	// unless the Management Policies feature flag is disabled.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider VirtualNetworkRuleInitParameters `json:"initProvider,omitempty"`
 }
 
 // VirtualNetworkRuleStatus defines the observed state of VirtualNetworkRule.
@@ -67,9 +113,8 @@ type VirtualNetworkRuleStatus struct {
 type VirtualNetworkRule struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.subnetId)",message="subnetId is a required parameter"
-	Spec   VirtualNetworkRuleSpec   `json:"spec"`
-	Status VirtualNetworkRuleStatus `json:"status,omitempty"`
+	Spec              VirtualNetworkRuleSpec   `json:"spec"`
+	Status            VirtualNetworkRuleStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

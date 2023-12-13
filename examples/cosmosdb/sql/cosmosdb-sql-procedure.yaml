@@ -1,0 +1,20 @@
+apiVersion: cosmosdb.azure.kubedb.com/v1alpha1
+kind: SQLStoredProcedure
+metadata:
+  labels:
+    testing.kubedb.com/example-name: example
+  name: example
+spec:
+  forProvider:
+    accountNameRef:
+      name: example-cosmosdb-sql
+    databaseNameRef:
+      name: example-db
+    containerNameRef:
+      name: example-container
+    resourceGroupNameRef:
+      name: db
+    body: "  \tfunction () { var context = getContext(); var response = context.getResponse();
+      response.setBody('Hello, World'); }\n"
+
+---

@@ -11,10 +11,26 @@ spec:
     remoteVirtualNetworkIdSelector:
       matchLabels:
         testing.upbound.io/example-name: example-2
-    resourceGroupName: ${azurerm_resource_group.example.name}
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
     virtualNetworkNameSelector:
       matchLabels:
         testing.upbound.io/example-name: example-1
+
+---
+
+apiVersion: azure.kubedb.com/v1alpha1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: network/v1alpha1/virtualnetworkpeering
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe
 
 ---
 
@@ -31,7 +47,9 @@ spec:
     addressSpace:
     - 10.0.1.0/24
     location: West Europe
-    resourceGroupName: peeredvnets-rg
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
 
 ---
 
@@ -48,7 +66,6 @@ spec:
     addressSpace:
     - 10.0.2.0/24
     location: West Europe
-    resourceGroupName: peeredvnets-rg
-
----
-
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example

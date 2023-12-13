@@ -1,0 +1,33 @@
+apiVersion: cosmosdb.azure.kubedb.com/v1alpha1
+kind: GremlinGraph
+metadata:
+  annotations:
+    meta.kubedb.com/example-id: cosmosdb/v1alpha1/gremlingraph
+  labels:
+    testing.kubedb.com/example-name: example
+  name: example
+spec:
+  forProvider:
+    accountNameRef:
+      name: example-cosmosdb-gremlin
+    databaseNameRef:
+      name: example
+    resourceGroupNameRef:
+      name: db
+    conflictResolutionPolicy:
+    - conflictResolutionPath: /_ts
+      mode: LastWriterWins
+    indexPolicy:
+    - automatic: true
+      excludedPaths:
+      - /"_etag"/?
+      includedPaths:
+      - /*
+      indexingMode: consistent
+    partitionKeyPath: /Example
+    throughput: 400
+    uniqueKey:
+    - paths:
+      - /definition/id1
+      - /definition/id2
+---

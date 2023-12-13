@@ -10,8 +10,12 @@ spec:
   forProvider:
     charset: utf8mb4
     collation: utf8mb4_unicode_520_ci
-    resourceGroupName: ${azurerm_resource_group.example.name}
-    serverName: ${azurerm_mariadb_server.example.name}
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    serverNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
 
 ---
 
@@ -33,7 +37,9 @@ spec:
     backupRetentionDays: 7
     geoRedundantBackupEnabled: false
     location: West Europe
-    resourceGroupName: tfex-mariadb-database-RG
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
     skuName: B_Gen5_2
     sslEnforcementEnabled: true
     storageMb: 51200
@@ -41,3 +47,14 @@ spec:
 
 ---
 
+apiVersion: azure.kubedb.com/v1alpha1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: dbformariadb/v1alpha1/database
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe

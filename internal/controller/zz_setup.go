@@ -1,14 +1,18 @@
-/*
-Copyright 2021 Upbound Inc.
-*/
+// SPDX-FileCopyrightText: 2023 The Crossplane Authors <https://crossplane.io>
+//
+// SPDX-License-Identifier: Apache-2.0
 
 package controller
 
 import (
 	ctrl "sigs.k8s.io/controller-runtime"
 
-	"github.com/upbound/upjet/pkg/controller"
+	"github.com/crossplane/upjet/pkg/controller"
 
+	roleassignment "kubedb.dev/provider-azure/internal/controller/authorization/roleassignment"
+	providerregistration "kubedb.dev/provider-azure/internal/controller/azure/providerregistration"
+	resourcegroup "kubedb.dev/provider-azure/internal/controller/azure/resourcegroup"
+	subscription "kubedb.dev/provider-azure/internal/controller/azure/subscription"
 	rediscache "kubedb.dev/provider-azure/internal/controller/cache/rediscache"
 	redisenterprisecluster "kubedb.dev/provider-azure/internal/controller/cache/redisenterprisecluster"
 	redisenterprisedatabase "kubedb.dev/provider-azure/internal/controller/cache/redisenterprisedatabase"
@@ -61,15 +65,50 @@ import (
 	key "kubedb.dev/provider-azure/internal/controller/keyvault/key"
 	vault "kubedb.dev/provider-azure/internal/controller/keyvault/vault"
 	privatednszone "kubedb.dev/provider-azure/internal/controller/network/privatednszone"
+	privatednszonevirtualnetworklink "kubedb.dev/provider-azure/internal/controller/network/privatednszonevirtualnetworklink"
+	routetable "kubedb.dev/provider-azure/internal/controller/network/routetable"
+	securitygroup "kubedb.dev/provider-azure/internal/controller/network/securitygroup"
+	subnet "kubedb.dev/provider-azure/internal/controller/network/subnet"
+	subnetnetworksecuritygroupassociation "kubedb.dev/provider-azure/internal/controller/network/subnetnetworksecuritygroupassociation"
+	subnetroutetableassociation "kubedb.dev/provider-azure/internal/controller/network/subnetroutetableassociation"
 	virtualnetwork "kubedb.dev/provider-azure/internal/controller/network/virtualnetwork"
 	virtualnetworkpeering "kubedb.dev/provider-azure/internal/controller/network/virtualnetworkpeering"
 	providerconfig "kubedb.dev/provider-azure/internal/controller/providerconfig"
+	mssqldatabase "kubedb.dev/provider-azure/internal/controller/sql/mssqldatabase"
+	mssqldatabasevulnerabilityassessmentrulebaseline "kubedb.dev/provider-azure/internal/controller/sql/mssqldatabasevulnerabilityassessmentrulebaseline"
+	mssqlelasticpool "kubedb.dev/provider-azure/internal/controller/sql/mssqlelasticpool"
+	mssqlfailovergroup "kubedb.dev/provider-azure/internal/controller/sql/mssqlfailovergroup"
+	mssqlfirewallrule "kubedb.dev/provider-azure/internal/controller/sql/mssqlfirewallrule"
+	mssqljobagent "kubedb.dev/provider-azure/internal/controller/sql/mssqljobagent"
+	mssqljobcredential "kubedb.dev/provider-azure/internal/controller/sql/mssqljobcredential"
+	mssqlmanageddatabase "kubedb.dev/provider-azure/internal/controller/sql/mssqlmanageddatabase"
+	mssqlmanagedinstance "kubedb.dev/provider-azure/internal/controller/sql/mssqlmanagedinstance"
+	mssqlmanagedinstanceactivedirectoryadministrator "kubedb.dev/provider-azure/internal/controller/sql/mssqlmanagedinstanceactivedirectoryadministrator"
+	mssqlmanagedinstancefailovergroup "kubedb.dev/provider-azure/internal/controller/sql/mssqlmanagedinstancefailovergroup"
+	mssqlmanagedinstancevulnerabilityassessment "kubedb.dev/provider-azure/internal/controller/sql/mssqlmanagedinstancevulnerabilityassessment"
+	mssqloutboundfirewallrule "kubedb.dev/provider-azure/internal/controller/sql/mssqloutboundfirewallrule"
+	mssqlserver "kubedb.dev/provider-azure/internal/controller/sql/mssqlserver"
+	mssqlserverdnsalias "kubedb.dev/provider-azure/internal/controller/sql/mssqlserverdnsalias"
+	mssqlservermicrosoftsupportauditingpolicy "kubedb.dev/provider-azure/internal/controller/sql/mssqlservermicrosoftsupportauditingpolicy"
+	mssqlserversecurityalertpolicy "kubedb.dev/provider-azure/internal/controller/sql/mssqlserversecurityalertpolicy"
+	mssqlservertransparentdataencryption "kubedb.dev/provider-azure/internal/controller/sql/mssqlservertransparentdataencryption"
+	mssqlservervulnerabilityassessment "kubedb.dev/provider-azure/internal/controller/sql/mssqlservervulnerabilityassessment"
+	mssqlvirtualnetworkrule "kubedb.dev/provider-azure/internal/controller/sql/mssqlvirtualnetworkrule"
+	accountstorage "kubedb.dev/provider-azure/internal/controller/storage/account"
+	container "kubedb.dev/provider-azure/internal/controller/storage/container"
 )
 
 // Setup creates all controllers with the supplied logger and adds them to
 // the supplied manager.
 func Setup(mgr ctrl.Manager, o controller.Options) error {
 	for _, setup := range []func(ctrl.Manager, controller.Options) error{
+		roleassignment.Setup,
+		providerregistration.Setup,
+		providerregistration.Setup,
+		resourcegroup.Setup,
+		resourcegroup.Setup,
+		subscription.Setup,
+		subscription.Setup,
 		rediscache.Setup,
 		redisenterprisecluster.Setup,
 		redisenterprisedatabase.Setup,
@@ -122,9 +161,37 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		key.Setup,
 		vault.Setup,
 		privatednszone.Setup,
+		privatednszonevirtualnetworklink.Setup,
+		routetable.Setup,
+		securitygroup.Setup,
+		subnet.Setup,
+		subnetnetworksecuritygroupassociation.Setup,
+		subnetroutetableassociation.Setup,
 		virtualnetwork.Setup,
 		virtualnetworkpeering.Setup,
 		providerconfig.Setup,
+		mssqldatabase.Setup,
+		mssqldatabasevulnerabilityassessmentrulebaseline.Setup,
+		mssqlelasticpool.Setup,
+		mssqlfailovergroup.Setup,
+		mssqlfirewallrule.Setup,
+		mssqljobagent.Setup,
+		mssqljobcredential.Setup,
+		mssqlmanageddatabase.Setup,
+		mssqlmanagedinstance.Setup,
+		mssqlmanagedinstanceactivedirectoryadministrator.Setup,
+		mssqlmanagedinstancefailovergroup.Setup,
+		mssqlmanagedinstancevulnerabilityassessment.Setup,
+		mssqloutboundfirewallrule.Setup,
+		mssqlserver.Setup,
+		mssqlserverdnsalias.Setup,
+		mssqlservermicrosoftsupportauditingpolicy.Setup,
+		mssqlserversecurityalertpolicy.Setup,
+		mssqlservertransparentdataencryption.Setup,
+		mssqlservervulnerabilityassessment.Setup,
+		mssqlvirtualnetworkrule.Setup,
+		accountstorage.Setup,
+		container.Setup,
 	} {
 		if err := setup(mgr, o); err != nil {
 			return err

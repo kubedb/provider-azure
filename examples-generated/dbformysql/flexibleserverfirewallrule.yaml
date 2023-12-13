@@ -9,7 +9,9 @@ metadata:
 spec:
   forProvider:
     endIpAddress: 40.112.8.12
-    resourceGroupName: ${azurerm_resource_group.example.name}
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
     serverNameSelector:
       matchLabels:
         testing.upbound.io/example-name: example
@@ -28,7 +30,20 @@ metadata:
 spec:
   forProvider:
     location: West Europe
-    resourceGroupName: api-rg-pro
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
 
 ---
 
+apiVersion: azure.kubedb.com/v1alpha1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: dbformysql/v1alpha1/flexibleserverfirewallrule
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe

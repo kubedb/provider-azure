@@ -9,11 +9,15 @@ metadata:
 spec:
   forProvider:
     ignoreMissingVnetServiceEndpoint: true
-    resourceGroupName: ${azurerm_resource_group.example.name}
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
     serverNameSelector:
       matchLabels:
         testing.upbound.io/example-name: example
-    subnetId: ${azurerm_subnet.internal.id}
+    subnetIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: internal
 
 ---
 
@@ -34,11 +38,50 @@ spec:
       namespace: upbound-system
     backupRetentionDays: 7
     location: West Europe
-    resourceGroupName: example-resources
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
     skuName: GP_Gen5_2
     sslEnforcementEnabled: true
     storageMb: 5120
     version: "9.5"
+
+---
+
+apiVersion: azure.kubedb.com/v1alpha1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: dbforpostgresql/v1alpha1/virtualnetworkrule
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+
+---
+
+apiVersion: network.azure.kubedb.com/v1alpha1
+kind: Subnet
+metadata:
+  annotations:
+    meta.upbound.io/example-id: dbforpostgresql/v1alpha1/virtualnetworkrule
+  labels:
+    testing.upbound.io/example-name: internal
+  name: internal
+spec:
+  forProvider:
+    addressPrefixes:
+    - 10.7.29.0/29
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    serviceEndpoints:
+    - Microsoft.Sql
+    virtualNetworkNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
 
 ---
 
@@ -55,7 +98,6 @@ spec:
     addressSpace:
     - 10.7.29.0/29
     location: West Europe
-    resourceGroupName: example-resources
-
----
-
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example

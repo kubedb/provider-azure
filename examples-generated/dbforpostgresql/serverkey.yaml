@@ -29,7 +29,9 @@ spec:
   forProvider:
     location: West Europe
     purgeProtectionEnabled: true
-    resourceGroupName: example-resources
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
     skuName: premium
     tenantId: ${data.azurerm_client_config.current.tenant_id}
 
@@ -78,7 +80,9 @@ spec:
     identity:
     - type: SystemAssigned
     location: West Europe
-    resourceGroupName: example-resources
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
     skuName: GP_Gen5_2
     sslEnforcementEnabled: true
     storageMb: 51200
@@ -86,3 +90,14 @@ spec:
 
 ---
 
+apiVersion: azure.kubedb.com/v1alpha1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: dbforpostgresql/v1alpha1/serverkey
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe

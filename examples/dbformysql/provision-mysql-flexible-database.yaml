@@ -1,0 +1,108 @@
+
+apiVersion: dbformysql.azure.kubedb.com/v1alpha1
+kind: FlexibleDatabase
+metadata:
+  annotations:
+    upjet.kubedb.com/manual-intervention: "The resource depends on a Server and it needs a manual intervention."
+  name: example
+spec:
+  forProvider:
+    charset: utf8
+    collation: utf8_unicode_ci
+    resourceGroupNameRef:
+      name: db
+    serverNameRef:
+      name: example-server
+---
+
+apiVersion: dbformysql.azure.kubedb.com/v1alpha1
+kind: FlexibleServer
+metadata:
+  annotations:
+    upjet.kubedb.com/manual-intervention: "This resource requires manual intervention."
+  name: example-server
+spec:
+  forProvider:
+    resourceGroupNameRef:
+      name: db
+    location: West Europe
+    version: "8.0.21"
+    skuName: B_Standard_B1ms
+    administratorLogin: psqladmin
+    administratorPasswordSecretRef:
+      key: password
+      name: example-secret
+      namespace: crossplane-system
+    backupRetentionDays: 7
+    delegatedSubnetIdRef:
+      name: example-subnet
+  writeConnectionSecretToRef:
+    name: example-connection-flexiblemysqlserver
+    namespace: crossplane-system
+---
+
+apiVersion: v1
+kind: Secret
+metadata:
+  annotations:
+    upjet.kubedb.com/manual-intervention: "This resource requires manual intervention."
+  name: example-secret
+  namespace: crossplane-system
+type: Opaque
+data:
+  password: dGVzdFBhc3N3b3JkITEyMw== # testPassword!123
+---
+
+apiVersion: network.azure.kubedb.com/v1alpha1
+kind: VirtualNetwork
+metadata:
+  annotations:
+    upjet.kubedb.com/manual-intervention: "This resource requires manual intervention."
+  name: example-vn
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameRef:
+      name: db
+    addressSpace:
+      - "10.0.0.0/16"
+    dnsServers:
+      - "10.0.0.4"
+      - "10.0.0.5"
+---
+
+
+apiVersion: network.azure.kubedb.com/v1alpha1
+kind: Subnet
+metadata:
+  annotations:
+    upjet.kubedb.com/manual-intervention: "This resource requires manual intervention."
+  name: example-subnet
+spec:
+  forProvider:
+    resourceGroupNameRef:
+      name: db
+    virtualNetworkNameRef:
+      name: example-vn
+    addressPrefixes:
+      - "10.0.0.0/24"
+    delegation:
+      - name: dbformysqldelegation
+        serviceDelegation:
+          - name: Microsoft.DBforMySQL/flexibleServers
+            actions:
+              - Microsoft.Network/virtualNetworks/subnets/join/action
+---
+
+apiVersion: azure.kubedb.com/v1alpha1
+kind: ResourceGroup
+metadata:
+  annotations:
+    upjet.kubedb.com/manual-intervention: "This resource requires manual intervention."
+  name: db
+spec:
+  forProvider:
+    location: West Europe
+    tags:
+      provisioner: crossplane
+---

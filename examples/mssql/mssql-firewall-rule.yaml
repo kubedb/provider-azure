@@ -1,0 +1,15 @@
+apiVersion: sql.azure.kubedb.com/v1alpha1
+kind: MSSQLFirewallRule
+metadata:
+  annotations:
+    meta.kubedb.com/example-id: sql/v1alpha1/mssqlfirewallrule
+  labels:
+    testing.kubedb.com/example-name: example
+  name: example
+spec:
+  forProvider:
+    endIpAddress: 10.0.17.62
+    serverIdRef:
+      name: mssqlservername
+    startIpAddress: 10.0.17.62
+---

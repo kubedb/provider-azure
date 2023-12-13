@@ -1,0 +1,55 @@
+apiVersion: sql.azure.kubedb.com/v1alpha1
+kind: MSSQLVirtualNetworkRule
+metadata:
+  annotations:
+    meta.kubedb.com/example-id: sql/v1alpha1/mssqlvirtualnetworkrule
+  labels:
+    testing.kubedb.com/example-name: example
+  name: example
+spec:
+  forProvider:
+    subnetIdRef:
+      name: example
+    serverIdRef:
+      name: mssqlservername
+
+---
+
+apiVersion: network.azure.kubedb.com/v1alpha1
+kind: Subnet
+metadata:
+  annotations:
+    meta.kubedb.com/example-id: sql/v1alpha1/mssqlvirtualnetworkrule
+  labels:
+    testing.kubedb.com/example-name: example
+  name: example
+spec:
+  forProvider:
+    addressPrefixes:
+      - "10.0.0.0/24"
+    resourceGroupNameRef:
+      name: db
+    serviceEndpoints:
+    - Microsoft.Sql
+    virtualNetworkNameRef:
+      name: example-vn
+
+---
+
+apiVersion: network.azure.kubedb.com/v1alpha1
+kind: VirtualNetwork
+metadata:
+  annotations:
+    meta.kubedb.com/example-id: sql/v1alpha1/mssqlvirtualnetworkrule
+  labels:
+    testing.kubedb.com/example-name: example-vn
+  name: example-vn
+spec:
+  forProvider:
+    addressSpace:
+      - "10.0.0.0/16"
+    location: West Europe
+    resourceGroupNameRef:
+      name: db
+
+---

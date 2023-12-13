@@ -1,0 +1,17 @@
+apiVersion: cosmosdb.azure.kubedb.com/v1alpha1
+kind: SQLTrigger
+metadata:
+  annotations:
+    meta.kubedb.com/example-id: cosmosdb/v1alpha1/sqltrigger
+  labels:
+    testing.kubedb.com/example-name: example
+  name: example
+spec:
+  forProvider:
+    body: function trigger(){}
+    containerIdRef:
+      name: example-container
+    operation: Delete
+    type: Post
+
+---

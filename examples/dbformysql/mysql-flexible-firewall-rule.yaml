@@ -1,0 +1,15 @@
+apiVersion: dbformysql.azure.kubedb.com/v1alpha1
+kind: FlexibleServerFirewallRule
+metadata:
+  annotations:
+    upjet.kubedb.com/manual-intervention: "The resource depends on a Server and it needs a manual intervention."
+  name: example
+spec:
+  forProvider:
+    endIpAddress: 40.112.8.12
+    resourceGroupNameRef:
+      name: db
+    serverNameRef:
+      name: example-server
+    startIpAddress: 40.112.8.12
+---

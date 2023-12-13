@@ -1,0 +1,27 @@
+apiVersion: sql.azure.kubedb.com/v1alpha1
+kind: MSSQLManagedInstanceActiveDirectoryAdministrator
+metadata:
+  annotations:
+    upjet.kubedb.com/manual-intervention: "Creation of MSSQLManagedInstance takes 4 hours"
+  name: example
+spec:
+  forProvider:
+    loginUsername: msadmin
+    managedInstanceIdRef:
+      name: examplesql
+    # For own user Ids below can be conveniently retrieved by the following commands
+    # for objectId: $ az ad signed-in-user show| grep id\":
+    # for tenantId: $ az account tenant list | grep tenantId
+    objectId: 4ab2d9c2-a0d7-4d49-8214-a35046243620
+    tenantId: 772268e5-d940-4bf6-be82-1c4a09a67f5d
+---
+    
+# faced this error
+# apply failed: waiting for creation of Managed Instance Azure Active Directory Administrator:
+# (Administrator Name "ActiveDirectory" / Managed Instance Name "example-sql" / Resource Group "example-sql-rg"):
+# Code="ServicePrincipalLookupInAadFailedIdentityForbidden" Message="Server identity does not have Azure Active Directory Readers permission.
+# Please follow the steps here : https://docs.microsoft.com/en-us/azure/azure-sql/database/authentication-aad-service-principal. ":
+# waiting for creation of Managed Instance Azure Active Directory Administrator:
+# (Administrator Name "ActiveDirectory" / Managed Instance Name "example-sql" / Resource Group "example-sql-rg"):
+# Code="ServicePrincipalLookupInAadFailedIdentityForbidden" Message="Server identity does not have Azure Active Directory Readers permission.
+# Please follow the steps here : https://docs.microsoft.com/en-us/azure/azure-sql/database/authentication-aad-service-principal.

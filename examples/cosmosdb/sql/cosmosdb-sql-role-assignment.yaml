@@ -1,0 +1,50 @@
+apiVersion: cosmosdb.azure.kubedb.com/v1alpha1
+kind: SQLRoleAssignment
+metadata:
+  annotations:
+    meta.kubedb.com/example-id: cosmosdb/v1alpha1/sqlroleassignment
+    upjet.kubedb.com/manual-intervention: "This resource needs a SQLRoleDefinition resource."
+  labels:
+    testing.kubedb.com/example-name: example
+  name: example
+spec:
+  forProvider:
+    accountNameRef:
+      name: example-cosmosdb-sql
+    resourceGroupNameRef:
+      name: db
+    roleDefinitionIdRef:
+      name: sql-custom-roledef
+    name: 736180af-7fbc-4c7f-9004-22735173c1c3
+    #principalId -> Azure User object id
+    principalId: 267af1b5-77e8-461d-b12b-f39c9e15c2f7
+    scopeRef:
+      name: example-cosmosdb-sql
+    # scope: "/subscriptions/1bfc9f66-316d-433e-b13d-c55589f642ca/resourceGroups/example/providers/Microsoft.DocumentDB/databaseAccounts/example-cosmosdb-sql"
+
+---
+
+apiVersion: cosmosdb.azure.kubedb.com/v1alpha1
+kind: SQLRoleDefinition
+metadata:
+  annotations:
+    meta.kubedb.com/example-id: cosmosdb/v1alpha1/sqlroleassignment
+    upjet.kubedb.com/manual-intervention: "This resource needs a valid assignableScopes id(s)."
+  labels:
+    testing.kubedb.com/example-name: example
+  name: sql-custom-roledef
+spec:
+  forProvider:
+    accountNameRef:
+      name: example-cosmosdb-sql
+    resourceGroupNameRef:
+      name: db
+    assignableScopes:
+    - "/subscriptions/1bfc9f66-316d-433e-b13d-c55589f642ca/resourceGroups/example/providers/Microsoft.DocumentDB/databaseAccounts/example-db"
+    name: examplesqlroledef
+    permissions:
+    - dataActions:
+      - Microsoft.DocumentDB/databaseAccounts/sqlDatabases/containers/items/read
+    type: CustomRole
+
+---

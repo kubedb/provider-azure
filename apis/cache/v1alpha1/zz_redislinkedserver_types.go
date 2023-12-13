@@ -1,3 +1,7 @@
+// SPDX-FileCopyrightText: 2023 The Crossplane Authors <https://crossplane.io>
+//
+// SPDX-License-Identifier: Apache-2.0
+
 /*
 Copyright 2022 Upbound Inc.
 */
@@ -12,6 +16,15 @@ import (
 
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
+
+type RedisLinkedServerInitParameters struct {
+
+	// The location of the linked Redis cache. Changing this forces a new Redis to be created.
+	LinkedRedisCacheLocation *string `json:"linkedRedisCacheLocation,omitempty" tf:"linked_redis_cache_location,omitempty"`
+
+	// The role of the linked Redis cache (eg "Secondary"). Changing this forces a new Redis to be created. Possible values are Primary and Secondary.
+	ServerRole *string `json:"serverRole,omitempty" tf:"server_role,omitempty"`
+}
 
 type RedisLinkedServerObservation struct {
 
@@ -58,8 +71,17 @@ type RedisLinkedServerParameters struct {
 	LinkedRedisCacheLocation *string `json:"linkedRedisCacheLocation,omitempty" tf:"linked_redis_cache_location,omitempty"`
 
 	// The name of the Resource Group where the Redis caches exists. Changing this forces a new Redis to be created.
-	// +kubebuilder:validation:Required
-	ResourceGroupName *string `json:"resourceGroupName" tf:"resource_group_name,omitempty"`
+	// +crossplane:generate:reference:type=kubedb.dev/provider-azure/apis/azure/v1alpha1.ResourceGroup
+	// +kubebuilder:validation:Optional
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+
+	// Reference to a ResourceGroup in azure to populate resourceGroupName.
+	// +kubebuilder:validation:Optional
+	ResourceGroupNameRef *v1.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+
+	// Selector for a ResourceGroup in azure to populate resourceGroupName.
+	// +kubebuilder:validation:Optional
+	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The role of the linked Redis cache (eg "Secondary"). Changing this forces a new Redis to be created. Possible values are Primary and Secondary.
 	// +kubebuilder:validation:Optional
@@ -83,6 +105,17 @@ type RedisLinkedServerParameters struct {
 type RedisLinkedServerSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     RedisLinkedServerParameters `json:"forProvider"`
+	// THIS IS A BETA FIELD. It will be honored
+	// unless the Management Policies feature flag is disabled.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider RedisLinkedServerInitParameters `json:"initProvider,omitempty"`
 }
 
 // RedisLinkedServerStatus defines the observed state of RedisLinkedServer.
@@ -103,8 +136,8 @@ type RedisLinkedServerStatus struct {
 type RedisLinkedServer struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.linkedRedisCacheLocation)",message="linkedRedisCacheLocation is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.serverRole)",message="serverRole is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.linkedRedisCacheLocation) || (has(self.initProvider) && has(self.initProvider.linkedRedisCacheLocation))",message="spec.forProvider.linkedRedisCacheLocation is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.serverRole) || (has(self.initProvider) && has(self.initProvider.serverRole))",message="spec.forProvider.serverRole is a required parameter"
 	Spec   RedisLinkedServerSpec   `json:"spec"`
 	Status RedisLinkedServerStatus `json:"status,omitempty"`
 }

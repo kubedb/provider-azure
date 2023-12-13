@@ -8,7 +8,9 @@ metadata:
   name: example
 spec:
   forProvider:
-    accountName: ${data.azurerm_cosmosdb_account.example.name}
+    accountNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: azurerm_cosmosdb_account
     databaseNameSelector:
       matchLabels:
         testing.upbound.io/example-name: example
@@ -21,7 +23,9 @@ spec:
       indexingMode: consistent
     partitionKeyPath: /definition/id
     partitionKeyVersion: 1
-    resourceGroupName: ${data.azurerm_cosmosdb_account.example.resource_group_name}
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: azurerm_cosmosdb_account
     throughput: 400
     uniqueKey:
     - paths:
@@ -40,8 +44,9 @@ metadata:
   name: example
 spec:
   forProvider:
-    accountName: ${data.azurerm_cosmosdb_account.example.name}
-    resourceGroupName: ${data.azurerm_cosmosdb_account.example.resource_group_name}
-
----
-
+    accountNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: azurerm_cosmosdb_account
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: azurerm_cosmosdb_account

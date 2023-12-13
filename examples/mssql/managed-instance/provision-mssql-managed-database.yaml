@@ -1,0 +1,158 @@
+apiVersion: sql.azure.kubedb.com/v1alpha1
+kind: MSSQLManagedDatabase
+metadata:
+  annotations:
+    upjet.kubedb.com/manual-intervention: "Creation of MSSQLManagedInstance takes 4 hours"
+  name: example
+spec:
+  forProvider:
+    managedInstanceIdRef:
+      name: examplesql
+
+---
+apiVersion: sql.azure.kubedb.com/v1alpha1
+kind: MSSQLManagedInstance
+metadata:
+  name: examplesql
+  annotations:
+    upjet.kubedb.com/manual-intervention: "Creation takes 4 hours"
+spec:
+  forProvider:
+    administratorLogin: mradministrator
+    administratorLoginPasswordSecretRef:
+      key: password
+      name: example-secret
+      namespace: crossplane-system
+    licenseType: BasePrice
+    location: West US
+    resourceGroupNameRef:
+      name: db
+    skuName: GP_Gen5
+    storageSizeInGb: 32
+    subnetIdRef:
+      name: example-subnet
+    vcores: 4
+    identity:
+      - type: SystemAssigned
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: example-secret
+  namespace: crossplane-system
+type: Opaque
+data:
+  password: dGVzdFBhc3N3b3JkITEyMw== # testPassword!123
+---
+
+
+apiVersion: network.azure.kubedb.com/v1alpha1
+kind: VirtualNetwork
+metadata:
+  annotations:
+    upjet.kubedb.com/manual-intervention: "Creation MSSQLManagedInstance takes 4 hours"
+  name: example-vn
+spec:
+  forProvider:
+    location: West US
+    resourceGroupNameRef:
+      name: db
+    addressSpace:
+      - "10.0.0.0/16"
+    dnsServers:
+      - "10.0.0.4"
+      - "10.0.0.5"
+---
+apiVersion: network.azure.kubedb.com/v1alpha1
+kind: Subnet
+metadata:
+  annotations:
+    upjet.kubedb.com/manual-intervention: "Creation MSSQLManagedInstance takes 4 hours"
+  name: example-subnet
+spec:
+  forProvider:
+    resourceGroupNameRef:
+      name: db
+    virtualNetworkNameRef:
+      name: example-vn
+    addressPrefixes:
+      - "10.0.0.0/24"
+    delegation:
+      - name: managedinstancedelegation
+        serviceDelegation:
+          - name: "Microsoft.Sql/managedInstances"
+            actions:
+              - "Microsoft.Network/virtualNetworks/subnets/join/action"
+              - "Microsoft.Network/virtualNetworks/subnets/prepareNetworkPolicies/action"
+              - "Microsoft.Network/virtualNetworks/subnets/unprepareNetworkPolicies/action"
+---
+apiVersion: network.azure.kubedb.com/v1alpha1
+kind: SecurityGroup
+metadata:
+  annotations:
+    upjet.kubedb.com/manual-intervention: "Creation MSSQLManagedInstance takes 4 hours"
+  name: example
+spec:
+  forProvider:
+    location: West US
+    resourceGroupNameRef:
+      name: db
+    tags:
+      environment: Production
+
+---
+apiVersion: network.azure.kubedb.com/v1alpha1
+kind: SubnetNetworkSecurityGroupAssociation
+metadata:
+  annotations:
+    upjet.kubedb.com/manual-intervention: "Creation MSSQLManagedInstance takes 4 hours"
+  name: example
+spec:
+  forProvider:
+    networkSecurityGroupIdRef:
+      name: example
+    subnetIdRef:
+      name: example-subnet
+---
+apiVersion: network.azure.kubedb.com/v1alpha1
+kind: RouteTable
+metadata:
+  annotations:
+    upjet.kubedb.com/manual-intervention: "Creation MSSQLManagedInstance takes 4 hours"
+  name: example
+spec:
+  forProvider:
+    disableBgpRoutePropagation: false
+    location: West US
+    resourceGroupNameRef:
+      name: db
+    tags:
+      environment: Production
+---
+apiVersion: network.azure.kubedb.com/v1alpha1
+kind: SubnetRouteTableAssociation
+metadata:
+  annotations:
+    upjet.kubedb.com/manual-intervention: "Creation MSSQLManagedInstance takes 4 hours"
+  name: example
+spec:
+  forProvider:
+    routeTableIdRef:
+      name: example
+    subnetIdRef:
+      name: example-subnet
+
+---
+
+# apiVersion: azure.kubedb.com/v1alpha1
+# kind: ResourceGroup
+# metadata:
+#   annotations:
+#     upjet.kubedb.com/manual-intervention: "Creation takes of MSSQLManagedInstance takes 4 hours"
+#   name: db
+# spec:
+#   forProvider:
+#     location: West US
+#     tags:
+#       provisioner: crossplane
+# ---
