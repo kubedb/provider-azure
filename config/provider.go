@@ -49,9 +49,9 @@ func GetProvider() *ujconfig.Provider {
 	// We need to include the controllers for this group into the base packages
 	// list to get their controllers packaged together with the config package
 	// controllers (provider family config package).
-	for _, c := range []string{"internal/controller/azure/resourcegroup", "internal/controller/azure/providerregistration", "internal/controller/azure/subscription"} {
-		pc.BasePackages.ControllerMap[c] = "config"
-	}
+	//for _, c := range []string{"internal/controller/azure/resourcegroup", "internal/controller/azure/providerregistration", "internal/controller/azure/subscription"} {
+	//	pc.BasePackages.ControllerMap[c] = "config"
+	//}
 
 	// API group overrides from Terraform import statements
 	for _, r := range pc.Resources {
