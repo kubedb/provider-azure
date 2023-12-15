@@ -1,27 +1,10 @@
 //package controller
 
-
-
-/*
-var(
-    gk2      = schema.GroupKind{"azure.kubedb.com", "ResourceGroup"}
-	gk3      = schema.GroupKind{"azure.kubedb.com", "ProviderConfig"}
-	setupFns = map[schema.GroupKind]func(ctrl.Manager, controller.Options) error{
-		gk2: resourcegroup.Setup,
-		gk3: providerregistration.Setup,
-	}
-)
-*/
-
 var (
 
 	setupDone = map[schema.GroupKind]bool{}
 	mu        sync.RWMutex
 )
-
-//func SetupControllerList(mgr ctrl.Manager, o controller.Options) error {
-//
-//}
 
 type CustomResourceReconciler struct {
 	mgr ctrl.Manager
@@ -29,21 +12,16 @@ type CustomResourceReconciler struct {
 }
 
 func NewCustomResourceReconciler(mgr ctrl.Manager, o controller.Options) *CustomResourceReconciler {
-	//if err := SetupControllerList(mgr, o); err != nil {
-	//	log.Error(err, "unable to fetch CustomResourceDefinition")
-	//}
 	return &CustomResourceReconciler{mgr: mgr, o: o}
 }
 
 func (r *CustomResourceReconciler) Reconcile(ctx context.Context, req ctrl.Request) (ctrl.Result, error) {
 	log := log.FromContext(ctx)
-
 	var crd apiextensions.CustomResourceDefinition
 	if err := r.mgr.GetClient().Get(ctx, req.NamespacedName, &crd); err != nil {
 		log.Error(err, "unable to fetch CustomResourceDefinition")
 		return ctrl.Result{}, client.IgnoreNotFound(err)
 	}
-
 	gk := schema.GroupKind{
 		Group: crd.Spec.Group,
 		Kind:  crd.Spec.Names.Kind,

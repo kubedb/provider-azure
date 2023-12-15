@@ -111,9 +111,9 @@ func (sg *ProviderGenerator) generate(group string, versionPkgList []string, sho
 		importData += rmDot[0] + " " + "\"" + pkgPath + "\"\n"
 
 		if group == "azure" {
-			kindMapData += "schema.GroupKind{\"" + kind + "." + group + ".kubedb.com\", "
+			kindMapData += "schema.GroupKind{\"" + group + ".kubedb.com\", "
 		} else {
-			kindMapData += "schema.GroupKind{\"" + kind + "." + group + ".azure.kubedb.com\", "
+			kindMapData += "schema.GroupKind{\"" + group + ".azure.kubedb.com\", "
 		}
 		kindMapData += "\"" + groupKind[kind] + "\"}: " + aliases[i] + "Setup,\n"
 	}
