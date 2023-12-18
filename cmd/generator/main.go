@@ -23,7 +23,6 @@ func main() {
 		panic(fmt.Sprintf("cannot calculate the absolute path with %s", rootDir))
 	}
 	pc := pconfig.GetProvider()
-	dynamic_controller.GenerateController()
 	pipeline.Run(pc, absRootDir)
-
+	dynamic_controller.GenerateController(pc, absRootDir)
 }

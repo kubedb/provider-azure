@@ -41,7 +41,7 @@ type ProviderGenerator struct {
 
 // Generate writes the setup file and the corresponding provider main file
 // using the given list of version packages.
-func (sg *ProviderGenerator) Generate(versionPkgMap map[string][]string, mainTemplate string, shortName string) error {
+func (sg *ProviderGenerator) Generate(versionPkgMap map[string][]string, mainTemplate string, shortName string, rootGroup string, absRootDir string) error {
 	var t *template.Template
 	if len(mainTemplate) != 0 {
 		tmpl, err := template.New("main").Parse(mainTemplate)
@@ -51,11 +51,11 @@ func (sg *ProviderGenerator) Generate(versionPkgMap map[string][]string, mainTem
 		t = tmpl
 	}
 	if t == nil {
-		return errors.Wrap(sg.generate("", versionPkgMap[config.PackageNameMonolith], shortName), "failed to generate the controller setup file")
+		return errors.Wrap(sg.generate(rootGroup, versionPkgMap[config.PackageNameMonolith], shortName, absRootDir), "failed to generate the controller setup file")
 	}
 	for g, versionPkgList := range versionPkgMap {
 
-		if err := sg.generate(g, versionPkgList, shortName); err != nil {
+		if err := sg.generate(rootGroup, versionPkgList, shortName, absRootDir); err != nil {
 			return errors.Wrapf(err, "failed to generate the controller setup file for group: %s", g)
 		}
 		if err := generateProviderMain(sg.ProviderPath, g, t); err != nil {
@@ -87,8 +87,7 @@ func generateProviderMain(providerPath, group string, t *template.Template) erro
 	return nil
 }
 
-func (sg *ProviderGenerator) generate(group string, versionPkgList []string, shortName string) error {
-	//pc := pconfig.GetProvider()
+func (sg *ProviderGenerator) generate(rootGroup string, versionPkgList []string, shortName string, absRootDir string) error {
 	setupFile := wrapper.NewFile(filepath.Join(sg.ModulePath, "apis"), "apis", templates.SetupTemplate,
 		wrapper.WithGenStatement(pipeline.GenStatement),
 		wrapper.WithHeaderPath(sg.LicenseHeaderPath),
@@ -109,31 +108,30 @@ func (sg *ProviderGenerator) generate(group string, versionPkgList []string, sho
 		group := words[siz-2]
 		kind := words[siz-1]
 		importData += rmDot[0] + " " + "\"" + pkgPath + "\"\n"
-
-		if group == "azure" {
-			kindMapData += "schema.GroupKind{\"" + group + ".kubedb.com\", "
+		if group == shortName {
+			kindMapData += "schema.GroupKind{\"" + rootGroup + "\", "
 		} else {
-			kindMapData += "schema.GroupKind{\"" + group + ".azure.kubedb.com\", "
+			kindMapData += "schema.GroupKind{\"" + group + "." + rootGroup + "\", "
 		}
 		kindMapData += "\"" + groupKind[kind] + "\"}: " + aliases[i] + "Setup,\n"
 	}
 	importData += ")\n\n"
 	kindMapData += "}\n)\n\n"
-	if err := generateControllerFile(importData, kindMapData); err != nil {
+	if err := generateControllerFile(importData, kindMapData, absRootDir); err != nil {
 		panic(errors.Wrap(err, "cannot create controller"))
 	}
 	return nil
 }
 
-func generateControllerFile(importData string, kindMapData string) error {
+func generateControllerFile(importData string, kindMapData string, absRootDir string) error {
 	importData += kindMapData
 
-	filePath := "/home/arman/go/src/kubedb.dev/provider-azure/internal/controller/zz_crd_controller.go" // Replace with the path to your file
+	filePath := absRootDir + "/internal/controller/zz_dynamic_crd_controller.go" // Replace with the path to your file
 
 	// Attempt to remove the file
 	os.Remove(filePath)
 
-	filePath = "/home/arman/go/src/kubedb.dev/provider-azure/internal/controller/crd_controller.go.txt" // Replace with the path to your file
+	filePath = absRootDir + "/cmd/generator/crd_controller.go.txt" // Replace with the path to your file
 	// Read the entire file content
 	content, err := ioutil.ReadFile(filePath)
 	if err != nil {
@@ -143,7 +141,7 @@ func generateControllerFile(importData string, kindMapData string) error {
 	fileContent := string(content)
 	importData += fileContent
 
-	filePath = "/home/arman/go/src/kubedb.dev/provider-azure/internal/controller/zz_crd_controller.go"
+	filePath = absRootDir + "/internal/controller/zz_dynamic_crd_controller.go"
 
 	// Open or create the file for writing
 	file, err := os.OpenFile(filePath, os.O_CREATE|os.O_WRONLY, 0644)

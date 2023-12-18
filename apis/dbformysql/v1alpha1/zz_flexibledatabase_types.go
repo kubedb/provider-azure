@@ -15,76 +15,85 @@ import (
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+
 )
+
+
+
 
 type FlexibleDatabaseInitParameters struct {
 
-	// Specifies the Charset for the MySQL Database, which needs to be a valid MySQL Charset. Changing this forces a new resource to be created.
-	Charset *string `json:"charset,omitempty" tf:"charset,omitempty"`
 
-	// Specifies the Collation for the MySQL Database, which needs to be a valid MySQL Collation. Changing this forces a new resource to be created.
-	Collation *string `json:"collation,omitempty" tf:"collation,omitempty"`
+// Specifies the Charset for the MySQL Database, which needs to be a valid MySQL Charset. Changing this forces a new resource to be created.
+Charset *string `json:"charset,omitempty" tf:"charset,omitempty"`
+
+// Specifies the Collation for the MySQL Database, which needs to be a valid MySQL Collation. Changing this forces a new resource to be created.
+Collation *string `json:"collation,omitempty" tf:"collation,omitempty"`
 }
+
 
 type FlexibleDatabaseObservation struct {
 
-	// Specifies the Charset for the MySQL Database, which needs to be a valid MySQL Charset. Changing this forces a new resource to be created.
-	Charset *string `json:"charset,omitempty" tf:"charset,omitempty"`
 
-	// Specifies the Collation for the MySQL Database, which needs to be a valid MySQL Collation. Changing this forces a new resource to be created.
-	Collation *string `json:"collation,omitempty" tf:"collation,omitempty"`
+// Specifies the Charset for the MySQL Database, which needs to be a valid MySQL Charset. Changing this forces a new resource to be created.
+Charset *string `json:"charset,omitempty" tf:"charset,omitempty"`
 
-	// The ID of the MySQL Database.
-	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+// Specifies the Collation for the MySQL Database, which needs to be a valid MySQL Collation. Changing this forces a new resource to be created.
+Collation *string `json:"collation,omitempty" tf:"collation,omitempty"`
 
-	// The name of the resource group in which the MySQL Server exists. Changing this forces a new resource to be created.
-	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+// The ID of the MySQL Database.
+ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// Specifies the name of the MySQL Flexible Server. Changing this forces a new resource to be created.
-	ServerName *string `json:"serverName,omitempty" tf:"server_name,omitempty"`
+// The name of the resource group in which the MySQL Server exists. Changing this forces a new resource to be created.
+ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+
+// Specifies the name of the MySQL Flexible Server. Changing this forces a new resource to be created.
+ServerName *string `json:"serverName,omitempty" tf:"server_name,omitempty"`
 }
+
 
 type FlexibleDatabaseParameters struct {
 
-	// Specifies the Charset for the MySQL Database, which needs to be a valid MySQL Charset. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Optional
-	Charset *string `json:"charset,omitempty" tf:"charset,omitempty"`
 
-	// Specifies the Collation for the MySQL Database, which needs to be a valid MySQL Collation. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Optional
-	Collation *string `json:"collation,omitempty" tf:"collation,omitempty"`
+// Specifies the Charset for the MySQL Database, which needs to be a valid MySQL Charset. Changing this forces a new resource to be created.
+// +kubebuilder:validation:Optional
+Charset *string `json:"charset,omitempty" tf:"charset,omitempty"`
 
-	// The name of the resource group in which the MySQL Server exists. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=kubedb.dev/provider-azure/apis/azure/v1alpha1.ResourceGroup
-	// +kubebuilder:validation:Optional
-	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+// Specifies the Collation for the MySQL Database, which needs to be a valid MySQL Collation. Changing this forces a new resource to be created.
+// +kubebuilder:validation:Optional
+Collation *string `json:"collation,omitempty" tf:"collation,omitempty"`
 
-	// Reference to a ResourceGroup in azure to populate resourceGroupName.
-	// +kubebuilder:validation:Optional
-	ResourceGroupNameRef *v1.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+// The name of the resource group in which the MySQL Server exists. Changing this forces a new resource to be created.
+// +crossplane:generate:reference:type=kubedb.dev/provider-azure/apis/azure/v1alpha1.ResourceGroup
+// +kubebuilder:validation:Optional
+ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 
-	// Selector for a ResourceGroup in azure to populate resourceGroupName.
-	// +kubebuilder:validation:Optional
-	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+// Reference to a ResourceGroup in azure to populate resourceGroupName.
+// +kubebuilder:validation:Optional
+ResourceGroupNameRef *v1.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
-	// Specifies the name of the MySQL Flexible Server. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=FlexibleServer
-	// +kubebuilder:validation:Optional
-	ServerName *string `json:"serverName,omitempty" tf:"server_name,omitempty"`
+// Selector for a ResourceGroup in azure to populate resourceGroupName.
+// +kubebuilder:validation:Optional
+ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
-	// Reference to a FlexibleServer to populate serverName.
-	// +kubebuilder:validation:Optional
-	ServerNameRef *v1.Reference `json:"serverNameRef,omitempty" tf:"-"`
+// Specifies the name of the MySQL Flexible Server. Changing this forces a new resource to be created.
+// +crossplane:generate:reference:type=FlexibleServer
+// +kubebuilder:validation:Optional
+ServerName *string `json:"serverName,omitempty" tf:"server_name,omitempty"`
 
-	// Selector for a FlexibleServer to populate serverName.
-	// +kubebuilder:validation:Optional
-	ServerNameSelector *v1.Selector `json:"serverNameSelector,omitempty" tf:"-"`
+// Reference to a FlexibleServer to populate serverName.
+// +kubebuilder:validation:Optional
+ServerNameRef *v1.Reference `json:"serverNameRef,omitempty" tf:"-"`
+
+// Selector for a FlexibleServer to populate serverName.
+// +kubebuilder:validation:Optional
+ServerNameSelector *v1.Selector `json:"serverNameSelector,omitempty" tf:"-"`
 }
 
 // FlexibleDatabaseSpec defines the desired state of FlexibleDatabase
 type FlexibleDatabaseSpec struct {
 	v1.ResourceSpec `json:",inline"`
-	ForProvider     FlexibleDatabaseParameters `json:"forProvider"`
+	ForProvider       FlexibleDatabaseParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -95,13 +104,13 @@ type FlexibleDatabaseSpec struct {
 	// required on creation, but we do not desire to update them after creation,
 	// for example because of an external controller is managing them, like an
 	// autoscaler.
-	InitProvider FlexibleDatabaseInitParameters `json:"initProvider,omitempty"`
+	InitProvider       FlexibleDatabaseInitParameters `json:"initProvider,omitempty"`
 }
 
 // FlexibleDatabaseStatus defines the observed state of FlexibleDatabase.
 type FlexibleDatabaseStatus struct {
 	v1.ResourceStatus `json:",inline"`
-	AtProvider        FlexibleDatabaseObservation `json:"atProvider,omitempty"`
+	AtProvider          FlexibleDatabaseObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true
@@ -116,10 +125,10 @@ type FlexibleDatabaseStatus struct {
 type FlexibleDatabase struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.charset) || (has(self.initProvider) && has(self.initProvider.charset))",message="spec.forProvider.charset is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.collation) || (has(self.initProvider) && has(self.initProvider.collation))",message="spec.forProvider.collation is a required parameter"
-	Spec   FlexibleDatabaseSpec   `json:"spec"`
-	Status FlexibleDatabaseStatus `json:"status,omitempty"`
+// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.charset) || (has(self.initProvider) && has(self.initProvider.charset))",message="spec.forProvider.charset is a required parameter"
+// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.collation) || (has(self.initProvider) && has(self.initProvider.collation))",message="spec.forProvider.collation is a required parameter"
+	Spec              FlexibleDatabaseSpec   `json:"spec"`
+	Status            FlexibleDatabaseStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

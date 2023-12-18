@@ -15,86 +15,95 @@ import (
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+
 )
+
+
+
 
 type ActiveDirectoryAdministratorInitParameters struct {
 
-	// The login name of the principal to set as the server administrator
-	Login *string `json:"login,omitempty" tf:"login,omitempty"`
 
-	// The ID of the principal to set as the server administrator. For a managed identity this should be the Client ID of the identity.
-	ObjectID *string `json:"objectId,omitempty" tf:"object_id,omitempty"`
+// The login name of the principal to set as the server administrator
+Login *string `json:"login,omitempty" tf:"login,omitempty"`
 
-	// The Azure Tenant ID
-	TenantID *string `json:"tenantId,omitempty" tf:"tenant_id,omitempty"`
+// The ID of the principal to set as the server administrator. For a managed identity this should be the Client ID of the identity.
+ObjectID *string `json:"objectId,omitempty" tf:"object_id,omitempty"`
+
+// The Azure Tenant ID
+TenantID *string `json:"tenantId,omitempty" tf:"tenant_id,omitempty"`
 }
+
 
 type ActiveDirectoryAdministratorObservation struct {
 
-	// The ID of the PostgreSQL Active Directory Administrator.
-	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The login name of the principal to set as the server administrator
-	Login *string `json:"login,omitempty" tf:"login,omitempty"`
+// The ID of the PostgreSQL Active Directory Administrator.
+ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The ID of the principal to set as the server administrator. For a managed identity this should be the Client ID of the identity.
-	ObjectID *string `json:"objectId,omitempty" tf:"object_id,omitempty"`
+// The login name of the principal to set as the server administrator
+Login *string `json:"login,omitempty" tf:"login,omitempty"`
 
-	// The name of the resource group for the PostgreSQL server. Changing this forces a new resource to be created.
-	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+// The ID of the principal to set as the server administrator. For a managed identity this should be the Client ID of the identity.
+ObjectID *string `json:"objectId,omitempty" tf:"object_id,omitempty"`
 
-	// The name of the PostgreSQL Server on which to set the administrator. Changing this forces a new resource to be created.
-	ServerName *string `json:"serverName,omitempty" tf:"server_name,omitempty"`
+// The name of the resource group for the PostgreSQL server. Changing this forces a new resource to be created.
+ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 
-	// The Azure Tenant ID
-	TenantID *string `json:"tenantId,omitempty" tf:"tenant_id,omitempty"`
+// The name of the PostgreSQL Server on which to set the administrator. Changing this forces a new resource to be created.
+ServerName *string `json:"serverName,omitempty" tf:"server_name,omitempty"`
+
+// The Azure Tenant ID
+TenantID *string `json:"tenantId,omitempty" tf:"tenant_id,omitempty"`
 }
+
 
 type ActiveDirectoryAdministratorParameters struct {
 
-	// The login name of the principal to set as the server administrator
-	// +kubebuilder:validation:Optional
-	Login *string `json:"login,omitempty" tf:"login,omitempty"`
 
-	// The ID of the principal to set as the server administrator. For a managed identity this should be the Client ID of the identity.
-	// +kubebuilder:validation:Optional
-	ObjectID *string `json:"objectId,omitempty" tf:"object_id,omitempty"`
+// The login name of the principal to set as the server administrator
+// +kubebuilder:validation:Optional
+Login *string `json:"login,omitempty" tf:"login,omitempty"`
 
-	// The name of the resource group for the PostgreSQL server. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=kubedb.dev/provider-azure/apis/azure/v1alpha1.ResourceGroup
-	// +kubebuilder:validation:Optional
-	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+// The ID of the principal to set as the server administrator. For a managed identity this should be the Client ID of the identity.
+// +kubebuilder:validation:Optional
+ObjectID *string `json:"objectId,omitempty" tf:"object_id,omitempty"`
 
-	// Reference to a ResourceGroup in azure to populate resourceGroupName.
-	// +kubebuilder:validation:Optional
-	ResourceGroupNameRef *v1.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+// The name of the resource group for the PostgreSQL server. Changing this forces a new resource to be created.
+// +crossplane:generate:reference:type=kubedb.dev/provider-azure/apis/azure/v1alpha1.ResourceGroup
+// +kubebuilder:validation:Optional
+ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 
-	// Selector for a ResourceGroup in azure to populate resourceGroupName.
-	// +kubebuilder:validation:Optional
-	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+// Reference to a ResourceGroup in azure to populate resourceGroupName.
+// +kubebuilder:validation:Optional
+ResourceGroupNameRef *v1.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
-	// The name of the PostgreSQL Server on which to set the administrator. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=Server
-	// +kubebuilder:validation:Optional
-	ServerName *string `json:"serverName,omitempty" tf:"server_name,omitempty"`
+// Selector for a ResourceGroup in azure to populate resourceGroupName.
+// +kubebuilder:validation:Optional
+ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
-	// Reference to a Server to populate serverName.
-	// +kubebuilder:validation:Optional
-	ServerNameRef *v1.Reference `json:"serverNameRef,omitempty" tf:"-"`
+// The name of the PostgreSQL Server on which to set the administrator. Changing this forces a new resource to be created.
+// +crossplane:generate:reference:type=Server
+// +kubebuilder:validation:Optional
+ServerName *string `json:"serverName,omitempty" tf:"server_name,omitempty"`
 
-	// Selector for a Server to populate serverName.
-	// +kubebuilder:validation:Optional
-	ServerNameSelector *v1.Selector `json:"serverNameSelector,omitempty" tf:"-"`
+// Reference to a Server to populate serverName.
+// +kubebuilder:validation:Optional
+ServerNameRef *v1.Reference `json:"serverNameRef,omitempty" tf:"-"`
 
-	// The Azure Tenant ID
-	// +kubebuilder:validation:Optional
-	TenantID *string `json:"tenantId,omitempty" tf:"tenant_id,omitempty"`
+// Selector for a Server to populate serverName.
+// +kubebuilder:validation:Optional
+ServerNameSelector *v1.Selector `json:"serverNameSelector,omitempty" tf:"-"`
+
+// The Azure Tenant ID
+// +kubebuilder:validation:Optional
+TenantID *string `json:"tenantId,omitempty" tf:"tenant_id,omitempty"`
 }
 
 // ActiveDirectoryAdministratorSpec defines the desired state of ActiveDirectoryAdministrator
 type ActiveDirectoryAdministratorSpec struct {
 	v1.ResourceSpec `json:",inline"`
-	ForProvider     ActiveDirectoryAdministratorParameters `json:"forProvider"`
+	ForProvider       ActiveDirectoryAdministratorParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -105,13 +114,13 @@ type ActiveDirectoryAdministratorSpec struct {
 	// required on creation, but we do not desire to update them after creation,
 	// for example because of an external controller is managing them, like an
 	// autoscaler.
-	InitProvider ActiveDirectoryAdministratorInitParameters `json:"initProvider,omitempty"`
+	InitProvider       ActiveDirectoryAdministratorInitParameters `json:"initProvider,omitempty"`
 }
 
 // ActiveDirectoryAdministratorStatus defines the observed state of ActiveDirectoryAdministrator.
 type ActiveDirectoryAdministratorStatus struct {
 	v1.ResourceStatus `json:",inline"`
-	AtProvider        ActiveDirectoryAdministratorObservation `json:"atProvider,omitempty"`
+	AtProvider          ActiveDirectoryAdministratorObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true
@@ -126,11 +135,11 @@ type ActiveDirectoryAdministratorStatus struct {
 type ActiveDirectoryAdministrator struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.login) || (has(self.initProvider) && has(self.initProvider.login))",message="spec.forProvider.login is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.objectId) || (has(self.initProvider) && has(self.initProvider.objectId))",message="spec.forProvider.objectId is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.tenantId) || (has(self.initProvider) && has(self.initProvider.tenantId))",message="spec.forProvider.tenantId is a required parameter"
-	Spec   ActiveDirectoryAdministratorSpec   `json:"spec"`
-	Status ActiveDirectoryAdministratorStatus `json:"status,omitempty"`
+// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.login) || (has(self.initProvider) && has(self.initProvider.login))",message="spec.forProvider.login is a required parameter"
+// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.objectId) || (has(self.initProvider) && has(self.initProvider.objectId))",message="spec.forProvider.objectId is a required parameter"
+// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.tenantId) || (has(self.initProvider) && has(self.initProvider.tenantId))",message="spec.forProvider.tenantId is a required parameter"
+	Spec              ActiveDirectoryAdministratorSpec   `json:"spec"`
+	Status            ActiveDirectoryAdministratorStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

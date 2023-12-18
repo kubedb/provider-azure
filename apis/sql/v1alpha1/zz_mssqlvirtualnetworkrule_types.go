@@ -15,68 +15,77 @@ import (
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+
 )
+
+
+
 
 type MSSQLVirtualNetworkRuleInitParameters struct {
 
-	// Create the virtual network rule before the subnet has the virtual network service endpoint enabled. Defaults to false.
-	IgnoreMissingVnetServiceEndpoint *bool `json:"ignoreMissingVnetServiceEndpoint,omitempty" tf:"ignore_missing_vnet_service_endpoint,omitempty"`
+
+// Create the virtual network rule before the subnet has the virtual network service endpoint enabled. Defaults to false.
+IgnoreMissingVnetServiceEndpoint *bool `json:"ignoreMissingVnetServiceEndpoint,omitempty" tf:"ignore_missing_vnet_service_endpoint,omitempty"`
 }
+
 
 type MSSQLVirtualNetworkRuleObservation struct {
 
-	// The ID of the SQL virtual network rule.
-	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// Create the virtual network rule before the subnet has the virtual network service endpoint enabled. Defaults to false.
-	IgnoreMissingVnetServiceEndpoint *bool `json:"ignoreMissingVnetServiceEndpoint,omitempty" tf:"ignore_missing_vnet_service_endpoint,omitempty"`
+// The ID of the SQL virtual network rule.
+ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The resource ID of the SQL Server to which this SQL virtual network rule will be applied. Changing this forces a new resource to be created.
-	ServerID *string `json:"serverId,omitempty" tf:"server_id,omitempty"`
+// Create the virtual network rule before the subnet has the virtual network service endpoint enabled. Defaults to false.
+IgnoreMissingVnetServiceEndpoint *bool `json:"ignoreMissingVnetServiceEndpoint,omitempty" tf:"ignore_missing_vnet_service_endpoint,omitempty"`
 
-	// The ID of the subnet from which the SQL server will accept communications.
-	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
+// The resource ID of the SQL Server to which this SQL virtual network rule will be applied. Changing this forces a new resource to be created.
+ServerID *string `json:"serverId,omitempty" tf:"server_id,omitempty"`
+
+// The ID of the subnet from which the SQL server will accept communications.
+SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
 }
+
 
 type MSSQLVirtualNetworkRuleParameters struct {
 
-	// Create the virtual network rule before the subnet has the virtual network service endpoint enabled. Defaults to false.
-	// +kubebuilder:validation:Optional
-	IgnoreMissingVnetServiceEndpoint *bool `json:"ignoreMissingVnetServiceEndpoint,omitempty" tf:"ignore_missing_vnet_service_endpoint,omitempty"`
 
-	// The resource ID of the SQL Server to which this SQL virtual network rule will be applied. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=MSSQLServer
-	// +crossplane:generate:reference:extractor=kubedb.dev/provider-azure/apis/rconfig.ExtractResourceID()
-	// +kubebuilder:validation:Optional
-	ServerID *string `json:"serverId,omitempty" tf:"server_id,omitempty"`
+// Create the virtual network rule before the subnet has the virtual network service endpoint enabled. Defaults to false.
+// +kubebuilder:validation:Optional
+IgnoreMissingVnetServiceEndpoint *bool `json:"ignoreMissingVnetServiceEndpoint,omitempty" tf:"ignore_missing_vnet_service_endpoint,omitempty"`
 
-	// Reference to a MSSQLServer to populate serverId.
-	// +kubebuilder:validation:Optional
-	ServerIDRef *v1.Reference `json:"serverIdRef,omitempty" tf:"-"`
+// The resource ID of the SQL Server to which this SQL virtual network rule will be applied. Changing this forces a new resource to be created.
+// +crossplane:generate:reference:type=MSSQLServer
+// +crossplane:generate:reference:extractor=kubedb.dev/provider-azure/apis/rconfig.ExtractResourceID()
+// +kubebuilder:validation:Optional
+ServerID *string `json:"serverId,omitempty" tf:"server_id,omitempty"`
 
-	// Selector for a MSSQLServer to populate serverId.
-	// +kubebuilder:validation:Optional
-	ServerIDSelector *v1.Selector `json:"serverIdSelector,omitempty" tf:"-"`
+// Reference to a MSSQLServer to populate serverId.
+// +kubebuilder:validation:Optional
+ServerIDRef *v1.Reference `json:"serverIdRef,omitempty" tf:"-"`
 
-	// The ID of the subnet from which the SQL server will accept communications.
-	// +crossplane:generate:reference:type=kubedb.dev/provider-azure/apis/network/v1alpha1.Subnet
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
-	// +kubebuilder:validation:Optional
-	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
+// Selector for a MSSQLServer to populate serverId.
+// +kubebuilder:validation:Optional
+ServerIDSelector *v1.Selector `json:"serverIdSelector,omitempty" tf:"-"`
 
-	// Reference to a Subnet in network to populate subnetId.
-	// +kubebuilder:validation:Optional
-	SubnetIDRef *v1.Reference `json:"subnetIdRef,omitempty" tf:"-"`
+// The ID of the subnet from which the SQL server will accept communications.
+// +crossplane:generate:reference:type=kubedb.dev/provider-azure/apis/network/v1alpha1.Subnet
+// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+// +kubebuilder:validation:Optional
+SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
 
-	// Selector for a Subnet in network to populate subnetId.
-	// +kubebuilder:validation:Optional
-	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
+// Reference to a Subnet in network to populate subnetId.
+// +kubebuilder:validation:Optional
+SubnetIDRef *v1.Reference `json:"subnetIdRef,omitempty" tf:"-"`
+
+// Selector for a Subnet in network to populate subnetId.
+// +kubebuilder:validation:Optional
+SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
 }
 
 // MSSQLVirtualNetworkRuleSpec defines the desired state of MSSQLVirtualNetworkRule
 type MSSQLVirtualNetworkRuleSpec struct {
 	v1.ResourceSpec `json:",inline"`
-	ForProvider     MSSQLVirtualNetworkRuleParameters `json:"forProvider"`
+	ForProvider       MSSQLVirtualNetworkRuleParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -87,13 +96,13 @@ type MSSQLVirtualNetworkRuleSpec struct {
 	// required on creation, but we do not desire to update them after creation,
 	// for example because of an external controller is managing them, like an
 	// autoscaler.
-	InitProvider MSSQLVirtualNetworkRuleInitParameters `json:"initProvider,omitempty"`
+	InitProvider       MSSQLVirtualNetworkRuleInitParameters `json:"initProvider,omitempty"`
 }
 
 // MSSQLVirtualNetworkRuleStatus defines the observed state of MSSQLVirtualNetworkRule.
 type MSSQLVirtualNetworkRuleStatus struct {
 	v1.ResourceStatus `json:",inline"`
-	AtProvider        MSSQLVirtualNetworkRuleObservation `json:"atProvider,omitempty"`
+	AtProvider          MSSQLVirtualNetworkRuleObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

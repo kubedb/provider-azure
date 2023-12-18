@@ -15,76 +15,85 @@ import (
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+
 )
+
+
+
 
 type RedisFirewallRuleInitParameters struct {
 
-	// The highest IP address included in the range.
-	EndIP *string `json:"endIp,omitempty" tf:"end_ip,omitempty"`
 
-	// The lowest IP address included in the range
-	StartIP *string `json:"startIp,omitempty" tf:"start_ip,omitempty"`
+// The highest IP address included in the range.
+EndIP *string `json:"endIp,omitempty" tf:"end_ip,omitempty"`
+
+// The lowest IP address included in the range
+StartIP *string `json:"startIp,omitempty" tf:"start_ip,omitempty"`
 }
+
 
 type RedisFirewallRuleObservation struct {
 
-	// The highest IP address included in the range.
-	EndIP *string `json:"endIp,omitempty" tf:"end_ip,omitempty"`
 
-	// The ID of the Redis Firewall Rule.
-	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+// The highest IP address included in the range.
+EndIP *string `json:"endIp,omitempty" tf:"end_ip,omitempty"`
 
-	// The name of the Redis Cache. Changing this forces a new resource to be created.
-	RedisCacheName *string `json:"redisCacheName,omitempty" tf:"redis_cache_name,omitempty"`
+// The ID of the Redis Firewall Rule.
+ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The name of the resource group in which this Redis Cache exists. Changing this forces a new resource to be created.
-	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+// The name of the Redis Cache. Changing this forces a new resource to be created.
+RedisCacheName *string `json:"redisCacheName,omitempty" tf:"redis_cache_name,omitempty"`
 
-	// The lowest IP address included in the range
-	StartIP *string `json:"startIp,omitempty" tf:"start_ip,omitempty"`
+// The name of the resource group in which this Redis Cache exists. Changing this forces a new resource to be created.
+ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+
+// The lowest IP address included in the range
+StartIP *string `json:"startIp,omitempty" tf:"start_ip,omitempty"`
 }
+
 
 type RedisFirewallRuleParameters struct {
 
-	// The highest IP address included in the range.
-	// +kubebuilder:validation:Optional
-	EndIP *string `json:"endIp,omitempty" tf:"end_ip,omitempty"`
 
-	// The name of the Redis Cache. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=kubedb.dev/provider-azure/apis/cache/v1alpha1.RedisCache
-	// +kubebuilder:validation:Optional
-	RedisCacheName *string `json:"redisCacheName,omitempty" tf:"redis_cache_name,omitempty"`
+// The highest IP address included in the range.
+// +kubebuilder:validation:Optional
+EndIP *string `json:"endIp,omitempty" tf:"end_ip,omitempty"`
 
-	// Reference to a RedisCache in cache to populate redisCacheName.
-	// +kubebuilder:validation:Optional
-	RedisCacheNameRef *v1.Reference `json:"redisCacheNameRef,omitempty" tf:"-"`
+// The name of the Redis Cache. Changing this forces a new resource to be created.
+// +crossplane:generate:reference:type=kubedb.dev/provider-azure/apis/cache/v1alpha1.RedisCache
+// +kubebuilder:validation:Optional
+RedisCacheName *string `json:"redisCacheName,omitempty" tf:"redis_cache_name,omitempty"`
 
-	// Selector for a RedisCache in cache to populate redisCacheName.
-	// +kubebuilder:validation:Optional
-	RedisCacheNameSelector *v1.Selector `json:"redisCacheNameSelector,omitempty" tf:"-"`
+// Reference to a RedisCache in cache to populate redisCacheName.
+// +kubebuilder:validation:Optional
+RedisCacheNameRef *v1.Reference `json:"redisCacheNameRef,omitempty" tf:"-"`
 
-	// The name of the resource group in which this Redis Cache exists. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=kubedb.dev/provider-azure/apis/azure/v1alpha1.ResourceGroup
-	// +kubebuilder:validation:Optional
-	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+// Selector for a RedisCache in cache to populate redisCacheName.
+// +kubebuilder:validation:Optional
+RedisCacheNameSelector *v1.Selector `json:"redisCacheNameSelector,omitempty" tf:"-"`
 
-	// Reference to a ResourceGroup in azure to populate resourceGroupName.
-	// +kubebuilder:validation:Optional
-	ResourceGroupNameRef *v1.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+// The name of the resource group in which this Redis Cache exists. Changing this forces a new resource to be created.
+// +crossplane:generate:reference:type=kubedb.dev/provider-azure/apis/azure/v1alpha1.ResourceGroup
+// +kubebuilder:validation:Optional
+ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 
-	// Selector for a ResourceGroup in azure to populate resourceGroupName.
-	// +kubebuilder:validation:Optional
-	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+// Reference to a ResourceGroup in azure to populate resourceGroupName.
+// +kubebuilder:validation:Optional
+ResourceGroupNameRef *v1.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
-	// The lowest IP address included in the range
-	// +kubebuilder:validation:Optional
-	StartIP *string `json:"startIp,omitempty" tf:"start_ip,omitempty"`
+// Selector for a ResourceGroup in azure to populate resourceGroupName.
+// +kubebuilder:validation:Optional
+ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+
+// The lowest IP address included in the range
+// +kubebuilder:validation:Optional
+StartIP *string `json:"startIp,omitempty" tf:"start_ip,omitempty"`
 }
 
 // RedisFirewallRuleSpec defines the desired state of RedisFirewallRule
 type RedisFirewallRuleSpec struct {
 	v1.ResourceSpec `json:",inline"`
-	ForProvider     RedisFirewallRuleParameters `json:"forProvider"`
+	ForProvider       RedisFirewallRuleParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -95,13 +104,13 @@ type RedisFirewallRuleSpec struct {
 	// required on creation, but we do not desire to update them after creation,
 	// for example because of an external controller is managing them, like an
 	// autoscaler.
-	InitProvider RedisFirewallRuleInitParameters `json:"initProvider,omitempty"`
+	InitProvider       RedisFirewallRuleInitParameters `json:"initProvider,omitempty"`
 }
 
 // RedisFirewallRuleStatus defines the observed state of RedisFirewallRule.
 type RedisFirewallRuleStatus struct {
 	v1.ResourceStatus `json:",inline"`
-	AtProvider        RedisFirewallRuleObservation `json:"atProvider,omitempty"`
+	AtProvider          RedisFirewallRuleObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true
@@ -116,10 +125,10 @@ type RedisFirewallRuleStatus struct {
 type RedisFirewallRule struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.endIp) || (has(self.initProvider) && has(self.initProvider.endIp))",message="spec.forProvider.endIp is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.startIp) || (has(self.initProvider) && has(self.initProvider.startIp))",message="spec.forProvider.startIp is a required parameter"
-	Spec   RedisFirewallRuleSpec   `json:"spec"`
-	Status RedisFirewallRuleStatus `json:"status,omitempty"`
+// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.endIp) || (has(self.initProvider) && has(self.initProvider.endIp))",message="spec.forProvider.endIp is a required parameter"
+// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.startIp) || (has(self.initProvider) && has(self.initProvider.startIp))",message="spec.forProvider.startIp is a required parameter"
+	Spec              RedisFirewallRuleSpec   `json:"spec"`
+	Status            RedisFirewallRuleStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

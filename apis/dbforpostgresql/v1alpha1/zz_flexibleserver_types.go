@@ -15,429 +15,468 @@ import (
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+
 )
+
+
+
 
 type AuthenticationInitParameters struct {
 
-	// Whether or not Active Directory authentication is allowed to access the PostgreSQL Flexible Server. Defaults to false.
-	ActiveDirectoryAuthEnabled *bool `json:"activeDirectoryAuthEnabled,omitempty" tf:"active_directory_auth_enabled,omitempty"`
 
-	// Whether or not password authentication is allowed to access the PostgreSQL Flexible Server. Defaults to true.
-	PasswordAuthEnabled *bool `json:"passwordAuthEnabled,omitempty" tf:"password_auth_enabled,omitempty"`
+// Whether or not Active Directory authentication is allowed to access the PostgreSQL Flexible Server. Defaults to false.
+ActiveDirectoryAuthEnabled *bool `json:"activeDirectoryAuthEnabled,omitempty" tf:"active_directory_auth_enabled,omitempty"`
 
-	// The Tenant ID of the Azure Active Directory which is used by the Active Directory authentication. active_directory_auth_enabled must be set to true.
-	TenantID *string `json:"tenantId,omitempty" tf:"tenant_id,omitempty"`
+// Whether or not password authentication is allowed to access the PostgreSQL Flexible Server. Defaults to true.
+PasswordAuthEnabled *bool `json:"passwordAuthEnabled,omitempty" tf:"password_auth_enabled,omitempty"`
+
+// The Tenant ID of the Azure Active Directory which is used by the Active Directory authentication. active_directory_auth_enabled must be set to true.
+TenantID *string `json:"tenantId,omitempty" tf:"tenant_id,omitempty"`
 }
+
 
 type AuthenticationObservation struct {
 
-	// Whether or not Active Directory authentication is allowed to access the PostgreSQL Flexible Server. Defaults to false.
-	ActiveDirectoryAuthEnabled *bool `json:"activeDirectoryAuthEnabled,omitempty" tf:"active_directory_auth_enabled,omitempty"`
 
-	// Whether or not password authentication is allowed to access the PostgreSQL Flexible Server. Defaults to true.
-	PasswordAuthEnabled *bool `json:"passwordAuthEnabled,omitempty" tf:"password_auth_enabled,omitempty"`
+// Whether or not Active Directory authentication is allowed to access the PostgreSQL Flexible Server. Defaults to false.
+ActiveDirectoryAuthEnabled *bool `json:"activeDirectoryAuthEnabled,omitempty" tf:"active_directory_auth_enabled,omitempty"`
 
-	// The Tenant ID of the Azure Active Directory which is used by the Active Directory authentication. active_directory_auth_enabled must be set to true.
-	TenantID *string `json:"tenantId,omitempty" tf:"tenant_id,omitempty"`
+// Whether or not password authentication is allowed to access the PostgreSQL Flexible Server. Defaults to true.
+PasswordAuthEnabled *bool `json:"passwordAuthEnabled,omitempty" tf:"password_auth_enabled,omitempty"`
+
+// The Tenant ID of the Azure Active Directory which is used by the Active Directory authentication. active_directory_auth_enabled must be set to true.
+TenantID *string `json:"tenantId,omitempty" tf:"tenant_id,omitempty"`
 }
+
 
 type AuthenticationParameters struct {
 
-	// Whether or not Active Directory authentication is allowed to access the PostgreSQL Flexible Server. Defaults to false.
-	// +kubebuilder:validation:Optional
-	ActiveDirectoryAuthEnabled *bool `json:"activeDirectoryAuthEnabled,omitempty" tf:"active_directory_auth_enabled,omitempty"`
 
-	// Whether or not password authentication is allowed to access the PostgreSQL Flexible Server. Defaults to true.
-	// +kubebuilder:validation:Optional
-	PasswordAuthEnabled *bool `json:"passwordAuthEnabled,omitempty" tf:"password_auth_enabled,omitempty"`
+// Whether or not Active Directory authentication is allowed to access the PostgreSQL Flexible Server. Defaults to false.
+// +kubebuilder:validation:Optional
+ActiveDirectoryAuthEnabled *bool `json:"activeDirectoryAuthEnabled,omitempty" tf:"active_directory_auth_enabled,omitempty"`
 
-	// The Tenant ID of the Azure Active Directory which is used by the Active Directory authentication. active_directory_auth_enabled must be set to true.
-	// +kubebuilder:validation:Optional
-	TenantID *string `json:"tenantId,omitempty" tf:"tenant_id,omitempty"`
+// Whether or not password authentication is allowed to access the PostgreSQL Flexible Server. Defaults to true.
+// +kubebuilder:validation:Optional
+PasswordAuthEnabled *bool `json:"passwordAuthEnabled,omitempty" tf:"password_auth_enabled,omitempty"`
+
+// The Tenant ID of the Azure Active Directory which is used by the Active Directory authentication. active_directory_auth_enabled must be set to true.
+// +kubebuilder:validation:Optional
+TenantID *string `json:"tenantId,omitempty" tf:"tenant_id,omitempty"`
 }
+
 
 type CustomerManagedKeyInitParameters struct {
 
-	// The ID of the Key Vault Key.
-	KeyVaultKeyID *string `json:"keyVaultKeyId,omitempty" tf:"key_vault_key_id,omitempty"`
 
-	// Specifies the primary user managed identity id for a Customer Managed Key. Should be added with identity_ids.
-	PrimaryUserAssignedIdentityID *string `json:"primaryUserAssignedIdentityId,omitempty" tf:"primary_user_assigned_identity_id,omitempty"`
+// The ID of the Key Vault Key.
+KeyVaultKeyID *string `json:"keyVaultKeyId,omitempty" tf:"key_vault_key_id,omitempty"`
+
+// Specifies the primary user managed identity id for a Customer Managed Key. Should be added with identity_ids.
+PrimaryUserAssignedIdentityID *string `json:"primaryUserAssignedIdentityId,omitempty" tf:"primary_user_assigned_identity_id,omitempty"`
 }
+
 
 type CustomerManagedKeyObservation struct {
 
-	// The ID of the Key Vault Key.
-	KeyVaultKeyID *string `json:"keyVaultKeyId,omitempty" tf:"key_vault_key_id,omitempty"`
 
-	// Specifies the primary user managed identity id for a Customer Managed Key. Should be added with identity_ids.
-	PrimaryUserAssignedIdentityID *string `json:"primaryUserAssignedIdentityId,omitempty" tf:"primary_user_assigned_identity_id,omitempty"`
+// The ID of the Key Vault Key.
+KeyVaultKeyID *string `json:"keyVaultKeyId,omitempty" tf:"key_vault_key_id,omitempty"`
+
+// Specifies the primary user managed identity id for a Customer Managed Key. Should be added with identity_ids.
+PrimaryUserAssignedIdentityID *string `json:"primaryUserAssignedIdentityId,omitempty" tf:"primary_user_assigned_identity_id,omitempty"`
 }
+
 
 type CustomerManagedKeyParameters struct {
 
-	// The ID of the Key Vault Key.
-	// +kubebuilder:validation:Optional
-	KeyVaultKeyID *string `json:"keyVaultKeyId,omitempty" tf:"key_vault_key_id,omitempty"`
 
-	// Specifies the primary user managed identity id for a Customer Managed Key. Should be added with identity_ids.
-	// +kubebuilder:validation:Optional
-	PrimaryUserAssignedIdentityID *string `json:"primaryUserAssignedIdentityId,omitempty" tf:"primary_user_assigned_identity_id,omitempty"`
+// The ID of the Key Vault Key.
+// +kubebuilder:validation:Optional
+KeyVaultKeyID *string `json:"keyVaultKeyId,omitempty" tf:"key_vault_key_id,omitempty"`
+
+// Specifies the primary user managed identity id for a Customer Managed Key. Should be added with identity_ids.
+// +kubebuilder:validation:Optional
+PrimaryUserAssignedIdentityID *string `json:"primaryUserAssignedIdentityId,omitempty" tf:"primary_user_assigned_identity_id,omitempty"`
 }
+
 
 type FlexibleServerInitParameters struct {
 
-	// The Administrator login for the PostgreSQL Flexible Server. Required when create_mode is Default and authentication.password_auth_enabled is true.
-	AdministratorLogin *string `json:"administratorLogin,omitempty" tf:"administrator_login,omitempty"`
 
-	// An authentication block as defined below.
-	Authentication []AuthenticationInitParameters `json:"authentication,omitempty" tf:"authentication,omitempty"`
+// The Administrator login for the PostgreSQL Flexible Server. Required when create_mode is Default and authentication.password_auth_enabled is true.
+AdministratorLogin *string `json:"administratorLogin,omitempty" tf:"administrator_login,omitempty"`
 
-	// The backup retention days for the PostgreSQL Flexible Server. Possible values are between 7 and 35 days.
-	BackupRetentionDays *float64 `json:"backupRetentionDays,omitempty" tf:"backup_retention_days,omitempty"`
+// An authentication block as defined below.
+Authentication []AuthenticationInitParameters `json:"authentication,omitempty" tf:"authentication,omitempty"`
 
-	// The creation mode which can be used to restore or replicate existing servers. Possible values are Default, PointInTimeRestore, Replica and Update. Changing this forces a new PostgreSQL Flexible Server to be created.
-	CreateMode *string `json:"createMode,omitempty" tf:"create_mode,omitempty"`
+// The backup retention days for the PostgreSQL Flexible Server. Possible values are between 7 and 35 days.
+BackupRetentionDays *float64 `json:"backupRetentionDays,omitempty" tf:"backup_retention_days,omitempty"`
 
-	// A customer_managed_key block as defined below. Changing this forces a new resource to be created.
-	CustomerManagedKey []CustomerManagedKeyInitParameters `json:"customerManagedKey,omitempty" tf:"customer_managed_key,omitempty"`
+// The creation mode which can be used to restore or replicate existing servers. Possible values are Default, PointInTimeRestore, Replica and Update. Changing this forces a new PostgreSQL Flexible Server to be created.
+CreateMode *string `json:"createMode,omitempty" tf:"create_mode,omitempty"`
 
-	// Is Geo-Redundant backup enabled on the PostgreSQL Flexible Server. Defaults to false. Changing this forces a new PostgreSQL Flexible Server to be created.
-	GeoRedundantBackupEnabled *bool `json:"geoRedundantBackupEnabled,omitempty" tf:"geo_redundant_backup_enabled,omitempty"`
+// A customer_managed_key block as defined below. Changing this forces a new resource to be created.
+CustomerManagedKey []CustomerManagedKeyInitParameters `json:"customerManagedKey,omitempty" tf:"customer_managed_key,omitempty"`
 
-	// A high_availability block as defined below.
-	HighAvailability []HighAvailabilityInitParameters `json:"highAvailability,omitempty" tf:"high_availability,omitempty"`
+// Is Geo-Redundant backup enabled on the PostgreSQL Flexible Server. Defaults to false. Changing this forces a new PostgreSQL Flexible Server to be created.
+GeoRedundantBackupEnabled *bool `json:"geoRedundantBackupEnabled,omitempty" tf:"geo_redundant_backup_enabled,omitempty"`
 
-	// An identity block as defined below.
-	Identity []IdentityInitParameters `json:"identity,omitempty" tf:"identity,omitempty"`
+// A high_availability block as defined below.
+HighAvailability []HighAvailabilityInitParameters `json:"highAvailability,omitempty" tf:"high_availability,omitempty"`
 
-	// The Azure Region where the PostgreSQL Flexible Server should exist. Changing this forces a new PostgreSQL Flexible Server to be created.
-	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+// An identity block as defined below.
+Identity []IdentityInitParameters `json:"identity,omitempty" tf:"identity,omitempty"`
 
-	// A maintenance_window block as defined below.
-	MaintenanceWindow []MaintenanceWindowInitParameters `json:"maintenanceWindow,omitempty" tf:"maintenance_window,omitempty"`
+// The Azure Region where the PostgreSQL Flexible Server should exist. Changing this forces a new PostgreSQL Flexible Server to be created.
+Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
-	// The point in time to restore from source_server_id when create_mode is PointInTimeRestore. Changing this forces a new PostgreSQL Flexible Server to be created.
-	PointInTimeRestoreTimeInUtc *string `json:"pointInTimeRestoreTimeInUtc,omitempty" tf:"point_in_time_restore_time_in_utc,omitempty"`
+// A maintenance_window block as defined below.
+MaintenanceWindow []MaintenanceWindowInitParameters `json:"maintenanceWindow,omitempty" tf:"maintenance_window,omitempty"`
 
-	// The replication role for the PostgreSQL Flexible Server. Possible value is None.
-	ReplicationRole *string `json:"replicationRole,omitempty" tf:"replication_role,omitempty"`
+// The point in time to restore from source_server_id when create_mode is PointInTimeRestore. Changing this forces a new PostgreSQL Flexible Server to be created.
+PointInTimeRestoreTimeInUtc *string `json:"pointInTimeRestoreTimeInUtc,omitempty" tf:"point_in_time_restore_time_in_utc,omitempty"`
 
-	// The SKU Name for the PostgreSQL Flexible Server. The name of the SKU, follows the tier + name pattern (e.g. B_Standard_B1ms, GP_Standard_D2s_v3, MO_Standard_E4s_v3).
-	SkuName *string `json:"skuName,omitempty" tf:"sku_name,omitempty"`
+// The replication role for the PostgreSQL Flexible Server. Possible value is None.
+ReplicationRole *string `json:"replicationRole,omitempty" tf:"replication_role,omitempty"`
 
-	// The resource ID of the source PostgreSQL Flexible Server to be restored. Required when create_mode is PointInTimeRestore or Replica. Changing this forces a new PostgreSQL Flexible Server to be created.
-	SourceServerID *string `json:"sourceServerId,omitempty" tf:"source_server_id,omitempty"`
+// The SKU Name for the PostgreSQL Flexible Server. The name of the SKU, follows the tier + name pattern (e.g. B_Standard_B1ms, GP_Standard_D2s_v3, MO_Standard_E4s_v3).
+SkuName *string `json:"skuName,omitempty" tf:"sku_name,omitempty"`
 
-	// The max storage allowed for the PostgreSQL Flexible Server. Possible values are 32768, 65536, 131072, 262144, 524288, 1048576, 2097152, 4194304, 8388608, and 16777216.
-	StorageMb *float64 `json:"storageMb,omitempty" tf:"storage_mb,omitempty"`
+// The resource ID of the source PostgreSQL Flexible Server to be restored. Required when create_mode is PointInTimeRestore or Replica. Changing this forces a new PostgreSQL Flexible Server to be created.
+SourceServerID *string `json:"sourceServerId,omitempty" tf:"source_server_id,omitempty"`
 
-	// A mapping of tags which should be assigned to the PostgreSQL Flexible Server.
-	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+// The max storage allowed for the PostgreSQL Flexible Server. Possible values are 32768, 65536, 131072, 262144, 524288, 1048576, 2097152, 4194304, 8388608, and 16777216.
+StorageMb *float64 `json:"storageMb,omitempty" tf:"storage_mb,omitempty"`
 
-	// The version of PostgreSQL Flexible Server to use. Possible values are 11,12, 13, 14 and 15. Required when create_mode is Default. Changing this forces a new PostgreSQL Flexible Server to be created.
-	Version *string `json:"version,omitempty" tf:"version,omitempty"`
+// A mapping of tags which should be assigned to the PostgreSQL Flexible Server.
+Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// Specifies the Availability Zone in which the PostgreSQL Flexible Server should be located.
-	Zone *string `json:"zone,omitempty" tf:"zone,omitempty"`
+// The version of PostgreSQL Flexible Server to use. Possible values are 11,12, 13, 14 and 15. Required when create_mode is Default. Changing this forces a new PostgreSQL Flexible Server to be created.
+Version *string `json:"version,omitempty" tf:"version,omitempty"`
+
+// Specifies the Availability Zone in which the PostgreSQL Flexible Server should be located.
+Zone *string `json:"zone,omitempty" tf:"zone,omitempty"`
 }
+
 
 type FlexibleServerObservation struct {
 
-	// The Administrator login for the PostgreSQL Flexible Server. Required when create_mode is Default and authentication.password_auth_enabled is true.
-	AdministratorLogin *string `json:"administratorLogin,omitempty" tf:"administrator_login,omitempty"`
 
-	// An authentication block as defined below.
-	Authentication []AuthenticationObservation `json:"authentication,omitempty" tf:"authentication,omitempty"`
+// The Administrator login for the PostgreSQL Flexible Server. Required when create_mode is Default and authentication.password_auth_enabled is true.
+AdministratorLogin *string `json:"administratorLogin,omitempty" tf:"administrator_login,omitempty"`
 
-	// The backup retention days for the PostgreSQL Flexible Server. Possible values are between 7 and 35 days.
-	BackupRetentionDays *float64 `json:"backupRetentionDays,omitempty" tf:"backup_retention_days,omitempty"`
+// An authentication block as defined below.
+Authentication []AuthenticationObservation `json:"authentication,omitempty" tf:"authentication,omitempty"`
 
-	// The creation mode which can be used to restore or replicate existing servers. Possible values are Default, PointInTimeRestore, Replica and Update. Changing this forces a new PostgreSQL Flexible Server to be created.
-	CreateMode *string `json:"createMode,omitempty" tf:"create_mode,omitempty"`
+// The backup retention days for the PostgreSQL Flexible Server. Possible values are between 7 and 35 days.
+BackupRetentionDays *float64 `json:"backupRetentionDays,omitempty" tf:"backup_retention_days,omitempty"`
 
-	// A customer_managed_key block as defined below. Changing this forces a new resource to be created.
-	CustomerManagedKey []CustomerManagedKeyObservation `json:"customerManagedKey,omitempty" tf:"customer_managed_key,omitempty"`
+// The creation mode which can be used to restore or replicate existing servers. Possible values are Default, PointInTimeRestore, Replica and Update. Changing this forces a new PostgreSQL Flexible Server to be created.
+CreateMode *string `json:"createMode,omitempty" tf:"create_mode,omitempty"`
 
-	// The ID of the virtual network subnet to create the PostgreSQL Flexible Server. The provided subnet should not have any other resource deployed in it and this subnet will be delegated to the PostgreSQL Flexible Server, if not already delegated. Changing this forces a new PostgreSQL Flexible Server to be created.
-	DelegatedSubnetID *string `json:"delegatedSubnetId,omitempty" tf:"delegated_subnet_id,omitempty"`
+// A customer_managed_key block as defined below. Changing this forces a new resource to be created.
+CustomerManagedKey []CustomerManagedKeyObservation `json:"customerManagedKey,omitempty" tf:"customer_managed_key,omitempty"`
 
-	// The FQDN of the PostgreSQL Flexible Server.
-	Fqdn *string `json:"fqdn,omitempty" tf:"fqdn,omitempty"`
+// The ID of the virtual network subnet to create the PostgreSQL Flexible Server. The provided subnet should not have any other resource deployed in it and this subnet will be delegated to the PostgreSQL Flexible Server, if not already delegated. Changing this forces a new PostgreSQL Flexible Server to be created.
+DelegatedSubnetID *string `json:"delegatedSubnetId,omitempty" tf:"delegated_subnet_id,omitempty"`
 
-	// Is Geo-Redundant backup enabled on the PostgreSQL Flexible Server. Defaults to false. Changing this forces a new PostgreSQL Flexible Server to be created.
-	GeoRedundantBackupEnabled *bool `json:"geoRedundantBackupEnabled,omitempty" tf:"geo_redundant_backup_enabled,omitempty"`
+// The FQDN of the PostgreSQL Flexible Server.
+Fqdn *string `json:"fqdn,omitempty" tf:"fqdn,omitempty"`
 
-	// A high_availability block as defined below.
-	HighAvailability []HighAvailabilityObservation `json:"highAvailability,omitempty" tf:"high_availability,omitempty"`
+// Is Geo-Redundant backup enabled on the PostgreSQL Flexible Server. Defaults to false. Changing this forces a new PostgreSQL Flexible Server to be created.
+GeoRedundantBackupEnabled *bool `json:"geoRedundantBackupEnabled,omitempty" tf:"geo_redundant_backup_enabled,omitempty"`
 
-	// The ID of the PostgreSQL Flexible Server.
-	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+// A high_availability block as defined below.
+HighAvailability []HighAvailabilityObservation `json:"highAvailability,omitempty" tf:"high_availability,omitempty"`
 
-	// An identity block as defined below.
-	Identity []IdentityObservation `json:"identity,omitempty" tf:"identity,omitempty"`
+// The ID of the PostgreSQL Flexible Server.
+ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The Azure Region where the PostgreSQL Flexible Server should exist. Changing this forces a new PostgreSQL Flexible Server to be created.
-	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+// An identity block as defined below.
+Identity []IdentityObservation `json:"identity,omitempty" tf:"identity,omitempty"`
 
-	// A maintenance_window block as defined below.
-	MaintenanceWindow []MaintenanceWindowObservation `json:"maintenanceWindow,omitempty" tf:"maintenance_window,omitempty"`
+// The Azure Region where the PostgreSQL Flexible Server should exist. Changing this forces a new PostgreSQL Flexible Server to be created.
+Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
-	// The point in time to restore from source_server_id when create_mode is PointInTimeRestore. Changing this forces a new PostgreSQL Flexible Server to be created.
-	PointInTimeRestoreTimeInUtc *string `json:"pointInTimeRestoreTimeInUtc,omitempty" tf:"point_in_time_restore_time_in_utc,omitempty"`
+// A maintenance_window block as defined below.
+MaintenanceWindow []MaintenanceWindowObservation `json:"maintenanceWindow,omitempty" tf:"maintenance_window,omitempty"`
 
-	// The ID of the private DNS zone to create the PostgreSQL Flexible Server. Changing this forces a new PostgreSQL Flexible Server to be created.
-	PrivateDNSZoneID *string `json:"privateDnsZoneId,omitempty" tf:"private_dns_zone_id,omitempty"`
+// The point in time to restore from source_server_id when create_mode is PointInTimeRestore. Changing this forces a new PostgreSQL Flexible Server to be created.
+PointInTimeRestoreTimeInUtc *string `json:"pointInTimeRestoreTimeInUtc,omitempty" tf:"point_in_time_restore_time_in_utc,omitempty"`
 
-	// Is public network access enabled?
-	PublicNetworkAccessEnabled *bool `json:"publicNetworkAccessEnabled,omitempty" tf:"public_network_access_enabled,omitempty"`
+// The ID of the private DNS zone to create the PostgreSQL Flexible Server. Changing this forces a new PostgreSQL Flexible Server to be created.
+PrivateDNSZoneID *string `json:"privateDnsZoneId,omitempty" tf:"private_dns_zone_id,omitempty"`
 
-	// The replication role for the PostgreSQL Flexible Server. Possible value is None.
-	ReplicationRole *string `json:"replicationRole,omitempty" tf:"replication_role,omitempty"`
+// Is public network access enabled?
+PublicNetworkAccessEnabled *bool `json:"publicNetworkAccessEnabled,omitempty" tf:"public_network_access_enabled,omitempty"`
 
-	// The name of the Resource Group where the PostgreSQL Flexible Server should exist. Changing this forces a new PostgreSQL Flexible Server to be created.
-	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+// The replication role for the PostgreSQL Flexible Server. Possible value is None.
+ReplicationRole *string `json:"replicationRole,omitempty" tf:"replication_role,omitempty"`
 
-	// The SKU Name for the PostgreSQL Flexible Server. The name of the SKU, follows the tier + name pattern (e.g. B_Standard_B1ms, GP_Standard_D2s_v3, MO_Standard_E4s_v3).
-	SkuName *string `json:"skuName,omitempty" tf:"sku_name,omitempty"`
+// The name of the Resource Group where the PostgreSQL Flexible Server should exist. Changing this forces a new PostgreSQL Flexible Server to be created.
+ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 
-	// The resource ID of the source PostgreSQL Flexible Server to be restored. Required when create_mode is PointInTimeRestore or Replica. Changing this forces a new PostgreSQL Flexible Server to be created.
-	SourceServerID *string `json:"sourceServerId,omitempty" tf:"source_server_id,omitempty"`
+// The SKU Name for the PostgreSQL Flexible Server. The name of the SKU, follows the tier + name pattern (e.g. B_Standard_B1ms, GP_Standard_D2s_v3, MO_Standard_E4s_v3).
+SkuName *string `json:"skuName,omitempty" tf:"sku_name,omitempty"`
 
-	// The max storage allowed for the PostgreSQL Flexible Server. Possible values are 32768, 65536, 131072, 262144, 524288, 1048576, 2097152, 4194304, 8388608, and 16777216.
-	StorageMb *float64 `json:"storageMb,omitempty" tf:"storage_mb,omitempty"`
+// The resource ID of the source PostgreSQL Flexible Server to be restored. Required when create_mode is PointInTimeRestore or Replica. Changing this forces a new PostgreSQL Flexible Server to be created.
+SourceServerID *string `json:"sourceServerId,omitempty" tf:"source_server_id,omitempty"`
 
-	// A mapping of tags which should be assigned to the PostgreSQL Flexible Server.
-	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+// The max storage allowed for the PostgreSQL Flexible Server. Possible values are 32768, 65536, 131072, 262144, 524288, 1048576, 2097152, 4194304, 8388608, and 16777216.
+StorageMb *float64 `json:"storageMb,omitempty" tf:"storage_mb,omitempty"`
 
-	// The version of PostgreSQL Flexible Server to use. Possible values are 11,12, 13, 14 and 15. Required when create_mode is Default. Changing this forces a new PostgreSQL Flexible Server to be created.
-	Version *string `json:"version,omitempty" tf:"version,omitempty"`
+// A mapping of tags which should be assigned to the PostgreSQL Flexible Server.
+Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// Specifies the Availability Zone in which the PostgreSQL Flexible Server should be located.
-	Zone *string `json:"zone,omitempty" tf:"zone,omitempty"`
+// The version of PostgreSQL Flexible Server to use. Possible values are 11,12, 13, 14 and 15. Required when create_mode is Default. Changing this forces a new PostgreSQL Flexible Server to be created.
+Version *string `json:"version,omitempty" tf:"version,omitempty"`
+
+// Specifies the Availability Zone in which the PostgreSQL Flexible Server should be located.
+Zone *string `json:"zone,omitempty" tf:"zone,omitempty"`
 }
+
 
 type FlexibleServerParameters struct {
 
-	// The Administrator login for the PostgreSQL Flexible Server. Required when create_mode is Default and authentication.password_auth_enabled is true.
-	// +kubebuilder:validation:Optional
-	AdministratorLogin *string `json:"administratorLogin,omitempty" tf:"administrator_login,omitempty"`
 
-	// The Password associated with the administrator_login for the PostgreSQL Flexible Server. Required when create_mode is Default and authentication.password_auth_enabled is true.
-	// +kubebuilder:validation:Optional
-	AdministratorPasswordSecretRef *v1.SecretKeySelector `json:"administratorPasswordSecretRef,omitempty" tf:"-"`
+// The Administrator login for the PostgreSQL Flexible Server. Required when create_mode is Default and authentication.password_auth_enabled is true.
+// +kubebuilder:validation:Optional
+AdministratorLogin *string `json:"administratorLogin,omitempty" tf:"administrator_login,omitempty"`
 
-	// An authentication block as defined below.
-	// +kubebuilder:validation:Optional
-	Authentication []AuthenticationParameters `json:"authentication,omitempty" tf:"authentication,omitempty"`
+// The Password associated with the administrator_login for the PostgreSQL Flexible Server. Required when create_mode is Default and authentication.password_auth_enabled is true.
+// +kubebuilder:validation:Optional
+AdministratorPasswordSecretRef *v1.SecretKeySelector `json:"administratorPasswordSecretRef,omitempty" tf:"-"`
 
-	// The backup retention days for the PostgreSQL Flexible Server. Possible values are between 7 and 35 days.
-	// +kubebuilder:validation:Optional
-	BackupRetentionDays *float64 `json:"backupRetentionDays,omitempty" tf:"backup_retention_days,omitempty"`
+// An authentication block as defined below.
+// +kubebuilder:validation:Optional
+Authentication []AuthenticationParameters `json:"authentication,omitempty" tf:"authentication,omitempty"`
 
-	// The creation mode which can be used to restore or replicate existing servers. Possible values are Default, PointInTimeRestore, Replica and Update. Changing this forces a new PostgreSQL Flexible Server to be created.
-	// +kubebuilder:validation:Optional
-	CreateMode *string `json:"createMode,omitempty" tf:"create_mode,omitempty"`
+// The backup retention days for the PostgreSQL Flexible Server. Possible values are between 7 and 35 days.
+// +kubebuilder:validation:Optional
+BackupRetentionDays *float64 `json:"backupRetentionDays,omitempty" tf:"backup_retention_days,omitempty"`
 
-	// A customer_managed_key block as defined below. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Optional
-	CustomerManagedKey []CustomerManagedKeyParameters `json:"customerManagedKey,omitempty" tf:"customer_managed_key,omitempty"`
+// The creation mode which can be used to restore or replicate existing servers. Possible values are Default, PointInTimeRestore, Replica and Update. Changing this forces a new PostgreSQL Flexible Server to be created.
+// +kubebuilder:validation:Optional
+CreateMode *string `json:"createMode,omitempty" tf:"create_mode,omitempty"`
 
-	// The ID of the virtual network subnet to create the PostgreSQL Flexible Server. The provided subnet should not have any other resource deployed in it and this subnet will be delegated to the PostgreSQL Flexible Server, if not already delegated. Changing this forces a new PostgreSQL Flexible Server to be created.
-	// +crossplane:generate:reference:type=kubedb.dev/provider-azure/apis/network/v1alpha1.Subnet
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
-	// +kubebuilder:validation:Optional
-	DelegatedSubnetID *string `json:"delegatedSubnetId,omitempty" tf:"delegated_subnet_id,omitempty"`
+// A customer_managed_key block as defined below. Changing this forces a new resource to be created.
+// +kubebuilder:validation:Optional
+CustomerManagedKey []CustomerManagedKeyParameters `json:"customerManagedKey,omitempty" tf:"customer_managed_key,omitempty"`
 
-	// Reference to a Subnet in network to populate delegatedSubnetId.
-	// +kubebuilder:validation:Optional
-	DelegatedSubnetIDRef *v1.Reference `json:"delegatedSubnetIdRef,omitempty" tf:"-"`
+// The ID of the virtual network subnet to create the PostgreSQL Flexible Server. The provided subnet should not have any other resource deployed in it and this subnet will be delegated to the PostgreSQL Flexible Server, if not already delegated. Changing this forces a new PostgreSQL Flexible Server to be created.
+// +crossplane:generate:reference:type=kubedb.dev/provider-azure/apis/network/v1alpha1.Subnet
+// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+// +kubebuilder:validation:Optional
+DelegatedSubnetID *string `json:"delegatedSubnetId,omitempty" tf:"delegated_subnet_id,omitempty"`
 
-	// Selector for a Subnet in network to populate delegatedSubnetId.
-	// +kubebuilder:validation:Optional
-	DelegatedSubnetIDSelector *v1.Selector `json:"delegatedSubnetIdSelector,omitempty" tf:"-"`
+// Reference to a Subnet in network to populate delegatedSubnetId.
+// +kubebuilder:validation:Optional
+DelegatedSubnetIDRef *v1.Reference `json:"delegatedSubnetIdRef,omitempty" tf:"-"`
 
-	// Is Geo-Redundant backup enabled on the PostgreSQL Flexible Server. Defaults to false. Changing this forces a new PostgreSQL Flexible Server to be created.
-	// +kubebuilder:validation:Optional
-	GeoRedundantBackupEnabled *bool `json:"geoRedundantBackupEnabled,omitempty" tf:"geo_redundant_backup_enabled,omitempty"`
+// Selector for a Subnet in network to populate delegatedSubnetId.
+// +kubebuilder:validation:Optional
+DelegatedSubnetIDSelector *v1.Selector `json:"delegatedSubnetIdSelector,omitempty" tf:"-"`
 
-	// A high_availability block as defined below.
-	// +kubebuilder:validation:Optional
-	HighAvailability []HighAvailabilityParameters `json:"highAvailability,omitempty" tf:"high_availability,omitempty"`
+// Is Geo-Redundant backup enabled on the PostgreSQL Flexible Server. Defaults to false. Changing this forces a new PostgreSQL Flexible Server to be created.
+// +kubebuilder:validation:Optional
+GeoRedundantBackupEnabled *bool `json:"geoRedundantBackupEnabled,omitempty" tf:"geo_redundant_backup_enabled,omitempty"`
 
-	// An identity block as defined below.
-	// +kubebuilder:validation:Optional
-	Identity []IdentityParameters `json:"identity,omitempty" tf:"identity,omitempty"`
+// A high_availability block as defined below.
+// +kubebuilder:validation:Optional
+HighAvailability []HighAvailabilityParameters `json:"highAvailability,omitempty" tf:"high_availability,omitempty"`
 
-	// The Azure Region where the PostgreSQL Flexible Server should exist. Changing this forces a new PostgreSQL Flexible Server to be created.
-	// +kubebuilder:validation:Optional
-	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+// An identity block as defined below.
+// +kubebuilder:validation:Optional
+Identity []IdentityParameters `json:"identity,omitempty" tf:"identity,omitempty"`
 
-	// A maintenance_window block as defined below.
-	// +kubebuilder:validation:Optional
-	MaintenanceWindow []MaintenanceWindowParameters `json:"maintenanceWindow,omitempty" tf:"maintenance_window,omitempty"`
+// The Azure Region where the PostgreSQL Flexible Server should exist. Changing this forces a new PostgreSQL Flexible Server to be created.
+// +kubebuilder:validation:Optional
+Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
-	// The point in time to restore from source_server_id when create_mode is PointInTimeRestore. Changing this forces a new PostgreSQL Flexible Server to be created.
-	// +kubebuilder:validation:Optional
-	PointInTimeRestoreTimeInUtc *string `json:"pointInTimeRestoreTimeInUtc,omitempty" tf:"point_in_time_restore_time_in_utc,omitempty"`
+// A maintenance_window block as defined below.
+// +kubebuilder:validation:Optional
+MaintenanceWindow []MaintenanceWindowParameters `json:"maintenanceWindow,omitempty" tf:"maintenance_window,omitempty"`
 
-	// The ID of the private DNS zone to create the PostgreSQL Flexible Server. Changing this forces a new PostgreSQL Flexible Server to be created.
-	// +crossplane:generate:reference:type=kubedb.dev/provider-azure/apis/network/v1alpha1.PrivateDNSZone
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
-	// +kubebuilder:validation:Optional
-	PrivateDNSZoneID *string `json:"privateDnsZoneId,omitempty" tf:"private_dns_zone_id,omitempty"`
+// The point in time to restore from source_server_id when create_mode is PointInTimeRestore. Changing this forces a new PostgreSQL Flexible Server to be created.
+// +kubebuilder:validation:Optional
+PointInTimeRestoreTimeInUtc *string `json:"pointInTimeRestoreTimeInUtc,omitempty" tf:"point_in_time_restore_time_in_utc,omitempty"`
 
-	// Reference to a PrivateDNSZone in network to populate privateDnsZoneId.
-	// +kubebuilder:validation:Optional
-	PrivateDNSZoneIDRef *v1.Reference `json:"privateDnsZoneIdRef,omitempty" tf:"-"`
+// The ID of the private DNS zone to create the PostgreSQL Flexible Server. Changing this forces a new PostgreSQL Flexible Server to be created.
+// +crossplane:generate:reference:type=kubedb.dev/provider-azure/apis/network/v1alpha1.PrivateDNSZone
+// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+// +kubebuilder:validation:Optional
+PrivateDNSZoneID *string `json:"privateDnsZoneId,omitempty" tf:"private_dns_zone_id,omitempty"`
 
-	// Selector for a PrivateDNSZone in network to populate privateDnsZoneId.
-	// +kubebuilder:validation:Optional
-	PrivateDNSZoneIDSelector *v1.Selector `json:"privateDnsZoneIdSelector,omitempty" tf:"-"`
+// Reference to a PrivateDNSZone in network to populate privateDnsZoneId.
+// +kubebuilder:validation:Optional
+PrivateDNSZoneIDRef *v1.Reference `json:"privateDnsZoneIdRef,omitempty" tf:"-"`
 
-	// The replication role for the PostgreSQL Flexible Server. Possible value is None.
-	// +kubebuilder:validation:Optional
-	ReplicationRole *string `json:"replicationRole,omitempty" tf:"replication_role,omitempty"`
+// Selector for a PrivateDNSZone in network to populate privateDnsZoneId.
+// +kubebuilder:validation:Optional
+PrivateDNSZoneIDSelector *v1.Selector `json:"privateDnsZoneIdSelector,omitempty" tf:"-"`
 
-	// The name of the Resource Group where the PostgreSQL Flexible Server should exist. Changing this forces a new PostgreSQL Flexible Server to be created.
-	// +crossplane:generate:reference:type=kubedb.dev/provider-azure/apis/azure/v1alpha1.ResourceGroup
-	// +kubebuilder:validation:Optional
-	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+// The replication role for the PostgreSQL Flexible Server. Possible value is None.
+// +kubebuilder:validation:Optional
+ReplicationRole *string `json:"replicationRole,omitempty" tf:"replication_role,omitempty"`
 
-	// Reference to a ResourceGroup in azure to populate resourceGroupName.
-	// +kubebuilder:validation:Optional
-	ResourceGroupNameRef *v1.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+// The name of the Resource Group where the PostgreSQL Flexible Server should exist. Changing this forces a new PostgreSQL Flexible Server to be created.
+// +crossplane:generate:reference:type=kubedb.dev/provider-azure/apis/azure/v1alpha1.ResourceGroup
+// +kubebuilder:validation:Optional
+ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 
-	// Selector for a ResourceGroup in azure to populate resourceGroupName.
-	// +kubebuilder:validation:Optional
-	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+// Reference to a ResourceGroup in azure to populate resourceGroupName.
+// +kubebuilder:validation:Optional
+ResourceGroupNameRef *v1.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
-	// The SKU Name for the PostgreSQL Flexible Server. The name of the SKU, follows the tier + name pattern (e.g. B_Standard_B1ms, GP_Standard_D2s_v3, MO_Standard_E4s_v3).
-	// +kubebuilder:validation:Optional
-	SkuName *string `json:"skuName,omitempty" tf:"sku_name,omitempty"`
+// Selector for a ResourceGroup in azure to populate resourceGroupName.
+// +kubebuilder:validation:Optional
+ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
-	// The resource ID of the source PostgreSQL Flexible Server to be restored. Required when create_mode is PointInTimeRestore or Replica. Changing this forces a new PostgreSQL Flexible Server to be created.
-	// +kubebuilder:validation:Optional
-	SourceServerID *string `json:"sourceServerId,omitempty" tf:"source_server_id,omitempty"`
+// The SKU Name for the PostgreSQL Flexible Server. The name of the SKU, follows the tier + name pattern (e.g. B_Standard_B1ms, GP_Standard_D2s_v3, MO_Standard_E4s_v3).
+// +kubebuilder:validation:Optional
+SkuName *string `json:"skuName,omitempty" tf:"sku_name,omitempty"`
 
-	// The max storage allowed for the PostgreSQL Flexible Server. Possible values are 32768, 65536, 131072, 262144, 524288, 1048576, 2097152, 4194304, 8388608, and 16777216.
-	// +kubebuilder:validation:Optional
-	StorageMb *float64 `json:"storageMb,omitempty" tf:"storage_mb,omitempty"`
+// The resource ID of the source PostgreSQL Flexible Server to be restored. Required when create_mode is PointInTimeRestore or Replica. Changing this forces a new PostgreSQL Flexible Server to be created.
+// +kubebuilder:validation:Optional
+SourceServerID *string `json:"sourceServerId,omitempty" tf:"source_server_id,omitempty"`
 
-	// A mapping of tags which should be assigned to the PostgreSQL Flexible Server.
-	// +kubebuilder:validation:Optional
-	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+// The max storage allowed for the PostgreSQL Flexible Server. Possible values are 32768, 65536, 131072, 262144, 524288, 1048576, 2097152, 4194304, 8388608, and 16777216.
+// +kubebuilder:validation:Optional
+StorageMb *float64 `json:"storageMb,omitempty" tf:"storage_mb,omitempty"`
 
-	// The version of PostgreSQL Flexible Server to use. Possible values are 11,12, 13, 14 and 15. Required when create_mode is Default. Changing this forces a new PostgreSQL Flexible Server to be created.
-	// +kubebuilder:validation:Optional
-	Version *string `json:"version,omitempty" tf:"version,omitempty"`
+// A mapping of tags which should be assigned to the PostgreSQL Flexible Server.
+// +kubebuilder:validation:Optional
+Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// Specifies the Availability Zone in which the PostgreSQL Flexible Server should be located.
-	// +kubebuilder:validation:Optional
-	Zone *string `json:"zone,omitempty" tf:"zone,omitempty"`
+// The version of PostgreSQL Flexible Server to use. Possible values are 11,12, 13, 14 and 15. Required when create_mode is Default. Changing this forces a new PostgreSQL Flexible Server to be created.
+// +kubebuilder:validation:Optional
+Version *string `json:"version,omitempty" tf:"version,omitempty"`
+
+// Specifies the Availability Zone in which the PostgreSQL Flexible Server should be located.
+// +kubebuilder:validation:Optional
+Zone *string `json:"zone,omitempty" tf:"zone,omitempty"`
 }
+
 
 type HighAvailabilityInitParameters struct {
 
-	// The high availability mode for the PostgreSQL Flexible Server. Possible value are SameZone or ZoneRedundant.
-	Mode *string `json:"mode,omitempty" tf:"mode,omitempty"`
 
-	// Specifies the Availability Zone in which the standby Flexible Server should be located.
-	StandbyAvailabilityZone *string `json:"standbyAvailabilityZone,omitempty" tf:"standby_availability_zone,omitempty"`
+// The high availability mode for the PostgreSQL Flexible Server. Possible value are SameZone or ZoneRedundant.
+Mode *string `json:"mode,omitempty" tf:"mode,omitempty"`
+
+// Specifies the Availability Zone in which the standby Flexible Server should be located.
+StandbyAvailabilityZone *string `json:"standbyAvailabilityZone,omitempty" tf:"standby_availability_zone,omitempty"`
 }
+
 
 type HighAvailabilityObservation struct {
 
-	// The high availability mode for the PostgreSQL Flexible Server. Possible value are SameZone or ZoneRedundant.
-	Mode *string `json:"mode,omitempty" tf:"mode,omitempty"`
 
-	// Specifies the Availability Zone in which the standby Flexible Server should be located.
-	StandbyAvailabilityZone *string `json:"standbyAvailabilityZone,omitempty" tf:"standby_availability_zone,omitempty"`
+// The high availability mode for the PostgreSQL Flexible Server. Possible value are SameZone or ZoneRedundant.
+Mode *string `json:"mode,omitempty" tf:"mode,omitempty"`
+
+// Specifies the Availability Zone in which the standby Flexible Server should be located.
+StandbyAvailabilityZone *string `json:"standbyAvailabilityZone,omitempty" tf:"standby_availability_zone,omitempty"`
 }
+
 
 type HighAvailabilityParameters struct {
 
-	// The high availability mode for the PostgreSQL Flexible Server. Possible value are SameZone or ZoneRedundant.
-	// +kubebuilder:validation:Optional
-	Mode *string `json:"mode" tf:"mode,omitempty"`
 
-	// Specifies the Availability Zone in which the standby Flexible Server should be located.
-	// +kubebuilder:validation:Optional
-	StandbyAvailabilityZone *string `json:"standbyAvailabilityZone,omitempty" tf:"standby_availability_zone,omitempty"`
+// The high availability mode for the PostgreSQL Flexible Server. Possible value are SameZone or ZoneRedundant.
+// +kubebuilder:validation:Optional
+Mode *string `json:"mode" tf:"mode,omitempty"`
+
+// Specifies the Availability Zone in which the standby Flexible Server should be located.
+// +kubebuilder:validation:Optional
+StandbyAvailabilityZone *string `json:"standbyAvailabilityZone,omitempty" tf:"standby_availability_zone,omitempty"`
 }
+
 
 type IdentityInitParameters struct {
 
-	// A list of User Assigned Managed Identity IDs to be assigned to this PostgreSQL Flexible Server. Required if used together with customer_managed_key block.
-	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
 
-	// Specifies the type of Managed Service Identity that should be configured on this PostgreSQL Flexible Server. The only possible value is UserAssigned.
-	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+// A list of User Assigned Managed Identity IDs to be assigned to this PostgreSQL Flexible Server. Required if used together with customer_managed_key block.
+IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
+
+// Specifies the type of Managed Service Identity that should be configured on this PostgreSQL Flexible Server. The only possible value is UserAssigned.
+Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
+
 
 type IdentityObservation struct {
 
-	// A list of User Assigned Managed Identity IDs to be assigned to this PostgreSQL Flexible Server. Required if used together with customer_managed_key block.
-	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
 
-	// Specifies the type of Managed Service Identity that should be configured on this PostgreSQL Flexible Server. The only possible value is UserAssigned.
-	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+// A list of User Assigned Managed Identity IDs to be assigned to this PostgreSQL Flexible Server. Required if used together with customer_managed_key block.
+IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
+
+// Specifies the type of Managed Service Identity that should be configured on this PostgreSQL Flexible Server. The only possible value is UserAssigned.
+Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
+
 
 type IdentityParameters struct {
 
-	// A list of User Assigned Managed Identity IDs to be assigned to this PostgreSQL Flexible Server. Required if used together with customer_managed_key block.
-	// +kubebuilder:validation:Optional
-	IdentityIds []*string `json:"identityIds" tf:"identity_ids,omitempty"`
 
-	// Specifies the type of Managed Service Identity that should be configured on this PostgreSQL Flexible Server. The only possible value is UserAssigned.
-	// +kubebuilder:validation:Optional
-	Type *string `json:"type" tf:"type,omitempty"`
+// A list of User Assigned Managed Identity IDs to be assigned to this PostgreSQL Flexible Server. Required if used together with customer_managed_key block.
+// +kubebuilder:validation:Optional
+IdentityIds []*string `json:"identityIds" tf:"identity_ids,omitempty"`
+
+// Specifies the type of Managed Service Identity that should be configured on this PostgreSQL Flexible Server. The only possible value is UserAssigned.
+// +kubebuilder:validation:Optional
+Type *string `json:"type" tf:"type,omitempty"`
 }
+
 
 type MaintenanceWindowInitParameters struct {
 
-	// The day of week for maintenance window, where the week starts on a Sunday, i.e. Sunday = 0, Monday = 1. Defaults to 0.
-	DayOfWeek *float64 `json:"dayOfWeek,omitempty" tf:"day_of_week,omitempty"`
 
-	// The start hour for maintenance window. Defaults to 0.
-	StartHour *float64 `json:"startHour,omitempty" tf:"start_hour,omitempty"`
+// The day of week for maintenance window, where the week starts on a Sunday, i.e. Sunday = 0, Monday = 1. Defaults to 0.
+DayOfWeek *float64 `json:"dayOfWeek,omitempty" tf:"day_of_week,omitempty"`
 
-	// The start minute for maintenance window. Defaults to 0.
-	StartMinute *float64 `json:"startMinute,omitempty" tf:"start_minute,omitempty"`
+// The start hour for maintenance window. Defaults to 0.
+StartHour *float64 `json:"startHour,omitempty" tf:"start_hour,omitempty"`
+
+// The start minute for maintenance window. Defaults to 0.
+StartMinute *float64 `json:"startMinute,omitempty" tf:"start_minute,omitempty"`
 }
+
 
 type MaintenanceWindowObservation struct {
 
-	// The day of week for maintenance window, where the week starts on a Sunday, i.e. Sunday = 0, Monday = 1. Defaults to 0.
-	DayOfWeek *float64 `json:"dayOfWeek,omitempty" tf:"day_of_week,omitempty"`
 
-	// The start hour for maintenance window. Defaults to 0.
-	StartHour *float64 `json:"startHour,omitempty" tf:"start_hour,omitempty"`
+// The day of week for maintenance window, where the week starts on a Sunday, i.e. Sunday = 0, Monday = 1. Defaults to 0.
+DayOfWeek *float64 `json:"dayOfWeek,omitempty" tf:"day_of_week,omitempty"`
 
-	// The start minute for maintenance window. Defaults to 0.
-	StartMinute *float64 `json:"startMinute,omitempty" tf:"start_minute,omitempty"`
+// The start hour for maintenance window. Defaults to 0.
+StartHour *float64 `json:"startHour,omitempty" tf:"start_hour,omitempty"`
+
+// The start minute for maintenance window. Defaults to 0.
+StartMinute *float64 `json:"startMinute,omitempty" tf:"start_minute,omitempty"`
 }
+
 
 type MaintenanceWindowParameters struct {
 
-	// The day of week for maintenance window, where the week starts on a Sunday, i.e. Sunday = 0, Monday = 1. Defaults to 0.
-	// +kubebuilder:validation:Optional
-	DayOfWeek *float64 `json:"dayOfWeek,omitempty" tf:"day_of_week,omitempty"`
 
-	// The start hour for maintenance window. Defaults to 0.
-	// +kubebuilder:validation:Optional
-	StartHour *float64 `json:"startHour,omitempty" tf:"start_hour,omitempty"`
+// The day of week for maintenance window, where the week starts on a Sunday, i.e. Sunday = 0, Monday = 1. Defaults to 0.
+// +kubebuilder:validation:Optional
+DayOfWeek *float64 `json:"dayOfWeek,omitempty" tf:"day_of_week,omitempty"`
 
-	// The start minute for maintenance window. Defaults to 0.
-	// +kubebuilder:validation:Optional
-	StartMinute *float64 `json:"startMinute,omitempty" tf:"start_minute,omitempty"`
+// The start hour for maintenance window. Defaults to 0.
+// +kubebuilder:validation:Optional
+StartHour *float64 `json:"startHour,omitempty" tf:"start_hour,omitempty"`
+
+// The start minute for maintenance window. Defaults to 0.
+// +kubebuilder:validation:Optional
+StartMinute *float64 `json:"startMinute,omitempty" tf:"start_minute,omitempty"`
 }
 
 // FlexibleServerSpec defines the desired state of FlexibleServer
 type FlexibleServerSpec struct {
 	v1.ResourceSpec `json:",inline"`
-	ForProvider     FlexibleServerParameters `json:"forProvider"`
+	ForProvider       FlexibleServerParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -448,13 +487,13 @@ type FlexibleServerSpec struct {
 	// required on creation, but we do not desire to update them after creation,
 	// for example because of an external controller is managing them, like an
 	// autoscaler.
-	InitProvider FlexibleServerInitParameters `json:"initProvider,omitempty"`
+	InitProvider       FlexibleServerInitParameters `json:"initProvider,omitempty"`
 }
 
 // FlexibleServerStatus defines the observed state of FlexibleServer.
 type FlexibleServerStatus struct {
 	v1.ResourceStatus `json:",inline"`
-	AtProvider        FlexibleServerObservation `json:"atProvider,omitempty"`
+	AtProvider          FlexibleServerObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true
@@ -469,9 +508,9 @@ type FlexibleServerStatus struct {
 type FlexibleServer struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.location) || (has(self.initProvider) && has(self.initProvider.location))",message="spec.forProvider.location is a required parameter"
-	Spec   FlexibleServerSpec   `json:"spec"`
-	Status FlexibleServerStatus `json:"status,omitempty"`
+// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.location) || (has(self.initProvider) && has(self.initProvider.location))",message="spec.forProvider.location is a required parameter"
+	Spec              FlexibleServerSpec   `json:"spec"`
+	Status            FlexibleServerStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

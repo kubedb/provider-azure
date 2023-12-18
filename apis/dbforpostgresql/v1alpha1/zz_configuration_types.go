@@ -15,76 +15,85 @@ import (
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+
 )
+
+
+
 
 type ConfigurationInitParameters struct {
 
-	// Specifies the name of the PostgreSQL Configuration, which needs to be a valid PostgreSQL configuration name. Changing this forces a new resource to be created.
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// Specifies the value of the PostgreSQL Configuration. See the PostgreSQL documentation for valid values. Changing this forces a new resource to be created.
-	Value *string `json:"value,omitempty" tf:"value,omitempty"`
+// Specifies the name of the PostgreSQL Configuration, which needs to be a valid PostgreSQL configuration name. Changing this forces a new resource to be created.
+Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+// Specifies the value of the PostgreSQL Configuration. See the PostgreSQL documentation for valid values. Changing this forces a new resource to be created.
+Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
+
 
 type ConfigurationObservation struct {
 
-	// The ID of the PostgreSQL Configuration.
-	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// Specifies the name of the PostgreSQL Configuration, which needs to be a valid PostgreSQL configuration name. Changing this forces a new resource to be created.
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+// The ID of the PostgreSQL Configuration.
+ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The name of the resource group in which the PostgreSQL Server exists. Changing this forces a new resource to be created.
-	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+// Specifies the name of the PostgreSQL Configuration, which needs to be a valid PostgreSQL configuration name. Changing this forces a new resource to be created.
+Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// Specifies the name of the PostgreSQL Server. Changing this forces a new resource to be created.
-	ServerName *string `json:"serverName,omitempty" tf:"server_name,omitempty"`
+// The name of the resource group in which the PostgreSQL Server exists. Changing this forces a new resource to be created.
+ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 
-	// Specifies the value of the PostgreSQL Configuration. See the PostgreSQL documentation for valid values. Changing this forces a new resource to be created.
-	Value *string `json:"value,omitempty" tf:"value,omitempty"`
+// Specifies the name of the PostgreSQL Server. Changing this forces a new resource to be created.
+ServerName *string `json:"serverName,omitempty" tf:"server_name,omitempty"`
+
+// Specifies the value of the PostgreSQL Configuration. See the PostgreSQL documentation for valid values. Changing this forces a new resource to be created.
+Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
+
 
 type ConfigurationParameters struct {
 
-	// Specifies the name of the PostgreSQL Configuration, which needs to be a valid PostgreSQL configuration name. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// The name of the resource group in which the PostgreSQL Server exists. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=kubedb.dev/provider-azure/apis/azure/v1alpha1.ResourceGroup
-	// +kubebuilder:validation:Optional
-	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+// Specifies the name of the PostgreSQL Configuration, which needs to be a valid PostgreSQL configuration name. Changing this forces a new resource to be created.
+// +kubebuilder:validation:Optional
+Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// Reference to a ResourceGroup in azure to populate resourceGroupName.
-	// +kubebuilder:validation:Optional
-	ResourceGroupNameRef *v1.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+// The name of the resource group in which the PostgreSQL Server exists. Changing this forces a new resource to be created.
+// +crossplane:generate:reference:type=kubedb.dev/provider-azure/apis/azure/v1alpha1.ResourceGroup
+// +kubebuilder:validation:Optional
+ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 
-	// Selector for a ResourceGroup in azure to populate resourceGroupName.
-	// +kubebuilder:validation:Optional
-	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+// Reference to a ResourceGroup in azure to populate resourceGroupName.
+// +kubebuilder:validation:Optional
+ResourceGroupNameRef *v1.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
-	// Specifies the name of the PostgreSQL Server. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=Server
-	// +kubebuilder:validation:Optional
-	ServerName *string `json:"serverName,omitempty" tf:"server_name,omitempty"`
+// Selector for a ResourceGroup in azure to populate resourceGroupName.
+// +kubebuilder:validation:Optional
+ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
-	// Reference to a Server to populate serverName.
-	// +kubebuilder:validation:Optional
-	ServerNameRef *v1.Reference `json:"serverNameRef,omitempty" tf:"-"`
+// Specifies the name of the PostgreSQL Server. Changing this forces a new resource to be created.
+// +crossplane:generate:reference:type=Server
+// +kubebuilder:validation:Optional
+ServerName *string `json:"serverName,omitempty" tf:"server_name,omitempty"`
 
-	// Selector for a Server to populate serverName.
-	// +kubebuilder:validation:Optional
-	ServerNameSelector *v1.Selector `json:"serverNameSelector,omitempty" tf:"-"`
+// Reference to a Server to populate serverName.
+// +kubebuilder:validation:Optional
+ServerNameRef *v1.Reference `json:"serverNameRef,omitempty" tf:"-"`
 
-	// Specifies the value of the PostgreSQL Configuration. See the PostgreSQL documentation for valid values. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Optional
-	Value *string `json:"value,omitempty" tf:"value,omitempty"`
+// Selector for a Server to populate serverName.
+// +kubebuilder:validation:Optional
+ServerNameSelector *v1.Selector `json:"serverNameSelector,omitempty" tf:"-"`
+
+// Specifies the value of the PostgreSQL Configuration. See the PostgreSQL documentation for valid values. Changing this forces a new resource to be created.
+// +kubebuilder:validation:Optional
+Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 // ConfigurationSpec defines the desired state of Configuration
 type ConfigurationSpec struct {
 	v1.ResourceSpec `json:",inline"`
-	ForProvider     ConfigurationParameters `json:"forProvider"`
+	ForProvider       ConfigurationParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -95,13 +104,13 @@ type ConfigurationSpec struct {
 	// required on creation, but we do not desire to update them after creation,
 	// for example because of an external controller is managing them, like an
 	// autoscaler.
-	InitProvider ConfigurationInitParameters `json:"initProvider,omitempty"`
+	InitProvider       ConfigurationInitParameters `json:"initProvider,omitempty"`
 }
 
 // ConfigurationStatus defines the observed state of Configuration.
 type ConfigurationStatus struct {
 	v1.ResourceStatus `json:",inline"`
-	AtProvider        ConfigurationObservation `json:"atProvider,omitempty"`
+	AtProvider          ConfigurationObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true
@@ -116,10 +125,10 @@ type ConfigurationStatus struct {
 type Configuration struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name) || (has(self.initProvider) && has(self.initProvider.name))",message="spec.forProvider.name is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.value) || (has(self.initProvider) && has(self.initProvider.value))",message="spec.forProvider.value is a required parameter"
-	Spec   ConfigurationSpec   `json:"spec"`
-	Status ConfigurationStatus `json:"status,omitempty"`
+// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name) || (has(self.initProvider) && has(self.initProvider.name))",message="spec.forProvider.name is a required parameter"
+// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.value) || (has(self.initProvider) && has(self.initProvider.value))",message="spec.forProvider.value is a required parameter"
+	Spec              ConfigurationSpec   `json:"spec"`
+	Status            ConfigurationStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

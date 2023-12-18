@@ -15,76 +15,85 @@ import (
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+
 )
+
+
+
 
 type FlexibleServerFirewallRuleInitParameters struct {
 
-	// Specifies the End IP Address associated with this Firewall Rule.
-	EndIPAddress *string `json:"endIpAddress,omitempty" tf:"end_ip_address,omitempty"`
 
-	// Specifies the Start IP Address associated with this Firewall Rule.
-	StartIPAddress *string `json:"startIpAddress,omitempty" tf:"start_ip_address,omitempty"`
+// Specifies the End IP Address associated with this Firewall Rule.
+EndIPAddress *string `json:"endIpAddress,omitempty" tf:"end_ip_address,omitempty"`
+
+// Specifies the Start IP Address associated with this Firewall Rule.
+StartIPAddress *string `json:"startIpAddress,omitempty" tf:"start_ip_address,omitempty"`
 }
+
 
 type FlexibleServerFirewallRuleObservation struct {
 
-	// Specifies the End IP Address associated with this Firewall Rule.
-	EndIPAddress *string `json:"endIpAddress,omitempty" tf:"end_ip_address,omitempty"`
 
-	// The ID of the MySQL Firewall Rule.
-	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+// Specifies the End IP Address associated with this Firewall Rule.
+EndIPAddress *string `json:"endIpAddress,omitempty" tf:"end_ip_address,omitempty"`
 
-	// The name of the resource group in which the MySQL Flexible Server exists. Changing this forces a new resource to be created.
-	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+// The ID of the MySQL Firewall Rule.
+ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// Specifies the name of the MySQL Flexible Server. Changing this forces a new resource to be created.
-	ServerName *string `json:"serverName,omitempty" tf:"server_name,omitempty"`
+// The name of the resource group in which the MySQL Flexible Server exists. Changing this forces a new resource to be created.
+ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 
-	// Specifies the Start IP Address associated with this Firewall Rule.
-	StartIPAddress *string `json:"startIpAddress,omitempty" tf:"start_ip_address,omitempty"`
+// Specifies the name of the MySQL Flexible Server. Changing this forces a new resource to be created.
+ServerName *string `json:"serverName,omitempty" tf:"server_name,omitempty"`
+
+// Specifies the Start IP Address associated with this Firewall Rule.
+StartIPAddress *string `json:"startIpAddress,omitempty" tf:"start_ip_address,omitempty"`
 }
+
 
 type FlexibleServerFirewallRuleParameters struct {
 
-	// Specifies the End IP Address associated with this Firewall Rule.
-	// +kubebuilder:validation:Optional
-	EndIPAddress *string `json:"endIpAddress,omitempty" tf:"end_ip_address,omitempty"`
 
-	// The name of the resource group in which the MySQL Flexible Server exists. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=kubedb.dev/provider-azure/apis/azure/v1alpha1.ResourceGroup
-	// +kubebuilder:validation:Optional
-	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+// Specifies the End IP Address associated with this Firewall Rule.
+// +kubebuilder:validation:Optional
+EndIPAddress *string `json:"endIpAddress,omitempty" tf:"end_ip_address,omitempty"`
 
-	// Reference to a ResourceGroup in azure to populate resourceGroupName.
-	// +kubebuilder:validation:Optional
-	ResourceGroupNameRef *v1.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+// The name of the resource group in which the MySQL Flexible Server exists. Changing this forces a new resource to be created.
+// +crossplane:generate:reference:type=kubedb.dev/provider-azure/apis/azure/v1alpha1.ResourceGroup
+// +kubebuilder:validation:Optional
+ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 
-	// Selector for a ResourceGroup in azure to populate resourceGroupName.
-	// +kubebuilder:validation:Optional
-	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+// Reference to a ResourceGroup in azure to populate resourceGroupName.
+// +kubebuilder:validation:Optional
+ResourceGroupNameRef *v1.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
-	// Specifies the name of the MySQL Flexible Server. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=FlexibleServer
-	// +kubebuilder:validation:Optional
-	ServerName *string `json:"serverName,omitempty" tf:"server_name,omitempty"`
+// Selector for a ResourceGroup in azure to populate resourceGroupName.
+// +kubebuilder:validation:Optional
+ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
-	// Reference to a FlexibleServer to populate serverName.
-	// +kubebuilder:validation:Optional
-	ServerNameRef *v1.Reference `json:"serverNameRef,omitempty" tf:"-"`
+// Specifies the name of the MySQL Flexible Server. Changing this forces a new resource to be created.
+// +crossplane:generate:reference:type=FlexibleServer
+// +kubebuilder:validation:Optional
+ServerName *string `json:"serverName,omitempty" tf:"server_name,omitempty"`
 
-	// Selector for a FlexibleServer to populate serverName.
-	// +kubebuilder:validation:Optional
-	ServerNameSelector *v1.Selector `json:"serverNameSelector,omitempty" tf:"-"`
+// Reference to a FlexibleServer to populate serverName.
+// +kubebuilder:validation:Optional
+ServerNameRef *v1.Reference `json:"serverNameRef,omitempty" tf:"-"`
 
-	// Specifies the Start IP Address associated with this Firewall Rule.
-	// +kubebuilder:validation:Optional
-	StartIPAddress *string `json:"startIpAddress,omitempty" tf:"start_ip_address,omitempty"`
+// Selector for a FlexibleServer to populate serverName.
+// +kubebuilder:validation:Optional
+ServerNameSelector *v1.Selector `json:"serverNameSelector,omitempty" tf:"-"`
+
+// Specifies the Start IP Address associated with this Firewall Rule.
+// +kubebuilder:validation:Optional
+StartIPAddress *string `json:"startIpAddress,omitempty" tf:"start_ip_address,omitempty"`
 }
 
 // FlexibleServerFirewallRuleSpec defines the desired state of FlexibleServerFirewallRule
 type FlexibleServerFirewallRuleSpec struct {
 	v1.ResourceSpec `json:",inline"`
-	ForProvider     FlexibleServerFirewallRuleParameters `json:"forProvider"`
+	ForProvider       FlexibleServerFirewallRuleParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -95,13 +104,13 @@ type FlexibleServerFirewallRuleSpec struct {
 	// required on creation, but we do not desire to update them after creation,
 	// for example because of an external controller is managing them, like an
 	// autoscaler.
-	InitProvider FlexibleServerFirewallRuleInitParameters `json:"initProvider,omitempty"`
+	InitProvider       FlexibleServerFirewallRuleInitParameters `json:"initProvider,omitempty"`
 }
 
 // FlexibleServerFirewallRuleStatus defines the observed state of FlexibleServerFirewallRule.
 type FlexibleServerFirewallRuleStatus struct {
 	v1.ResourceStatus `json:",inline"`
-	AtProvider        FlexibleServerFirewallRuleObservation `json:"atProvider,omitempty"`
+	AtProvider          FlexibleServerFirewallRuleObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true
@@ -116,10 +125,10 @@ type FlexibleServerFirewallRuleStatus struct {
 type FlexibleServerFirewallRule struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.endIpAddress) || (has(self.initProvider) && has(self.initProvider.endIpAddress))",message="spec.forProvider.endIpAddress is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.startIpAddress) || (has(self.initProvider) && has(self.initProvider.startIpAddress))",message="spec.forProvider.startIpAddress is a required parameter"
-	Spec   FlexibleServerFirewallRuleSpec   `json:"spec"`
-	Status FlexibleServerFirewallRuleStatus `json:"status,omitempty"`
+// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.endIpAddress) || (has(self.initProvider) && has(self.initProvider.endIpAddress))",message="spec.forProvider.endIpAddress is a required parameter"
+// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.startIpAddress) || (has(self.initProvider) && has(self.initProvider.startIpAddress))",message="spec.forProvider.startIpAddress is a required parameter"
+	Spec              FlexibleServerFirewallRuleSpec   `json:"spec"`
+	Status            FlexibleServerFirewallRuleStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

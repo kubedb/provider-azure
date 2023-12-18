@@ -15,71 +15,80 @@ import (
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+
 )
+
+
+
 
 type SQLTriggerInitParameters struct {
 
-	// Body of the Trigger.
-	Body *string `json:"body,omitempty" tf:"body,omitempty"`
 
-	// The operation the trigger is associated with. Possible values are All, Create, Update, Delete and Replace.
-	Operation *string `json:"operation,omitempty" tf:"operation,omitempty"`
+// Body of the Trigger.
+Body *string `json:"body,omitempty" tf:"body,omitempty"`
 
-	// Type of the Trigger. Possible values are Pre and Post.
-	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+// The operation the trigger is associated with. Possible values are All, Create, Update, Delete and Replace.
+Operation *string `json:"operation,omitempty" tf:"operation,omitempty"`
+
+// Type of the Trigger. Possible values are Pre and Post.
+Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
+
 
 type SQLTriggerObservation struct {
 
-	// Body of the Trigger.
-	Body *string `json:"body,omitempty" tf:"body,omitempty"`
 
-	// The id of the Cosmos DB SQL Container to create the SQL Trigger within. Changing this forces a new SQL Trigger to be created.
-	ContainerID *string `json:"containerId,omitempty" tf:"container_id,omitempty"`
+// Body of the Trigger.
+Body *string `json:"body,omitempty" tf:"body,omitempty"`
 
-	// The ID of the SQL Trigger.
-	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+// The id of the Cosmos DB SQL Container to create the SQL Trigger within. Changing this forces a new SQL Trigger to be created.
+ContainerID *string `json:"containerId,omitempty" tf:"container_id,omitempty"`
 
-	// The operation the trigger is associated with. Possible values are All, Create, Update, Delete and Replace.
-	Operation *string `json:"operation,omitempty" tf:"operation,omitempty"`
+// The ID of the SQL Trigger.
+ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// Type of the Trigger. Possible values are Pre and Post.
-	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+// The operation the trigger is associated with. Possible values are All, Create, Update, Delete and Replace.
+Operation *string `json:"operation,omitempty" tf:"operation,omitempty"`
+
+// Type of the Trigger. Possible values are Pre and Post.
+Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
+
 
 type SQLTriggerParameters struct {
 
-	// Body of the Trigger.
-	// +kubebuilder:validation:Optional
-	Body *string `json:"body,omitempty" tf:"body,omitempty"`
 
-	// The id of the Cosmos DB SQL Container to create the SQL Trigger within. Changing this forces a new SQL Trigger to be created.
-	// +crossplane:generate:reference:type=SQLContainer
-	// +crossplane:generate:reference:extractor=kubedb.dev/provider-azure/apis/rconfig.ExtractResourceID()
-	// +kubebuilder:validation:Optional
-	ContainerID *string `json:"containerId,omitempty" tf:"container_id,omitempty"`
+// Body of the Trigger.
+// +kubebuilder:validation:Optional
+Body *string `json:"body,omitempty" tf:"body,omitempty"`
 
-	// Reference to a SQLContainer to populate containerId.
-	// +kubebuilder:validation:Optional
-	ContainerIDRef *v1.Reference `json:"containerIdRef,omitempty" tf:"-"`
+// The id of the Cosmos DB SQL Container to create the SQL Trigger within. Changing this forces a new SQL Trigger to be created.
+// +crossplane:generate:reference:type=SQLContainer
+// +crossplane:generate:reference:extractor=kubedb.dev/provider-azure/apis/rconfig.ExtractResourceID()
+// +kubebuilder:validation:Optional
+ContainerID *string `json:"containerId,omitempty" tf:"container_id,omitempty"`
 
-	// Selector for a SQLContainer to populate containerId.
-	// +kubebuilder:validation:Optional
-	ContainerIDSelector *v1.Selector `json:"containerIdSelector,omitempty" tf:"-"`
+// Reference to a SQLContainer to populate containerId.
+// +kubebuilder:validation:Optional
+ContainerIDRef *v1.Reference `json:"containerIdRef,omitempty" tf:"-"`
 
-	// The operation the trigger is associated with. Possible values are All, Create, Update, Delete and Replace.
-	// +kubebuilder:validation:Optional
-	Operation *string `json:"operation,omitempty" tf:"operation,omitempty"`
+// Selector for a SQLContainer to populate containerId.
+// +kubebuilder:validation:Optional
+ContainerIDSelector *v1.Selector `json:"containerIdSelector,omitempty" tf:"-"`
 
-	// Type of the Trigger. Possible values are Pre and Post.
-	// +kubebuilder:validation:Optional
-	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+// The operation the trigger is associated with. Possible values are All, Create, Update, Delete and Replace.
+// +kubebuilder:validation:Optional
+Operation *string `json:"operation,omitempty" tf:"operation,omitempty"`
+
+// Type of the Trigger. Possible values are Pre and Post.
+// +kubebuilder:validation:Optional
+Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 // SQLTriggerSpec defines the desired state of SQLTrigger
 type SQLTriggerSpec struct {
 	v1.ResourceSpec `json:",inline"`
-	ForProvider     SQLTriggerParameters `json:"forProvider"`
+	ForProvider       SQLTriggerParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -90,13 +99,13 @@ type SQLTriggerSpec struct {
 	// required on creation, but we do not desire to update them after creation,
 	// for example because of an external controller is managing them, like an
 	// autoscaler.
-	InitProvider SQLTriggerInitParameters `json:"initProvider,omitempty"`
+	InitProvider       SQLTriggerInitParameters `json:"initProvider,omitempty"`
 }
 
 // SQLTriggerStatus defines the observed state of SQLTrigger.
 type SQLTriggerStatus struct {
 	v1.ResourceStatus `json:",inline"`
-	AtProvider        SQLTriggerObservation `json:"atProvider,omitempty"`
+	AtProvider          SQLTriggerObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true
@@ -111,11 +120,11 @@ type SQLTriggerStatus struct {
 type SQLTrigger struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.body) || (has(self.initProvider) && has(self.initProvider.body))",message="spec.forProvider.body is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.operation) || (has(self.initProvider) && has(self.initProvider.operation))",message="spec.forProvider.operation is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.type) || (has(self.initProvider) && has(self.initProvider.type))",message="spec.forProvider.type is a required parameter"
-	Spec   SQLTriggerSpec   `json:"spec"`
-	Status SQLTriggerStatus `json:"status,omitempty"`
+// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.body) || (has(self.initProvider) && has(self.initProvider.body))",message="spec.forProvider.body is a required parameter"
+// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.operation) || (has(self.initProvider) && has(self.initProvider.operation))",message="spec.forProvider.operation is a required parameter"
+// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.type) || (has(self.initProvider) && has(self.initProvider.type))",message="spec.forProvider.type is a required parameter"
+	Spec              SQLTriggerSpec   `json:"spec"`
+	Status            SQLTriggerStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

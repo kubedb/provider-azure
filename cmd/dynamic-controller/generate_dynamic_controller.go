@@ -6,8 +6,8 @@ import (
 	"github.com/crossplane/upjet/pkg/config"
 	"github.com/crossplane/upjet/pkg/examples"
 	"github.com/crossplane/upjet/pkg/pipeline"
-	pconfig "kubedb.dev/provider-azure/config"
 	"os"
+	"os/exec"
 	"path/filepath"
 	"sort"
 	"strings"
@@ -17,7 +17,7 @@ var (
 	groupKind map[string]string
 )
 
-func GenerateController() {
+func GenerateController(pc *config.Provider, absRootDir string) {
 	groupKind = make(map[string]string)
 	if len(os.Args) < 2 || os.Args[1] == "" {
 		panic("root directory is required to be given as argument")
@@ -27,7 +27,6 @@ func GenerateController() {
 	if err != nil {
 		panic(fmt.Sprintf("cannot calculate the absolute path with %s", rootDir))
 	}
-	pc := pconfig.GetProvider()
 	resourcesGroups := map[string]map[string]map[string]*config.Resource{}
 	for name, resource := range pc.Resources {
 		group := pc.RootGroup
@@ -41,7 +40,6 @@ func GenerateController() {
 			resourcesGroups[group][resource.Version] = map[string]*config.Resource{}
 		}
 		resourcesGroups[group][resource.Version][name] = resource
-		//fmt.Println(group, " ", resource.Version, " ", name, " ", resource.Kind, " ", resource.ShortGroup)
 		kind := strings.ToLower(resource.Kind)
 		groupKind[kind] = resource.Kind
 	}
@@ -121,8 +119,14 @@ func GenerateController() {
 			apiVersionPkgList = append(apiVersionPkgList, versionGen.Package().Path())
 		}
 	}
-	if err := NewProviderGenerator(rootDir, pc.ModulePath).Generate(controllerPkgMap, pc.MainTemplate, pc.ShortName); err != nil {
+	if err := NewProviderGenerator(rootDir, pc.ModulePath).Generate(controllerPkgMap, pc.MainTemplate, pc.ShortName, pc.RootGroup, absRootDir); err != nil {
 		panic(errors.Wrap(err, "cannot generate setup file"))
+	}
+
+	internalCmd := exec.Command("bash", "-c", "goimports -w $(find . -iname 'zz_*')")
+	internalCmd.Dir = filepath.Clean(filepath.Join(rootDir, "internal"))
+	if out, err := internalCmd.CombinedOutput(); err != nil {
+		panic(errors.Wrap(err, "cannot run goimports for internal folder: "+string(out)))
 	}
 }
 

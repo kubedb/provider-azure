@@ -15,367 +15,418 @@ import (
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+
 )
+
+
+
 
 type CompositeIndexInitParameters struct {
 
-	// One or more index blocks as defined below.
-	Index []IndexInitParameters `json:"index,omitempty" tf:"index,omitempty"`
+
+// One or more index blocks as defined below.
+Index []IndexInitParameters `json:"index,omitempty" tf:"index,omitempty"`
 }
+
 
 type CompositeIndexObservation struct {
 
-	// One or more index blocks as defined below.
-	Index []IndexObservation `json:"index,omitempty" tf:"index,omitempty"`
+
+// One or more index blocks as defined below.
+Index []IndexObservation `json:"index,omitempty" tf:"index,omitempty"`
 }
+
 
 type CompositeIndexParameters struct {
 
-	// One or more index blocks as defined below.
-	// +kubebuilder:validation:Optional
-	Index []IndexParameters `json:"index" tf:"index,omitempty"`
+
+// One or more index blocks as defined below.
+// +kubebuilder:validation:Optional
+Index []IndexParameters `json:"index" tf:"index,omitempty"`
 }
+
 
 type ConflictResolutionPolicyInitParameters struct {
 
-	// The conflict resolution path in the case of LastWriterWins mode.
-	ConflictResolutionPath *string `json:"conflictResolutionPath,omitempty" tf:"conflict_resolution_path,omitempty"`
 
-	// The procedure to resolve conflicts in the case of custom mode.
-	ConflictResolutionProcedure *string `json:"conflictResolutionProcedure,omitempty" tf:"conflict_resolution_procedure,omitempty"`
+// The conflict resolution path in the case of LastWriterWins mode.
+ConflictResolutionPath *string `json:"conflictResolutionPath,omitempty" tf:"conflict_resolution_path,omitempty"`
 
-	// Indicates the conflict resolution mode. Possible values include: LastWriterWins, Custom.
-	Mode *string `json:"mode,omitempty" tf:"mode,omitempty"`
+// The procedure to resolve conflicts in the case of custom mode.
+ConflictResolutionProcedure *string `json:"conflictResolutionProcedure,omitempty" tf:"conflict_resolution_procedure,omitempty"`
+
+// Indicates the conflict resolution mode. Possible values include: LastWriterWins, Custom.
+Mode *string `json:"mode,omitempty" tf:"mode,omitempty"`
 }
+
 
 type ConflictResolutionPolicyObservation struct {
 
-	// The conflict resolution path in the case of LastWriterWins mode.
-	ConflictResolutionPath *string `json:"conflictResolutionPath,omitempty" tf:"conflict_resolution_path,omitempty"`
 
-	// The procedure to resolve conflicts in the case of custom mode.
-	ConflictResolutionProcedure *string `json:"conflictResolutionProcedure,omitempty" tf:"conflict_resolution_procedure,omitempty"`
+// The conflict resolution path in the case of LastWriterWins mode.
+ConflictResolutionPath *string `json:"conflictResolutionPath,omitempty" tf:"conflict_resolution_path,omitempty"`
 
-	// Indicates the conflict resolution mode. Possible values include: LastWriterWins, Custom.
-	Mode *string `json:"mode,omitempty" tf:"mode,omitempty"`
+// The procedure to resolve conflicts in the case of custom mode.
+ConflictResolutionProcedure *string `json:"conflictResolutionProcedure,omitempty" tf:"conflict_resolution_procedure,omitempty"`
+
+// Indicates the conflict resolution mode. Possible values include: LastWriterWins, Custom.
+Mode *string `json:"mode,omitempty" tf:"mode,omitempty"`
 }
+
 
 type ConflictResolutionPolicyParameters struct {
 
-	// The conflict resolution path in the case of LastWriterWins mode.
-	// +kubebuilder:validation:Optional
-	ConflictResolutionPath *string `json:"conflictResolutionPath,omitempty" tf:"conflict_resolution_path,omitempty"`
 
-	// The procedure to resolve conflicts in the case of custom mode.
-	// +kubebuilder:validation:Optional
-	ConflictResolutionProcedure *string `json:"conflictResolutionProcedure,omitempty" tf:"conflict_resolution_procedure,omitempty"`
+// The conflict resolution path in the case of LastWriterWins mode.
+// +kubebuilder:validation:Optional
+ConflictResolutionPath *string `json:"conflictResolutionPath,omitempty" tf:"conflict_resolution_path,omitempty"`
 
-	// Indicates the conflict resolution mode. Possible values include: LastWriterWins, Custom.
-	// +kubebuilder:validation:Optional
-	Mode *string `json:"mode" tf:"mode,omitempty"`
+// The procedure to resolve conflicts in the case of custom mode.
+// +kubebuilder:validation:Optional
+ConflictResolutionProcedure *string `json:"conflictResolutionProcedure,omitempty" tf:"conflict_resolution_procedure,omitempty"`
+
+// Indicates the conflict resolution mode. Possible values include: LastWriterWins, Custom.
+// +kubebuilder:validation:Optional
+Mode *string `json:"mode" tf:"mode,omitempty"`
 }
+
 
 type GremlinGraphAutoscaleSettingsInitParameters struct {
 
-	// The maximum throughput of the Gremlin graph (RU/s). Must be between 1,000 and 1,000,000. Must be set in increments of 1,000. Conflicts with throughput.
-	MaxThroughput *float64 `json:"maxThroughput,omitempty" tf:"max_throughput,omitempty"`
+
+// The maximum throughput of the Gremlin graph (RU/s). Must be between 1,000 and 1,000,000. Must be set in increments of 1,000. Conflicts with throughput.
+MaxThroughput *float64 `json:"maxThroughput,omitempty" tf:"max_throughput,omitempty"`
 }
+
 
 type GremlinGraphAutoscaleSettingsObservation struct {
 
-	// The maximum throughput of the Gremlin graph (RU/s). Must be between 1,000 and 1,000,000. Must be set in increments of 1,000. Conflicts with throughput.
-	MaxThroughput *float64 `json:"maxThroughput,omitempty" tf:"max_throughput,omitempty"`
+
+// The maximum throughput of the Gremlin graph (RU/s). Must be between 1,000 and 1,000,000. Must be set in increments of 1,000. Conflicts with throughput.
+MaxThroughput *float64 `json:"maxThroughput,omitempty" tf:"max_throughput,omitempty"`
 }
+
 
 type GremlinGraphAutoscaleSettingsParameters struct {
 
-	// The maximum throughput of the Gremlin graph (RU/s). Must be between 1,000 and 1,000,000. Must be set in increments of 1,000. Conflicts with throughput.
-	// +kubebuilder:validation:Optional
-	MaxThroughput *float64 `json:"maxThroughput,omitempty" tf:"max_throughput,omitempty"`
+
+// The maximum throughput of the Gremlin graph (RU/s). Must be between 1,000 and 1,000,000. Must be set in increments of 1,000. Conflicts with throughput.
+// +kubebuilder:validation:Optional
+MaxThroughput *float64 `json:"maxThroughput,omitempty" tf:"max_throughput,omitempty"`
 }
+
 
 type GremlinGraphInitParameters struct {
 
-	// An autoscale_settings block as defined below. Requires partition_key_path to be set.
-	AutoscaleSettings []GremlinGraphAutoscaleSettingsInitParameters `json:"autoscaleSettings,omitempty" tf:"autoscale_settings,omitempty"`
 
-	// A conflict_resolution_policy blocks as defined below. Changing this forces a new resource to be created.
-	ConflictResolutionPolicy []ConflictResolutionPolicyInitParameters `json:"conflictResolutionPolicy,omitempty" tf:"conflict_resolution_policy,omitempty"`
+// An autoscale_settings block as defined below. Requires partition_key_path to be set.
+AutoscaleSettings []GremlinGraphAutoscaleSettingsInitParameters `json:"autoscaleSettings,omitempty" tf:"autoscale_settings,omitempty"`
 
-	// The default time to live (TTL) of the Gremlin graph. If the value is missing or set to "-1", items don’t expire.
-	DefaultTTL *float64 `json:"defaultTtl,omitempty" tf:"default_ttl,omitempty"`
+// A conflict_resolution_policy blocks as defined below. Changing this forces a new resource to be created.
+ConflictResolutionPolicy []ConflictResolutionPolicyInitParameters `json:"conflictResolutionPolicy,omitempty" tf:"conflict_resolution_policy,omitempty"`
 
-	// The configuration of the indexing policy. One or more index_policy blocks as defined below.
-	IndexPolicy []IndexPolicyInitParameters `json:"indexPolicy,omitempty" tf:"index_policy,omitempty"`
+// The default time to live (TTL) of the Gremlin graph. If the value is missing or set to "-1", items don’t expire.
+DefaultTTL *float64 `json:"defaultTtl,omitempty" tf:"default_ttl,omitempty"`
 
-	// Define a partition key. Changing this forces a new resource to be created.
-	PartitionKeyPath *string `json:"partitionKeyPath,omitempty" tf:"partition_key_path,omitempty"`
+// The configuration of the indexing policy. One or more index_policy blocks as defined below.
+IndexPolicy []IndexPolicyInitParameters `json:"indexPolicy,omitempty" tf:"index_policy,omitempty"`
 
-	// Define a partition key version. Changing this forces a new resource to be created. Possible values are 1and 2. This should be set to 2 in order to use large partition keys.
-	PartitionKeyVersion *float64 `json:"partitionKeyVersion,omitempty" tf:"partition_key_version,omitempty"`
+// Define a partition key. Changing this forces a new resource to be created.
+PartitionKeyPath *string `json:"partitionKeyPath,omitempty" tf:"partition_key_path,omitempty"`
 
-	// The throughput of the Gremlin graph (RU/s). Must be set in increments of 100. The minimum value is 400.
-	Throughput *float64 `json:"throughput,omitempty" tf:"throughput,omitempty"`
+// Define a partition key version. Changing this forces a new resource to be created. Possible values are 1and 2. This should be set to 2 in order to use large partition keys.
+PartitionKeyVersion *float64 `json:"partitionKeyVersion,omitempty" tf:"partition_key_version,omitempty"`
 
-	// One or more unique_key blocks as defined below. Changing this forces a new resource to be created.
-	UniqueKey []UniqueKeyInitParameters `json:"uniqueKey,omitempty" tf:"unique_key,omitempty"`
+// The throughput of the Gremlin graph (RU/s). Must be set in increments of 100. The minimum value is 400.
+Throughput *float64 `json:"throughput,omitempty" tf:"throughput,omitempty"`
+
+// One or more unique_key blocks as defined below. Changing this forces a new resource to be created.
+UniqueKey []UniqueKeyInitParameters `json:"uniqueKey,omitempty" tf:"unique_key,omitempty"`
 }
+
 
 type GremlinGraphObservation struct {
 
-	// The name of the CosmosDB Account to create the Gremlin Graph within. Changing this forces a new resource to be created.
-	AccountName *string `json:"accountName,omitempty" tf:"account_name,omitempty"`
 
-	// An autoscale_settings block as defined below. Requires partition_key_path to be set.
-	AutoscaleSettings []GremlinGraphAutoscaleSettingsObservation `json:"autoscaleSettings,omitempty" tf:"autoscale_settings,omitempty"`
+// The name of the CosmosDB Account to create the Gremlin Graph within. Changing this forces a new resource to be created.
+AccountName *string `json:"accountName,omitempty" tf:"account_name,omitempty"`
 
-	// A conflict_resolution_policy blocks as defined below. Changing this forces a new resource to be created.
-	ConflictResolutionPolicy []ConflictResolutionPolicyObservation `json:"conflictResolutionPolicy,omitempty" tf:"conflict_resolution_policy,omitempty"`
+// An autoscale_settings block as defined below. Requires partition_key_path to be set.
+AutoscaleSettings []GremlinGraphAutoscaleSettingsObservation `json:"autoscaleSettings,omitempty" tf:"autoscale_settings,omitempty"`
 
-	// The name of the Cosmos DB Graph Database in which the Cosmos DB Gremlin Graph is created. Changing this forces a new resource to be created.
-	DatabaseName *string `json:"databaseName,omitempty" tf:"database_name,omitempty"`
+// A conflict_resolution_policy blocks as defined below. Changing this forces a new resource to be created.
+ConflictResolutionPolicy []ConflictResolutionPolicyObservation `json:"conflictResolutionPolicy,omitempty" tf:"conflict_resolution_policy,omitempty"`
 
-	// The default time to live (TTL) of the Gremlin graph. If the value is missing or set to "-1", items don’t expire.
-	DefaultTTL *float64 `json:"defaultTtl,omitempty" tf:"default_ttl,omitempty"`
+// The name of the Cosmos DB Graph Database in which the Cosmos DB Gremlin Graph is created. Changing this forces a new resource to be created.
+DatabaseName *string `json:"databaseName,omitempty" tf:"database_name,omitempty"`
 
-	// The ID of the CosmosDB Gremlin Graph.
-	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+// The default time to live (TTL) of the Gremlin graph. If the value is missing or set to "-1", items don’t expire.
+DefaultTTL *float64 `json:"defaultTtl,omitempty" tf:"default_ttl,omitempty"`
 
-	// The configuration of the indexing policy. One or more index_policy blocks as defined below.
-	IndexPolicy []IndexPolicyObservation `json:"indexPolicy,omitempty" tf:"index_policy,omitempty"`
+// The ID of the CosmosDB Gremlin Graph.
+ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// Define a partition key. Changing this forces a new resource to be created.
-	PartitionKeyPath *string `json:"partitionKeyPath,omitempty" tf:"partition_key_path,omitempty"`
+// The configuration of the indexing policy. One or more index_policy blocks as defined below.
+IndexPolicy []IndexPolicyObservation `json:"indexPolicy,omitempty" tf:"index_policy,omitempty"`
 
-	// Define a partition key version. Changing this forces a new resource to be created. Possible values are 1and 2. This should be set to 2 in order to use large partition keys.
-	PartitionKeyVersion *float64 `json:"partitionKeyVersion,omitempty" tf:"partition_key_version,omitempty"`
+// Define a partition key. Changing this forces a new resource to be created.
+PartitionKeyPath *string `json:"partitionKeyPath,omitempty" tf:"partition_key_path,omitempty"`
 
-	// The name of the resource group in which the Cosmos DB Gremlin Graph is created. Changing this forces a new resource to be created.
-	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+// Define a partition key version. Changing this forces a new resource to be created. Possible values are 1and 2. This should be set to 2 in order to use large partition keys.
+PartitionKeyVersion *float64 `json:"partitionKeyVersion,omitempty" tf:"partition_key_version,omitempty"`
 
-	// The throughput of the Gremlin graph (RU/s). Must be set in increments of 100. The minimum value is 400.
-	Throughput *float64 `json:"throughput,omitempty" tf:"throughput,omitempty"`
+// The name of the resource group in which the Cosmos DB Gremlin Graph is created. Changing this forces a new resource to be created.
+ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 
-	// One or more unique_key blocks as defined below. Changing this forces a new resource to be created.
-	UniqueKey []UniqueKeyObservation `json:"uniqueKey,omitempty" tf:"unique_key,omitempty"`
+// The throughput of the Gremlin graph (RU/s). Must be set in increments of 100. The minimum value is 400.
+Throughput *float64 `json:"throughput,omitempty" tf:"throughput,omitempty"`
+
+// One or more unique_key blocks as defined below. Changing this forces a new resource to be created.
+UniqueKey []UniqueKeyObservation `json:"uniqueKey,omitempty" tf:"unique_key,omitempty"`
 }
+
 
 type GremlinGraphParameters struct {
 
-	// The name of the CosmosDB Account to create the Gremlin Graph within. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=Account
-	// +kubebuilder:validation:Optional
-	AccountName *string `json:"accountName,omitempty" tf:"account_name,omitempty"`
 
-	// Reference to a Account to populate accountName.
-	// +kubebuilder:validation:Optional
-	AccountNameRef *v1.Reference `json:"accountNameRef,omitempty" tf:"-"`
+// The name of the CosmosDB Account to create the Gremlin Graph within. Changing this forces a new resource to be created.
+// +crossplane:generate:reference:type=Account
+// +kubebuilder:validation:Optional
+AccountName *string `json:"accountName,omitempty" tf:"account_name,omitempty"`
 
-	// Selector for a Account to populate accountName.
-	// +kubebuilder:validation:Optional
-	AccountNameSelector *v1.Selector `json:"accountNameSelector,omitempty" tf:"-"`
+// Reference to a Account to populate accountName.
+// +kubebuilder:validation:Optional
+AccountNameRef *v1.Reference `json:"accountNameRef,omitempty" tf:"-"`
 
-	// An autoscale_settings block as defined below. Requires partition_key_path to be set.
-	// +kubebuilder:validation:Optional
-	AutoscaleSettings []GremlinGraphAutoscaleSettingsParameters `json:"autoscaleSettings,omitempty" tf:"autoscale_settings,omitempty"`
+// Selector for a Account to populate accountName.
+// +kubebuilder:validation:Optional
+AccountNameSelector *v1.Selector `json:"accountNameSelector,omitempty" tf:"-"`
 
-	// A conflict_resolution_policy blocks as defined below. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Optional
-	ConflictResolutionPolicy []ConflictResolutionPolicyParameters `json:"conflictResolutionPolicy,omitempty" tf:"conflict_resolution_policy,omitempty"`
+// An autoscale_settings block as defined below. Requires partition_key_path to be set.
+// +kubebuilder:validation:Optional
+AutoscaleSettings []GremlinGraphAutoscaleSettingsParameters `json:"autoscaleSettings,omitempty" tf:"autoscale_settings,omitempty"`
 
-	// The name of the Cosmos DB Graph Database in which the Cosmos DB Gremlin Graph is created. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=GremlinDatabase
-	// +kubebuilder:validation:Optional
-	DatabaseName *string `json:"databaseName,omitempty" tf:"database_name,omitempty"`
+// A conflict_resolution_policy blocks as defined below. Changing this forces a new resource to be created.
+// +kubebuilder:validation:Optional
+ConflictResolutionPolicy []ConflictResolutionPolicyParameters `json:"conflictResolutionPolicy,omitempty" tf:"conflict_resolution_policy,omitempty"`
 
-	// Reference to a GremlinDatabase to populate databaseName.
-	// +kubebuilder:validation:Optional
-	DatabaseNameRef *v1.Reference `json:"databaseNameRef,omitempty" tf:"-"`
+// The name of the Cosmos DB Graph Database in which the Cosmos DB Gremlin Graph is created. Changing this forces a new resource to be created.
+// +crossplane:generate:reference:type=GremlinDatabase
+// +kubebuilder:validation:Optional
+DatabaseName *string `json:"databaseName,omitempty" tf:"database_name,omitempty"`
 
-	// Selector for a GremlinDatabase to populate databaseName.
-	// +kubebuilder:validation:Optional
-	DatabaseNameSelector *v1.Selector `json:"databaseNameSelector,omitempty" tf:"-"`
+// Reference to a GremlinDatabase to populate databaseName.
+// +kubebuilder:validation:Optional
+DatabaseNameRef *v1.Reference `json:"databaseNameRef,omitempty" tf:"-"`
 
-	// The default time to live (TTL) of the Gremlin graph. If the value is missing or set to "-1", items don’t expire.
-	// +kubebuilder:validation:Optional
-	DefaultTTL *float64 `json:"defaultTtl,omitempty" tf:"default_ttl,omitempty"`
+// Selector for a GremlinDatabase to populate databaseName.
+// +kubebuilder:validation:Optional
+DatabaseNameSelector *v1.Selector `json:"databaseNameSelector,omitempty" tf:"-"`
 
-	// The configuration of the indexing policy. One or more index_policy blocks as defined below.
-	// +kubebuilder:validation:Optional
-	IndexPolicy []IndexPolicyParameters `json:"indexPolicy,omitempty" tf:"index_policy,omitempty"`
+// The default time to live (TTL) of the Gremlin graph. If the value is missing or set to "-1", items don’t expire.
+// +kubebuilder:validation:Optional
+DefaultTTL *float64 `json:"defaultTtl,omitempty" tf:"default_ttl,omitempty"`
 
-	// Define a partition key. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Optional
-	PartitionKeyPath *string `json:"partitionKeyPath,omitempty" tf:"partition_key_path,omitempty"`
+// The configuration of the indexing policy. One or more index_policy blocks as defined below.
+// +kubebuilder:validation:Optional
+IndexPolicy []IndexPolicyParameters `json:"indexPolicy,omitempty" tf:"index_policy,omitempty"`
 
-	// Define a partition key version. Changing this forces a new resource to be created. Possible values are 1and 2. This should be set to 2 in order to use large partition keys.
-	// +kubebuilder:validation:Optional
-	PartitionKeyVersion *float64 `json:"partitionKeyVersion,omitempty" tf:"partition_key_version,omitempty"`
+// Define a partition key. Changing this forces a new resource to be created.
+// +kubebuilder:validation:Optional
+PartitionKeyPath *string `json:"partitionKeyPath,omitempty" tf:"partition_key_path,omitempty"`
 
-	// The name of the resource group in which the Cosmos DB Gremlin Graph is created. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=kubedb.dev/provider-azure/apis/azure/v1alpha1.ResourceGroup
-	// +kubebuilder:validation:Optional
-	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+// Define a partition key version. Changing this forces a new resource to be created. Possible values are 1and 2. This should be set to 2 in order to use large partition keys.
+// +kubebuilder:validation:Optional
+PartitionKeyVersion *float64 `json:"partitionKeyVersion,omitempty" tf:"partition_key_version,omitempty"`
 
-	// Reference to a ResourceGroup in azure to populate resourceGroupName.
-	// +kubebuilder:validation:Optional
-	ResourceGroupNameRef *v1.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+// The name of the resource group in which the Cosmos DB Gremlin Graph is created. Changing this forces a new resource to be created.
+// +crossplane:generate:reference:type=kubedb.dev/provider-azure/apis/azure/v1alpha1.ResourceGroup
+// +kubebuilder:validation:Optional
+ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 
-	// Selector for a ResourceGroup in azure to populate resourceGroupName.
-	// +kubebuilder:validation:Optional
-	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+// Reference to a ResourceGroup in azure to populate resourceGroupName.
+// +kubebuilder:validation:Optional
+ResourceGroupNameRef *v1.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
-	// The throughput of the Gremlin graph (RU/s). Must be set in increments of 100. The minimum value is 400.
-	// +kubebuilder:validation:Optional
-	Throughput *float64 `json:"throughput,omitempty" tf:"throughput,omitempty"`
+// Selector for a ResourceGroup in azure to populate resourceGroupName.
+// +kubebuilder:validation:Optional
+ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
-	// One or more unique_key blocks as defined below. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Optional
-	UniqueKey []UniqueKeyParameters `json:"uniqueKey,omitempty" tf:"unique_key,omitempty"`
+// The throughput of the Gremlin graph (RU/s). Must be set in increments of 100. The minimum value is 400.
+// +kubebuilder:validation:Optional
+Throughput *float64 `json:"throughput,omitempty" tf:"throughput,omitempty"`
+
+// One or more unique_key blocks as defined below. Changing this forces a new resource to be created.
+// +kubebuilder:validation:Optional
+UniqueKey []UniqueKeyParameters `json:"uniqueKey,omitempty" tf:"unique_key,omitempty"`
 }
+
 
 type IndexInitParameters struct {
 
-	// Order of the index. Possible values are Ascending or Descending.
-	Order *string `json:"order,omitempty" tf:"order,omitempty"`
 
-	// Path for which the indexing behaviour applies to. According to the service design, all spatial types including LineString, MultiPolygon, Point, and Polygon will be applied to the path.
-	Path *string `json:"path,omitempty" tf:"path,omitempty"`
+// Order of the index. Possible values are Ascending or Descending.
+Order *string `json:"order,omitempty" tf:"order,omitempty"`
+
+// Path for which the indexing behaviour applies to. According to the service design, all spatial types including LineString, MultiPolygon, Point, and Polygon will be applied to the path.
+Path *string `json:"path,omitempty" tf:"path,omitempty"`
 }
+
 
 type IndexObservation struct {
 
-	// Order of the index. Possible values are Ascending or Descending.
-	Order *string `json:"order,omitempty" tf:"order,omitempty"`
 
-	// Path for which the indexing behaviour applies to. According to the service design, all spatial types including LineString, MultiPolygon, Point, and Polygon will be applied to the path.
-	Path *string `json:"path,omitempty" tf:"path,omitempty"`
+// Order of the index. Possible values are Ascending or Descending.
+Order *string `json:"order,omitempty" tf:"order,omitempty"`
+
+// Path for which the indexing behaviour applies to. According to the service design, all spatial types including LineString, MultiPolygon, Point, and Polygon will be applied to the path.
+Path *string `json:"path,omitempty" tf:"path,omitempty"`
 }
+
 
 type IndexParameters struct {
 
-	// Order of the index. Possible values are Ascending or Descending.
-	// +kubebuilder:validation:Optional
-	Order *string `json:"order" tf:"order,omitempty"`
 
-	// Path for which the indexing behaviour applies to. According to the service design, all spatial types including LineString, MultiPolygon, Point, and Polygon will be applied to the path.
-	// +kubebuilder:validation:Optional
-	Path *string `json:"path" tf:"path,omitempty"`
+// Order of the index. Possible values are Ascending or Descending.
+// +kubebuilder:validation:Optional
+Order *string `json:"order" tf:"order,omitempty"`
+
+// Path for which the indexing behaviour applies to. According to the service design, all spatial types including LineString, MultiPolygon, Point, and Polygon will be applied to the path.
+// +kubebuilder:validation:Optional
+Path *string `json:"path" tf:"path,omitempty"`
 }
+
 
 type IndexPolicyInitParameters struct {
 
-	// Indicates if the indexing policy is automatic. Defaults to true.
-	Automatic *bool `json:"automatic,omitempty" tf:"automatic,omitempty"`
 
-	// One or more composite_index blocks as defined below.
-	CompositeIndex []CompositeIndexInitParameters `json:"compositeIndex,omitempty" tf:"composite_index,omitempty"`
+// Indicates if the indexing policy is automatic. Defaults to true.
+Automatic *bool `json:"automatic,omitempty" tf:"automatic,omitempty"`
 
-	// List of paths to exclude from indexing. Required if indexing_mode is Consistent or Lazy.
-	ExcludedPaths []*string `json:"excludedPaths,omitempty" tf:"excluded_paths,omitempty"`
+// One or more composite_index blocks as defined below.
+CompositeIndex []CompositeIndexInitParameters `json:"compositeIndex,omitempty" tf:"composite_index,omitempty"`
 
-	// List of paths to include in the indexing. Required if indexing_mode is Consistent or Lazy.
-	IncludedPaths []*string `json:"includedPaths,omitempty" tf:"included_paths,omitempty"`
+// List of paths to exclude from indexing. Required if indexing_mode is Consistent or Lazy.
+ExcludedPaths []*string `json:"excludedPaths,omitempty" tf:"excluded_paths,omitempty"`
 
-	// Indicates the indexing mode. Possible values include: Consistent, Lazy, None.
-	IndexingMode *string `json:"indexingMode,omitempty" tf:"indexing_mode,omitempty"`
+// List of paths to include in the indexing. Required if indexing_mode is Consistent or Lazy.
+IncludedPaths []*string `json:"includedPaths,omitempty" tf:"included_paths,omitempty"`
 
-	// One or more spatial_index blocks as defined below.
-	SpatialIndex []SpatialIndexInitParameters `json:"spatialIndex,omitempty" tf:"spatial_index,omitempty"`
+// Indicates the indexing mode. Possible values include: Consistent, Lazy, None.
+IndexingMode *string `json:"indexingMode,omitempty" tf:"indexing_mode,omitempty"`
+
+// One or more spatial_index blocks as defined below.
+SpatialIndex []SpatialIndexInitParameters `json:"spatialIndex,omitempty" tf:"spatial_index,omitempty"`
 }
+
 
 type IndexPolicyObservation struct {
 
-	// Indicates if the indexing policy is automatic. Defaults to true.
-	Automatic *bool `json:"automatic,omitempty" tf:"automatic,omitempty"`
 
-	// One or more composite_index blocks as defined below.
-	CompositeIndex []CompositeIndexObservation `json:"compositeIndex,omitempty" tf:"composite_index,omitempty"`
+// Indicates if the indexing policy is automatic. Defaults to true.
+Automatic *bool `json:"automatic,omitempty" tf:"automatic,omitempty"`
 
-	// List of paths to exclude from indexing. Required if indexing_mode is Consistent or Lazy.
-	ExcludedPaths []*string `json:"excludedPaths,omitempty" tf:"excluded_paths,omitempty"`
+// One or more composite_index blocks as defined below.
+CompositeIndex []CompositeIndexObservation `json:"compositeIndex,omitempty" tf:"composite_index,omitempty"`
 
-	// List of paths to include in the indexing. Required if indexing_mode is Consistent or Lazy.
-	IncludedPaths []*string `json:"includedPaths,omitempty" tf:"included_paths,omitempty"`
+// List of paths to exclude from indexing. Required if indexing_mode is Consistent or Lazy.
+ExcludedPaths []*string `json:"excludedPaths,omitempty" tf:"excluded_paths,omitempty"`
 
-	// Indicates the indexing mode. Possible values include: Consistent, Lazy, None.
-	IndexingMode *string `json:"indexingMode,omitempty" tf:"indexing_mode,omitempty"`
+// List of paths to include in the indexing. Required if indexing_mode is Consistent or Lazy.
+IncludedPaths []*string `json:"includedPaths,omitempty" tf:"included_paths,omitempty"`
 
-	// One or more spatial_index blocks as defined below.
-	SpatialIndex []SpatialIndexObservation `json:"spatialIndex,omitempty" tf:"spatial_index,omitempty"`
+// Indicates the indexing mode. Possible values include: Consistent, Lazy, None.
+IndexingMode *string `json:"indexingMode,omitempty" tf:"indexing_mode,omitempty"`
+
+// One or more spatial_index blocks as defined below.
+SpatialIndex []SpatialIndexObservation `json:"spatialIndex,omitempty" tf:"spatial_index,omitempty"`
 }
+
 
 type IndexPolicyParameters struct {
 
-	// Indicates if the indexing policy is automatic. Defaults to true.
-	// +kubebuilder:validation:Optional
-	Automatic *bool `json:"automatic,omitempty" tf:"automatic,omitempty"`
 
-	// One or more composite_index blocks as defined below.
-	// +kubebuilder:validation:Optional
-	CompositeIndex []CompositeIndexParameters `json:"compositeIndex,omitempty" tf:"composite_index,omitempty"`
+// Indicates if the indexing policy is automatic. Defaults to true.
+// +kubebuilder:validation:Optional
+Automatic *bool `json:"automatic,omitempty" tf:"automatic,omitempty"`
 
-	// List of paths to exclude from indexing. Required if indexing_mode is Consistent or Lazy.
-	// +kubebuilder:validation:Optional
-	ExcludedPaths []*string `json:"excludedPaths,omitempty" tf:"excluded_paths,omitempty"`
+// One or more composite_index blocks as defined below.
+// +kubebuilder:validation:Optional
+CompositeIndex []CompositeIndexParameters `json:"compositeIndex,omitempty" tf:"composite_index,omitempty"`
 
-	// List of paths to include in the indexing. Required if indexing_mode is Consistent or Lazy.
-	// +kubebuilder:validation:Optional
-	IncludedPaths []*string `json:"includedPaths,omitempty" tf:"included_paths,omitempty"`
+// List of paths to exclude from indexing. Required if indexing_mode is Consistent or Lazy.
+// +kubebuilder:validation:Optional
+ExcludedPaths []*string `json:"excludedPaths,omitempty" tf:"excluded_paths,omitempty"`
 
-	// Indicates the indexing mode. Possible values include: Consistent, Lazy, None.
-	// +kubebuilder:validation:Optional
-	IndexingMode *string `json:"indexingMode" tf:"indexing_mode,omitempty"`
+// List of paths to include in the indexing. Required if indexing_mode is Consistent or Lazy.
+// +kubebuilder:validation:Optional
+IncludedPaths []*string `json:"includedPaths,omitempty" tf:"included_paths,omitempty"`
 
-	// One or more spatial_index blocks as defined below.
-	// +kubebuilder:validation:Optional
-	SpatialIndex []SpatialIndexParameters `json:"spatialIndex,omitempty" tf:"spatial_index,omitempty"`
+// Indicates the indexing mode. Possible values include: Consistent, Lazy, None.
+// +kubebuilder:validation:Optional
+IndexingMode *string `json:"indexingMode" tf:"indexing_mode,omitempty"`
+
+// One or more spatial_index blocks as defined below.
+// +kubebuilder:validation:Optional
+SpatialIndex []SpatialIndexParameters `json:"spatialIndex,omitempty" tf:"spatial_index,omitempty"`
 }
+
 
 type SpatialIndexInitParameters struct {
 
-	// Path for which the indexing behaviour applies to. According to the service design, all spatial types including LineString, MultiPolygon, Point, and Polygon will be applied to the path.
-	Path *string `json:"path,omitempty" tf:"path,omitempty"`
+
+// Path for which the indexing behaviour applies to. According to the service design, all spatial types including LineString, MultiPolygon, Point, and Polygon will be applied to the path.
+Path *string `json:"path,omitempty" tf:"path,omitempty"`
 }
+
 
 type SpatialIndexObservation struct {
 
-	// Path for which the indexing behaviour applies to. According to the service design, all spatial types including LineString, MultiPolygon, Point, and Polygon will be applied to the path.
-	Path *string `json:"path,omitempty" tf:"path,omitempty"`
 
-	Types []*string `json:"types,omitempty" tf:"types,omitempty"`
+// Path for which the indexing behaviour applies to. According to the service design, all spatial types including LineString, MultiPolygon, Point, and Polygon will be applied to the path.
+Path *string `json:"path,omitempty" tf:"path,omitempty"`
+
+Types []*string `json:"types,omitempty" tf:"types,omitempty"`
 }
+
 
 type SpatialIndexParameters struct {
 
-	// Path for which the indexing behaviour applies to. According to the service design, all spatial types including LineString, MultiPolygon, Point, and Polygon will be applied to the path.
-	// +kubebuilder:validation:Optional
-	Path *string `json:"path" tf:"path,omitempty"`
+
+// Path for which the indexing behaviour applies to. According to the service design, all spatial types including LineString, MultiPolygon, Point, and Polygon will be applied to the path.
+// +kubebuilder:validation:Optional
+Path *string `json:"path" tf:"path,omitempty"`
 }
+
 
 type UniqueKeyInitParameters struct {
 
-	// A list of paths to use for this unique key. Changing this forces a new resource to be created.
-	Paths []*string `json:"paths,omitempty" tf:"paths,omitempty"`
+
+// A list of paths to use for this unique key. Changing this forces a new resource to be created.
+Paths []*string `json:"paths,omitempty" tf:"paths,omitempty"`
 }
+
 
 type UniqueKeyObservation struct {
 
-	// A list of paths to use for this unique key. Changing this forces a new resource to be created.
-	Paths []*string `json:"paths,omitempty" tf:"paths,omitempty"`
+
+// A list of paths to use for this unique key. Changing this forces a new resource to be created.
+Paths []*string `json:"paths,omitempty" tf:"paths,omitempty"`
 }
+
 
 type UniqueKeyParameters struct {
 
-	// A list of paths to use for this unique key. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Optional
-	Paths []*string `json:"paths" tf:"paths,omitempty"`
+
+// A list of paths to use for this unique key. Changing this forces a new resource to be created.
+// +kubebuilder:validation:Optional
+Paths []*string `json:"paths" tf:"paths,omitempty"`
 }
 
 // GremlinGraphSpec defines the desired state of GremlinGraph
 type GremlinGraphSpec struct {
 	v1.ResourceSpec `json:",inline"`
-	ForProvider     GremlinGraphParameters `json:"forProvider"`
+	ForProvider       GremlinGraphParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -386,13 +437,13 @@ type GremlinGraphSpec struct {
 	// required on creation, but we do not desire to update them after creation,
 	// for example because of an external controller is managing them, like an
 	// autoscaler.
-	InitProvider GremlinGraphInitParameters `json:"initProvider,omitempty"`
+	InitProvider       GremlinGraphInitParameters `json:"initProvider,omitempty"`
 }
 
 // GremlinGraphStatus defines the observed state of GremlinGraph.
 type GremlinGraphStatus struct {
 	v1.ResourceStatus `json:",inline"`
-	AtProvider        GremlinGraphObservation `json:"atProvider,omitempty"`
+	AtProvider          GremlinGraphObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true
@@ -407,9 +458,9 @@ type GremlinGraphStatus struct {
 type GremlinGraph struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.partitionKeyPath) || (has(self.initProvider) && has(self.initProvider.partitionKeyPath))",message="spec.forProvider.partitionKeyPath is a required parameter"
-	Spec   GremlinGraphSpec   `json:"spec"`
-	Status GremlinGraphStatus `json:"status,omitempty"`
+// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.partitionKeyPath) || (has(self.initProvider) && has(self.initProvider.partitionKeyPath))",message="spec.forProvider.partitionKeyPath is a required parameter"
+	Spec              GremlinGraphSpec   `json:"spec"`
+	Status            GremlinGraphStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

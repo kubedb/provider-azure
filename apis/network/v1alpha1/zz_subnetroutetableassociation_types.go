@@ -15,58 +15,67 @@ import (
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+
 )
 
+
+
+
 type SubnetRouteTableAssociationInitParameters struct {
+
 }
+
 
 type SubnetRouteTableAssociationObservation struct {
 
-	// The ID of the Subnet.
-	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The ID of the Route Table which should be associated with the Subnet. Changing this forces a new resource to be created.
-	RouteTableID *string `json:"routeTableId,omitempty" tf:"route_table_id,omitempty"`
+// The ID of the Subnet.
+ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The ID of the Subnet. Changing this forces a new resource to be created.
-	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
+// The ID of the Route Table which should be associated with the Subnet. Changing this forces a new resource to be created.
+RouteTableID *string `json:"routeTableId,omitempty" tf:"route_table_id,omitempty"`
+
+// The ID of the Subnet. Changing this forces a new resource to be created.
+SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
 }
+
 
 type SubnetRouteTableAssociationParameters struct {
 
-	// The ID of the Route Table which should be associated with the Subnet. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=RouteTable
-	// +crossplane:generate:reference:extractor=kubedb.dev/provider-azure/apis/rconfig.ExtractResourceID()
-	// +kubebuilder:validation:Optional
-	RouteTableID *string `json:"routeTableId,omitempty" tf:"route_table_id,omitempty"`
 
-	// Reference to a RouteTable to populate routeTableId.
-	// +kubebuilder:validation:Optional
-	RouteTableIDRef *v1.Reference `json:"routeTableIdRef,omitempty" tf:"-"`
+// The ID of the Route Table which should be associated with the Subnet. Changing this forces a new resource to be created.
+// +crossplane:generate:reference:type=RouteTable
+// +crossplane:generate:reference:extractor=kubedb.dev/provider-azure/apis/rconfig.ExtractResourceID()
+// +kubebuilder:validation:Optional
+RouteTableID *string `json:"routeTableId,omitempty" tf:"route_table_id,omitempty"`
 
-	// Selector for a RouteTable to populate routeTableId.
-	// +kubebuilder:validation:Optional
-	RouteTableIDSelector *v1.Selector `json:"routeTableIdSelector,omitempty" tf:"-"`
+// Reference to a RouteTable to populate routeTableId.
+// +kubebuilder:validation:Optional
+RouteTableIDRef *v1.Reference `json:"routeTableIdRef,omitempty" tf:"-"`
 
-	// The ID of the Subnet. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=Subnet
-	// +crossplane:generate:reference:extractor=kubedb.dev/provider-azure/apis/rconfig.ExtractResourceID()
-	// +kubebuilder:validation:Optional
-	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
+// Selector for a RouteTable to populate routeTableId.
+// +kubebuilder:validation:Optional
+RouteTableIDSelector *v1.Selector `json:"routeTableIdSelector,omitempty" tf:"-"`
 
-	// Reference to a Subnet to populate subnetId.
-	// +kubebuilder:validation:Optional
-	SubnetIDRef *v1.Reference `json:"subnetIdRef,omitempty" tf:"-"`
+// The ID of the Subnet. Changing this forces a new resource to be created.
+// +crossplane:generate:reference:type=Subnet
+// +crossplane:generate:reference:extractor=kubedb.dev/provider-azure/apis/rconfig.ExtractResourceID()
+// +kubebuilder:validation:Optional
+SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
 
-	// Selector for a Subnet to populate subnetId.
-	// +kubebuilder:validation:Optional
-	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
+// Reference to a Subnet to populate subnetId.
+// +kubebuilder:validation:Optional
+SubnetIDRef *v1.Reference `json:"subnetIdRef,omitempty" tf:"-"`
+
+// Selector for a Subnet to populate subnetId.
+// +kubebuilder:validation:Optional
+SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
 }
 
 // SubnetRouteTableAssociationSpec defines the desired state of SubnetRouteTableAssociation
 type SubnetRouteTableAssociationSpec struct {
 	v1.ResourceSpec `json:",inline"`
-	ForProvider     SubnetRouteTableAssociationParameters `json:"forProvider"`
+	ForProvider       SubnetRouteTableAssociationParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -77,13 +86,13 @@ type SubnetRouteTableAssociationSpec struct {
 	// required on creation, but we do not desire to update them after creation,
 	// for example because of an external controller is managing them, like an
 	// autoscaler.
-	InitProvider SubnetRouteTableAssociationInitParameters `json:"initProvider,omitempty"`
+	InitProvider       SubnetRouteTableAssociationInitParameters `json:"initProvider,omitempty"`
 }
 
 // SubnetRouteTableAssociationStatus defines the observed state of SubnetRouteTableAssociation.
 type SubnetRouteTableAssociationStatus struct {
 	v1.ResourceStatus `json:",inline"`
-	AtProvider        SubnetRouteTableAssociationObservation `json:"atProvider,omitempty"`
+	AtProvider          SubnetRouteTableAssociationObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

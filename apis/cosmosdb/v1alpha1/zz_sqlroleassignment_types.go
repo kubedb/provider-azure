@@ -15,110 +15,119 @@ import (
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+
 )
+
+
+
 
 type SQLRoleAssignmentInitParameters struct {
 
-	// The GUID as the name of the Cosmos DB SQL Role Assignment - one will be generated if not specified. Changing this forces a new resource to be created.
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// The ID of the Principal (Client) in Azure Active Directory. Changing this forces a new resource to be created.
-	PrincipalID *string `json:"principalId,omitempty" tf:"principal_id,omitempty"`
+// The GUID as the name of the Cosmos DB SQL Role Assignment - one will be generated if not specified. Changing this forces a new resource to be created.
+Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+// The ID of the Principal (Client) in Azure Active Directory. Changing this forces a new resource to be created.
+PrincipalID *string `json:"principalId,omitempty" tf:"principal_id,omitempty"`
 }
+
 
 type SQLRoleAssignmentObservation struct {
 
-	// The name of the Cosmos DB Account. Changing this forces a new resource to be created.
-	AccountName *string `json:"accountName,omitempty" tf:"account_name,omitempty"`
 
-	// The ID of the Cosmos DB SQL Role Assignment.
-	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+// The name of the Cosmos DB Account. Changing this forces a new resource to be created.
+AccountName *string `json:"accountName,omitempty" tf:"account_name,omitempty"`
 
-	// The GUID as the name of the Cosmos DB SQL Role Assignment - one will be generated if not specified. Changing this forces a new resource to be created.
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+// The ID of the Cosmos DB SQL Role Assignment.
+ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The ID of the Principal (Client) in Azure Active Directory. Changing this forces a new resource to be created.
-	PrincipalID *string `json:"principalId,omitempty" tf:"principal_id,omitempty"`
+// The GUID as the name of the Cosmos DB SQL Role Assignment - one will be generated if not specified. Changing this forces a new resource to be created.
+Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// The name of the Resource Group in which the Cosmos DB SQL Role Assignment is created. Changing this forces a new resource to be created.
-	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+// The ID of the Principal (Client) in Azure Active Directory. Changing this forces a new resource to be created.
+PrincipalID *string `json:"principalId,omitempty" tf:"principal_id,omitempty"`
 
-	// The resource ID of the Cosmos DB SQL Role Definition.
-	RoleDefinitionID *string `json:"roleDefinitionId,omitempty" tf:"role_definition_id,omitempty"`
+// The name of the Resource Group in which the Cosmos DB SQL Role Assignment is created. Changing this forces a new resource to be created.
+ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 
-	// The data plane resource path for which access is being granted through this Cosmos DB SQL Role Assignment. Changing this forces a new resource to be created.
-	Scope *string `json:"scope,omitempty" tf:"scope,omitempty"`
+// The resource ID of the Cosmos DB SQL Role Definition.
+RoleDefinitionID *string `json:"roleDefinitionId,omitempty" tf:"role_definition_id,omitempty"`
+
+// The data plane resource path for which access is being granted through this Cosmos DB SQL Role Assignment. Changing this forces a new resource to be created.
+Scope *string `json:"scope,omitempty" tf:"scope,omitempty"`
 }
+
 
 type SQLRoleAssignmentParameters struct {
 
-	// The name of the Cosmos DB Account. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=kubedb.dev/provider-azure/apis/cosmosdb/v1alpha1.Account
-	// +kubebuilder:validation:Optional
-	AccountName *string `json:"accountName,omitempty" tf:"account_name,omitempty"`
 
-	// Reference to a Account in cosmosdb to populate accountName.
-	// +kubebuilder:validation:Optional
-	AccountNameRef *v1.Reference `json:"accountNameRef,omitempty" tf:"-"`
+// The name of the Cosmos DB Account. Changing this forces a new resource to be created.
+// +crossplane:generate:reference:type=kubedb.dev/provider-azure/apis/cosmosdb/v1alpha1.Account
+// +kubebuilder:validation:Optional
+AccountName *string `json:"accountName,omitempty" tf:"account_name,omitempty"`
 
-	// Selector for a Account in cosmosdb to populate accountName.
-	// +kubebuilder:validation:Optional
-	AccountNameSelector *v1.Selector `json:"accountNameSelector,omitempty" tf:"-"`
+// Reference to a Account in cosmosdb to populate accountName.
+// +kubebuilder:validation:Optional
+AccountNameRef *v1.Reference `json:"accountNameRef,omitempty" tf:"-"`
 
-	// The GUID as the name of the Cosmos DB SQL Role Assignment - one will be generated if not specified. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+// Selector for a Account in cosmosdb to populate accountName.
+// +kubebuilder:validation:Optional
+AccountNameSelector *v1.Selector `json:"accountNameSelector,omitempty" tf:"-"`
 
-	// The ID of the Principal (Client) in Azure Active Directory. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Optional
-	PrincipalID *string `json:"principalId,omitempty" tf:"principal_id,omitempty"`
+// The GUID as the name of the Cosmos DB SQL Role Assignment - one will be generated if not specified. Changing this forces a new resource to be created.
+// +kubebuilder:validation:Optional
+Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// The name of the Resource Group in which the Cosmos DB SQL Role Assignment is created. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=kubedb.dev/provider-azure/apis/azure/v1alpha1.ResourceGroup
-	// +kubebuilder:validation:Optional
-	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+// The ID of the Principal (Client) in Azure Active Directory. Changing this forces a new resource to be created.
+// +kubebuilder:validation:Optional
+PrincipalID *string `json:"principalId,omitempty" tf:"principal_id,omitempty"`
 
-	// Reference to a ResourceGroup in azure to populate resourceGroupName.
-	// +kubebuilder:validation:Optional
-	ResourceGroupNameRef *v1.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+// The name of the Resource Group in which the Cosmos DB SQL Role Assignment is created. Changing this forces a new resource to be created.
+// +crossplane:generate:reference:type=kubedb.dev/provider-azure/apis/azure/v1alpha1.ResourceGroup
+// +kubebuilder:validation:Optional
+ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 
-	// Selector for a ResourceGroup in azure to populate resourceGroupName.
-	// +kubebuilder:validation:Optional
-	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+// Reference to a ResourceGroup in azure to populate resourceGroupName.
+// +kubebuilder:validation:Optional
+ResourceGroupNameRef *v1.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
-	// The resource ID of the Cosmos DB SQL Role Definition.
-	// +crossplane:generate:reference:type=kubedb.dev/provider-azure/apis/cosmosdb/v1alpha1.SQLRoleDefinition
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
-	// +kubebuilder:validation:Optional
-	RoleDefinitionID *string `json:"roleDefinitionId,omitempty" tf:"role_definition_id,omitempty"`
+// Selector for a ResourceGroup in azure to populate resourceGroupName.
+// +kubebuilder:validation:Optional
+ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
-	// Reference to a SQLRoleDefinition in cosmosdb to populate roleDefinitionId.
-	// +kubebuilder:validation:Optional
-	RoleDefinitionIDRef *v1.Reference `json:"roleDefinitionIdRef,omitempty" tf:"-"`
+// The resource ID of the Cosmos DB SQL Role Definition.
+// +crossplane:generate:reference:type=kubedb.dev/provider-azure/apis/cosmosdb/v1alpha1.SQLRoleDefinition
+// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+// +kubebuilder:validation:Optional
+RoleDefinitionID *string `json:"roleDefinitionId,omitempty" tf:"role_definition_id,omitempty"`
 
-	// Selector for a SQLRoleDefinition in cosmosdb to populate roleDefinitionId.
-	// +kubebuilder:validation:Optional
-	RoleDefinitionIDSelector *v1.Selector `json:"roleDefinitionIdSelector,omitempty" tf:"-"`
+// Reference to a SQLRoleDefinition in cosmosdb to populate roleDefinitionId.
+// +kubebuilder:validation:Optional
+RoleDefinitionIDRef *v1.Reference `json:"roleDefinitionIdRef,omitempty" tf:"-"`
 
-	// The data plane resource path for which access is being granted through this Cosmos DB SQL Role Assignment. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=kubedb.dev/provider-azure/apis/cosmosdb/v1alpha1.Account
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
-	// +kubebuilder:validation:Optional
-	Scope *string `json:"scope,omitempty" tf:"scope,omitempty"`
+// Selector for a SQLRoleDefinition in cosmosdb to populate roleDefinitionId.
+// +kubebuilder:validation:Optional
+RoleDefinitionIDSelector *v1.Selector `json:"roleDefinitionIdSelector,omitempty" tf:"-"`
 
-	// Reference to a Account in cosmosdb to populate scope.
-	// +kubebuilder:validation:Optional
-	ScopeRef *v1.Reference `json:"scopeRef,omitempty" tf:"-"`
+// The data plane resource path for which access is being granted through this Cosmos DB SQL Role Assignment. Changing this forces a new resource to be created.
+// +crossplane:generate:reference:type=kubedb.dev/provider-azure/apis/cosmosdb/v1alpha1.Account
+// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+// +kubebuilder:validation:Optional
+Scope *string `json:"scope,omitempty" tf:"scope,omitempty"`
 
-	// Selector for a Account in cosmosdb to populate scope.
-	// +kubebuilder:validation:Optional
-	ScopeSelector *v1.Selector `json:"scopeSelector,omitempty" tf:"-"`
+// Reference to a Account in cosmosdb to populate scope.
+// +kubebuilder:validation:Optional
+ScopeRef *v1.Reference `json:"scopeRef,omitempty" tf:"-"`
+
+// Selector for a Account in cosmosdb to populate scope.
+// +kubebuilder:validation:Optional
+ScopeSelector *v1.Selector `json:"scopeSelector,omitempty" tf:"-"`
 }
 
 // SQLRoleAssignmentSpec defines the desired state of SQLRoleAssignment
 type SQLRoleAssignmentSpec struct {
 	v1.ResourceSpec `json:",inline"`
-	ForProvider     SQLRoleAssignmentParameters `json:"forProvider"`
+	ForProvider       SQLRoleAssignmentParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -129,13 +138,13 @@ type SQLRoleAssignmentSpec struct {
 	// required on creation, but we do not desire to update them after creation,
 	// for example because of an external controller is managing them, like an
 	// autoscaler.
-	InitProvider SQLRoleAssignmentInitParameters `json:"initProvider,omitempty"`
+	InitProvider       SQLRoleAssignmentInitParameters `json:"initProvider,omitempty"`
 }
 
 // SQLRoleAssignmentStatus defines the observed state of SQLRoleAssignment.
 type SQLRoleAssignmentStatus struct {
 	v1.ResourceStatus `json:",inline"`
-	AtProvider        SQLRoleAssignmentObservation `json:"atProvider,omitempty"`
+	AtProvider          SQLRoleAssignmentObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true
@@ -150,9 +159,9 @@ type SQLRoleAssignmentStatus struct {
 type SQLRoleAssignment struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.principalId) || (has(self.initProvider) && has(self.initProvider.principalId))",message="spec.forProvider.principalId is a required parameter"
-	Spec   SQLRoleAssignmentSpec   `json:"spec"`
-	Status SQLRoleAssignmentStatus `json:"status,omitempty"`
+// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.principalId) || (has(self.initProvider) && has(self.initProvider.principalId))",message="spec.forProvider.principalId is a required parameter"
+	Spec              SQLRoleAssignmentSpec   `json:"spec"`
+	Status            SQLRoleAssignmentStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

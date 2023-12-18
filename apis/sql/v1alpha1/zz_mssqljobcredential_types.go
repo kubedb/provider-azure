@@ -15,55 +15,64 @@ import (
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+
 )
+
+
+
 
 type MSSQLJobCredentialInitParameters struct {
 
-	// The username part of the credential.
-	Username *string `json:"username,omitempty" tf:"username,omitempty"`
+
+// The username part of the credential.
+Username *string `json:"username,omitempty" tf:"username,omitempty"`
 }
+
 
 type MSSQLJobCredentialObservation struct {
 
-	// The ID of the Elastic Job Credential.
-	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The ID of the Elastic Job Agent. Changing this forces a new Elastic Job Credential to be created.
-	JobAgentID *string `json:"jobAgentId,omitempty" tf:"job_agent_id,omitempty"`
+// The ID of the Elastic Job Credential.
+ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The username part of the credential.
-	Username *string `json:"username,omitempty" tf:"username,omitempty"`
+// The ID of the Elastic Job Agent. Changing this forces a new Elastic Job Credential to be created.
+JobAgentID *string `json:"jobAgentId,omitempty" tf:"job_agent_id,omitempty"`
+
+// The username part of the credential.
+Username *string `json:"username,omitempty" tf:"username,omitempty"`
 }
+
 
 type MSSQLJobCredentialParameters struct {
 
-	// The ID of the Elastic Job Agent. Changing this forces a new Elastic Job Credential to be created.
-	// +crossplane:generate:reference:type=kubedb.dev/provider-azure/apis/sql/v1alpha1.MSSQLJobAgent
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
-	// +kubebuilder:validation:Optional
-	JobAgentID *string `json:"jobAgentId,omitempty" tf:"job_agent_id,omitempty"`
 
-	// Reference to a MSSQLJobAgent in sql to populate jobAgentId.
-	// +kubebuilder:validation:Optional
-	JobAgentIDRef *v1.Reference `json:"jobAgentIdRef,omitempty" tf:"-"`
+// The ID of the Elastic Job Agent. Changing this forces a new Elastic Job Credential to be created.
+// +crossplane:generate:reference:type=kubedb.dev/provider-azure/apis/sql/v1alpha1.MSSQLJobAgent
+// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+// +kubebuilder:validation:Optional
+JobAgentID *string `json:"jobAgentId,omitempty" tf:"job_agent_id,omitempty"`
 
-	// Selector for a MSSQLJobAgent in sql to populate jobAgentId.
-	// +kubebuilder:validation:Optional
-	JobAgentIDSelector *v1.Selector `json:"jobAgentIdSelector,omitempty" tf:"-"`
+// Reference to a MSSQLJobAgent in sql to populate jobAgentId.
+// +kubebuilder:validation:Optional
+JobAgentIDRef *v1.Reference `json:"jobAgentIdRef,omitempty" tf:"-"`
 
-	// The password part of the credential.
-	// +kubebuilder:validation:Optional
-	PasswordSecretRef v1.SecretKeySelector `json:"passwordSecretRef" tf:"-"`
+// Selector for a MSSQLJobAgent in sql to populate jobAgentId.
+// +kubebuilder:validation:Optional
+JobAgentIDSelector *v1.Selector `json:"jobAgentIdSelector,omitempty" tf:"-"`
 
-	// The username part of the credential.
-	// +kubebuilder:validation:Optional
-	Username *string `json:"username,omitempty" tf:"username,omitempty"`
+// The password part of the credential.
+// +kubebuilder:validation:Optional
+PasswordSecretRef v1.SecretKeySelector `json:"passwordSecretRef" tf:"-"`
+
+// The username part of the credential.
+// +kubebuilder:validation:Optional
+Username *string `json:"username,omitempty" tf:"username,omitempty"`
 }
 
 // MSSQLJobCredentialSpec defines the desired state of MSSQLJobCredential
 type MSSQLJobCredentialSpec struct {
 	v1.ResourceSpec `json:",inline"`
-	ForProvider     MSSQLJobCredentialParameters `json:"forProvider"`
+	ForProvider       MSSQLJobCredentialParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -74,13 +83,13 @@ type MSSQLJobCredentialSpec struct {
 	// required on creation, but we do not desire to update them after creation,
 	// for example because of an external controller is managing them, like an
 	// autoscaler.
-	InitProvider MSSQLJobCredentialInitParameters `json:"initProvider,omitempty"`
+	InitProvider       MSSQLJobCredentialInitParameters `json:"initProvider,omitempty"`
 }
 
 // MSSQLJobCredentialStatus defines the observed state of MSSQLJobCredential.
 type MSSQLJobCredentialStatus struct {
 	v1.ResourceStatus `json:",inline"`
-	AtProvider        MSSQLJobCredentialObservation `json:"atProvider,omitempty"`
+	AtProvider          MSSQLJobCredentialObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true
@@ -95,10 +104,10 @@ type MSSQLJobCredentialStatus struct {
 type MSSQLJobCredential struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.passwordSecretRef)",message="spec.forProvider.passwordSecretRef is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.username) || (has(self.initProvider) && has(self.initProvider.username))",message="spec.forProvider.username is a required parameter"
-	Spec   MSSQLJobCredentialSpec   `json:"spec"`
-	Status MSSQLJobCredentialStatus `json:"status,omitempty"`
+// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.passwordSecretRef)",message="spec.forProvider.passwordSecretRef is a required parameter"
+// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.username) || (has(self.initProvider) && has(self.initProvider.username))",message="spec.forProvider.username is a required parameter"
+	Spec              MSSQLJobCredentialSpec   `json:"spec"`
+	Status            MSSQLJobCredentialStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

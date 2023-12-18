@@ -15,110 +15,125 @@ import (
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+
 )
+
+
+
 
 type MSSQLManagedDatabaseInitParameters struct {
 
-	// A long_term_retention_policy block as defined below.
-	LongTermRetentionPolicy []MSSQLManagedDatabaseLongTermRetentionPolicyInitParameters `json:"longTermRetentionPolicy,omitempty" tf:"long_term_retention_policy,omitempty"`
 
-	// The backup retention period in days. This is how many days Point-in-Time Restore will be supported.
-	ShortTermRetentionDays *float64 `json:"shortTermRetentionDays,omitempty" tf:"short_term_retention_days,omitempty"`
+// A long_term_retention_policy block as defined below.
+LongTermRetentionPolicy []MSSQLManagedDatabaseLongTermRetentionPolicyInitParameters `json:"longTermRetentionPolicy,omitempty" tf:"long_term_retention_policy,omitempty"`
+
+// The backup retention period in days. This is how many days Point-in-Time Restore will be supported.
+ShortTermRetentionDays *float64 `json:"shortTermRetentionDays,omitempty" tf:"short_term_retention_days,omitempty"`
 }
+
 
 type MSSQLManagedDatabaseLongTermRetentionPolicyInitParameters struct {
 
-	// The monthly retention policy for an LTR backup in an ISO 8601 format. Valid value is between 1 to 120 months. e.g. P1Y, P1M, P4W or P30D.
-	MonthlyRetention *string `json:"monthlyRetention,omitempty" tf:"monthly_retention,omitempty"`
 
-	// The week of year to take the yearly backup. Value has to be between 1 and 52.
-	WeekOfYear *float64 `json:"weekOfYear,omitempty" tf:"week_of_year,omitempty"`
+// The monthly retention policy for an LTR backup in an ISO 8601 format. Valid value is between 1 to 120 months. e.g. P1Y, P1M, P4W or P30D.
+MonthlyRetention *string `json:"monthlyRetention,omitempty" tf:"monthly_retention,omitempty"`
 
-	// The weekly retention policy for an LTR backup in an ISO 8601 format. Valid value is between 1 to 520 weeks. e.g. P1Y, P1M, P1W or P7D.
-	WeeklyRetention *string `json:"weeklyRetention,omitempty" tf:"weekly_retention,omitempty"`
+// The week of year to take the yearly backup. Value has to be between 1 and 52.
+WeekOfYear *float64 `json:"weekOfYear,omitempty" tf:"week_of_year,omitempty"`
 
-	// The yearly retention policy for an LTR backup in an ISO 8601 format. Valid value is between 1 to 10 years. e.g. P1Y, P12M, P52W or P365D.
-	YearlyRetention *string `json:"yearlyRetention,omitempty" tf:"yearly_retention,omitempty"`
+// The weekly retention policy for an LTR backup in an ISO 8601 format. Valid value is between 1 to 520 weeks. e.g. P1Y, P1M, P1W or P7D.
+WeeklyRetention *string `json:"weeklyRetention,omitempty" tf:"weekly_retention,omitempty"`
+
+// The yearly retention policy for an LTR backup in an ISO 8601 format. Valid value is between 1 to 10 years. e.g. P1Y, P12M, P52W or P365D.
+YearlyRetention *string `json:"yearlyRetention,omitempty" tf:"yearly_retention,omitempty"`
 }
+
 
 type MSSQLManagedDatabaseLongTermRetentionPolicyObservation struct {
 
-	// The monthly retention policy for an LTR backup in an ISO 8601 format. Valid value is between 1 to 120 months. e.g. P1Y, P1M, P4W or P30D.
-	MonthlyRetention *string `json:"monthlyRetention,omitempty" tf:"monthly_retention,omitempty"`
 
-	// The week of year to take the yearly backup. Value has to be between 1 and 52.
-	WeekOfYear *float64 `json:"weekOfYear,omitempty" tf:"week_of_year,omitempty"`
+// The monthly retention policy for an LTR backup in an ISO 8601 format. Valid value is between 1 to 120 months. e.g. P1Y, P1M, P4W or P30D.
+MonthlyRetention *string `json:"monthlyRetention,omitempty" tf:"monthly_retention,omitempty"`
 
-	// The weekly retention policy for an LTR backup in an ISO 8601 format. Valid value is between 1 to 520 weeks. e.g. P1Y, P1M, P1W or P7D.
-	WeeklyRetention *string `json:"weeklyRetention,omitempty" tf:"weekly_retention,omitempty"`
+// The week of year to take the yearly backup. Value has to be between 1 and 52.
+WeekOfYear *float64 `json:"weekOfYear,omitempty" tf:"week_of_year,omitempty"`
 
-	// The yearly retention policy for an LTR backup in an ISO 8601 format. Valid value is between 1 to 10 years. e.g. P1Y, P12M, P52W or P365D.
-	YearlyRetention *string `json:"yearlyRetention,omitempty" tf:"yearly_retention,omitempty"`
+// The weekly retention policy for an LTR backup in an ISO 8601 format. Valid value is between 1 to 520 weeks. e.g. P1Y, P1M, P1W or P7D.
+WeeklyRetention *string `json:"weeklyRetention,omitempty" tf:"weekly_retention,omitempty"`
+
+// The yearly retention policy for an LTR backup in an ISO 8601 format. Valid value is between 1 to 10 years. e.g. P1Y, P12M, P52W or P365D.
+YearlyRetention *string `json:"yearlyRetention,omitempty" tf:"yearly_retention,omitempty"`
 }
+
 
 type MSSQLManagedDatabaseLongTermRetentionPolicyParameters struct {
 
-	// The monthly retention policy for an LTR backup in an ISO 8601 format. Valid value is between 1 to 120 months. e.g. P1Y, P1M, P4W or P30D.
-	// +kubebuilder:validation:Optional
-	MonthlyRetention *string `json:"monthlyRetention,omitempty" tf:"monthly_retention,omitempty"`
 
-	// The week of year to take the yearly backup. Value has to be between 1 and 52.
-	// +kubebuilder:validation:Optional
-	WeekOfYear *float64 `json:"weekOfYear,omitempty" tf:"week_of_year,omitempty"`
+// The monthly retention policy for an LTR backup in an ISO 8601 format. Valid value is between 1 to 120 months. e.g. P1Y, P1M, P4W or P30D.
+// +kubebuilder:validation:Optional
+MonthlyRetention *string `json:"monthlyRetention,omitempty" tf:"monthly_retention,omitempty"`
 
-	// The weekly retention policy for an LTR backup in an ISO 8601 format. Valid value is between 1 to 520 weeks. e.g. P1Y, P1M, P1W or P7D.
-	// +kubebuilder:validation:Optional
-	WeeklyRetention *string `json:"weeklyRetention,omitempty" tf:"weekly_retention,omitempty"`
+// The week of year to take the yearly backup. Value has to be between 1 and 52.
+// +kubebuilder:validation:Optional
+WeekOfYear *float64 `json:"weekOfYear,omitempty" tf:"week_of_year,omitempty"`
 
-	// The yearly retention policy for an LTR backup in an ISO 8601 format. Valid value is between 1 to 10 years. e.g. P1Y, P12M, P52W or P365D.
-	// +kubebuilder:validation:Optional
-	YearlyRetention *string `json:"yearlyRetention,omitempty" tf:"yearly_retention,omitempty"`
+// The weekly retention policy for an LTR backup in an ISO 8601 format. Valid value is between 1 to 520 weeks. e.g. P1Y, P1M, P1W or P7D.
+// +kubebuilder:validation:Optional
+WeeklyRetention *string `json:"weeklyRetention,omitempty" tf:"weekly_retention,omitempty"`
+
+// The yearly retention policy for an LTR backup in an ISO 8601 format. Valid value is between 1 to 10 years. e.g. P1Y, P12M, P52W or P365D.
+// +kubebuilder:validation:Optional
+YearlyRetention *string `json:"yearlyRetention,omitempty" tf:"yearly_retention,omitempty"`
 }
+
 
 type MSSQLManagedDatabaseObservation struct {
 
-	// The Azure SQL Managed Database ID.
-	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// A long_term_retention_policy block as defined below.
-	LongTermRetentionPolicy []MSSQLManagedDatabaseLongTermRetentionPolicyObservation `json:"longTermRetentionPolicy,omitempty" tf:"long_term_retention_policy,omitempty"`
+// The Azure SQL Managed Database ID.
+ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The ID of the Azure SQL Managed Instance on which to create this Managed Database. Changing this forces a new resource to be created.
-	ManagedInstanceID *string `json:"managedInstanceId,omitempty" tf:"managed_instance_id,omitempty"`
+// A long_term_retention_policy block as defined below.
+LongTermRetentionPolicy []MSSQLManagedDatabaseLongTermRetentionPolicyObservation `json:"longTermRetentionPolicy,omitempty" tf:"long_term_retention_policy,omitempty"`
 
-	// The backup retention period in days. This is how many days Point-in-Time Restore will be supported.
-	ShortTermRetentionDays *float64 `json:"shortTermRetentionDays,omitempty" tf:"short_term_retention_days,omitempty"`
+// The ID of the Azure SQL Managed Instance on which to create this Managed Database. Changing this forces a new resource to be created.
+ManagedInstanceID *string `json:"managedInstanceId,omitempty" tf:"managed_instance_id,omitempty"`
+
+// The backup retention period in days. This is how many days Point-in-Time Restore will be supported.
+ShortTermRetentionDays *float64 `json:"shortTermRetentionDays,omitempty" tf:"short_term_retention_days,omitempty"`
 }
+
 
 type MSSQLManagedDatabaseParameters struct {
 
-	// A long_term_retention_policy block as defined below.
-	// +kubebuilder:validation:Optional
-	LongTermRetentionPolicy []MSSQLManagedDatabaseLongTermRetentionPolicyParameters `json:"longTermRetentionPolicy,omitempty" tf:"long_term_retention_policy,omitempty"`
 
-	// The ID of the Azure SQL Managed Instance on which to create this Managed Database. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=MSSQLManagedInstance
-	// +crossplane:generate:reference:extractor=kubedb.dev/provider-azure/apis/rconfig.ExtractResourceID()
-	// +kubebuilder:validation:Optional
-	ManagedInstanceID *string `json:"managedInstanceId,omitempty" tf:"managed_instance_id,omitempty"`
+// A long_term_retention_policy block as defined below.
+// +kubebuilder:validation:Optional
+LongTermRetentionPolicy []MSSQLManagedDatabaseLongTermRetentionPolicyParameters `json:"longTermRetentionPolicy,omitempty" tf:"long_term_retention_policy,omitempty"`
 
-	// Reference to a MSSQLManagedInstance to populate managedInstanceId.
-	// +kubebuilder:validation:Optional
-	ManagedInstanceIDRef *v1.Reference `json:"managedInstanceIdRef,omitempty" tf:"-"`
+// The ID of the Azure SQL Managed Instance on which to create this Managed Database. Changing this forces a new resource to be created.
+// +crossplane:generate:reference:type=MSSQLManagedInstance
+// +crossplane:generate:reference:extractor=kubedb.dev/provider-azure/apis/rconfig.ExtractResourceID()
+// +kubebuilder:validation:Optional
+ManagedInstanceID *string `json:"managedInstanceId,omitempty" tf:"managed_instance_id,omitempty"`
 
-	// Selector for a MSSQLManagedInstance to populate managedInstanceId.
-	// +kubebuilder:validation:Optional
-	ManagedInstanceIDSelector *v1.Selector `json:"managedInstanceIdSelector,omitempty" tf:"-"`
+// Reference to a MSSQLManagedInstance to populate managedInstanceId.
+// +kubebuilder:validation:Optional
+ManagedInstanceIDRef *v1.Reference `json:"managedInstanceIdRef,omitempty" tf:"-"`
 
-	// The backup retention period in days. This is how many days Point-in-Time Restore will be supported.
-	// +kubebuilder:validation:Optional
-	ShortTermRetentionDays *float64 `json:"shortTermRetentionDays,omitempty" tf:"short_term_retention_days,omitempty"`
+// Selector for a MSSQLManagedInstance to populate managedInstanceId.
+// +kubebuilder:validation:Optional
+ManagedInstanceIDSelector *v1.Selector `json:"managedInstanceIdSelector,omitempty" tf:"-"`
+
+// The backup retention period in days. This is how many days Point-in-Time Restore will be supported.
+// +kubebuilder:validation:Optional
+ShortTermRetentionDays *float64 `json:"shortTermRetentionDays,omitempty" tf:"short_term_retention_days,omitempty"`
 }
 
 // MSSQLManagedDatabaseSpec defines the desired state of MSSQLManagedDatabase
 type MSSQLManagedDatabaseSpec struct {
 	v1.ResourceSpec `json:",inline"`
-	ForProvider     MSSQLManagedDatabaseParameters `json:"forProvider"`
+	ForProvider       MSSQLManagedDatabaseParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -129,13 +144,13 @@ type MSSQLManagedDatabaseSpec struct {
 	// required on creation, but we do not desire to update them after creation,
 	// for example because of an external controller is managing them, like an
 	// autoscaler.
-	InitProvider MSSQLManagedDatabaseInitParameters `json:"initProvider,omitempty"`
+	InitProvider       MSSQLManagedDatabaseInitParameters `json:"initProvider,omitempty"`
 }
 
 // MSSQLManagedDatabaseStatus defines the observed state of MSSQLManagedDatabase.
 type MSSQLManagedDatabaseStatus struct {
 	v1.ResourceStatus `json:",inline"`
-	AtProvider        MSSQLManagedDatabaseObservation `json:"atProvider,omitempty"`
+	AtProvider          MSSQLManagedDatabaseObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true
