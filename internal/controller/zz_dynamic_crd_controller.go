@@ -165,7 +165,7 @@ var (
 		schema.GroupKind{"network.azure.kubedb.com", "SubnetRouteTableAssociation"}:                  subnetroutetableassociation.Setup,
 		schema.GroupKind{"network.azure.kubedb.com", "VirtualNetwork"}:                               virtualnetwork.Setup,
 		schema.GroupKind{"network.azure.kubedb.com", "VirtualNetworkPeering"}:                        virtualnetworkpeering.Setup,
-		schema.GroupKind{"controller.azure.kubedb.com", ""}:                                          providerconfig.Setup,
+		schema.GroupKind{"providerconfig.azure.kubedb.com", ""}:                                      providerconfig.Setup,
 		schema.GroupKind{"sql.azure.kubedb.com", "MSSQLDatabase"}:                                    mssqldatabase.Setup,
 		schema.GroupKind{"sql.azure.kubedb.com", "MSSQLDatabaseVulnerabilityAssessmentRuleBaseline"}: mssqldatabasevulnerabilityassessmentrulebaseline.Setup,
 		schema.GroupKind{"sql.azure.kubedb.com", "MSSQLElasticPool"}:                                 mssqlelasticpool.Setup,
