@@ -15,93 +15,102 @@ import (
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+
 )
+
+
+
 
 type RedisEnterpriseClusterInitParameters struct {
 
-	// The Azure Region where the Redis Enterprise Cluster should exist. Changing this forces a new Redis Enterprise Cluster to be created.
-	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
-	// The minimum TLS version. Possible values are 1.0, 1.1 and 1.2. Defaults to 1.2. Changing this forces a new Redis Enterprise Cluster to be created.
-	MinimumTLSVersion *string `json:"minimumTlsVersion,omitempty" tf:"minimum_tls_version,omitempty"`
+// The Azure Region where the Redis Enterprise Cluster should exist. Changing this forces a new Redis Enterprise Cluster to be created.
+Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
-	// The sku_name is comprised of two segments separated by a hyphen (e.g. Enterprise_E10-2). The first segment of the sku_name defines the name of the SKU, possible values are Enterprise_E10, Enterprise_E20", Enterprise_E50, Enterprise_E100, EnterpriseFlash_F300, EnterpriseFlash_F700 or EnterpriseFlash_F1500. The second segment defines the capacity of the sku_name, possible values for Enteprise SKUs are (2, 4, 6, ...). Possible values for EnterpriseFlash SKUs are (3, 9, 15, ...). Changing this forces a new Redis Enterprise Cluster to be created.
-	SkuName *string `json:"skuName,omitempty" tf:"sku_name,omitempty"`
+// The minimum TLS version. Possible values are 1.0, 1.1 and 1.2. Defaults to 1.2. Changing this forces a new Redis Enterprise Cluster to be created.
+MinimumTLSVersion *string `json:"minimumTlsVersion,omitempty" tf:"minimum_tls_version,omitempty"`
 
-	// A mapping of tags which should be assigned to the Redis Enterprise Cluster.
-	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+// The sku_name is comprised of two segments separated by a hyphen (e.g. Enterprise_E10-2). The first segment of the sku_name defines the name of the SKU, possible values are Enterprise_E10, Enterprise_E20", Enterprise_E50, Enterprise_E100, EnterpriseFlash_F300, EnterpriseFlash_F700 or EnterpriseFlash_F1500. The second segment defines the capacity of the sku_name, possible values for Enteprise SKUs are (2, 4, 6, ...). Possible values for EnterpriseFlash SKUs are (3, 9, 15, ...). Changing this forces a new Redis Enterprise Cluster to be created.
+SkuName *string `json:"skuName,omitempty" tf:"sku_name,omitempty"`
 
-	// Specifies a list of Availability Zones in which this Redis Enterprise Cluster should be located. Changing this forces a new Redis Enterprise Cluster to be created.
-	Zones []*string `json:"zones,omitempty" tf:"zones,omitempty"`
+// A mapping of tags which should be assigned to the Redis Enterprise Cluster.
+Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+// Specifies a list of Availability Zones in which this Redis Enterprise Cluster should be located. Changing this forces a new Redis Enterprise Cluster to be created.
+Zones []*string `json:"zones,omitempty" tf:"zones,omitempty"`
 }
+
 
 type RedisEnterpriseClusterObservation struct {
 
-	// DNS name of the cluster endpoint.
-	Hostname *string `json:"hostname,omitempty" tf:"hostname,omitempty"`
 
-	// The ID of the Redis Enterprise Cluster.
-	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+// DNS name of the cluster endpoint.
+Hostname *string `json:"hostname,omitempty" tf:"hostname,omitempty"`
 
-	// The Azure Region where the Redis Enterprise Cluster should exist. Changing this forces a new Redis Enterprise Cluster to be created.
-	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+// The ID of the Redis Enterprise Cluster.
+ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The minimum TLS version. Possible values are 1.0, 1.1 and 1.2. Defaults to 1.2. Changing this forces a new Redis Enterprise Cluster to be created.
-	MinimumTLSVersion *string `json:"minimumTlsVersion,omitempty" tf:"minimum_tls_version,omitempty"`
+// The Azure Region where the Redis Enterprise Cluster should exist. Changing this forces a new Redis Enterprise Cluster to be created.
+Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
-	// The name of the Resource Group where the Redis Enterprise Cluster should exist. Changing this forces a new Redis Enterprise Cluster to be created.
-	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+// The minimum TLS version. Possible values are 1.0, 1.1 and 1.2. Defaults to 1.2. Changing this forces a new Redis Enterprise Cluster to be created.
+MinimumTLSVersion *string `json:"minimumTlsVersion,omitempty" tf:"minimum_tls_version,omitempty"`
 
-	// The sku_name is comprised of two segments separated by a hyphen (e.g. Enterprise_E10-2). The first segment of the sku_name defines the name of the SKU, possible values are Enterprise_E10, Enterprise_E20", Enterprise_E50, Enterprise_E100, EnterpriseFlash_F300, EnterpriseFlash_F700 or EnterpriseFlash_F1500. The second segment defines the capacity of the sku_name, possible values for Enteprise SKUs are (2, 4, 6, ...). Possible values for EnterpriseFlash SKUs are (3, 9, 15, ...). Changing this forces a new Redis Enterprise Cluster to be created.
-	SkuName *string `json:"skuName,omitempty" tf:"sku_name,omitempty"`
+// The name of the Resource Group where the Redis Enterprise Cluster should exist. Changing this forces a new Redis Enterprise Cluster to be created.
+ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 
-	// A mapping of tags which should be assigned to the Redis Enterprise Cluster.
-	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+// The sku_name is comprised of two segments separated by a hyphen (e.g. Enterprise_E10-2). The first segment of the sku_name defines the name of the SKU, possible values are Enterprise_E10, Enterprise_E20", Enterprise_E50, Enterprise_E100, EnterpriseFlash_F300, EnterpriseFlash_F700 or EnterpriseFlash_F1500. The second segment defines the capacity of the sku_name, possible values for Enteprise SKUs are (2, 4, 6, ...). Possible values for EnterpriseFlash SKUs are (3, 9, 15, ...). Changing this forces a new Redis Enterprise Cluster to be created.
+SkuName *string `json:"skuName,omitempty" tf:"sku_name,omitempty"`
 
-	// Specifies a list of Availability Zones in which this Redis Enterprise Cluster should be located. Changing this forces a new Redis Enterprise Cluster to be created.
-	Zones []*string `json:"zones,omitempty" tf:"zones,omitempty"`
+// A mapping of tags which should be assigned to the Redis Enterprise Cluster.
+Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+// Specifies a list of Availability Zones in which this Redis Enterprise Cluster should be located. Changing this forces a new Redis Enterprise Cluster to be created.
+Zones []*string `json:"zones,omitempty" tf:"zones,omitempty"`
 }
+
 
 type RedisEnterpriseClusterParameters struct {
 
-	// The Azure Region where the Redis Enterprise Cluster should exist. Changing this forces a new Redis Enterprise Cluster to be created.
-	// +kubebuilder:validation:Optional
-	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
-	// The minimum TLS version. Possible values are 1.0, 1.1 and 1.2. Defaults to 1.2. Changing this forces a new Redis Enterprise Cluster to be created.
-	// +kubebuilder:validation:Optional
-	MinimumTLSVersion *string `json:"minimumTlsVersion,omitempty" tf:"minimum_tls_version,omitempty"`
+// The Azure Region where the Redis Enterprise Cluster should exist. Changing this forces a new Redis Enterprise Cluster to be created.
+// +kubebuilder:validation:Optional
+Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
-	// The name of the Resource Group where the Redis Enterprise Cluster should exist. Changing this forces a new Redis Enterprise Cluster to be created.
-	// +crossplane:generate:reference:type=kubedb.dev/provider-azure/apis/azure/v1alpha1.ResourceGroup
-	// +kubebuilder:validation:Optional
-	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+// The minimum TLS version. Possible values are 1.0, 1.1 and 1.2. Defaults to 1.2. Changing this forces a new Redis Enterprise Cluster to be created.
+// +kubebuilder:validation:Optional
+MinimumTLSVersion *string `json:"minimumTlsVersion,omitempty" tf:"minimum_tls_version,omitempty"`
 
-	// Reference to a ResourceGroup in azure to populate resourceGroupName.
-	// +kubebuilder:validation:Optional
-	ResourceGroupNameRef *v1.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+// The name of the Resource Group where the Redis Enterprise Cluster should exist. Changing this forces a new Redis Enterprise Cluster to be created.
+// +crossplane:generate:reference:type=kubedb.dev/provider-azure/apis/azure/v1alpha1.ResourceGroup
+// +kubebuilder:validation:Optional
+ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 
-	// Selector for a ResourceGroup in azure to populate resourceGroupName.
-	// +kubebuilder:validation:Optional
-	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+// Reference to a ResourceGroup in azure to populate resourceGroupName.
+// +kubebuilder:validation:Optional
+ResourceGroupNameRef *v1.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
-	// The sku_name is comprised of two segments separated by a hyphen (e.g. Enterprise_E10-2). The first segment of the sku_name defines the name of the SKU, possible values are Enterprise_E10, Enterprise_E20", Enterprise_E50, Enterprise_E100, EnterpriseFlash_F300, EnterpriseFlash_F700 or EnterpriseFlash_F1500. The second segment defines the capacity of the sku_name, possible values for Enteprise SKUs are (2, 4, 6, ...). Possible values for EnterpriseFlash SKUs are (3, 9, 15, ...). Changing this forces a new Redis Enterprise Cluster to be created.
-	// +kubebuilder:validation:Optional
-	SkuName *string `json:"skuName,omitempty" tf:"sku_name,omitempty"`
+// Selector for a ResourceGroup in azure to populate resourceGroupName.
+// +kubebuilder:validation:Optional
+ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
-	// A mapping of tags which should be assigned to the Redis Enterprise Cluster.
-	// +kubebuilder:validation:Optional
-	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+// The sku_name is comprised of two segments separated by a hyphen (e.g. Enterprise_E10-2). The first segment of the sku_name defines the name of the SKU, possible values are Enterprise_E10, Enterprise_E20", Enterprise_E50, Enterprise_E100, EnterpriseFlash_F300, EnterpriseFlash_F700 or EnterpriseFlash_F1500. The second segment defines the capacity of the sku_name, possible values for Enteprise SKUs are (2, 4, 6, ...). Possible values for EnterpriseFlash SKUs are (3, 9, 15, ...). Changing this forces a new Redis Enterprise Cluster to be created.
+// +kubebuilder:validation:Optional
+SkuName *string `json:"skuName,omitempty" tf:"sku_name,omitempty"`
 
-	// Specifies a list of Availability Zones in which this Redis Enterprise Cluster should be located. Changing this forces a new Redis Enterprise Cluster to be created.
-	// +kubebuilder:validation:Optional
-	Zones []*string `json:"zones,omitempty" tf:"zones,omitempty"`
+// A mapping of tags which should be assigned to the Redis Enterprise Cluster.
+// +kubebuilder:validation:Optional
+Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+// Specifies a list of Availability Zones in which this Redis Enterprise Cluster should be located. Changing this forces a new Redis Enterprise Cluster to be created.
+// +kubebuilder:validation:Optional
+Zones []*string `json:"zones,omitempty" tf:"zones,omitempty"`
 }
 
 // RedisEnterpriseClusterSpec defines the desired state of RedisEnterpriseCluster
 type RedisEnterpriseClusterSpec struct {
 	v1.ResourceSpec `json:",inline"`
-	ForProvider     RedisEnterpriseClusterParameters `json:"forProvider"`
+	ForProvider       RedisEnterpriseClusterParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -112,13 +121,13 @@ type RedisEnterpriseClusterSpec struct {
 	// required on creation, but we do not desire to update them after creation,
 	// for example because of an external controller is managing them, like an
 	// autoscaler.
-	InitProvider RedisEnterpriseClusterInitParameters `json:"initProvider,omitempty"`
+	InitProvider       RedisEnterpriseClusterInitParameters `json:"initProvider,omitempty"`
 }
 
 // RedisEnterpriseClusterStatus defines the observed state of RedisEnterpriseCluster.
 type RedisEnterpriseClusterStatus struct {
 	v1.ResourceStatus `json:",inline"`
-	AtProvider        RedisEnterpriseClusterObservation `json:"atProvider,omitempty"`
+	AtProvider          RedisEnterpriseClusterObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true
@@ -133,10 +142,10 @@ type RedisEnterpriseClusterStatus struct {
 type RedisEnterpriseCluster struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.location) || (has(self.initProvider) && has(self.initProvider.location))",message="spec.forProvider.location is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.skuName) || (has(self.initProvider) && has(self.initProvider.skuName))",message="spec.forProvider.skuName is a required parameter"
-	Spec   RedisEnterpriseClusterSpec   `json:"spec"`
-	Status RedisEnterpriseClusterStatus `json:"status,omitempty"`
+// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.location) || (has(self.initProvider) && has(self.initProvider.location))",message="spec.forProvider.location is a required parameter"
+// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.skuName) || (has(self.initProvider) && has(self.initProvider.skuName))",message="spec.forProvider.skuName is a required parameter"
+	Spec              RedisEnterpriseClusterSpec   `json:"spec"`
+	Status            RedisEnterpriseClusterStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

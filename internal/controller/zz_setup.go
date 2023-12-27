@@ -104,10 +104,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 	for _, setup := range []func(ctrl.Manager, controller.Options) error{
 		roleassignment.Setup,
 		providerregistration.Setup,
-		providerregistration.Setup,
 		resourcegroup.Setup,
-		resourcegroup.Setup,
-		subscription.Setup,
 		subscription.Setup,
 		rediscache.Setup,
 		redisenterprisecluster.Setup,

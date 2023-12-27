@@ -15,44 +15,53 @@ import (
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+
 )
+
+
+
 
 type ResourceGroupInitParameters struct {
 
-	// The Azure Region where the Resource Group should exist. Changing this forces a new Resource Group to be created.
-	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
-	// A mapping of tags which should be assigned to the Resource Group.
-	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+// The Azure Region where the Resource Group should exist. Changing this forces a new Resource Group to be created.
+Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+// A mapping of tags which should be assigned to the Resource Group.
+Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
+
 
 type ResourceGroupObservation struct {
 
-	// The ID of the Resource Group.
-	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The Azure Region where the Resource Group should exist. Changing this forces a new Resource Group to be created.
-	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+// The ID of the Resource Group.
+ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// A mapping of tags which should be assigned to the Resource Group.
-	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+// The Azure Region where the Resource Group should exist. Changing this forces a new Resource Group to be created.
+Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+// A mapping of tags which should be assigned to the Resource Group.
+Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
+
 
 type ResourceGroupParameters struct {
 
-	// The Azure Region where the Resource Group should exist. Changing this forces a new Resource Group to be created.
-	// +kubebuilder:validation:Optional
-	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
-	// A mapping of tags which should be assigned to the Resource Group.
-	// +kubebuilder:validation:Optional
-	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+// The Azure Region where the Resource Group should exist. Changing this forces a new Resource Group to be created.
+// +kubebuilder:validation:Optional
+Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+// A mapping of tags which should be assigned to the Resource Group.
+// +kubebuilder:validation:Optional
+Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 // ResourceGroupSpec defines the desired state of ResourceGroup
 type ResourceGroupSpec struct {
 	v1.ResourceSpec `json:",inline"`
-	ForProvider     ResourceGroupParameters `json:"forProvider"`
+	ForProvider       ResourceGroupParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -63,13 +72,13 @@ type ResourceGroupSpec struct {
 	// required on creation, but we do not desire to update them after creation,
 	// for example because of an external controller is managing them, like an
 	// autoscaler.
-	InitProvider ResourceGroupInitParameters `json:"initProvider,omitempty"`
+	InitProvider       ResourceGroupInitParameters `json:"initProvider,omitempty"`
 }
 
 // ResourceGroupStatus defines the observed state of ResourceGroup.
 type ResourceGroupStatus struct {
 	v1.ResourceStatus `json:",inline"`
-	AtProvider        ResourceGroupObservation `json:"atProvider,omitempty"`
+	AtProvider          ResourceGroupObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true
@@ -84,9 +93,9 @@ type ResourceGroupStatus struct {
 type ResourceGroup struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.location) || (has(self.initProvider) && has(self.initProvider.location))",message="spec.forProvider.location is a required parameter"
-	Spec   ResourceGroupSpec   `json:"spec"`
-	Status ResourceGroupStatus `json:"status,omitempty"`
+// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.location) || (has(self.initProvider) && has(self.initProvider.location))",message="spec.forProvider.location is a required parameter"
+	Spec              ResourceGroupSpec   `json:"spec"`
+	Status            ResourceGroupStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

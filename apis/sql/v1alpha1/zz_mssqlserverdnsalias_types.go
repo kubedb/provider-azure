@@ -15,44 +15,53 @@ import (
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+
 )
 
+
+
+
 type MSSQLServerDNSAliasInitParameters struct {
+
 }
+
 
 type MSSQLServerDNSAliasObservation struct {
 
-	// The fully qualified DNS record for alias.
-	DNSRecord *string `json:"dnsRecord,omitempty" tf:"dns_record,omitempty"`
 
-	// The ID of the MSSQL Server DNS Alias.
-	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+// The fully qualified DNS record for alias.
+DNSRecord *string `json:"dnsRecord,omitempty" tf:"dns_record,omitempty"`
 
-	// The ID of the mssql server. Changing this forces a new MSSQL Server DNS Alias to be created.
-	MssqlServerID *string `json:"mssqlServerId,omitempty" tf:"mssql_server_id,omitempty"`
+// The ID of the MSSQL Server DNS Alias.
+ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+// The ID of the mssql server. Changing this forces a new MSSQL Server DNS Alias to be created.
+MssqlServerID *string `json:"mssqlServerId,omitempty" tf:"mssql_server_id,omitempty"`
 }
+
 
 type MSSQLServerDNSAliasParameters struct {
 
-	// The ID of the mssql server. Changing this forces a new MSSQL Server DNS Alias to be created.
-	// +crossplane:generate:reference:type=MSSQLServer
-	// +crossplane:generate:reference:extractor=kubedb.dev/provider-azure/apis/rconfig.ExtractResourceID()
-	// +kubebuilder:validation:Optional
-	MssqlServerID *string `json:"mssqlServerId,omitempty" tf:"mssql_server_id,omitempty"`
 
-	// Reference to a MSSQLServer to populate mssqlServerId.
-	// +kubebuilder:validation:Optional
-	MssqlServerIDRef *v1.Reference `json:"mssqlServerIdRef,omitempty" tf:"-"`
+// The ID of the mssql server. Changing this forces a new MSSQL Server DNS Alias to be created.
+// +crossplane:generate:reference:type=MSSQLServer
+// +crossplane:generate:reference:extractor=kubedb.dev/provider-azure/apis/rconfig.ExtractResourceID()
+// +kubebuilder:validation:Optional
+MssqlServerID *string `json:"mssqlServerId,omitempty" tf:"mssql_server_id,omitempty"`
 
-	// Selector for a MSSQLServer to populate mssqlServerId.
-	// +kubebuilder:validation:Optional
-	MssqlServerIDSelector *v1.Selector `json:"mssqlServerIdSelector,omitempty" tf:"-"`
+// Reference to a MSSQLServer to populate mssqlServerId.
+// +kubebuilder:validation:Optional
+MssqlServerIDRef *v1.Reference `json:"mssqlServerIdRef,omitempty" tf:"-"`
+
+// Selector for a MSSQLServer to populate mssqlServerId.
+// +kubebuilder:validation:Optional
+MssqlServerIDSelector *v1.Selector `json:"mssqlServerIdSelector,omitempty" tf:"-"`
 }
 
 // MSSQLServerDNSAliasSpec defines the desired state of MSSQLServerDNSAlias
 type MSSQLServerDNSAliasSpec struct {
 	v1.ResourceSpec `json:",inline"`
-	ForProvider     MSSQLServerDNSAliasParameters `json:"forProvider"`
+	ForProvider       MSSQLServerDNSAliasParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -63,13 +72,13 @@ type MSSQLServerDNSAliasSpec struct {
 	// required on creation, but we do not desire to update them after creation,
 	// for example because of an external controller is managing them, like an
 	// autoscaler.
-	InitProvider MSSQLServerDNSAliasInitParameters `json:"initProvider,omitempty"`
+	InitProvider       MSSQLServerDNSAliasInitParameters `json:"initProvider,omitempty"`
 }
 
 // MSSQLServerDNSAliasStatus defines the observed state of MSSQLServerDNSAlias.
 type MSSQLServerDNSAliasStatus struct {
 	v1.ResourceStatus `json:",inline"`
-	AtProvider        MSSQLServerDNSAliasObservation `json:"atProvider,omitempty"`
+	AtProvider          MSSQLServerDNSAliasObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

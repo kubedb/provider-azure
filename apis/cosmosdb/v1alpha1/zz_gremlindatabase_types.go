@@ -15,95 +15,110 @@ import (
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+
 )
+
+
+
 
 type GremlinDatabaseAutoscaleSettingsInitParameters struct {
 
-	// The maximum throughput of the Gremlin database (RU/s). Must be between 1,000 and 1,000,000. Must be set in increments of 1,000. Conflicts with throughput.
-	MaxThroughput *float64 `json:"maxThroughput,omitempty" tf:"max_throughput,omitempty"`
+
+// The maximum throughput of the Gremlin database (RU/s). Must be between 1,000 and 1,000,000. Must be set in increments of 1,000. Conflicts with throughput.
+MaxThroughput *float64 `json:"maxThroughput,omitempty" tf:"max_throughput,omitempty"`
 }
+
 
 type GremlinDatabaseAutoscaleSettingsObservation struct {
 
-	// The maximum throughput of the Gremlin database (RU/s). Must be between 1,000 and 1,000,000. Must be set in increments of 1,000. Conflicts with throughput.
-	MaxThroughput *float64 `json:"maxThroughput,omitempty" tf:"max_throughput,omitempty"`
+
+// The maximum throughput of the Gremlin database (RU/s). Must be between 1,000 and 1,000,000. Must be set in increments of 1,000. Conflicts with throughput.
+MaxThroughput *float64 `json:"maxThroughput,omitempty" tf:"max_throughput,omitempty"`
 }
+
 
 type GremlinDatabaseAutoscaleSettingsParameters struct {
 
-	// The maximum throughput of the Gremlin database (RU/s). Must be between 1,000 and 1,000,000. Must be set in increments of 1,000. Conflicts with throughput.
-	// +kubebuilder:validation:Optional
-	MaxThroughput *float64 `json:"maxThroughput,omitempty" tf:"max_throughput,omitempty"`
+
+// The maximum throughput of the Gremlin database (RU/s). Must be between 1,000 and 1,000,000. Must be set in increments of 1,000. Conflicts with throughput.
+// +kubebuilder:validation:Optional
+MaxThroughput *float64 `json:"maxThroughput,omitempty" tf:"max_throughput,omitempty"`
 }
+
 
 type GremlinDatabaseInitParameters struct {
 
-	// An autoscale_settings block as defined below.
-	AutoscaleSettings []GremlinDatabaseAutoscaleSettingsInitParameters `json:"autoscaleSettings,omitempty" tf:"autoscale_settings,omitempty"`
 
-	// The throughput of the Gremlin database (RU/s). Must be set in increments of 100. The minimum value is 400.
-	Throughput *float64 `json:"throughput,omitempty" tf:"throughput,omitempty"`
+// An autoscale_settings block as defined below.
+AutoscaleSettings []GremlinDatabaseAutoscaleSettingsInitParameters `json:"autoscaleSettings,omitempty" tf:"autoscale_settings,omitempty"`
+
+// The throughput of the Gremlin database (RU/s). Must be set in increments of 100. The minimum value is 400.
+Throughput *float64 `json:"throughput,omitempty" tf:"throughput,omitempty"`
 }
+
 
 type GremlinDatabaseObservation struct {
 
-	// The name of the CosmosDB Account to create the Gremlin Database within. Changing this forces a new resource to be created.
-	AccountName *string `json:"accountName,omitempty" tf:"account_name,omitempty"`
 
-	// An autoscale_settings block as defined below.
-	AutoscaleSettings []GremlinDatabaseAutoscaleSettingsObservation `json:"autoscaleSettings,omitempty" tf:"autoscale_settings,omitempty"`
+// The name of the CosmosDB Account to create the Gremlin Database within. Changing this forces a new resource to be created.
+AccountName *string `json:"accountName,omitempty" tf:"account_name,omitempty"`
 
-	// The ID of the CosmosDB Gremlin Database.
-	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+// An autoscale_settings block as defined below.
+AutoscaleSettings []GremlinDatabaseAutoscaleSettingsObservation `json:"autoscaleSettings,omitempty" tf:"autoscale_settings,omitempty"`
 
-	// The name of the resource group in which the Cosmos DB Gremlin Database is created. Changing this forces a new resource to be created.
-	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+// The ID of the CosmosDB Gremlin Database.
+ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The throughput of the Gremlin database (RU/s). Must be set in increments of 100. The minimum value is 400.
-	Throughput *float64 `json:"throughput,omitempty" tf:"throughput,omitempty"`
+// The name of the resource group in which the Cosmos DB Gremlin Database is created. Changing this forces a new resource to be created.
+ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+
+// The throughput of the Gremlin database (RU/s). Must be set in increments of 100. The minimum value is 400.
+Throughput *float64 `json:"throughput,omitempty" tf:"throughput,omitempty"`
 }
+
 
 type GremlinDatabaseParameters struct {
 
-	// The name of the CosmosDB Account to create the Gremlin Database within. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=Account
-	// +kubebuilder:validation:Optional
-	AccountName *string `json:"accountName,omitempty" tf:"account_name,omitempty"`
 
-	// Reference to a Account to populate accountName.
-	// +kubebuilder:validation:Optional
-	AccountNameRef *v1.Reference `json:"accountNameRef,omitempty" tf:"-"`
+// The name of the CosmosDB Account to create the Gremlin Database within. Changing this forces a new resource to be created.
+// +crossplane:generate:reference:type=Account
+// +kubebuilder:validation:Optional
+AccountName *string `json:"accountName,omitempty" tf:"account_name,omitempty"`
 
-	// Selector for a Account to populate accountName.
-	// +kubebuilder:validation:Optional
-	AccountNameSelector *v1.Selector `json:"accountNameSelector,omitempty" tf:"-"`
+// Reference to a Account to populate accountName.
+// +kubebuilder:validation:Optional
+AccountNameRef *v1.Reference `json:"accountNameRef,omitempty" tf:"-"`
 
-	// An autoscale_settings block as defined below.
-	// +kubebuilder:validation:Optional
-	AutoscaleSettings []GremlinDatabaseAutoscaleSettingsParameters `json:"autoscaleSettings,omitempty" tf:"autoscale_settings,omitempty"`
+// Selector for a Account to populate accountName.
+// +kubebuilder:validation:Optional
+AccountNameSelector *v1.Selector `json:"accountNameSelector,omitempty" tf:"-"`
 
-	// The name of the resource group in which the Cosmos DB Gremlin Database is created. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=kubedb.dev/provider-azure/apis/azure/v1alpha1.ResourceGroup
-	// +kubebuilder:validation:Optional
-	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+// An autoscale_settings block as defined below.
+// +kubebuilder:validation:Optional
+AutoscaleSettings []GremlinDatabaseAutoscaleSettingsParameters `json:"autoscaleSettings,omitempty" tf:"autoscale_settings,omitempty"`
 
-	// Reference to a ResourceGroup in azure to populate resourceGroupName.
-	// +kubebuilder:validation:Optional
-	ResourceGroupNameRef *v1.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+// The name of the resource group in which the Cosmos DB Gremlin Database is created. Changing this forces a new resource to be created.
+// +crossplane:generate:reference:type=kubedb.dev/provider-azure/apis/azure/v1alpha1.ResourceGroup
+// +kubebuilder:validation:Optional
+ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 
-	// Selector for a ResourceGroup in azure to populate resourceGroupName.
-	// +kubebuilder:validation:Optional
-	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+// Reference to a ResourceGroup in azure to populate resourceGroupName.
+// +kubebuilder:validation:Optional
+ResourceGroupNameRef *v1.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
-	// The throughput of the Gremlin database (RU/s). Must be set in increments of 100. The minimum value is 400.
-	// +kubebuilder:validation:Optional
-	Throughput *float64 `json:"throughput,omitempty" tf:"throughput,omitempty"`
+// Selector for a ResourceGroup in azure to populate resourceGroupName.
+// +kubebuilder:validation:Optional
+ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+
+// The throughput of the Gremlin database (RU/s). Must be set in increments of 100. The minimum value is 400.
+// +kubebuilder:validation:Optional
+Throughput *float64 `json:"throughput,omitempty" tf:"throughput,omitempty"`
 }
 
 // GremlinDatabaseSpec defines the desired state of GremlinDatabase
 type GremlinDatabaseSpec struct {
 	v1.ResourceSpec `json:",inline"`
-	ForProvider     GremlinDatabaseParameters `json:"forProvider"`
+	ForProvider       GremlinDatabaseParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -114,13 +129,13 @@ type GremlinDatabaseSpec struct {
 	// required on creation, but we do not desire to update them after creation,
 	// for example because of an external controller is managing them, like an
 	// autoscaler.
-	InitProvider GremlinDatabaseInitParameters `json:"initProvider,omitempty"`
+	InitProvider       GremlinDatabaseInitParameters `json:"initProvider,omitempty"`
 }
 
 // GremlinDatabaseStatus defines the observed state of GremlinDatabase.
 type GremlinDatabaseStatus struct {
 	v1.ResourceStatus `json:",inline"`
-	AtProvider        GremlinDatabaseObservation `json:"atProvider,omitempty"`
+	AtProvider          GremlinDatabaseObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

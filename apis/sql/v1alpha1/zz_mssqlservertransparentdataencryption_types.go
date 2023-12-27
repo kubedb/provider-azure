@@ -15,68 +15,77 @@ import (
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+
 )
+
+
+
 
 type MSSQLServerTransparentDataEncryptionInitParameters struct {
 
-	// When enabled, the server will continuously check the key vault for any new versions of the key being used as the TDE protector. If a new version of the key is detected, the TDE protector on the server will be automatically rotated to the latest key version within 60 minutes.
-	AutoRotationEnabled *bool `json:"autoRotationEnabled,omitempty" tf:"auto_rotation_enabled,omitempty"`
+
+// When enabled, the server will continuously check the key vault for any new versions of the key being used as the TDE protector. If a new version of the key is detected, the TDE protector on the server will be automatically rotated to the latest key version within 60 minutes.
+AutoRotationEnabled *bool `json:"autoRotationEnabled,omitempty" tf:"auto_rotation_enabled,omitempty"`
 }
+
 
 type MSSQLServerTransparentDataEncryptionObservation struct {
 
-	// When enabled, the server will continuously check the key vault for any new versions of the key being used as the TDE protector. If a new version of the key is detected, the TDE protector on the server will be automatically rotated to the latest key version within 60 minutes.
-	AutoRotationEnabled *bool `json:"autoRotationEnabled,omitempty" tf:"auto_rotation_enabled,omitempty"`
 
-	// The ID of the MSSQL encryption protector
-	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+// When enabled, the server will continuously check the key vault for any new versions of the key being used as the TDE protector. If a new version of the key is detected, the TDE protector on the server will be automatically rotated to the latest key version within 60 minutes.
+AutoRotationEnabled *bool `json:"autoRotationEnabled,omitempty" tf:"auto_rotation_enabled,omitempty"`
 
-	// To use customer managed keys from Azure Key Vault, provide the AKV Key ID. To use service managed keys, omit this field.
-	KeyVaultKeyID *string `json:"keyVaultKeyId,omitempty" tf:"key_vault_key_id,omitempty"`
+// The ID of the MSSQL encryption protector
+ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// Specifies the name of the MS SQL Server. Changing this forces a new resource to be created.
-	ServerID *string `json:"serverId,omitempty" tf:"server_id,omitempty"`
+// To use customer managed keys from Azure Key Vault, provide the AKV Key ID. To use service managed keys, omit this field.
+KeyVaultKeyID *string `json:"keyVaultKeyId,omitempty" tf:"key_vault_key_id,omitempty"`
+
+// Specifies the name of the MS SQL Server. Changing this forces a new resource to be created.
+ServerID *string `json:"serverId,omitempty" tf:"server_id,omitempty"`
 }
+
 
 type MSSQLServerTransparentDataEncryptionParameters struct {
 
-	// When enabled, the server will continuously check the key vault for any new versions of the key being used as the TDE protector. If a new version of the key is detected, the TDE protector on the server will be automatically rotated to the latest key version within 60 minutes.
-	// +kubebuilder:validation:Optional
-	AutoRotationEnabled *bool `json:"autoRotationEnabled,omitempty" tf:"auto_rotation_enabled,omitempty"`
 
-	// To use customer managed keys from Azure Key Vault, provide the AKV Key ID. To use service managed keys, omit this field.
-	// +crossplane:generate:reference:type=kubedb.dev/provider-azure/apis/keyvault/v1alpha1.Key
-	// +crossplane:generate:reference:extractor=kubedb.dev/provider-azure/apis/rconfig.ExtractResourceID()
-	// +kubebuilder:validation:Optional
-	KeyVaultKeyID *string `json:"keyVaultKeyId,omitempty" tf:"key_vault_key_id,omitempty"`
+// When enabled, the server will continuously check the key vault for any new versions of the key being used as the TDE protector. If a new version of the key is detected, the TDE protector on the server will be automatically rotated to the latest key version within 60 minutes.
+// +kubebuilder:validation:Optional
+AutoRotationEnabled *bool `json:"autoRotationEnabled,omitempty" tf:"auto_rotation_enabled,omitempty"`
 
-	// Reference to a Key in keyvault to populate keyVaultKeyId.
-	// +kubebuilder:validation:Optional
-	KeyVaultKeyIDRef *v1.Reference `json:"keyVaultKeyIdRef,omitempty" tf:"-"`
+// To use customer managed keys from Azure Key Vault, provide the AKV Key ID. To use service managed keys, omit this field.
+// +crossplane:generate:reference:type=kubedb.dev/provider-azure/apis/keyvault/v1alpha1.Key
+// +crossplane:generate:reference:extractor=kubedb.dev/provider-azure/apis/rconfig.ExtractResourceID()
+// +kubebuilder:validation:Optional
+KeyVaultKeyID *string `json:"keyVaultKeyId,omitempty" tf:"key_vault_key_id,omitempty"`
 
-	// Selector for a Key in keyvault to populate keyVaultKeyId.
-	// +kubebuilder:validation:Optional
-	KeyVaultKeyIDSelector *v1.Selector `json:"keyVaultKeyIdSelector,omitempty" tf:"-"`
+// Reference to a Key in keyvault to populate keyVaultKeyId.
+// +kubebuilder:validation:Optional
+KeyVaultKeyIDRef *v1.Reference `json:"keyVaultKeyIdRef,omitempty" tf:"-"`
 
-	// Specifies the name of the MS SQL Server. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=MSSQLServer
-	// +crossplane:generate:reference:extractor=kubedb.dev/provider-azure/apis/rconfig.ExtractResourceID()
-	// +kubebuilder:validation:Optional
-	ServerID *string `json:"serverId,omitempty" tf:"server_id,omitempty"`
+// Selector for a Key in keyvault to populate keyVaultKeyId.
+// +kubebuilder:validation:Optional
+KeyVaultKeyIDSelector *v1.Selector `json:"keyVaultKeyIdSelector,omitempty" tf:"-"`
 
-	// Reference to a MSSQLServer to populate serverId.
-	// +kubebuilder:validation:Optional
-	ServerIDRef *v1.Reference `json:"serverIdRef,omitempty" tf:"-"`
+// Specifies the name of the MS SQL Server. Changing this forces a new resource to be created.
+// +crossplane:generate:reference:type=MSSQLServer
+// +crossplane:generate:reference:extractor=kubedb.dev/provider-azure/apis/rconfig.ExtractResourceID()
+// +kubebuilder:validation:Optional
+ServerID *string `json:"serverId,omitempty" tf:"server_id,omitempty"`
 
-	// Selector for a MSSQLServer to populate serverId.
-	// +kubebuilder:validation:Optional
-	ServerIDSelector *v1.Selector `json:"serverIdSelector,omitempty" tf:"-"`
+// Reference to a MSSQLServer to populate serverId.
+// +kubebuilder:validation:Optional
+ServerIDRef *v1.Reference `json:"serverIdRef,omitempty" tf:"-"`
+
+// Selector for a MSSQLServer to populate serverId.
+// +kubebuilder:validation:Optional
+ServerIDSelector *v1.Selector `json:"serverIdSelector,omitempty" tf:"-"`
 }
 
 // MSSQLServerTransparentDataEncryptionSpec defines the desired state of MSSQLServerTransparentDataEncryption
 type MSSQLServerTransparentDataEncryptionSpec struct {
 	v1.ResourceSpec `json:",inline"`
-	ForProvider     MSSQLServerTransparentDataEncryptionParameters `json:"forProvider"`
+	ForProvider       MSSQLServerTransparentDataEncryptionParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -87,13 +96,13 @@ type MSSQLServerTransparentDataEncryptionSpec struct {
 	// required on creation, but we do not desire to update them after creation,
 	// for example because of an external controller is managing them, like an
 	// autoscaler.
-	InitProvider MSSQLServerTransparentDataEncryptionInitParameters `json:"initProvider,omitempty"`
+	InitProvider       MSSQLServerTransparentDataEncryptionInitParameters `json:"initProvider,omitempty"`
 }
 
 // MSSQLServerTransparentDataEncryptionStatus defines the observed state of MSSQLServerTransparentDataEncryption.
 type MSSQLServerTransparentDataEncryptionStatus struct {
 	v1.ResourceStatus `json:",inline"`
-	AtProvider        MSSQLServerTransparentDataEncryptionObservation `json:"atProvider,omitempty"`
+	AtProvider          MSSQLServerTransparentDataEncryptionObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

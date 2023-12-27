@@ -15,66 +15,75 @@ import (
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+
 )
+
+
+
 
 type FlexibleServerConfigurationInitParameters struct {
 
-	// Specifies the value of the MySQL Flexible Server Configuration. See the MySQL documentation for valid values. Changing this forces a new resource to be created.
-	Value *string `json:"value,omitempty" tf:"value,omitempty"`
+
+// Specifies the value of the MySQL Flexible Server Configuration. See the MySQL documentation for valid values. Changing this forces a new resource to be created.
+Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
+
 
 type FlexibleServerConfigurationObservation struct {
 
-	// The ID of the MySQL Flexible Server Configuration.
-	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The name of the resource group in which the MySQL Flexible Server exists. Changing this forces a new resource to be created.
-	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+// The ID of the MySQL Flexible Server Configuration.
+ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// Specifies the name of the MySQL Flexible Server. Changing this forces a new resource to be created.
-	ServerName *string `json:"serverName,omitempty" tf:"server_name,omitempty"`
+// The name of the resource group in which the MySQL Flexible Server exists. Changing this forces a new resource to be created.
+ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 
-	// Specifies the value of the MySQL Flexible Server Configuration. See the MySQL documentation for valid values. Changing this forces a new resource to be created.
-	Value *string `json:"value,omitempty" tf:"value,omitempty"`
+// Specifies the name of the MySQL Flexible Server. Changing this forces a new resource to be created.
+ServerName *string `json:"serverName,omitempty" tf:"server_name,omitempty"`
+
+// Specifies the value of the MySQL Flexible Server Configuration. See the MySQL documentation for valid values. Changing this forces a new resource to be created.
+Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
+
 
 type FlexibleServerConfigurationParameters struct {
 
-	// The name of the resource group in which the MySQL Flexible Server exists. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=kubedb.dev/provider-azure/apis/azure/v1alpha1.ResourceGroup
-	// +kubebuilder:validation:Optional
-	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 
-	// Reference to a ResourceGroup in azure to populate resourceGroupName.
-	// +kubebuilder:validation:Optional
-	ResourceGroupNameRef *v1.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+// The name of the resource group in which the MySQL Flexible Server exists. Changing this forces a new resource to be created.
+// +crossplane:generate:reference:type=kubedb.dev/provider-azure/apis/azure/v1alpha1.ResourceGroup
+// +kubebuilder:validation:Optional
+ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 
-	// Selector for a ResourceGroup in azure to populate resourceGroupName.
-	// +kubebuilder:validation:Optional
-	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+// Reference to a ResourceGroup in azure to populate resourceGroupName.
+// +kubebuilder:validation:Optional
+ResourceGroupNameRef *v1.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
-	// Specifies the name of the MySQL Flexible Server. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=FlexibleServer
-	// +kubebuilder:validation:Optional
-	ServerName *string `json:"serverName,omitempty" tf:"server_name,omitempty"`
+// Selector for a ResourceGroup in azure to populate resourceGroupName.
+// +kubebuilder:validation:Optional
+ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
-	// Reference to a FlexibleServer to populate serverName.
-	// +kubebuilder:validation:Optional
-	ServerNameRef *v1.Reference `json:"serverNameRef,omitempty" tf:"-"`
+// Specifies the name of the MySQL Flexible Server. Changing this forces a new resource to be created.
+// +crossplane:generate:reference:type=FlexibleServer
+// +kubebuilder:validation:Optional
+ServerName *string `json:"serverName,omitempty" tf:"server_name,omitempty"`
 
-	// Selector for a FlexibleServer to populate serverName.
-	// +kubebuilder:validation:Optional
-	ServerNameSelector *v1.Selector `json:"serverNameSelector,omitempty" tf:"-"`
+// Reference to a FlexibleServer to populate serverName.
+// +kubebuilder:validation:Optional
+ServerNameRef *v1.Reference `json:"serverNameRef,omitempty" tf:"-"`
 
-	// Specifies the value of the MySQL Flexible Server Configuration. See the MySQL documentation for valid values. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Optional
-	Value *string `json:"value,omitempty" tf:"value,omitempty"`
+// Selector for a FlexibleServer to populate serverName.
+// +kubebuilder:validation:Optional
+ServerNameSelector *v1.Selector `json:"serverNameSelector,omitempty" tf:"-"`
+
+// Specifies the value of the MySQL Flexible Server Configuration. See the MySQL documentation for valid values. Changing this forces a new resource to be created.
+// +kubebuilder:validation:Optional
+Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 // FlexibleServerConfigurationSpec defines the desired state of FlexibleServerConfiguration
 type FlexibleServerConfigurationSpec struct {
 	v1.ResourceSpec `json:",inline"`
-	ForProvider     FlexibleServerConfigurationParameters `json:"forProvider"`
+	ForProvider       FlexibleServerConfigurationParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -85,13 +94,13 @@ type FlexibleServerConfigurationSpec struct {
 	// required on creation, but we do not desire to update them after creation,
 	// for example because of an external controller is managing them, like an
 	// autoscaler.
-	InitProvider FlexibleServerConfigurationInitParameters `json:"initProvider,omitempty"`
+	InitProvider       FlexibleServerConfigurationInitParameters `json:"initProvider,omitempty"`
 }
 
 // FlexibleServerConfigurationStatus defines the observed state of FlexibleServerConfiguration.
 type FlexibleServerConfigurationStatus struct {
 	v1.ResourceStatus `json:",inline"`
-	AtProvider        FlexibleServerConfigurationObservation `json:"atProvider,omitempty"`
+	AtProvider          FlexibleServerConfigurationObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true
@@ -106,9 +115,9 @@ type FlexibleServerConfigurationStatus struct {
 type FlexibleServerConfiguration struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.value) || (has(self.initProvider) && has(self.initProvider.value))",message="spec.forProvider.value is a required parameter"
-	Spec   FlexibleServerConfigurationSpec   `json:"spec"`
-	Status FlexibleServerConfigurationStatus `json:"status,omitempty"`
+// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.value) || (has(self.initProvider) && has(self.initProvider.value))",message="spec.forProvider.value is a required parameter"
+	Spec              FlexibleServerConfigurationSpec   `json:"spec"`
+	Status            FlexibleServerConfigurationStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

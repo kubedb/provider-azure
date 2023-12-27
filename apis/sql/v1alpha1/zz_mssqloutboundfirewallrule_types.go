@@ -15,41 +15,50 @@ import (
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+
 )
 
+
+
+
 type MSSQLOutboundFirewallRuleInitParameters struct {
+
 }
+
 
 type MSSQLOutboundFirewallRuleObservation struct {
 
-	// The SQL Outbound Firewall Rule ID.
-	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The resource ID of the SQL Server on which to create the Outbound Firewall Rule. Changing this forces a new resource to be created.
-	ServerID *string `json:"serverId,omitempty" tf:"server_id,omitempty"`
+// The SQL Outbound Firewall Rule ID.
+ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+// The resource ID of the SQL Server on which to create the Outbound Firewall Rule. Changing this forces a new resource to be created.
+ServerID *string `json:"serverId,omitempty" tf:"server_id,omitempty"`
 }
+
 
 type MSSQLOutboundFirewallRuleParameters struct {
 
-	// The resource ID of the SQL Server on which to create the Outbound Firewall Rule. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=MSSQLServer
-	// +crossplane:generate:reference:extractor=kubedb.dev/provider-azure/apis/rconfig.ExtractResourceID()
-	// +kubebuilder:validation:Optional
-	ServerID *string `json:"serverId,omitempty" tf:"server_id,omitempty"`
 
-	// Reference to a MSSQLServer to populate serverId.
-	// +kubebuilder:validation:Optional
-	ServerIDRef *v1.Reference `json:"serverIdRef,omitempty" tf:"-"`
+// The resource ID of the SQL Server on which to create the Outbound Firewall Rule. Changing this forces a new resource to be created.
+// +crossplane:generate:reference:type=MSSQLServer
+// +crossplane:generate:reference:extractor=kubedb.dev/provider-azure/apis/rconfig.ExtractResourceID()
+// +kubebuilder:validation:Optional
+ServerID *string `json:"serverId,omitempty" tf:"server_id,omitempty"`
 
-	// Selector for a MSSQLServer to populate serverId.
-	// +kubebuilder:validation:Optional
-	ServerIDSelector *v1.Selector `json:"serverIdSelector,omitempty" tf:"-"`
+// Reference to a MSSQLServer to populate serverId.
+// +kubebuilder:validation:Optional
+ServerIDRef *v1.Reference `json:"serverIdRef,omitempty" tf:"-"`
+
+// Selector for a MSSQLServer to populate serverId.
+// +kubebuilder:validation:Optional
+ServerIDSelector *v1.Selector `json:"serverIdSelector,omitempty" tf:"-"`
 }
 
 // MSSQLOutboundFirewallRuleSpec defines the desired state of MSSQLOutboundFirewallRule
 type MSSQLOutboundFirewallRuleSpec struct {
 	v1.ResourceSpec `json:",inline"`
-	ForProvider     MSSQLOutboundFirewallRuleParameters `json:"forProvider"`
+	ForProvider       MSSQLOutboundFirewallRuleParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -60,13 +69,13 @@ type MSSQLOutboundFirewallRuleSpec struct {
 	// required on creation, but we do not desire to update them after creation,
 	// for example because of an external controller is managing them, like an
 	// autoscaler.
-	InitProvider MSSQLOutboundFirewallRuleInitParameters `json:"initProvider,omitempty"`
+	InitProvider       MSSQLOutboundFirewallRuleInitParameters `json:"initProvider,omitempty"`
 }
 
 // MSSQLOutboundFirewallRuleStatus defines the observed state of MSSQLOutboundFirewallRule.
 type MSSQLOutboundFirewallRuleStatus struct {
 	v1.ResourceStatus `json:",inline"`
-	AtProvider        MSSQLOutboundFirewallRuleObservation `json:"atProvider,omitempty"`
+	AtProvider          MSSQLOutboundFirewallRuleObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

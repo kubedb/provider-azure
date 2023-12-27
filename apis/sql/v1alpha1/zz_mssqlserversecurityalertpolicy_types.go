@@ -15,127 +15,136 @@ import (
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+
 )
+
+
+
 
 type MSSQLServerSecurityAlertPolicyInitParameters struct {
 
-	// Specifies an array of alerts that are disabled. Allowed values are: Sql_Injection, Sql_Injection_Vulnerability, Access_Anomaly, Data_Exfiltration, Unsafe_Action.
-	DisabledAlerts []*string `json:"disabledAlerts,omitempty" tf:"disabled_alerts,omitempty"`
 
-	// Boolean flag which specifies if the alert is sent to the account administrators or not. Defaults to false.
-	EmailAccountAdmins *bool `json:"emailAccountAdmins,omitempty" tf:"email_account_admins,omitempty"`
+// Specifies an array of alerts that are disabled. Allowed values are: Sql_Injection, Sql_Injection_Vulnerability, Access_Anomaly, Data_Exfiltration, Unsafe_Action.
+DisabledAlerts []*string `json:"disabledAlerts,omitempty" tf:"disabled_alerts,omitempty"`
 
-	// Specifies an array of email addresses to which the alert is sent.
-	EmailAddresses []*string `json:"emailAddresses,omitempty" tf:"email_addresses,omitempty"`
+// Boolean flag which specifies if the alert is sent to the account administrators or not. Defaults to false.
+EmailAccountAdmins *bool `json:"emailAccountAdmins,omitempty" tf:"email_account_admins,omitempty"`
 
-	// Specifies the number of days to keep in the Threat Detection audit logs. Defaults to 0.
-	RetentionDays *float64 `json:"retentionDays,omitempty" tf:"retention_days,omitempty"`
+// Specifies an array of email addresses to which the alert is sent.
+EmailAddresses []*string `json:"emailAddresses,omitempty" tf:"email_addresses,omitempty"`
 
-	// Specifies the state of the policy, whether it is enabled or disabled or a policy has not been applied yet on the specific database server. Possible values are Disabled, Enabled and New.
-	State *string `json:"state,omitempty" tf:"state,omitempty"`
+// Specifies the number of days to keep in the Threat Detection audit logs. Defaults to 0.
+RetentionDays *float64 `json:"retentionDays,omitempty" tf:"retention_days,omitempty"`
+
+// Specifies the state of the policy, whether it is enabled or disabled or a policy has not been applied yet on the specific database server. Possible values are Disabled, Enabled and New.
+State *string `json:"state,omitempty" tf:"state,omitempty"`
 }
+
 
 type MSSQLServerSecurityAlertPolicyObservation struct {
 
-	// Specifies an array of alerts that are disabled. Allowed values are: Sql_Injection, Sql_Injection_Vulnerability, Access_Anomaly, Data_Exfiltration, Unsafe_Action.
-	DisabledAlerts []*string `json:"disabledAlerts,omitempty" tf:"disabled_alerts,omitempty"`
 
-	// Boolean flag which specifies if the alert is sent to the account administrators or not. Defaults to false.
-	EmailAccountAdmins *bool `json:"emailAccountAdmins,omitempty" tf:"email_account_admins,omitempty"`
+// Specifies an array of alerts that are disabled. Allowed values are: Sql_Injection, Sql_Injection_Vulnerability, Access_Anomaly, Data_Exfiltration, Unsafe_Action.
+DisabledAlerts []*string `json:"disabledAlerts,omitempty" tf:"disabled_alerts,omitempty"`
 
-	// Specifies an array of email addresses to which the alert is sent.
-	EmailAddresses []*string `json:"emailAddresses,omitempty" tf:"email_addresses,omitempty"`
+// Boolean flag which specifies if the alert is sent to the account administrators or not. Defaults to false.
+EmailAccountAdmins *bool `json:"emailAccountAdmins,omitempty" tf:"email_account_admins,omitempty"`
 
-	// The ID of the MS SQL Server Security Alert Policy.
-	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+// Specifies an array of email addresses to which the alert is sent.
+EmailAddresses []*string `json:"emailAddresses,omitempty" tf:"email_addresses,omitempty"`
 
-	// The name of the resource group that contains the MS SQL Server. Changing this forces a new resource to be created.
-	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+// The ID of the MS SQL Server Security Alert Policy.
+ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// Specifies the number of days to keep in the Threat Detection audit logs. Defaults to 0.
-	RetentionDays *float64 `json:"retentionDays,omitempty" tf:"retention_days,omitempty"`
+// The name of the resource group that contains the MS SQL Server. Changing this forces a new resource to be created.
+ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 
-	// Specifies the name of the MS SQL Server. Changing this forces a new resource to be created.
-	ServerName *string `json:"serverName,omitempty" tf:"server_name,omitempty"`
+// Specifies the number of days to keep in the Threat Detection audit logs. Defaults to 0.
+RetentionDays *float64 `json:"retentionDays,omitempty" tf:"retention_days,omitempty"`
 
-	// Specifies the state of the policy, whether it is enabled or disabled or a policy has not been applied yet on the specific database server. Possible values are Disabled, Enabled and New.
-	State *string `json:"state,omitempty" tf:"state,omitempty"`
+// Specifies the name of the MS SQL Server. Changing this forces a new resource to be created.
+ServerName *string `json:"serverName,omitempty" tf:"server_name,omitempty"`
 
-	// Specifies the blob storage endpoint (e.g. https://example.blob.core.windows.net). This blob storage will hold all Threat Detection audit logs.
-	StorageEndpoint *string `json:"storageEndpoint,omitempty" tf:"storage_endpoint,omitempty"`
+// Specifies the state of the policy, whether it is enabled or disabled or a policy has not been applied yet on the specific database server. Possible values are Disabled, Enabled and New.
+State *string `json:"state,omitempty" tf:"state,omitempty"`
+
+// Specifies the blob storage endpoint (e.g. https://example.blob.core.windows.net). This blob storage will hold all Threat Detection audit logs.
+StorageEndpoint *string `json:"storageEndpoint,omitempty" tf:"storage_endpoint,omitempty"`
 }
+
 
 type MSSQLServerSecurityAlertPolicyParameters struct {
 
-	// Specifies an array of alerts that are disabled. Allowed values are: Sql_Injection, Sql_Injection_Vulnerability, Access_Anomaly, Data_Exfiltration, Unsafe_Action.
-	// +kubebuilder:validation:Optional
-	DisabledAlerts []*string `json:"disabledAlerts,omitempty" tf:"disabled_alerts,omitempty"`
 
-	// Boolean flag which specifies if the alert is sent to the account administrators or not. Defaults to false.
-	// +kubebuilder:validation:Optional
-	EmailAccountAdmins *bool `json:"emailAccountAdmins,omitempty" tf:"email_account_admins,omitempty"`
+// Specifies an array of alerts that are disabled. Allowed values are: Sql_Injection, Sql_Injection_Vulnerability, Access_Anomaly, Data_Exfiltration, Unsafe_Action.
+// +kubebuilder:validation:Optional
+DisabledAlerts []*string `json:"disabledAlerts,omitempty" tf:"disabled_alerts,omitempty"`
 
-	// Specifies an array of email addresses to which the alert is sent.
-	// +kubebuilder:validation:Optional
-	EmailAddresses []*string `json:"emailAddresses,omitempty" tf:"email_addresses,omitempty"`
+// Boolean flag which specifies if the alert is sent to the account administrators or not. Defaults to false.
+// +kubebuilder:validation:Optional
+EmailAccountAdmins *bool `json:"emailAccountAdmins,omitempty" tf:"email_account_admins,omitempty"`
 
-	// The name of the resource group that contains the MS SQL Server. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=kubedb.dev/provider-azure/apis/azure/v1alpha1.ResourceGroup
-	// +kubebuilder:validation:Optional
-	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+// Specifies an array of email addresses to which the alert is sent.
+// +kubebuilder:validation:Optional
+EmailAddresses []*string `json:"emailAddresses,omitempty" tf:"email_addresses,omitempty"`
 
-	// Reference to a ResourceGroup in azure to populate resourceGroupName.
-	// +kubebuilder:validation:Optional
-	ResourceGroupNameRef *v1.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+// The name of the resource group that contains the MS SQL Server. Changing this forces a new resource to be created.
+// +crossplane:generate:reference:type=kubedb.dev/provider-azure/apis/azure/v1alpha1.ResourceGroup
+// +kubebuilder:validation:Optional
+ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 
-	// Selector for a ResourceGroup in azure to populate resourceGroupName.
-	// +kubebuilder:validation:Optional
-	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+// Reference to a ResourceGroup in azure to populate resourceGroupName.
+// +kubebuilder:validation:Optional
+ResourceGroupNameRef *v1.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
-	// Specifies the number of days to keep in the Threat Detection audit logs. Defaults to 0.
-	// +kubebuilder:validation:Optional
-	RetentionDays *float64 `json:"retentionDays,omitempty" tf:"retention_days,omitempty"`
+// Selector for a ResourceGroup in azure to populate resourceGroupName.
+// +kubebuilder:validation:Optional
+ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
-	// Specifies the name of the MS SQL Server. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=MSSQLServer
-	// +kubebuilder:validation:Optional
-	ServerName *string `json:"serverName,omitempty" tf:"server_name,omitempty"`
+// Specifies the number of days to keep in the Threat Detection audit logs. Defaults to 0.
+// +kubebuilder:validation:Optional
+RetentionDays *float64 `json:"retentionDays,omitempty" tf:"retention_days,omitempty"`
 
-	// Reference to a MSSQLServer to populate serverName.
-	// +kubebuilder:validation:Optional
-	ServerNameRef *v1.Reference `json:"serverNameRef,omitempty" tf:"-"`
+// Specifies the name of the MS SQL Server. Changing this forces a new resource to be created.
+// +crossplane:generate:reference:type=MSSQLServer
+// +kubebuilder:validation:Optional
+ServerName *string `json:"serverName,omitempty" tf:"server_name,omitempty"`
 
-	// Selector for a MSSQLServer to populate serverName.
-	// +kubebuilder:validation:Optional
-	ServerNameSelector *v1.Selector `json:"serverNameSelector,omitempty" tf:"-"`
+// Reference to a MSSQLServer to populate serverName.
+// +kubebuilder:validation:Optional
+ServerNameRef *v1.Reference `json:"serverNameRef,omitempty" tf:"-"`
 
-	// Specifies the state of the policy, whether it is enabled or disabled or a policy has not been applied yet on the specific database server. Possible values are Disabled, Enabled and New.
-	// +kubebuilder:validation:Optional
-	State *string `json:"state,omitempty" tf:"state,omitempty"`
+// Selector for a MSSQLServer to populate serverName.
+// +kubebuilder:validation:Optional
+ServerNameSelector *v1.Selector `json:"serverNameSelector,omitempty" tf:"-"`
 
-	// Specifies the identifier key of the Threat Detection audit storage account. This is mandatory when you use storage_endpoint to specify a storage account blob endpoint.
-	// +kubebuilder:validation:Optional
-	StorageAccountAccessKeySecretRef *v1.SecretKeySelector `json:"storageAccountAccessKeySecretRef,omitempty" tf:"-"`
+// Specifies the state of the policy, whether it is enabled or disabled or a policy has not been applied yet on the specific database server. Possible values are Disabled, Enabled and New.
+// +kubebuilder:validation:Optional
+State *string `json:"state,omitempty" tf:"state,omitempty"`
 
-	// Specifies the blob storage endpoint (e.g. https://example.blob.core.windows.net). This blob storage will hold all Threat Detection audit logs.
-	// +crossplane:generate:reference:type=kubedb.dev/provider-azure/apis/storage/v1alpha1.Account
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("primary_blob_endpoint",true)
-	// +kubebuilder:validation:Optional
-	StorageEndpoint *string `json:"storageEndpoint,omitempty" tf:"storage_endpoint,omitempty"`
+// Specifies the identifier key of the Threat Detection audit storage account. This is mandatory when you use storage_endpoint to specify a storage account blob endpoint.
+// +kubebuilder:validation:Optional
+StorageAccountAccessKeySecretRef *v1.SecretKeySelector `json:"storageAccountAccessKeySecretRef,omitempty" tf:"-"`
 
-	// Reference to a Account in storage to populate storageEndpoint.
-	// +kubebuilder:validation:Optional
-	StorageEndpointRef *v1.Reference `json:"storageEndpointRef,omitempty" tf:"-"`
+// Specifies the blob storage endpoint (e.g. https://example.blob.core.windows.net). This blob storage will hold all Threat Detection audit logs.
+// +crossplane:generate:reference:type=kubedb.dev/provider-azure/apis/storage/v1alpha1.Account
+// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("primary_blob_endpoint",true)
+// +kubebuilder:validation:Optional
+StorageEndpoint *string `json:"storageEndpoint,omitempty" tf:"storage_endpoint,omitempty"`
 
-	// Selector for a Account in storage to populate storageEndpoint.
-	// +kubebuilder:validation:Optional
-	StorageEndpointSelector *v1.Selector `json:"storageEndpointSelector,omitempty" tf:"-"`
+// Reference to a Account in storage to populate storageEndpoint.
+// +kubebuilder:validation:Optional
+StorageEndpointRef *v1.Reference `json:"storageEndpointRef,omitempty" tf:"-"`
+
+// Selector for a Account in storage to populate storageEndpoint.
+// +kubebuilder:validation:Optional
+StorageEndpointSelector *v1.Selector `json:"storageEndpointSelector,omitempty" tf:"-"`
 }
 
 // MSSQLServerSecurityAlertPolicySpec defines the desired state of MSSQLServerSecurityAlertPolicy
 type MSSQLServerSecurityAlertPolicySpec struct {
 	v1.ResourceSpec `json:",inline"`
-	ForProvider     MSSQLServerSecurityAlertPolicyParameters `json:"forProvider"`
+	ForProvider       MSSQLServerSecurityAlertPolicyParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -146,13 +155,13 @@ type MSSQLServerSecurityAlertPolicySpec struct {
 	// required on creation, but we do not desire to update them after creation,
 	// for example because of an external controller is managing them, like an
 	// autoscaler.
-	InitProvider MSSQLServerSecurityAlertPolicyInitParameters `json:"initProvider,omitempty"`
+	InitProvider       MSSQLServerSecurityAlertPolicyInitParameters `json:"initProvider,omitempty"`
 }
 
 // MSSQLServerSecurityAlertPolicyStatus defines the observed state of MSSQLServerSecurityAlertPolicy.
 type MSSQLServerSecurityAlertPolicyStatus struct {
 	v1.ResourceStatus `json:",inline"`
-	AtProvider        MSSQLServerSecurityAlertPolicyObservation `json:"atProvider,omitempty"`
+	AtProvider          MSSQLServerSecurityAlertPolicyObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true
@@ -167,9 +176,9 @@ type MSSQLServerSecurityAlertPolicyStatus struct {
 type MSSQLServerSecurityAlertPolicy struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.state) || (has(self.initProvider) && has(self.initProvider.state))",message="spec.forProvider.state is a required parameter"
-	Spec   MSSQLServerSecurityAlertPolicySpec   `json:"spec"`
-	Status MSSQLServerSecurityAlertPolicyStatus `json:"status,omitempty"`
+// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.state) || (has(self.initProvider) && has(self.initProvider.state))",message="spec.forProvider.state is a required parameter"
+	Spec              MSSQLServerSecurityAlertPolicySpec   `json:"spec"`
+	Status            MSSQLServerSecurityAlertPolicyStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

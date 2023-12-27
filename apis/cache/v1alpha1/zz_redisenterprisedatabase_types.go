@@ -15,158 +15,173 @@ import (
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+
 )
+
+
+
 
 type ModuleInitParameters struct {
 
-	// Configuration options for the module (e.g. ERROR_RATE 0.00 INITIAL_SIZE 400). Changing this forces a new resource to be created. Defaults to "".
-	Args *string `json:"args,omitempty" tf:"args,omitempty"`
 
-	// The name which should be used for this module. Possible values are RedisBloom, RedisTimeSeries, RediSearch and RedisJSON. Changing this forces a new Redis Enterprise Database to be created.
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+// Configuration options for the module (e.g. ERROR_RATE 0.00 INITIAL_SIZE 400). Changing this forces a new resource to be created. Defaults to "".
+Args *string `json:"args,omitempty" tf:"args,omitempty"`
+
+// The name which should be used for this module. Possible values are RedisBloom, RedisTimeSeries, RediSearch and RedisJSON. Changing this forces a new Redis Enterprise Database to be created.
+Name *string `json:"name,omitempty" tf:"name,omitempty"`
 }
+
 
 type ModuleObservation struct {
 
-	// Configuration options for the module (e.g. ERROR_RATE 0.00 INITIAL_SIZE 400). Changing this forces a new resource to be created. Defaults to "".
-	Args *string `json:"args,omitempty" tf:"args,omitempty"`
 
-	// The name which should be used for this module. Possible values are RedisBloom, RedisTimeSeries, RediSearch and RedisJSON. Changing this forces a new Redis Enterprise Database to be created.
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+// Configuration options for the module (e.g. ERROR_RATE 0.00 INITIAL_SIZE 400). Changing this forces a new resource to be created. Defaults to "".
+Args *string `json:"args,omitempty" tf:"args,omitempty"`
 
-	Version *string `json:"version,omitempty" tf:"version,omitempty"`
+// The name which should be used for this module. Possible values are RedisBloom, RedisTimeSeries, RediSearch and RedisJSON. Changing this forces a new Redis Enterprise Database to be created.
+Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+Version *string `json:"version,omitempty" tf:"version,omitempty"`
 }
+
 
 type ModuleParameters struct {
 
-	// Configuration options for the module (e.g. ERROR_RATE 0.00 INITIAL_SIZE 400). Changing this forces a new resource to be created. Defaults to "".
-	// +kubebuilder:validation:Optional
-	Args *string `json:"args,omitempty" tf:"args,omitempty"`
 
-	// The name which should be used for this module. Possible values are RedisBloom, RedisTimeSeries, RediSearch and RedisJSON. Changing this forces a new Redis Enterprise Database to be created.
-	// +kubebuilder:validation:Optional
-	Name *string `json:"name" tf:"name,omitempty"`
+// Configuration options for the module (e.g. ERROR_RATE 0.00 INITIAL_SIZE 400). Changing this forces a new resource to be created. Defaults to "".
+// +kubebuilder:validation:Optional
+Args *string `json:"args,omitempty" tf:"args,omitempty"`
+
+// The name which should be used for this module. Possible values are RedisBloom, RedisTimeSeries, RediSearch and RedisJSON. Changing this forces a new Redis Enterprise Database to be created.
+// +kubebuilder:validation:Optional
+Name *string `json:"name" tf:"name,omitempty"`
 }
+
 
 type RedisEnterpriseDatabaseInitParameters struct {
 
-	// Specifies whether redis clients can connect using TLS-encrypted or plaintext redis protocols. Default is TLS-encrypted. Possible values are Encrypted and Plaintext. Defaults to Encrypted. Changing this forces a new Redis Enterprise Database to be created.
-	ClientProtocol *string `json:"clientProtocol,omitempty" tf:"client_protocol,omitempty"`
 
-	// Clustering policy - default is OSSCluster. Specified at create time. Possible values are EnterpriseCluster and OSSCluster. Defaults to OSSCluster. Changing this forces a new Redis Enterprise Database to be created.
-	ClusteringPolicy *string `json:"clusteringPolicy,omitempty" tf:"clustering_policy,omitempty"`
+// Specifies whether redis clients can connect using TLS-encrypted or plaintext redis protocols. Default is TLS-encrypted. Possible values are Encrypted and Plaintext. Defaults to Encrypted. Changing this forces a new Redis Enterprise Database to be created.
+ClientProtocol *string `json:"clientProtocol,omitempty" tf:"client_protocol,omitempty"`
 
-	// Redis eviction policy - default is VolatileLRU. Possible values are AllKeysLFU, AllKeysLRU, AllKeysRandom, VolatileLRU, VolatileLFU, VolatileTTL, VolatileRandom and NoEviction. Changing this forces a new Redis Enterprise Database to be created.
-	EvictionPolicy *string `json:"evictionPolicy,omitempty" tf:"eviction_policy,omitempty"`
+// Clustering policy - default is OSSCluster. Specified at create time. Possible values are EnterpriseCluster and OSSCluster. Defaults to OSSCluster. Changing this forces a new Redis Enterprise Database to be created.
+ClusteringPolicy *string `json:"clusteringPolicy,omitempty" tf:"clustering_policy,omitempty"`
 
-	// Nickname of the group of linked databases. Changing this force a new Redis Enterprise Geo Database to be created.
-	LinkedDatabaseGroupNickname *string `json:"linkedDatabaseGroupNickname,omitempty" tf:"linked_database_group_nickname,omitempty"`
+// Redis eviction policy - default is VolatileLRU. Possible values are AllKeysLFU, AllKeysLRU, AllKeysRandom, VolatileLRU, VolatileLFU, VolatileTTL, VolatileRandom and NoEviction. Changing this forces a new Redis Enterprise Database to be created.
+EvictionPolicy *string `json:"evictionPolicy,omitempty" tf:"eviction_policy,omitempty"`
 
-	// A list of database resources to link with this database with a maximum of 5.
-	LinkedDatabaseID []*string `json:"linkedDatabaseId,omitempty" tf:"linked_database_id,omitempty"`
+// Nickname of the group of linked databases. Changing this force a new Redis Enterprise Geo Database to be created.
+LinkedDatabaseGroupNickname *string `json:"linkedDatabaseGroupNickname,omitempty" tf:"linked_database_group_nickname,omitempty"`
 
-	// A module block as defined below. Changing this forces a new resource to be created.
-	Module []ModuleInitParameters `json:"module,omitempty" tf:"module,omitempty"`
+// A list of database resources to link with this database with a maximum of 5.
+LinkedDatabaseID []*string `json:"linkedDatabaseId,omitempty" tf:"linked_database_id,omitempty"`
 
-	// TCP port of the database endpoint. Specified at create time. Defaults to an available port. Changing this forces a new Redis Enterprise Database to be created. Defaults to 10000.
-	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
+// A module block as defined below. Changing this forces a new resource to be created.
+Module []ModuleInitParameters `json:"module,omitempty" tf:"module,omitempty"`
+
+// TCP port of the database endpoint. Specified at create time. Defaults to an available port. Changing this forces a new Redis Enterprise Database to be created. Defaults to 10000.
+Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
 }
+
 
 type RedisEnterpriseDatabaseObservation struct {
 
-	// Specifies whether redis clients can connect using TLS-encrypted or plaintext redis protocols. Default is TLS-encrypted. Possible values are Encrypted and Plaintext. Defaults to Encrypted. Changing this forces a new Redis Enterprise Database to be created.
-	ClientProtocol *string `json:"clientProtocol,omitempty" tf:"client_protocol,omitempty"`
 
-	// The resource id of the Redis Enterprise Cluster to deploy this Redis Enterprise Database. Changing this forces a new Redis Enterprise Database to be created.
-	ClusterID *string `json:"clusterId,omitempty" tf:"cluster_id,omitempty"`
+// Specifies whether redis clients can connect using TLS-encrypted or plaintext redis protocols. Default is TLS-encrypted. Possible values are Encrypted and Plaintext. Defaults to Encrypted. Changing this forces a new Redis Enterprise Database to be created.
+ClientProtocol *string `json:"clientProtocol,omitempty" tf:"client_protocol,omitempty"`
 
-	// Clustering policy - default is OSSCluster. Specified at create time. Possible values are EnterpriseCluster and OSSCluster. Defaults to OSSCluster. Changing this forces a new Redis Enterprise Database to be created.
-	ClusteringPolicy *string `json:"clusteringPolicy,omitempty" tf:"clustering_policy,omitempty"`
+// The resource id of the Redis Enterprise Cluster to deploy this Redis Enterprise Database. Changing this forces a new Redis Enterprise Database to be created.
+ClusterID *string `json:"clusterId,omitempty" tf:"cluster_id,omitempty"`
 
-	// Redis eviction policy - default is VolatileLRU. Possible values are AllKeysLFU, AllKeysLRU, AllKeysRandom, VolatileLRU, VolatileLFU, VolatileTTL, VolatileRandom and NoEviction. Changing this forces a new Redis Enterprise Database to be created.
-	EvictionPolicy *string `json:"evictionPolicy,omitempty" tf:"eviction_policy,omitempty"`
+// Clustering policy - default is OSSCluster. Specified at create time. Possible values are EnterpriseCluster and OSSCluster. Defaults to OSSCluster. Changing this forces a new Redis Enterprise Database to be created.
+ClusteringPolicy *string `json:"clusteringPolicy,omitempty" tf:"clustering_policy,omitempty"`
 
-	// The ID of the Redis Enterprise Database.
-	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+// Redis eviction policy - default is VolatileLRU. Possible values are AllKeysLFU, AllKeysLRU, AllKeysRandom, VolatileLRU, VolatileLFU, VolatileTTL, VolatileRandom and NoEviction. Changing this forces a new Redis Enterprise Database to be created.
+EvictionPolicy *string `json:"evictionPolicy,omitempty" tf:"eviction_policy,omitempty"`
 
-	// Nickname of the group of linked databases. Changing this force a new Redis Enterprise Geo Database to be created.
-	LinkedDatabaseGroupNickname *string `json:"linkedDatabaseGroupNickname,omitempty" tf:"linked_database_group_nickname,omitempty"`
+// The ID of the Redis Enterprise Database.
+ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// A list of database resources to link with this database with a maximum of 5.
-	LinkedDatabaseID []*string `json:"linkedDatabaseId,omitempty" tf:"linked_database_id,omitempty"`
+// Nickname of the group of linked databases. Changing this force a new Redis Enterprise Geo Database to be created.
+LinkedDatabaseGroupNickname *string `json:"linkedDatabaseGroupNickname,omitempty" tf:"linked_database_group_nickname,omitempty"`
 
-	// A module block as defined below. Changing this forces a new resource to be created.
-	Module []ModuleObservation `json:"module,omitempty" tf:"module,omitempty"`
+// A list of database resources to link with this database with a maximum of 5.
+LinkedDatabaseID []*string `json:"linkedDatabaseId,omitempty" tf:"linked_database_id,omitempty"`
 
-	// TCP port of the database endpoint. Specified at create time. Defaults to an available port. Changing this forces a new Redis Enterprise Database to be created. Defaults to 10000.
-	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
+// A module block as defined below. Changing this forces a new resource to be created.
+Module []ModuleObservation `json:"module,omitempty" tf:"module,omitempty"`
 
-	// The name of the Resource Group where the Redis Enterprise Database should exist. Changing this forces a new Redis Enterprise Database to be created.
-	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+// TCP port of the database endpoint. Specified at create time. Defaults to an available port. Changing this forces a new Redis Enterprise Database to be created. Defaults to 10000.
+Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
+
+// The name of the Resource Group where the Redis Enterprise Database should exist. Changing this forces a new Redis Enterprise Database to be created.
+ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 }
+
 
 type RedisEnterpriseDatabaseParameters struct {
 
-	// Specifies whether redis clients can connect using TLS-encrypted or plaintext redis protocols. Default is TLS-encrypted. Possible values are Encrypted and Plaintext. Defaults to Encrypted. Changing this forces a new Redis Enterprise Database to be created.
-	// +kubebuilder:validation:Optional
-	ClientProtocol *string `json:"clientProtocol,omitempty" tf:"client_protocol,omitempty"`
 
-	// The resource id of the Redis Enterprise Cluster to deploy this Redis Enterprise Database. Changing this forces a new Redis Enterprise Database to be created.
-	// +crossplane:generate:reference:type=kubedb.dev/provider-azure/apis/cache/v1alpha1.RedisEnterpriseCluster
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
-	// +kubebuilder:validation:Optional
-	ClusterID *string `json:"clusterId,omitempty" tf:"cluster_id,omitempty"`
+// Specifies whether redis clients can connect using TLS-encrypted or plaintext redis protocols. Default is TLS-encrypted. Possible values are Encrypted and Plaintext. Defaults to Encrypted. Changing this forces a new Redis Enterprise Database to be created.
+// +kubebuilder:validation:Optional
+ClientProtocol *string `json:"clientProtocol,omitempty" tf:"client_protocol,omitempty"`
 
-	// Reference to a RedisEnterpriseCluster in cache to populate clusterId.
-	// +kubebuilder:validation:Optional
-	ClusterIDRef *v1.Reference `json:"clusterIdRef,omitempty" tf:"-"`
+// The resource id of the Redis Enterprise Cluster to deploy this Redis Enterprise Database. Changing this forces a new Redis Enterprise Database to be created.
+// +crossplane:generate:reference:type=kubedb.dev/provider-azure/apis/cache/v1alpha1.RedisEnterpriseCluster
+// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+// +kubebuilder:validation:Optional
+ClusterID *string `json:"clusterId,omitempty" tf:"cluster_id,omitempty"`
 
-	// Selector for a RedisEnterpriseCluster in cache to populate clusterId.
-	// +kubebuilder:validation:Optional
-	ClusterIDSelector *v1.Selector `json:"clusterIdSelector,omitempty" tf:"-"`
+// Reference to a RedisEnterpriseCluster in cache to populate clusterId.
+// +kubebuilder:validation:Optional
+ClusterIDRef *v1.Reference `json:"clusterIdRef,omitempty" tf:"-"`
 
-	// Clustering policy - default is OSSCluster. Specified at create time. Possible values are EnterpriseCluster and OSSCluster. Defaults to OSSCluster. Changing this forces a new Redis Enterprise Database to be created.
-	// +kubebuilder:validation:Optional
-	ClusteringPolicy *string `json:"clusteringPolicy,omitempty" tf:"clustering_policy,omitempty"`
+// Selector for a RedisEnterpriseCluster in cache to populate clusterId.
+// +kubebuilder:validation:Optional
+ClusterIDSelector *v1.Selector `json:"clusterIdSelector,omitempty" tf:"-"`
 
-	// Redis eviction policy - default is VolatileLRU. Possible values are AllKeysLFU, AllKeysLRU, AllKeysRandom, VolatileLRU, VolatileLFU, VolatileTTL, VolatileRandom and NoEviction. Changing this forces a new Redis Enterprise Database to be created.
-	// +kubebuilder:validation:Optional
-	EvictionPolicy *string `json:"evictionPolicy,omitempty" tf:"eviction_policy,omitempty"`
+// Clustering policy - default is OSSCluster. Specified at create time. Possible values are EnterpriseCluster and OSSCluster. Defaults to OSSCluster. Changing this forces a new Redis Enterprise Database to be created.
+// +kubebuilder:validation:Optional
+ClusteringPolicy *string `json:"clusteringPolicy,omitempty" tf:"clustering_policy,omitempty"`
 
-	// Nickname of the group of linked databases. Changing this force a new Redis Enterprise Geo Database to be created.
-	// +kubebuilder:validation:Optional
-	LinkedDatabaseGroupNickname *string `json:"linkedDatabaseGroupNickname,omitempty" tf:"linked_database_group_nickname,omitempty"`
+// Redis eviction policy - default is VolatileLRU. Possible values are AllKeysLFU, AllKeysLRU, AllKeysRandom, VolatileLRU, VolatileLFU, VolatileTTL, VolatileRandom and NoEviction. Changing this forces a new Redis Enterprise Database to be created.
+// +kubebuilder:validation:Optional
+EvictionPolicy *string `json:"evictionPolicy,omitempty" tf:"eviction_policy,omitempty"`
 
-	// A list of database resources to link with this database with a maximum of 5.
-	// +kubebuilder:validation:Optional
-	LinkedDatabaseID []*string `json:"linkedDatabaseId,omitempty" tf:"linked_database_id,omitempty"`
+// Nickname of the group of linked databases. Changing this force a new Redis Enterprise Geo Database to be created.
+// +kubebuilder:validation:Optional
+LinkedDatabaseGroupNickname *string `json:"linkedDatabaseGroupNickname,omitempty" tf:"linked_database_group_nickname,omitempty"`
 
-	// A module block as defined below. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Optional
-	Module []ModuleParameters `json:"module,omitempty" tf:"module,omitempty"`
+// A list of database resources to link with this database with a maximum of 5.
+// +kubebuilder:validation:Optional
+LinkedDatabaseID []*string `json:"linkedDatabaseId,omitempty" tf:"linked_database_id,omitempty"`
 
-	// TCP port of the database endpoint. Specified at create time. Defaults to an available port. Changing this forces a new Redis Enterprise Database to be created. Defaults to 10000.
-	// +kubebuilder:validation:Optional
-	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
+// A module block as defined below. Changing this forces a new resource to be created.
+// +kubebuilder:validation:Optional
+Module []ModuleParameters `json:"module,omitempty" tf:"module,omitempty"`
 
-	// The name of the Resource Group where the Redis Enterprise Database should exist. Changing this forces a new Redis Enterprise Database to be created.
-	// +crossplane:generate:reference:type=kubedb.dev/provider-azure/apis/azure/v1alpha1.ResourceGroup
-	// +kubebuilder:validation:Optional
-	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+// TCP port of the database endpoint. Specified at create time. Defaults to an available port. Changing this forces a new Redis Enterprise Database to be created. Defaults to 10000.
+// +kubebuilder:validation:Optional
+Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
 
-	// Reference to a ResourceGroup in azure to populate resourceGroupName.
-	// +kubebuilder:validation:Optional
-	ResourceGroupNameRef *v1.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+// The name of the Resource Group where the Redis Enterprise Database should exist. Changing this forces a new Redis Enterprise Database to be created.
+// +crossplane:generate:reference:type=kubedb.dev/provider-azure/apis/azure/v1alpha1.ResourceGroup
+// +kubebuilder:validation:Optional
+ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 
-	// Selector for a ResourceGroup in azure to populate resourceGroupName.
-	// +kubebuilder:validation:Optional
-	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+// Reference to a ResourceGroup in azure to populate resourceGroupName.
+// +kubebuilder:validation:Optional
+ResourceGroupNameRef *v1.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+
+// Selector for a ResourceGroup in azure to populate resourceGroupName.
+// +kubebuilder:validation:Optional
+ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 }
 
 // RedisEnterpriseDatabaseSpec defines the desired state of RedisEnterpriseDatabase
 type RedisEnterpriseDatabaseSpec struct {
 	v1.ResourceSpec `json:",inline"`
-	ForProvider     RedisEnterpriseDatabaseParameters `json:"forProvider"`
+	ForProvider       RedisEnterpriseDatabaseParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -177,13 +192,13 @@ type RedisEnterpriseDatabaseSpec struct {
 	// required on creation, but we do not desire to update them after creation,
 	// for example because of an external controller is managing them, like an
 	// autoscaler.
-	InitProvider RedisEnterpriseDatabaseInitParameters `json:"initProvider,omitempty"`
+	InitProvider       RedisEnterpriseDatabaseInitParameters `json:"initProvider,omitempty"`
 }
 
 // RedisEnterpriseDatabaseStatus defines the observed state of RedisEnterpriseDatabase.
 type RedisEnterpriseDatabaseStatus struct {
 	v1.ResourceStatus `json:",inline"`
-	AtProvider        RedisEnterpriseDatabaseObservation `json:"atProvider,omitempty"`
+	AtProvider          RedisEnterpriseDatabaseObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

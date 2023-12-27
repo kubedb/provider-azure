@@ -15,51 +15,60 @@ import (
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+
 )
+
+
+
 
 type SQLFunctionInitParameters struct {
 
-	// Body of the User Defined Function.
-	Body *string `json:"body,omitempty" tf:"body,omitempty"`
+
+// Body of the User Defined Function.
+Body *string `json:"body,omitempty" tf:"body,omitempty"`
 }
+
 
 type SQLFunctionObservation struct {
 
-	// Body of the User Defined Function.
-	Body *string `json:"body,omitempty" tf:"body,omitempty"`
 
-	// The id of the Cosmos DB SQL Container to create the SQL User Defined Function within. Changing this forces a new SQL User Defined Function to be created.
-	ContainerID *string `json:"containerId,omitempty" tf:"container_id,omitempty"`
+// Body of the User Defined Function.
+Body *string `json:"body,omitempty" tf:"body,omitempty"`
 
-	// The ID of the SQL User Defined Function.
-	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+// The id of the Cosmos DB SQL Container to create the SQL User Defined Function within. Changing this forces a new SQL User Defined Function to be created.
+ContainerID *string `json:"containerId,omitempty" tf:"container_id,omitempty"`
+
+// The ID of the SQL User Defined Function.
+ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
+
 
 type SQLFunctionParameters struct {
 
-	// Body of the User Defined Function.
-	// +kubebuilder:validation:Optional
-	Body *string `json:"body,omitempty" tf:"body,omitempty"`
 
-	// The id of the Cosmos DB SQL Container to create the SQL User Defined Function within. Changing this forces a new SQL User Defined Function to be created.
-	// +crossplane:generate:reference:type=SQLContainer
-	// +crossplane:generate:reference:extractor=kubedb.dev/provider-azure/apis/rconfig.ExtractResourceID()
-	// +kubebuilder:validation:Optional
-	ContainerID *string `json:"containerId,omitempty" tf:"container_id,omitempty"`
+// Body of the User Defined Function.
+// +kubebuilder:validation:Optional
+Body *string `json:"body,omitempty" tf:"body,omitempty"`
 
-	// Reference to a SQLContainer to populate containerId.
-	// +kubebuilder:validation:Optional
-	ContainerIDRef *v1.Reference `json:"containerIdRef,omitempty" tf:"-"`
+// The id of the Cosmos DB SQL Container to create the SQL User Defined Function within. Changing this forces a new SQL User Defined Function to be created.
+// +crossplane:generate:reference:type=SQLContainer
+// +crossplane:generate:reference:extractor=kubedb.dev/provider-azure/apis/rconfig.ExtractResourceID()
+// +kubebuilder:validation:Optional
+ContainerID *string `json:"containerId,omitempty" tf:"container_id,omitempty"`
 
-	// Selector for a SQLContainer to populate containerId.
-	// +kubebuilder:validation:Optional
-	ContainerIDSelector *v1.Selector `json:"containerIdSelector,omitempty" tf:"-"`
+// Reference to a SQLContainer to populate containerId.
+// +kubebuilder:validation:Optional
+ContainerIDRef *v1.Reference `json:"containerIdRef,omitempty" tf:"-"`
+
+// Selector for a SQLContainer to populate containerId.
+// +kubebuilder:validation:Optional
+ContainerIDSelector *v1.Selector `json:"containerIdSelector,omitempty" tf:"-"`
 }
 
 // SQLFunctionSpec defines the desired state of SQLFunction
 type SQLFunctionSpec struct {
 	v1.ResourceSpec `json:",inline"`
-	ForProvider     SQLFunctionParameters `json:"forProvider"`
+	ForProvider       SQLFunctionParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -70,13 +79,13 @@ type SQLFunctionSpec struct {
 	// required on creation, but we do not desire to update them after creation,
 	// for example because of an external controller is managing them, like an
 	// autoscaler.
-	InitProvider SQLFunctionInitParameters `json:"initProvider,omitempty"`
+	InitProvider       SQLFunctionInitParameters `json:"initProvider,omitempty"`
 }
 
 // SQLFunctionStatus defines the observed state of SQLFunction.
 type SQLFunctionStatus struct {
 	v1.ResourceStatus `json:",inline"`
-	AtProvider        SQLFunctionObservation `json:"atProvider,omitempty"`
+	AtProvider          SQLFunctionObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true
@@ -91,9 +100,9 @@ type SQLFunctionStatus struct {
 type SQLFunction struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.body) || (has(self.initProvider) && has(self.initProvider.body))",message="spec.forProvider.body is a required parameter"
-	Spec   SQLFunctionSpec   `json:"spec"`
-	Status SQLFunctionStatus `json:"status,omitempty"`
+// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.body) || (has(self.initProvider) && has(self.initProvider.body))",message="spec.forProvider.body is a required parameter"
+	Spec              SQLFunctionSpec   `json:"spec"`
+	Status            SQLFunctionStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

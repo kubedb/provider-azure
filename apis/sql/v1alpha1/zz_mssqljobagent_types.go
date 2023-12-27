@@ -15,71 +15,80 @@ import (
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+
 )
+
+
+
 
 type MSSQLJobAgentInitParameters struct {
 
-	// The Azure Region where the Elastic Job Agent should exist. Changing this forces a new Elastic Job Agent to be created.
-	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
-	// The name which should be used for this Elastic Job Agent. Changing this forces a new Elastic Job Agent to be created.
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+// The Azure Region where the Elastic Job Agent should exist. Changing this forces a new Elastic Job Agent to be created.
+Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
-	// A mapping of tags which should be assigned to the Database.
-	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+// The name which should be used for this Elastic Job Agent. Changing this forces a new Elastic Job Agent to be created.
+Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+// A mapping of tags which should be assigned to the Database.
+Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
+
 
 type MSSQLJobAgentObservation struct {
 
-	// The ID of the database to store metadata for the Elastic Job Agent. Changing this forces a new Elastic Job Agent to be created.
-	DatabaseID *string `json:"databaseId,omitempty" tf:"database_id,omitempty"`
 
-	// The ID of the Elastic Job Agent.
-	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+// The ID of the database to store metadata for the Elastic Job Agent. Changing this forces a new Elastic Job Agent to be created.
+DatabaseID *string `json:"databaseId,omitempty" tf:"database_id,omitempty"`
 
-	// The Azure Region where the Elastic Job Agent should exist. Changing this forces a new Elastic Job Agent to be created.
-	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+// The ID of the Elastic Job Agent.
+ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The name which should be used for this Elastic Job Agent. Changing this forces a new Elastic Job Agent to be created.
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+// The Azure Region where the Elastic Job Agent should exist. Changing this forces a new Elastic Job Agent to be created.
+Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
-	// A mapping of tags which should be assigned to the Database.
-	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+// The name which should be used for this Elastic Job Agent. Changing this forces a new Elastic Job Agent to be created.
+Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+// A mapping of tags which should be assigned to the Database.
+Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
+
 
 type MSSQLJobAgentParameters struct {
 
-	// The ID of the database to store metadata for the Elastic Job Agent. Changing this forces a new Elastic Job Agent to be created.
-	// +crossplane:generate:reference:type=kubedb.dev/provider-azure/apis/sql/v1alpha1.MSSQLDatabase
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
-	// +kubebuilder:validation:Optional
-	DatabaseID *string `json:"databaseId,omitempty" tf:"database_id,omitempty"`
 
-	// Reference to a MSSQLDatabase in sql to populate databaseId.
-	// +kubebuilder:validation:Optional
-	DatabaseIDRef *v1.Reference `json:"databaseIdRef,omitempty" tf:"-"`
+// The ID of the database to store metadata for the Elastic Job Agent. Changing this forces a new Elastic Job Agent to be created.
+// +crossplane:generate:reference:type=kubedb.dev/provider-azure/apis/sql/v1alpha1.MSSQLDatabase
+// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+// +kubebuilder:validation:Optional
+DatabaseID *string `json:"databaseId,omitempty" tf:"database_id,omitempty"`
 
-	// Selector for a MSSQLDatabase in sql to populate databaseId.
-	// +kubebuilder:validation:Optional
-	DatabaseIDSelector *v1.Selector `json:"databaseIdSelector,omitempty" tf:"-"`
+// Reference to a MSSQLDatabase in sql to populate databaseId.
+// +kubebuilder:validation:Optional
+DatabaseIDRef *v1.Reference `json:"databaseIdRef,omitempty" tf:"-"`
 
-	// The Azure Region where the Elastic Job Agent should exist. Changing this forces a new Elastic Job Agent to be created.
-	// +kubebuilder:validation:Optional
-	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+// Selector for a MSSQLDatabase in sql to populate databaseId.
+// +kubebuilder:validation:Optional
+DatabaseIDSelector *v1.Selector `json:"databaseIdSelector,omitempty" tf:"-"`
 
-	// The name which should be used for this Elastic Job Agent. Changing this forces a new Elastic Job Agent to be created.
-	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+// The Azure Region where the Elastic Job Agent should exist. Changing this forces a new Elastic Job Agent to be created.
+// +kubebuilder:validation:Optional
+Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
-	// A mapping of tags which should be assigned to the Database.
-	// +kubebuilder:validation:Optional
-	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+// The name which should be used for this Elastic Job Agent. Changing this forces a new Elastic Job Agent to be created.
+// +kubebuilder:validation:Optional
+Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+// A mapping of tags which should be assigned to the Database.
+// +kubebuilder:validation:Optional
+Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 // MSSQLJobAgentSpec defines the desired state of MSSQLJobAgent
 type MSSQLJobAgentSpec struct {
 	v1.ResourceSpec `json:",inline"`
-	ForProvider     MSSQLJobAgentParameters `json:"forProvider"`
+	ForProvider       MSSQLJobAgentParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -90,13 +99,13 @@ type MSSQLJobAgentSpec struct {
 	// required on creation, but we do not desire to update them after creation,
 	// for example because of an external controller is managing them, like an
 	// autoscaler.
-	InitProvider MSSQLJobAgentInitParameters `json:"initProvider,omitempty"`
+	InitProvider       MSSQLJobAgentInitParameters `json:"initProvider,omitempty"`
 }
 
 // MSSQLJobAgentStatus defines the observed state of MSSQLJobAgent.
 type MSSQLJobAgentStatus struct {
 	v1.ResourceStatus `json:",inline"`
-	AtProvider        MSSQLJobAgentObservation `json:"atProvider,omitempty"`
+	AtProvider          MSSQLJobAgentObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true
@@ -111,10 +120,10 @@ type MSSQLJobAgentStatus struct {
 type MSSQLJobAgent struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.location) || (has(self.initProvider) && has(self.initProvider.location))",message="spec.forProvider.location is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name) || (has(self.initProvider) && has(self.initProvider.name))",message="spec.forProvider.name is a required parameter"
-	Spec   MSSQLJobAgentSpec   `json:"spec"`
-	Status MSSQLJobAgentStatus `json:"status,omitempty"`
+// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.location) || (has(self.initProvider) && has(self.initProvider.location))",message="spec.forProvider.location is a required parameter"
+// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name) || (has(self.initProvider) && has(self.initProvider.name))",message="spec.forProvider.name is a required parameter"
+	Spec              MSSQLJobAgentSpec   `json:"spec"`
+	Status            MSSQLJobAgentStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

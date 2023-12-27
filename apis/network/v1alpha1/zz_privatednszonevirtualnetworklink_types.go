@@ -15,93 +15,102 @@ import (
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+
 )
+
+
+
 
 type PrivateDNSZoneVirtualNetworkLinkInitParameters struct {
 
-	// Is auto-registration of virtual machine records in the virtual network in the Private DNS zone enabled? Defaults to false.
-	RegistrationEnabled *bool `json:"registrationEnabled,omitempty" tf:"registration_enabled,omitempty"`
 
-	// A mapping of tags to assign to the resource.
-	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+// Is auto-registration of virtual machine records in the virtual network in the Private DNS zone enabled? Defaults to false.
+RegistrationEnabled *bool `json:"registrationEnabled,omitempty" tf:"registration_enabled,omitempty"`
+
+// A mapping of tags to assign to the resource.
+Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
+
 
 type PrivateDNSZoneVirtualNetworkLinkObservation struct {
 
-	// The ID of the Private DNS Zone Virtual Network Link.
-	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The name of the Private DNS zone (without a terminating dot). Changing this forces a new resource to be created.
-	PrivateDNSZoneName *string `json:"privateDnsZoneName,omitempty" tf:"private_dns_zone_name,omitempty"`
+// The ID of the Private DNS Zone Virtual Network Link.
+ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// Is auto-registration of virtual machine records in the virtual network in the Private DNS zone enabled? Defaults to false.
-	RegistrationEnabled *bool `json:"registrationEnabled,omitempty" tf:"registration_enabled,omitempty"`
+// The name of the Private DNS zone (without a terminating dot). Changing this forces a new resource to be created.
+PrivateDNSZoneName *string `json:"privateDnsZoneName,omitempty" tf:"private_dns_zone_name,omitempty"`
 
-	// Specifies the resource group where the Private DNS Zone exists. Changing this forces a new resource to be created.
-	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+// Is auto-registration of virtual machine records in the virtual network in the Private DNS zone enabled? Defaults to false.
+RegistrationEnabled *bool `json:"registrationEnabled,omitempty" tf:"registration_enabled,omitempty"`
 
-	// A mapping of tags to assign to the resource.
-	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+// Specifies the resource group where the Private DNS Zone exists. Changing this forces a new resource to be created.
+ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 
-	// The ID of the Virtual Network that should be linked to the DNS Zone. Changing this forces a new resource to be created.
-	VirtualNetworkID *string `json:"virtualNetworkId,omitempty" tf:"virtual_network_id,omitempty"`
+// A mapping of tags to assign to the resource.
+Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+// The ID of the Virtual Network that should be linked to the DNS Zone. Changing this forces a new resource to be created.
+VirtualNetworkID *string `json:"virtualNetworkId,omitempty" tf:"virtual_network_id,omitempty"`
 }
+
 
 type PrivateDNSZoneVirtualNetworkLinkParameters struct {
 
-	// The name of the Private DNS zone (without a terminating dot). Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=kubedb.dev/provider-azure/apis/network/v1alpha1.PrivateDNSZone
-	// +kubebuilder:validation:Optional
-	PrivateDNSZoneName *string `json:"privateDnsZoneName,omitempty" tf:"private_dns_zone_name,omitempty"`
 
-	// Reference to a PrivateDNSZone in network to populate privateDnsZoneName.
-	// +kubebuilder:validation:Optional
-	PrivateDNSZoneNameRef *v1.Reference `json:"privateDnsZoneNameRef,omitempty" tf:"-"`
+// The name of the Private DNS zone (without a terminating dot). Changing this forces a new resource to be created.
+// +crossplane:generate:reference:type=kubedb.dev/provider-azure/apis/network/v1alpha1.PrivateDNSZone
+// +kubebuilder:validation:Optional
+PrivateDNSZoneName *string `json:"privateDnsZoneName,omitempty" tf:"private_dns_zone_name,omitempty"`
 
-	// Selector for a PrivateDNSZone in network to populate privateDnsZoneName.
-	// +kubebuilder:validation:Optional
-	PrivateDNSZoneNameSelector *v1.Selector `json:"privateDnsZoneNameSelector,omitempty" tf:"-"`
+// Reference to a PrivateDNSZone in network to populate privateDnsZoneName.
+// +kubebuilder:validation:Optional
+PrivateDNSZoneNameRef *v1.Reference `json:"privateDnsZoneNameRef,omitempty" tf:"-"`
 
-	// Is auto-registration of virtual machine records in the virtual network in the Private DNS zone enabled? Defaults to false.
-	// +kubebuilder:validation:Optional
-	RegistrationEnabled *bool `json:"registrationEnabled,omitempty" tf:"registration_enabled,omitempty"`
+// Selector for a PrivateDNSZone in network to populate privateDnsZoneName.
+// +kubebuilder:validation:Optional
+PrivateDNSZoneNameSelector *v1.Selector `json:"privateDnsZoneNameSelector,omitempty" tf:"-"`
 
-	// Specifies the resource group where the Private DNS Zone exists. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=kubedb.dev/provider-azure/apis/azure/v1alpha1.ResourceGroup
-	// +kubebuilder:validation:Optional
-	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+// Is auto-registration of virtual machine records in the virtual network in the Private DNS zone enabled? Defaults to false.
+// +kubebuilder:validation:Optional
+RegistrationEnabled *bool `json:"registrationEnabled,omitempty" tf:"registration_enabled,omitempty"`
 
-	// Reference to a ResourceGroup in azure to populate resourceGroupName.
-	// +kubebuilder:validation:Optional
-	ResourceGroupNameRef *v1.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+// Specifies the resource group where the Private DNS Zone exists. Changing this forces a new resource to be created.
+// +crossplane:generate:reference:type=kubedb.dev/provider-azure/apis/azure/v1alpha1.ResourceGroup
+// +kubebuilder:validation:Optional
+ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 
-	// Selector for a ResourceGroup in azure to populate resourceGroupName.
-	// +kubebuilder:validation:Optional
-	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+// Reference to a ResourceGroup in azure to populate resourceGroupName.
+// +kubebuilder:validation:Optional
+ResourceGroupNameRef *v1.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
-	// A mapping of tags to assign to the resource.
-	// +kubebuilder:validation:Optional
-	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+// Selector for a ResourceGroup in azure to populate resourceGroupName.
+// +kubebuilder:validation:Optional
+ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
-	// The ID of the Virtual Network that should be linked to the DNS Zone. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=kubedb.dev/provider-azure/apis/network/v1alpha1.VirtualNetwork
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
-	// +kubebuilder:validation:Optional
-	VirtualNetworkID *string `json:"virtualNetworkId,omitempty" tf:"virtual_network_id,omitempty"`
+// A mapping of tags to assign to the resource.
+// +kubebuilder:validation:Optional
+Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// Reference to a VirtualNetwork in network to populate virtualNetworkId.
-	// +kubebuilder:validation:Optional
-	VirtualNetworkIDRef *v1.Reference `json:"virtualNetworkIdRef,omitempty" tf:"-"`
+// The ID of the Virtual Network that should be linked to the DNS Zone. Changing this forces a new resource to be created.
+// +crossplane:generate:reference:type=kubedb.dev/provider-azure/apis/network/v1alpha1.VirtualNetwork
+// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+// +kubebuilder:validation:Optional
+VirtualNetworkID *string `json:"virtualNetworkId,omitempty" tf:"virtual_network_id,omitempty"`
 
-	// Selector for a VirtualNetwork in network to populate virtualNetworkId.
-	// +kubebuilder:validation:Optional
-	VirtualNetworkIDSelector *v1.Selector `json:"virtualNetworkIdSelector,omitempty" tf:"-"`
+// Reference to a VirtualNetwork in network to populate virtualNetworkId.
+// +kubebuilder:validation:Optional
+VirtualNetworkIDRef *v1.Reference `json:"virtualNetworkIdRef,omitempty" tf:"-"`
+
+// Selector for a VirtualNetwork in network to populate virtualNetworkId.
+// +kubebuilder:validation:Optional
+VirtualNetworkIDSelector *v1.Selector `json:"virtualNetworkIdSelector,omitempty" tf:"-"`
 }
 
 // PrivateDNSZoneVirtualNetworkLinkSpec defines the desired state of PrivateDNSZoneVirtualNetworkLink
 type PrivateDNSZoneVirtualNetworkLinkSpec struct {
 	v1.ResourceSpec `json:",inline"`
-	ForProvider     PrivateDNSZoneVirtualNetworkLinkParameters `json:"forProvider"`
+	ForProvider       PrivateDNSZoneVirtualNetworkLinkParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -112,13 +121,13 @@ type PrivateDNSZoneVirtualNetworkLinkSpec struct {
 	// required on creation, but we do not desire to update them after creation,
 	// for example because of an external controller is managing them, like an
 	// autoscaler.
-	InitProvider PrivateDNSZoneVirtualNetworkLinkInitParameters `json:"initProvider,omitempty"`
+	InitProvider       PrivateDNSZoneVirtualNetworkLinkInitParameters `json:"initProvider,omitempty"`
 }
 
 // PrivateDNSZoneVirtualNetworkLinkStatus defines the observed state of PrivateDNSZoneVirtualNetworkLink.
 type PrivateDNSZoneVirtualNetworkLinkStatus struct {
 	v1.ResourceStatus `json:",inline"`
-	AtProvider        PrivateDNSZoneVirtualNetworkLinkObservation `json:"atProvider,omitempty"`
+	AtProvider          PrivateDNSZoneVirtualNetworkLinkObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

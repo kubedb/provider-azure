@@ -15,87 +15,96 @@ import (
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+
 )
+
+
+
 
 type SubscriptionInitParameters struct {
 
-	// The Azure Billing Scope ID. Can be a Microsoft Customer Account Billing Scope ID, a Microsoft Partner Account Billing Scope ID or an Enrollment Billing Scope ID.
-	BillingScopeID *string `json:"billingScopeId,omitempty" tf:"billing_scope_id,omitempty"`
 
-	// The ID of the Subscription. Changing this forces a new Subscription to be created.
-	// The GUID of the Subscription.
-	SubscriptionID *string `json:"subscriptionId,omitempty" tf:"subscription_id,omitempty"`
+// The Azure Billing Scope ID. Can be a Microsoft Customer Account Billing Scope ID, a Microsoft Partner Account Billing Scope ID or an Enrollment Billing Scope ID.
+BillingScopeID *string `json:"billingScopeId,omitempty" tf:"billing_scope_id,omitempty"`
 
-	// The Name of the Subscription. This is the Display Name in the portal.
-	// The Display Name for the Subscription.
-	SubscriptionName *string `json:"subscriptionName,omitempty" tf:"subscription_name,omitempty"`
+// The ID of the Subscription. Changing this forces a new Subscription to be created.
+// The GUID of the Subscription.
+SubscriptionID *string `json:"subscriptionId,omitempty" tf:"subscription_id,omitempty"`
 
-	// A mapping of tags to assign to the Subscription.
-	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+// The Name of the Subscription. This is the Display Name in the portal.
+// The Display Name for the Subscription.
+SubscriptionName *string `json:"subscriptionName,omitempty" tf:"subscription_name,omitempty"`
 
-	// The workload type of the Subscription. Possible values are Production (default) and DevTest. Changing this forces a new Subscription to be created.
-	// The workload type for the Subscription. Possible values are `Production` (default) and `DevTest`.
-	Workload *string `json:"workload,omitempty" tf:"workload,omitempty"`
+// A mapping of tags to assign to the Subscription.
+Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+// The workload type of the Subscription. Possible values are Production (default) and DevTest. Changing this forces a new Subscription to be created.
+// The workload type for the Subscription. Possible values are `Production` (default) and `DevTest`.
+Workload *string `json:"workload,omitempty" tf:"workload,omitempty"`
 }
+
 
 type SubscriptionObservation struct {
 
-	// The Azure Billing Scope ID. Can be a Microsoft Customer Account Billing Scope ID, a Microsoft Partner Account Billing Scope ID or an Enrollment Billing Scope ID.
-	BillingScopeID *string `json:"billingScopeId,omitempty" tf:"billing_scope_id,omitempty"`
 
-	// The Resource ID of the Alias.
-	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+// The Azure Billing Scope ID. Can be a Microsoft Customer Account Billing Scope ID, a Microsoft Partner Account Billing Scope ID or an Enrollment Billing Scope ID.
+BillingScopeID *string `json:"billingScopeId,omitempty" tf:"billing_scope_id,omitempty"`
 
-	// The ID of the Subscription. Changing this forces a new Subscription to be created.
-	// The GUID of the Subscription.
-	SubscriptionID *string `json:"subscriptionId,omitempty" tf:"subscription_id,omitempty"`
+// The Resource ID of the Alias.
+ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The Name of the Subscription. This is the Display Name in the portal.
-	// The Display Name for the Subscription.
-	SubscriptionName *string `json:"subscriptionName,omitempty" tf:"subscription_name,omitempty"`
+// The ID of the Subscription. Changing this forces a new Subscription to be created.
+// The GUID of the Subscription.
+SubscriptionID *string `json:"subscriptionId,omitempty" tf:"subscription_id,omitempty"`
 
-	// A mapping of tags to assign to the Subscription.
-	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+// The Name of the Subscription. This is the Display Name in the portal.
+// The Display Name for the Subscription.
+SubscriptionName *string `json:"subscriptionName,omitempty" tf:"subscription_name,omitempty"`
 
-	// The ID of the Tenant to which the subscription belongs.
-	// The Tenant ID to which the subscription belongs
-	TenantID *string `json:"tenantId,omitempty" tf:"tenant_id,omitempty"`
+// A mapping of tags to assign to the Subscription.
+Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// The workload type of the Subscription. Possible values are Production (default) and DevTest. Changing this forces a new Subscription to be created.
-	// The workload type for the Subscription. Possible values are `Production` (default) and `DevTest`.
-	Workload *string `json:"workload,omitempty" tf:"workload,omitempty"`
+// The ID of the Tenant to which the subscription belongs.
+// The Tenant ID to which the subscription belongs
+TenantID *string `json:"tenantId,omitempty" tf:"tenant_id,omitempty"`
+
+// The workload type of the Subscription. Possible values are Production (default) and DevTest. Changing this forces a new Subscription to be created.
+// The workload type for the Subscription. Possible values are `Production` (default) and `DevTest`.
+Workload *string `json:"workload,omitempty" tf:"workload,omitempty"`
 }
+
 
 type SubscriptionParameters struct {
 
-	// The Azure Billing Scope ID. Can be a Microsoft Customer Account Billing Scope ID, a Microsoft Partner Account Billing Scope ID or an Enrollment Billing Scope ID.
-	// +kubebuilder:validation:Optional
-	BillingScopeID *string `json:"billingScopeId,omitempty" tf:"billing_scope_id,omitempty"`
 
-	// The ID of the Subscription. Changing this forces a new Subscription to be created.
-	// The GUID of the Subscription.
-	// +kubebuilder:validation:Optional
-	SubscriptionID *string `json:"subscriptionId,omitempty" tf:"subscription_id,omitempty"`
+// The Azure Billing Scope ID. Can be a Microsoft Customer Account Billing Scope ID, a Microsoft Partner Account Billing Scope ID or an Enrollment Billing Scope ID.
+// +kubebuilder:validation:Optional
+BillingScopeID *string `json:"billingScopeId,omitempty" tf:"billing_scope_id,omitempty"`
 
-	// The Name of the Subscription. This is the Display Name in the portal.
-	// The Display Name for the Subscription.
-	// +kubebuilder:validation:Optional
-	SubscriptionName *string `json:"subscriptionName,omitempty" tf:"subscription_name,omitempty"`
+// The ID of the Subscription. Changing this forces a new Subscription to be created.
+// The GUID of the Subscription.
+// +kubebuilder:validation:Optional
+SubscriptionID *string `json:"subscriptionId,omitempty" tf:"subscription_id,omitempty"`
 
-	// A mapping of tags to assign to the Subscription.
-	// +kubebuilder:validation:Optional
-	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+// The Name of the Subscription. This is the Display Name in the portal.
+// The Display Name for the Subscription.
+// +kubebuilder:validation:Optional
+SubscriptionName *string `json:"subscriptionName,omitempty" tf:"subscription_name,omitempty"`
 
-	// The workload type of the Subscription. Possible values are Production (default) and DevTest. Changing this forces a new Subscription to be created.
-	// The workload type for the Subscription. Possible values are `Production` (default) and `DevTest`.
-	// +kubebuilder:validation:Optional
-	Workload *string `json:"workload,omitempty" tf:"workload,omitempty"`
+// A mapping of tags to assign to the Subscription.
+// +kubebuilder:validation:Optional
+Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+// The workload type of the Subscription. Possible values are Production (default) and DevTest. Changing this forces a new Subscription to be created.
+// The workload type for the Subscription. Possible values are `Production` (default) and `DevTest`.
+// +kubebuilder:validation:Optional
+Workload *string `json:"workload,omitempty" tf:"workload,omitempty"`
 }
 
 // SubscriptionSpec defines the desired state of Subscription
 type SubscriptionSpec struct {
 	v1.ResourceSpec `json:",inline"`
-	ForProvider     SubscriptionParameters `json:"forProvider"`
+	ForProvider       SubscriptionParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -106,13 +115,13 @@ type SubscriptionSpec struct {
 	// required on creation, but we do not desire to update them after creation,
 	// for example because of an external controller is managing them, like an
 	// autoscaler.
-	InitProvider SubscriptionInitParameters `json:"initProvider,omitempty"`
+	InitProvider       SubscriptionInitParameters `json:"initProvider,omitempty"`
 }
 
 // SubscriptionStatus defines the observed state of Subscription.
 type SubscriptionStatus struct {
 	v1.ResourceStatus `json:",inline"`
-	AtProvider        SubscriptionObservation `json:"atProvider,omitempty"`
+	AtProvider          SubscriptionObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true
@@ -127,9 +136,9 @@ type SubscriptionStatus struct {
 type Subscription struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.subscriptionName) || (has(self.initProvider) && has(self.initProvider.subscriptionName))",message="spec.forProvider.subscriptionName is a required parameter"
-	Spec   SubscriptionSpec   `json:"spec"`
-	Status SubscriptionStatus `json:"status,omitempty"`
+// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.subscriptionName) || (has(self.initProvider) && has(self.initProvider.subscriptionName))",message="spec.forProvider.subscriptionName is a required parameter"
+	Spec              SubscriptionSpec   `json:"spec"`
+	Status            SubscriptionStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true
